@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>The AI Guide for Small Business</title>
+<meta name="description" content="Working draft — private reading copy.">
+<meta name="theme-color" content="#FBF9F5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AI Guide">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%231E6B4F'/%3E%3Ctext x='90' y='124' font-family='Georgia,serif' font-size='96' fill='%23FBF9F5' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E6B4F'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='34' fill='%23FBF9F5' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#FBF9F5; --ink:#23211E; --muted:#6B6862; --accent:#1E6B4F;
+  --rule:#E6E1D8; --card:#F3EFE7; --mark:#8A5E12; --mark-bg:#F6EBD2;
+  --bar:rgba(251,249,245,.94);
+  --fs:19px; --lh:1.68; --measure:34rem;
+}
+html[data-theme="sepia"]{
+  --bg:#F6ECD9; --ink:#3A3226; --muted:#7A6A52; --accent:#7A5A22;
+  --rule:#E2D3B6; --card:#EFE2C7; --mark:#7A4B10; --mark-bg:#EADCBB;
+  --bar:rgba(246,236,217,.95);
+}
+html[data-theme="night"]{
+  --bg:#17171A; --ink:#C9C6C0; --muted:#8A8781; --accent:#6FC49C;
+  --rule:#2C2C30; --card:#202024; --mark:#D9A94F; --mark-bg:#2C2416;
+  --bar:rgba(23,23,26,.94);
+}
+@media (prefers-color-scheme: dark){
+  html[data-theme="auto"]{
+    --bg:#17171A; --ink:#C9C6C0; --muted:#8A8781; --accent:#6FC49C;
+    --rule:#2C2C30; --card:#202024; --mark:#D9A94F; --mark-bg:#2C2416;
+    --bar:rgba(23,23,26,.94);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Iowan Old Style','Charter','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif;
+  font-size:var(--fs); line-height:var(--lh);
+  -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent;
+  overscroll-behavior-y:none;
+}
+.ui{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+
+/* ---------- chrome ---------- */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:40;
+  display:flex; align-items:center; gap:.5rem;
+  padding:calc(env(safe-area-inset-top) + .35rem) max(.75rem, env(safe-area-inset-left)) .35rem
+          max(.75rem, env(safe-area-inset-right));
+  background:var(--bar); backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--rule);
+  transition:transform .25s ease;
+}
+.topbar.hidden{transform:translateY(-110%)}
+.iconbtn{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  min-width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  font-size:.95rem; font-weight:600; color:var(--accent); border-radius:10px;
+}
+.iconbtn:active{background:var(--card)}
+.bartitle{
+  flex:1; text-align:center; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.78rem; font-weight:600; color:var(--muted);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.botbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:40;
+  padding:.4rem max(1rem, env(safe-area-inset-left))
+          calc(env(safe-area-inset-bottom) + .45rem) max(1rem, env(safe-area-inset-right));
+  background:var(--bar); backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-top:1px solid var(--rule);
+  transition:transform .25s ease;
+}
+.botbar.hidden{transform:translateY(110%)}
+.track{height:2px; background:var(--rule); border-radius:2px; overflow:hidden}
+.fill{height:100%; width:0; background:var(--accent); transition:width .15s linear}
+.botmeta{
+  display:flex; justify-content:space-between; margin-top:.3rem;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.68rem; color:var(--muted); font-variant-numeric:tabular-nums;
+}
+
+/* ---------- reading area ---------- */
+main{
+  max-width:var(--measure); margin:0 auto;
+  padding:calc(env(safe-area-inset-top) + 4.6rem) max(1.35rem, env(safe-area-inset-left))
+          calc(env(safe-area-inset-bottom) + 5rem) max(1.35rem, env(safe-area-inset-right));
+}
+.view{display:none}
+.view.active{display:block; animation:fade .22s ease}
+@keyframes fade{from{opacity:0} to{opacity:1}}
+
+.chaphead{margin-bottom:1.9rem}
+.chapnum{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); font-weight:650; margin:0 0 .5rem;
+}
+.chaptitle{
+  font-size:1.72em; line-height:1.18; margin:0 0 .5rem; font-weight:700;
+  letter-spacing:-.01em; text-wrap:balance;
+}
+.chapmeta{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.72rem; color:var(--muted); margin:0;
+}
+h2{font-size:1.16em; line-height:1.3; margin:2.4em 0 .75em; font-weight:700; text-wrap:balance}
+h3{font-size:1.02em; margin:1.9em 0 .6em; font-weight:700}
+p{margin:0 0 1.05em; hyphens:auto; -webkit-hyphens:auto}
+strong{font-weight:700}
+blockquote{
+  margin:1.5em 0; padding:.1em 0 .1em 1em; border-left:3px solid var(--accent);
+  font-style:italic; font-size:1.05em;
+}
+blockquote p{margin:0; hyphens:none}
+ol,ul{margin:0 0 1.15em; padding-left:1.35em}
+li{margin-bottom:.55em}
+li::marker{color:var(--muted)}
+.promise{
+  background:var(--card); border-radius:12px;
+  padding:1rem 1.15rem .95rem; margin:0 0 2rem;
+}
+.promise-label{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.66rem; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--accent); font-weight:650; margin:0 0 .6rem;
+}
+.promise ul{margin:0; padding-left:1.1em; font-size:.94em; line-height:1.5}
+.promise li{margin-bottom:.42em}
+.tablewrap{
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  margin:1.5em 0; border:1px solid var(--rule); border-radius:10px;
+}
+table{
+  border-collapse:collapse; width:100%; min-width:30rem;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.78rem; line-height:1.45; font-variant-numeric:tabular-nums;
+}
+th{
+  text-align:left; font-size:.63rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); font-weight:650; padding:.55rem .7rem;
+  border-bottom:1px solid var(--rule); background:var(--card); white-space:nowrap;
+}
+td{padding:.55rem .7rem; border-bottom:1px solid var(--rule); vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+.verify{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.72em; color:var(--mark); background:var(--mark-bg);
+  padding:.08em .38em; border-radius:5px;
+}
+.srcrule{border:0; border-top:1px solid var(--rule); margin:2.6em 0 1.2em}
+.sources{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.72rem; line-height:1.6; color:var(--muted);
+}
+.chapnav{
+  display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--rule);
+}
+.btn-quiet{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.82rem; font-weight:600; color:var(--accent);
+  padding:.6rem .2rem; min-height:44px;
+}
+.chapnav-end{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.72rem; color:var(--muted); text-align:right;
+}
+
+/* ---------- cover ---------- */
+.cover{padding:1.5rem 0 0}
+.cover-eyebrow{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); font-weight:650; margin:0 0 1rem;
+}
+.cover-title{font-size:2.15em; line-height:1.14; margin:0 0 .7rem; font-weight:700; letter-spacing:-.015em}
+.cover-sub{color:var(--muted); font-style:italic; margin:0 0 1.6rem; font-size:1.02em}
+.cover-meta{
+  display:flex; flex-wrap:wrap; gap:.35rem 1.1rem;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.75rem; color:var(--muted); font-variant-numeric:tabular-nums;
+  padding:.8rem 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  margin-bottom:1.8rem;
+}
+.btn-primary{
+  display:block; width:100%; min-height:50px;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:1rem; font-weight:650; color:var(--bg); background:var(--accent);
+  border-radius:12px; margin-bottom:.5rem;
+}
+.btn-primary:active{opacity:.85}
+.cover .btn-quiet{display:block; width:100%; text-align:center}
+.cover-note{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.72rem; line-height:1.6; color:var(--muted); margin-top:2.5rem;
+}
+
+/* ---------- contents drawer ---------- */
+.scrim{
+  position:fixed; inset:0; z-index:50; background:rgba(0,0,0,.35);
+  opacity:0; pointer-events:none; transition:opacity .25s ease;
+}
+.scrim.open{opacity:1; pointer-events:auto}
+.drawer{
+  position:fixed; top:0; bottom:0; left:0; z-index:60;
+  width:min(86vw, 22rem); background:var(--bg); border-right:1px solid var(--rule);
+  transform:translateX(-102%); transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column;
+  padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.6rem .6rem .6rem 1.15rem; border-bottom:1px solid var(--rule);
+}
+.drawer-title{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); font-weight:650;
+}
+.drawer-body{overflow-y:auto; -webkit-overflow-scrolling:touch; padding:.6rem 0 1.5rem}
+.toc-part{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.66rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); font-weight:650; margin:1.1rem 1.15rem .3rem;
+}
+.toc-row{
+  display:flex; align-items:baseline; gap:.7rem; width:100%; text-align:left;
+  padding:.65rem 1.15rem; min-height:44px;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif; font-size:.86rem;
+}
+.toc-row:active{background:var(--card)}
+.toc-row.is-pending{color:var(--muted); opacity:.65}
+.toc-row.current{color:var(--accent); font-weight:650; background:var(--card)}
+.toc-num{
+  min-width:1.3rem; text-align:right; font-size:.74rem; color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.toc-row.current .toc-num{color:var(--accent)}
+.toc-title{flex:1}
+.toc-mins{font-size:.68rem; color:var(--muted); font-variant-numeric:tabular-nums}
+
+/* ---------- type sheet ---------- */
+.sheet{
+  position:fixed; left:0; right:0; bottom:0; z-index:60;
+  background:var(--bg); border-top:1px solid var(--rule);
+  border-radius:16px 16px 0 0; transform:translateY(102%);
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  padding:.4rem max(1.15rem, env(safe-area-inset-left))
+          calc(env(safe-area-inset-bottom) + 1.2rem) max(1.15rem, env(safe-area-inset-right));
+}
+.sheet.open{transform:translateY(0)}
+.grabber{width:36px; height:4px; border-radius:2px; background:var(--rule); margin:.5rem auto 1rem}
+.sheet-row{display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1.1rem}
+.sheet-label{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:650;
+}
+.seg{display:flex; gap:.35rem}
+.seg button{
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.8rem; font-weight:600; padding:.5rem .85rem; min-height:44px;
+  border:1px solid var(--rule); border-radius:10px; color:var(--muted);
+}
+.seg button.on{background:var(--accent); border-color:var(--accent); color:var(--bg)}
+.stepper{display:flex; align-items:center; gap:.4rem}
+.stepper button{
+  width:52px; height:44px; border:1px solid var(--rule); border-radius:10px;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif; font-weight:600; color:var(--accent);
+}
+.stepper button:disabled{opacity:.35; color:var(--muted)}
+.sizeval{
+  min-width:3.2rem; text-align:center;
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  font-size:.78rem; color:var(--muted); font-variant-numeric:tabular-nums;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar ui" id="topbar">
+  <button class="iconbtn" id="btn-toc" aria-label="Contents">☰</button>
+  <span class="bartitle" id="bartitle">The AI Guide for Small Business</span>
+  <button class="iconbtn" id="btn-type" aria-label="Text options">Aa</button>
+</div>
+
+<main id="main"><section class="view" id="cover"><div class="cover"><p class="cover-eyebrow">Working draft</p><h1 class="cover-title">The AI Guide<br>for Small Business</h1><p class="cover-sub">Cut through the noise. Buy only what pays for itself. Get your evenings back.</p><div class="cover-meta"><span>3 of 14 chapters</span><span>5,554 words</span><span>25 min read</span></div><button class="btn-primary" data-goto="ch1">Start reading</button><button class="btn-quiet" data-open="toc">Contents</button><p class="cover-note">Unpublished working draft &mdash; all rights reserved. Not for distribution. Highlighted tags mark facts awaiting a final source check before print. Updated August 9, 2026.</p></div></section><section class="view" id="ch1"><header class="chaphead"><p class="chapnum">Chapter 1</p><h1 class="chaptitle">The $200-a-Month Mistake</h1><p class="chapmeta">7 min read</p></header><div class="promise"><p class="promise-label">After this chapter, you will be able to</p><ul><li>Retell the $200-a-month mistake and spot it on your own statement</li><li>Explain the three habits that fill a careful owner's card with dead software</li><li>Run the Noise Test on any AI pitch in under a minute</li><li>Complete a Keep / Prove / Exit audit of your tools — after watching one done first</li><li>Set two cheap protections: against tools that die, and AI use you never sanctioned</li></ul></div><p>When Maria Rosey audited the software stack at Viral Nest, the PR firm she founded, she found five tools doing the same job. "You sign up for a tool during a busy week," she told Forbes in 2026, "you tell yourself it's just for now, then you forget it's even running."</p><p>Put numbers on her sentence and you have this chapter. A writing tool at $49 a month. An SEO tool at $89. An automation plan at $30, a scheduling seat at $10, an AI assistant at $20. That is $198 a month — $2,376 a year. The invoice is a plausible example, not an average; the shape is what owners keep finding on their own statements.</p><p>This book calls it the subscription graveyard. The tools in it are not bad. They are homeless: no recurring task, no person responsible, no number that says whether they help. The mistake is not buying software. It is paying for AI without ever deciding what it is for. Smart, careful people make it every day. Here is why.</p><h2>Why sensible owners collect dead subscriptions</h2><p><strong>Fear signs up.</strong> The headlines say most businesses already use AI, and a directory now lists some 47,400 tools to feel behind about. No independent body reviews any of them. The numbers are softer than they look. When BDC, Canada's bank for entrepreneurs, asked owners whether they used AI, 39% said yes. Shown examples first, 66% said yes. The answer depends on the question. And when statistics agencies count businesses actually running AI in their operations, they find 8.8% in the United States and 19.2% in Canada (US Census, 2025; Statistics Canada, 2026). You are not behind. The feeling that you are is manufactured, and it is profitable.</p><p><strong>The calendar keeps.</strong> Rosey named the mechanism: the busy week. Novelty and a deadline start the trial; auto-renewal converts "just for now" into a default. Cancelling requires a decision. Renewing requires nothing. Vendors understand that asymmetry, which is why trials collect a card number first.</p><p><strong>Guilt defends.</strong> By month three, the tool has cost setup hours and real dollars. Cancelling feels like admitting the waste, so "we should really use it more" becomes the plan. And because no one owns the tool, no one ever has to deliver a verdict. Keeping it feels thrifty; it is the only option that costs money every single month. Economists call this the sunk-cost trap. The graveyard runs on it.</p><p>Fear signs up, the calendar keeps, guilt defends. That is the whole machine, and every part of it stops the moment a tool has a task, an owner, and a number. The rest of this chapter installs those three.</p><h2>The Noise Test</h2><p>Before believing any tool's promise, including the ones in this book, ask one question:</p><blockquote><p>Who profits from me believing I need this now?</p></blockquote><p>Usually: the vendor, an affiliate earning a commission, an investor who needs growth, or a creator whose business is reviewing tools. The product may still be good. But the urgency belongs to the seller, not to you.</p><p>Then demand four names:</p><ol><li><strong>Name the task.</strong> "Marketing" is not a task. "Turn Friday's customer question into Monday's email" is a task.</li><li><strong>Name the owner.</strong> Who runs and checks it every week? In a one-person business, that is you, which is why the tool count stays small.</li><li><strong>Name the proof.</strong> One result (hours saved, calls answered, bookings made) and a review date in the calendar from day one.</li><li><strong>Name the exit.</strong> How you export your work, cancel, and keep operating without it.</li></ol><p>Can't name all four? Then do the task manually once and buy nothing yet; a boring manual run shows exactly what software must beat. Chapter 3 expands these four names into a five-question filter for anything that survives them.</p><h2>The audit, done in front of you</h2><p>Here is the opening invoice put through the test. Yours will differ; the verdicts are the lesson.</p><div class="tablewrap"><table><thead><tr><th>Tool</th><th style="text-align:right">$/mo</th><th>Task and owner?</th><th>Verdict</th></tr></thead><tbody><tr><td>Writing tool (Jasper)</td><td style="text-align:right">$49</td><td>Brand copy — but the $20 assistant already drafts it, and nobody reviews its output</td><td><strong>Exit</strong></td></tr><tr><td>SEO tool (Surfer)</td><td style="text-align:right">$89</td><td>"SEO," no task named. A curiosity buy from a busy week</td><td><strong>Exit</strong></td></tr><tr><td>Automation (Zapier)</td><td style="text-align:right">$30</td><td>Moves website forms into the job sheet; owner: you. Hours saved never measured</td><td><strong>Prove</strong> — 30 days, one number</td></tr><tr><td>Scheduling (Calendly)</td><td style="text-align:right">$10</td><td>Customers book without phone tag; bookings visible every week</td><td><strong>Keep</strong></td></tr><tr><td>Assistant (ChatGPT)</td><td style="text-align:right">$20</td><td>Drafts Thursday's email and quotes; owner: you, checked Fridays</td><td><strong>Keep</strong></td></tr></tbody></table></div><p>Verdict math: $138 a month exits, $30 stays and earns, $30 gets a 30-day deadline instead of another year of guilt. Notice <em>why</em> each tool died. The writing tool fell to overlap: a wide, cheap generalist covers it, which is why a specialist must earn its seat after the $20 tool fails at something valuable. The SEO tool fell to a missing task. Nothing fell to being "bad software."</p><p>Before cancelling anything, protect the exit: export your work, and check whether a form, calendar, or customer message runs through the tool. Then cancel on evidence, not guilt. This is not theoretical bookkeeping. Amber de la Garza, a small-business productivity coach, says she found $5,129 in one two-hour audit of cancellations, downgrades, and renegotiations; the figure is self-reported, from her own podcast.</p><p><strong>A cheap tool without a weekly job is expensive.</strong></p><h2>Two risks worth ten minutes</h2><p><strong>Tools die young.</strong> AI products are mostly young companies; one tracker has already collected 92 dead ones. The protection costs nothing. Put any tool under a year old on month-to-month billing. Export your data quarterly. Never let one tool be the only place customer information lives. Chapter 3 prices exits properly.</p><p><strong>Your team is already using AI.</strong> MIT researchers found in 2025 that at more than 90% of companies studied, employees used personal AI accounts at work, pasting who-knows-what into free chatbots nobody vetted. Ask your people what they already use. The answer closes a data hole and hands you a free list of tools worth piloting on purpose. Chapter 12 turns this into a one-page policy.</p><h2>Do This Friday</h2><p>Time required: 45 minutes. Cost: $0. You have already seen this done above.</p><ol><li><strong>Pull three months of charges.</strong> Search your business card and bank statements for software and app-store payments. Cancel nothing yet.</li><li><strong>Build a one-page list.</strong> For each tool: monthly cost, its one task, its owner, the last date it produced something useful.</li><li><strong>Mark each line.</strong> <strong>Keep</strong> means task, owner, and proof are all present. <strong>Prove</strong> means unsure. <strong>Exit</strong> means no task or no owner.</li><li><strong>Protect the exits.</strong> Export data, check what breaks, then cancel. If a tool touches customers, payments, or your website, schedule the safe exit rather than rushing it.</li><li><strong>Set one proof test.</strong> Each Prove tool gets 30 days, one measurable result, and a calendar date. No new tools during the test.</li><li><strong>Total the stack.</strong> Monthly charges × 12, posted where you will see it before the next free trial.</li></ol><h2>The deal for the rest of this book</h2><p>That audit is this book in miniature, and it is the contract for the next thirteen chapters. Part I gives you the filters: what AI can and cannot do (Chapter 2), and the five questions that decide any purchase (Chapter 3). Part II is the money map, one business function at a time, starting with the customers already calling you (Chapter 4). Every chapter comes with real prices, the catch stated, and one "Do This Friday." Part III makes it run without you hovering: rollout, headcount told honestly, staying out of trouble, staying calm.</p><p>The promise is not more AI. It is fewer tools, chosen on evidence, each with a task, an owner, and a number. And your evenings back.</p><p><strong>The takeaway: do not pay for AI because it is impressive; pay only when a named task, a named owner, and a number prove it belongs in your business.</strong></p><hr class="srcrule"><div class="sources"><em>Sources and credibility notes: Maria Rosey / Viral Nest (Forbes contributor piece, August 2026 — independent press, quote snippet-verified, on-page check queued for print); Amber de la Garza figure (self-reported on her own podcast, 2025 — labeled in text); BDC question-framing experiment (BDC, 2024); official production-use counts (US Census BTOS via SBA, 2025; Statistics Canada, 2026 — snippet-verified August 2026); shadow-AI usage (MIT NANDA, State of AI in Business, 2025 — company-wide study, not SMB-specific); tool-directory and product-closure counts (directional, unaudited); "no independent reviewer" framing (Stanford HAI has proposed a "Consumer Reports for AI"); tool prices (vendor and secondary sources, August 2026, approximate; the five-tool invoice is an illustrative example, stated as such). Full source records: research/case-studies.md, research/market-stats.md, research/tools-database.md.</em></div><nav class="chapnav"><button class="btn-quiet" data-goto="cover">← Cover</button><button class="btn-quiet" data-goto="ch3">Chapter 3 →</button></nav></section><section class="view" id="ch3"><header class="chaphead"><p class="chapnum">Chapter 3</p><h1 class="chaptitle">The Five-Question Filter</h1><p class="chapmeta">11 min read</p></header><div class="promise"><p class="promise-label">After this chapter, you will be able to</p><ul><li>Put any AI tool through five questions on an index card in about thirty minutes</li><li>Price a tool at your real volume — seats, tasks, add-ons, twelve months — instead of its sticker price</li><li>Spot where a "free" plan actually ends before it traps a working habit</li><li>Check a vendor's data practices and exit terms in ten minutes on their own site</li><li>Run a 30-day pilot with one metric and written kill criteria, so tools stay or go on evidence</li></ul></div><p>DoNotPay sold itself as "the world's first robot lawyer." For a subscription, it promised to fight parking tickets, generate legal documents, and let you sue anyone at the press of a button. No law degree, no billable hours, no retainer. For an owner with a dispute worth less than a lawyer's first hour, the pitch lands exactly where it hurts.</p><p>In September 2024, the Federal Trade Commission announced that DoNotPay had agreed to pay $193,000 and to stop claiming its AI matched a human lawyer unless it could prove it. The FTC's complaint was almost boring. The company had not tested whether its robot lawyer worked at the level of a human attorney. It had not even hired lawyers to check. The final order, approved unanimously in January 2025, added one requirement more painful than the fine: DoNotPay had to tell its own past subscribers about the settlement.</p><p>Notice what the FTC did not say. It did not say AI cannot help with legal paperwork. It said nobody had checked whether this AI could. The product had never been reviewed. The marketing, eventually, was.</p><p>That enforcement action made DoNotPay one of the most scrutinized AI products in America. The other 47,400 tools in Chapter 1's directory have faced less. There is no Consumer Reports for AI, and the regulator shows up occasionally, after the damage. Nobody is coming to review the tool you are about to buy.</p><p>So the review has to be yours, and short enough that you will actually run it. This chapter is that review: five questions, one index card, about thirty minutes. The filter is distilled from three sources that take the problem seriously — the Small Business Administration's vendor checklists, the AI Risk Management Framework from NIST (the federal standards body), and MIT's research on why AI pilots fail. You get the five questions that survive translation into plain English.</p><p>Chapter 1's Noise Test told you whether a tool deserves evaluation at all. These five questions are the evaluation. Most tools fail by question three. That is the filter working.</p><h2>Question 1: What task, and measured how?</h2><p>A tool that promises to "transform your marketing" is making you do its thinking. Which task? "Send the weekly special to the email list every Thursday" is a task. "Answer the phone when we're closed" is a task. "Marketing" is a department.</p><p>Then walk the chain to a number, link by link. The tool drafts the Thursday email. The email goes out on time instead of skipping busy weeks. More customers open it. Some order. If every link holds, the tool earns money. If you cannot walk the chain, the benefit is a slogan. MIT's researchers found the same pattern from the other direction: tools get kept when they produce a measurable result inside a real workflow, inside a defined window. Tools that are merely impressive get dropped.</p><p>Before any trial, write down the current number. How long does Thursday's email take today? How many calls went unanswered last week? A baseline costs five minutes now and settles every argument later.</p><p>Owners who win with AI talk in numbers. When a Florida news outlet profiled Growbo, a small marketing agency, founder Matt Ackerson could put figures on his AI systems: about 700 hours and $12,000 saved in four months. The figures are his own, so add salt. But he had them, because he measured.</p><p>The rule: <strong>a tool you cannot measure is a tool you cannot fire.</strong> It will sit in Chapter 1's subscription graveyard drawing $29 a month forever, protected by the vague feeling that it helps.</p><h2>Question 2: Who runs it every week?</h2><p>The most common review of small-business software is eight words long: "We should really be using that thing more."</p><p>Software does not run itself, and AI software especially does not. Someone connects it to the calendar and the inbox. Someone feeds it this week's prices. Someone reads what it wrote before a customer does. In Bluevine's 2026 survey, 78% of small-business owners said they do not fully trust AI to work unsupervised. They are right; Chapter 2 showed the machine lying with perfect confidence. Supervision is not a flaw in the plan. It is the plan.</p><p>So name the supervisor before you buy. A name and an hour: "Dana, Friday, 8 to 9." If the answer is "the team," the answer is nobody. If the answer is you — and in a business your size it usually is — question two has a second half: which hour of your week does this replace? A tool that needs an hour of babysitting must save clearly more than that hour, or it is a hobby with an invoice.</p><h2>Question 3: Where does my data go?</h2><p>Every AI tool is a new place where your business information lives. What goes in is rarely just "text": it is customer names and phone numbers, your prices and margins, the draft policy about the employee problem you asked for help wording.</p><p>It is probably already happening informally. MIT researchers reported in 2025 that at more than 90% of the companies they studied, employees were using personal AI accounts at work, pasting work material into free consumer chatbots nobody vetted. Owners have noticed the stakes: 33% named data security as a barrier in Bluevine's 2026 survey, up from 23% the year before. The worry is growing because usage is growing.</p><p>You do not need a security department. You need three answers, findable on the vendor's own site in ten minutes:</p><ol><li><strong>Does it train on my data, and is there an off switch?</strong> Business plans usually say no or let you opt out; free consumer tiers often say yes, quietly.</li><li><strong>Can I export everything, and delete everything, if I leave?</strong></li><li><strong>Which plan is built for business use?</strong> The free version and the business version of the same product can carry different privacy terms.</li></ol><p>Until you have checked, treat a free AI tool like a postcard: write nothing on it you would mind someone else reading. Customer data belongs on a business plan with the training switch off. Chapter 12 goes deeper, including what your chatbot's promises legally commit you to.</p><h2>Question 4: What does it cost at real volume?</h2><p>The sticker price is the price of the demo. The real price arrives around month six, and it is set by how software charges: per seat, per task, per "operation," per employee, per resolved ticket.</p><p>An example with honest math. Intercom's AI support agent runs $29 per seat per month, plus 99 cents for every conversation the AI resolves (August 2026 snapshot; check the vendor's page). Resolve 300 tickets a month — a good month — and the bill is roughly $326, not $29. The tool may still be worth it. But that decision belongs to the $326 number.</p><p>Free tiers deserve the same math, because they are sized to end just as the habit forms. That is not an accident; it is the business model. Here is where "free" actually stops, as of August 2026. Prices change, so check the vendor's page before you buy.</p><div class="tablewrap"><table><thead><tr><th>Tool</th><th>What free really gets you</th><th>First paid dollar</th><th>The catch</th></tr></thead><tbody><tr><td>Zapier</td><td>100 tasks/mo, two-step automations only</td><td>Pro ~$29.99/mo</td><td>Task billing climbs fast as automations multiply</td></tr><tr><td>Make</td><td>1,000 credits/mo (its unit of work), 2 active scenarios</td><td>Core ~$9/mo</td><td>A credit is one step, not one finished job</td></tr><tr><td>n8n</td><td>Free only if you host it yourself</td><td>Cloud ~$25/mo</td><td>Self-hosting is a part-time technical hobby</td></tr><tr><td>ChatGPT</td><td>Capable free tier, shifting limits</td><td>Plus $20/mo</td><td>Limits and model access change with little notice</td></tr><tr><td>Otter.ai</td><td>~300 transcription minutes/mo</td><td>Pro ~$8.33/mo, billed annually</td><td>The low monthly price requires paying a year up front</td></tr><tr><td>Calendly</td><td>One event type</td><td>$10–16/seat/mo</td><td>Per-seat pricing grows with every hire</td></tr></tbody></table></div><p>Run your own numbers the same way: real monthly volume × unit price, plus a seat for everyone who needs one, times twelve. If the honest annual number embarrasses the sticker price, question four just saved you the difference.</p><h2>Question 5: How do I get out?</h2><p>Chapter 1 mentioned a tracker that collects dead AI products the way other sites collect obituaries. The count matters less than the pattern: AI tools are young companies, and young companies fold, pivot, and get acquired. Some of your candidates will not exist in three years.</p><p>Nobody has published a reliable count of small businesses trapped in AI tools they regret; the lock-in data does not exist yet. The mechanics are visible anyway. Your data accumulates inside the tool. Your workflows grow around it. Then the price rises, or a free feature moves behind a paywall, precisely because leaving now hurts. The vendor is not evil. The vendor has an incentive, and you should be able to name it.</p><p>Four checks before the first dollar:</p><ol><li><strong>Find the export button before you need it.</strong> No export is your answer.</li><li><strong>Check the format.</strong> Spreadsheet files you can open anywhere are an exit; a backup only the same tool can read is a wall.</li><li><strong>Go month-to-month for the first year,</strong> even when the annual plan dangles two free months. The discount is the price of your flexibility.</li><li><strong>Write down what breaks on cancel day.</strong> Which forms, calendars, phone lines, and customer messages run through this tool? That list is your real exit cost.</li></ol><p>Industry-specific platforms — the restaurant systems, the trades apps — lock deepest, because they hold the most. Sometimes they are still the right call. Chapter 9 weighs that trade honestly.</p><h2>The 30-day pilot</h2><p>A tool that passes all five questions has earned a trial. Not a purchase — a trial with a scoreboard.</p><p>The famous failure statistic makes the case. In 2025, MIT researchers found that 95% of formal corporate AI pilots showed no measurable return six months later. That study covered big companies, not businesses like yours, and its bar was strict. But the reason those pilots failed is portable: they launched without a metric, an owner, or a deadline, then drifted. Buy-and-drift has a small-business version too. In a 2025 NEXT Insurance survey, the share of small businesses using AI <em>fell</em> from 42% to 28% in a year; 62% of non-users said they did not understand the benefits, and 55% pointed at cost. People bought, saw nothing they could count, and quit.</p><p>The pilot avoids both endings. Four rules:</p><ol><li><strong>Thirty days, on the calendar.</strong> Renewal is a decision, not a default.</li><li><strong>One metric, chosen from question one, with the baseline written down first.</strong></li><li><strong>Kill criteria in writing before day one.</strong> "If it has not saved two hours a week by day 30, it goes." Deciding while neutral beats deciding while attached.</li><li><strong>One pilot at a time.</strong> Two simultaneous trials means neither gets a fair test.</li></ol><p>Here is the quiet advantage you have over the companies in that MIT study: their pilots need a committee, a budget line, and a quarter. You can baseline a task this afternoon and know in thirty days, for under a hundred dollars. Run the pilot like an owner and the market's failure rate is not your problem.</p><p>A pilot is not a vibe check. It is a bet with a scoreboard, and either outcome — stay or go — is a win, because both end the ambiguity that fills subscription graveyards.</p><h2>Do This Friday</h2><p>Time required: about 45 minutes. Cost: $0.</p><ol><li><strong>Pick one candidate.</strong> The tool you are most tempted by right now, or a "Prove" tool from Chapter 1's audit. Just one.</li><li><strong>Write the five answers on one index card.</strong> The task and its number. The owner and their hour. The three data answers from the vendor's site. The real-volume annual cost. The exit.</li><li><strong>Price the truth.</strong> Real monthly volume × unit price, plus seats, times twelve. Put that number next to the sticker price.</li><li><strong>Find the exit before the entrance.</strong> Locate the export feature, check the file format, read the cancellation terms, note the contract length.</li><li><strong>Schedule the pilot.</strong> Start date, baseline number, one metric, a 30-day review in your calendar, and a written kill criterion.</li><li><strong>Let a blank mean no.</strong> Any question you cannot answer is a "not yet." Saying no to software is free, and you can say yes later. (Appendix B has this filter as a printable worksheet.)</li></ol><p><strong>The takeaway: if a tool cannot survive five questions on an index card, it does not deserve a line on your credit-card statement.</strong></p><hr class="srcrule"><div class="sources"><em>Sources and credibility notes: FTC v. DoNotPay — complaint announced September 2024 as part of the FTC's "Operation AI Comply" sweep; final order (unanimous, January 2025) imposed $193,000 in monetary relief, banned unsupported human-lawyer-equivalence claims, and required notice to 2021–2023 subscribers (ftc.gov press releases; confirm on-page at print — direct fetch blocked from drafting environment). Supervision-trust, data-security, and spending figures (Bluevine surveys, 2026); shadow-AI usage (MIT NANDA, State of AI in Business, 2025 — company-wide study, not SMB-specific); pilot-failure figure (MIT, 2025 — formal enterprise pilots, strict ROI bar, not a small-business statistic); adoption decline (NEXT Insurance, 2025); Growbo (Spectrum Bay News 9, 2025 — independent outlet, self-reported figures, labeled in text). Filter provenance: SBA-informed vendor checklists; NIST AI Risk Management Framework 1.0; MIT adoption research. Tool prices and free-tier limits: vendor and secondary sources, August 2026 (Zapier free tier vendor-verified July 2026; Make, Otter, Calendly, ChatGPT re-checked via search August 2026; all prices re-verified at print). Full source records: research/market-stats.md, research/tools-database.md, research/case-studies.md.</em></div><nav class="chapnav"><button class="btn-quiet" data-goto="ch1">← Chapter 1</button><button class="btn-quiet" data-goto="ch4">Chapter 4 →</button></nav></section><section class="view" id="ch4"><header class="chaphead"><p class="chapnum">Chapter 4</p><h1 class="chaptitle">Never Miss Another Customer</h1><p class="chapmeta">7 min read</p></header><div class="promise"><p class="promise-label">After this chapter, you will be able to</p><ul><li>Measure your missed-call leak in dollars per week from your own phone log</li><li>Decide whether an AI receptionist, booking links, or both fit how your customers reach you</li><li>Set up the four-step pipeline that makes the money: answer → book → follow up → ask for the review</li><li>Write the plain-language script an AI answering tool needs before you buy anything</li><li>Keep your AI's promises legal: a narrow script, a human handoff, and kill criteria at 30 days</li></ul></div><p>On a Sunday morning last year, a plumbing company booked a $1,060 job while the owner was still in bed.</p><p>Nobody at Riley Plumbing &amp; Heating answered that call, because nobody was working. An AI phone agent picked up, talked the customer through the problem, checked the schedule, and booked the visit. That story comes from ServiceTitan, the company that sells the tool, so take the shine off it accordingly. But the mechanics are not marketing. The call came in. Something answered. The job got booked. At most small businesses, that same call rings four times, goes to voicemail, and dies there.</p><p>This chapter is about the cheapest revenue you will ever find: the customers already trying to give you money.</p><h2>The leak you're not measuring</h2><p>Here is the uncomfortable math, from industry analyses of small-business phone traffic: roughly 62% of calls to small businesses go unanswered, and about 85% of the people who reach voicemail never call back <span class="verify">[VERIFY: industry-sourced figures, skipcalls.com 2026 — replace with primary study before print]</span>. They don't leave a message. They call the next name on the list. You never know they existed.</p><p>Put real numbers on it. Say your average job is worth $300, and you close half the people you actually talk to. Every ten missed calls is ten conversations you never had, five jobs you never won, $1,500 that went to a competitor whose phone got answered. Run that math across a year and you understand why estimates of the annual cost of missed calls for a small service business run from $26,000 to $126,000 depending on the trade.</p><p>Meanwhile, most owners trying to "do AI" are generating social media posts. Marketing pours water into the top of a leaky bucket. This chapter plugs the hole in the bottom.</p><p><strong>The order matters: capture the demand you already have before you spend a dollar creating more.</strong></p><h2>Why speed is the whole game</h2><p>Sales research has repeated one finding for years: respond to a new lead within about five minutes and your odds of a real conversation are many times higher than if you wait even half an hour <span class="verify">[VERIFY: the "21x" figure traces to older InsideSales/HBR-era studies; re-confirm best current citation]</span>. Nobody comparison-shops patiently anymore. A homeowner with a burst pipe calls until a human — or something that sounds helpfully close to one — picks up.</p><p>You cannot personally be that fast at 7 p.m. on a Tuesday. You are quoting a job, or making dinner, or finally off the clock. For decades the options were an answering service, a hired dispatcher, or your own interrupted evening. The genuinely new thing AI brings is a fourth option: software that answers every call, instantly, for about the price of one small job a month.</p><p>Owners who set this up describe the same two results. First, booked work they would have missed. Second, and they mention this almost as often: the phone stops owning them. Dinner is dinner. That second result is why this book keeps insisting AI's best gift to a small business is not head count math. It is getting pieces of your life back.</p><h2>What "answering" needs to include</h2><p>An AI receptionist that just takes messages is voicemail with better manners. The setups that make money do four things in a row. Think of it as one pipeline: <strong>answer → book → follow up → ask for the review.</strong></p><ol><li><strong>Answer every call, 24/7.</strong> The AI greets callers, handles the three questions that make up most of your volume (are you open, do you serve my area, what does it roughly cost), and takes details for anything unusual.</li><li><strong>Book straight into your calendar.</strong> Not "someone will call you back." The caller hangs up holding a time slot. G.L. Hunt, a family-owned Texas foundation-repair company, reports a 40% higher booking rate after wiring AI follow-up into its missed-call handling, and attributes $1.8 million in revenue over 90 days to one missed-call campaign. Those numbers come from Hatch, its software vendor, so treat them as a best case. Even a quarter of that effect pays for the software for a decade.</li><li><strong>Follow up automatically.</strong> Missed a call anyway? The system texts back within a minute: "Sorry we missed you — want to book a time or tell us what you need?" A text that arrives while the customer is still on your competitor's hold music wins ugly and often.</li><li><strong>Ask for the review.</strong> Job done, the system requests a Google review and drafts your reply. Reviews feed the next customer's decision, which feeds the phone, which is the whole loop.</li></ol><p>Restaurants run the same play with orders instead of appointments. Little Italy, an independent restaurant, put an AI agent on its phone line connected to its Toast register; the owner reports cutting front-of-house labor costs by more than 24% and going live in three days (the tool vendor, Loman, tells that story, so same caveat as above).</p><h2>The tools, with prices and catches</h2><p>Prices are from August 2026 and change often; check the vendor's page before you buy. Every tool here has a catch, listed, because every tool everywhere does.</p><div class="tablewrap"><table><thead><tr><th>Tool</th><th>Price</th><th>What it is</th><th>The catch</th></tr></thead><tbody><tr><td>Goodcall</td><td>$79/mo flat</td><td>AI phone answering, unlimited minutes</td><td>Setup and calendar integration take real effort up front</td></tr><tr><td>My AI Front Desk</td><td>$99/mo</td><td>Phone + text + web chat + booking in one bundle</td><td>Less customizable than single-purpose tools</td></tr><tr><td>Vellum</td><td>free base; ~$50/mo</td><td>AI receptionist + scheduling, cheap entry</td><td>Voice quality improves with paid tiers</td></tr><tr><td>Calendly</td><td>free; $10/seat/mo</td><td>Booking links that kill phone tag</td><td>Free plan = one event type</td></tr><tr><td>WiserReview</td><td>~$9–19/mo</td><td>Review monitoring + AI-drafted replies</td><td>Free tier covers one location</td></tr></tbody></table></div><p>Industry-specific versions exist and often fit better: Voksha for salons and clinics (~$50–150/mo), Yelp Host for restaurant reservations and phone orders, Jobber's AI features if you're in the trades and already run your business on it. The vertical tool costs more and locks you in; the trade is less setup. Chapter 9 covers that decision properly.</p><p>One tool to be skeptical of: the website chat widget. Website chatbots convert around 1.1% of visitors in most studies of small-business sites. If your customers call — and for local service businesses they overwhelmingly do — the phone is where the money leaks. Buy the phone fix first. The chat widget can wait a year.</p><h2>Two warnings before you switch anything on</h2><p><strong>Your AI's promises are your promises.</strong> In 2024 a Canadian tribunal made Air Canada honor a refund policy its chatbot invented on the spot. The ruling was small money and a giant precedent: the company owns what the bot says. Keep your AI's script narrow. It should answer the questions you gave it, book the appointment, and say "I'll have someone confirm that" for everything else. Never let it improvise prices, guarantees, or availability you didn't write down. Chapter 12 goes deeper.</p><p><strong>Tell callers it's an AI if asked, and staff the handoff.</strong> Some callers will want a human. The system should take a message and flag it urgently, and someone should actually see that flag. An AI receptionist with no human backstop is how you miss the one call that mattered while feeling covered.</p><h2>Do this Friday</h2><p>Time required: about an hour. Cost: $0 today.</p><ol><li><strong>Count the leak.</strong> Open your phone's call log for the last seven days. Count calls you missed entirely and calls returned more than an hour later. Multiply by your close rate and average job value. Write that number down. That's your leak, per week.</li><li><strong>Call your own business</strong> after closing time, from a friend's phone. Listen to what a new customer hears. Most owners find this genuinely painful. Good. Use the pain.</li><li><strong>Script your top three.</strong> Write the three questions you answer most, with your real answers, in plain words. Whatever tool you pick, this script is its training material, and writing it costs nothing.</li><li><strong>Pick one tool and book the trial.</strong> One, not three. If you take calls for a living, start with Goodcall or My AI Front Desk. Appointment-based? Start with Calendly plus an AI receptionist that writes into it.</li><li><strong>Set the kill criteria now, before you're attached:</strong> in 30 days the tool has either booked jobs worth more than three months of its price, or it's gone. Put the review date in your calendar. (This is the Five-Question Filter from Chapter 3 doing its job.)</li></ol><p><strong>The takeaway: before you buy any AI to find new customers, stop losing the ones already calling you.</strong></p><hr class="srcrule"><div class="sources"><em>Sources and credibility notes: Riley Plumbing (ServiceTitan case study — vendor-sourced); G.L. Hunt (Hatch case study — vendor-sourced); Little Italy (Loman case study — vendor-sourced); Air Canada ruling (Moffatt v. Air Canada, BCCRT 2024 — court record, independent); missed-call and chatbot-conversion figures (industry analyses, 2026 — [VERIFY] tagged above, replace with primary sources before print); tool prices (vendor and secondary sources, Aug 2026 — re-verify at print). Full citations: research/tools-database.md, research/case-studies.md, research/market-stats.md.</em></div><nav class="chapnav"><button class="btn-quiet" data-goto="ch3">← Chapter 3</button><span class="chapnav-end">End of the drafted chapters</span></nav></section></main>
+
+<div class="botbar ui" id="botbar">
+  <div class="track"><div class="fill" id="fill"></div></div>
+  <div class="botmeta"><span id="loc">Cover</span><span id="left"></span></div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" aria-label="Contents" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="drawer-title ui">Contents</span>
+    <button class="iconbtn" id="btn-close-toc" aria-label="Close contents">✕</button>
+  </div>
+  <div class="drawer-body">
+    <button class="toc-row" data-goto="cover"><span class="toc-num">·</span><span class="toc-title">Cover</span><span class="toc-mins"></span></button>
+    <p class="toc-part">Part I — Clear the Noise</p><button class="toc-row" data-goto="ch1"><span class="toc-num">1</span><span class="toc-title">The $200-a-Month Mistake</span><span class="toc-mins">7 min</span></button><div class="toc-row is-pending"><span class="toc-num">2</span><span class="toc-title">What AI Actually Does Well (and Where It Lies)</span><span class="toc-mins">soon</span></div><button class="toc-row" data-goto="ch3"><span class="toc-num">3</span><span class="toc-title">The Five-Question Filter</span><span class="toc-mins">11 min</span></button><p class="toc-part">Part II — The Money Map</p><button class="toc-row" data-goto="ch4"><span class="toc-num">4</span><span class="toc-title">Never Miss Another Customer</span><span class="toc-mins">7 min</span></button><div class="toc-row is-pending"><span class="toc-num">5</span><span class="toc-title">Marketing Without a Marketing Department</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">6</span><span class="toc-title">Sales Follow-Up That Runs Itself</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">7</span><span class="toc-title">The Back Office on Autopilot</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">8</span><span class="toc-title">The Glue: Assistants and Automation</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">9</span><span class="toc-title">Your Industry&#x27;s Unfair Advantage</span><span class="toc-mins">soon</span></div><p class="toc-part">Part III — Run It Like an Owner</p><div class="toc-row is-pending"><span class="toc-num">10</span><span class="toc-title">The 30-Day Rollout</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">11</span><span class="toc-title">Headcount, Honestly</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">12</span><span class="toc-title">Stay Out of Trouble</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">13</span><span class="toc-title">The Calm Owner</span><span class="toc-mins">soon</span></div><div class="toc-row is-pending"><span class="toc-num">14</span><span class="toc-title">Your Next 12 Months</span><span class="toc-mins">soon</span></div>
+  </div>
+</aside>
+
+<div class="sheet" id="sheet" aria-label="Text options" aria-hidden="true">
+  <div class="grabber"></div>
+  <div class="sheet-row">
+    <span class="sheet-label">Text size</span>
+    <div class="stepper">
+      <button id="size-down" aria-label="Smaller text">A−</button>
+      <span class="sizeval" id="sizeval"></span>
+      <button id="size-up" aria-label="Larger text">A+</button>
+    </div>
+  </div>
+  <div class="sheet-row">
+    <span class="sheet-label">Theme</span>
+    <div class="seg" id="themes">
+      <button data-theme="auto">Auto</button>
+      <button data-theme="light">Paper</button>
+      <button data-theme="sepia">Sepia</button>
+      <button data-theme="night">Night</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var SIZES = [17, 18, 19, 20, 22, 24];
+  var WPM = 220;
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem('aig.' + k); return v === null ? d : v; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem('aig.' + k, v); } catch (e) {} }
+  };
+  var doc = document.documentElement;
+  var views = [].slice.call(document.querySelectorAll('.view'));
+  var main = document.getElementById('main');
+  var topbar = document.getElementById('topbar');
+  var botbar = document.getElementById('botbar');
+  var fill = document.getElementById('fill');
+  var loc = document.getElementById('loc');
+  var left = document.getElementById('left');
+  var bartitle = document.getElementById('bartitle');
+  var scrim = document.getElementById('scrim');
+  var drawer = document.getElementById('drawer');
+  var sheet = document.getElementById('sheet');
+  var current = null;
+
+  /* ----- theme + size ----- */
+  function applyTheme(t) {
+    doc.setAttribute('data-theme', t);
+    store.set('theme', t);
+    [].forEach.call(document.querySelectorAll('#themes button'), function (b) {
+      b.classList.toggle('on', b.getAttribute('data-theme') === t);
+    });
+    var probe = getComputedStyle(document.body).backgroundColor;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta && probe) meta.setAttribute('content', probe);
+  }
+  function applySize(i) {
+    i = Math.max(0, Math.min(SIZES.length - 1, i));
+    store.set('size', i);
+    doc.style.setProperty('--fs', SIZES[i] + 'px');
+    document.getElementById('sizeval').textContent = SIZES[i] + 'px';
+    document.getElementById('size-down').disabled = i === 0;
+    document.getElementById('size-up').disabled = i === SIZES.length - 1;
+    return i;
+  }
+  var sizeIdx = applySize(parseInt(store.get('size', '2'), 10));
+  applyTheme(store.get('theme', 'auto'));
+
+  document.getElementById('size-down').addEventListener('click', function () { sizeIdx = applySize(sizeIdx - 1); progress(); });
+  document.getElementById('size-up').addEventListener('click', function () { sizeIdx = applySize(sizeIdx + 1); progress(); });
+  [].forEach.call(document.querySelectorAll('#themes button'), function (b) {
+    b.addEventListener('click', function () { applyTheme(b.getAttribute('data-theme')); });
+  });
+
+  /* ----- panels ----- */
+  function closePanels() {
+    drawer.classList.remove('open'); sheet.classList.remove('open'); scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true'); sheet.setAttribute('aria-hidden', 'true');
+  }
+  function openDrawer() { closePanels(); drawer.classList.add('open'); scrim.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); }
+  function openSheet() { closePanels(); sheet.classList.add('open'); scrim.classList.add('open'); sheet.setAttribute('aria-hidden', 'false'); }
+  document.getElementById('btn-toc').addEventListener('click', openDrawer);
+  document.getElementById('btn-close-toc').addEventListener('click', closePanels);
+  document.getElementById('btn-type').addEventListener('click', openSheet);
+  scrim.addEventListener('click', closePanels);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanels(); });
+
+  /* ----- navigation ----- */
+  function saveScroll() {
+    if (current) store.set('pos.' + current, String(window.scrollY));
+  }
+  function show(id, restore) {
+    var target = document.getElementById(id);
+    if (!target) { id = views[0].id; target = views[0]; }
+    saveScroll();
+    views.forEach(function (v) { v.classList.toggle('active', v === target); });
+    current = id;
+    store.set('last', id);
+    if (location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
+
+    var head = target.querySelector('.chaptitle');
+    bartitle.textContent = head ? head.textContent : 'The AI Guide for Small Business';
+    [].forEach.call(document.querySelectorAll('.toc-row'), function (r) {
+      r.classList.toggle('current', r.getAttribute('data-goto') === id);
+    });
+    var y = restore ? parseInt(store.get('pos.' + id, '0'), 10) || 0 : 0;
+    window.scrollTo(0, y);
+    showChrome();
+    progress();
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-goto]');
+    if (btn) { closePanels(); show(btn.getAttribute('data-goto'), false); return; }
+    var op = e.target.closest('[data-open]');
+    if (op && op.getAttribute('data-open') === 'toc') openDrawer();
+  });
+  window.addEventListener('hashchange', function () {
+    var id = location.hash.slice(1);
+    if (id && id !== current) show(id, false);
+  });
+
+  /* ----- progress + chrome ----- */
+  function progress() {
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 20 ? Math.min(100, Math.max(0, (window.scrollY / docH) * 100)) : (current === 'cover' ? 0 : 100);
+    fill.style.width = pct.toFixed(1) + '%';
+    var view = document.getElementById(current);
+    if (!current || current === 'cover') {
+      loc.textContent = 'Cover'; left.textContent = '';
+      return;
+    }
+    var num = view.querySelector('.chapnum');
+    loc.textContent = num ? num.textContent : '';
+    var words = (view.textContent || '').trim().split(/\s+/).length;
+    var mins = Math.max(0, Math.round((words * (1 - pct / 100)) / WPM));
+    left.textContent = mins <= 0 ? 'End of chapter' : mins + ' min left';
+  }
+  var lastY = 0, ticking = false;
+  function showChrome() { topbar.classList.remove('hidden'); botbar.classList.remove('hidden'); }
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      if (y > lastY + 8 && y > 90) { topbar.classList.add('hidden'); botbar.classList.add('hidden'); }
+      else if (y < lastY - 8) { showChrome(); }
+      lastY = y;
+      progress();
+      ticking = false;
+    });
+  }, { passive: true });
+  window.addEventListener('resize', progress);
+  window.addEventListener('pagehide', saveScroll);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) saveScroll(); });
+
+  /* ----- boot ----- */
+  var start = location.hash.slice(1) || store.get('last', 'cover');
+  show(start, !location.hash);
+})();
+</script>
+</body>
+</html>
