@@ -329,7 +329,7 @@
     "The map: task families and the checks that fit them",
     "The reason Chapter 1's named checks work is that each one is aimed at a failure shape.",
     "Read them as minimum checks: each cuts the risk of its shape, none removes it, and a check can miss, which is what the last column prices.",
-    "Where a check says compare, it means against the original you hold, knowing what you expected to change; a difference you didn't expect is a finding, not a formatting choice.",
+    "Where a check says compare, it means compare against the original you hold, knowing what you expected to change; a difference you didn't expect is a finding, not a formatting choice.",
     "Here is the whole instrument on one page, built from the six task families in this book's logged trials and the shapes above:",
     "Task family",
     "The failure it invites",
@@ -428,13 +428,13 @@
     "For your best delegation candidate, assemble its facts sheet once: prices, policies, the three answers you always give (build it only from data that clears the zero-th gate: prices, policies, stock answers, never live customer or employee details; whether a consumer tier trains on conversations varies by vendor, plan, and settings, a training toggle turned off is not permission, and Chapter 12 carries the switches and the full fence).",
     "Ten minutes now; it gives shape 1 fewer places to hide on every future run of that task.",
     "Your map will have five tasks, and a few more rows where they split.",
-    "The book's has six families.",
+    "The book's map has six families.",
     "Growth is adding rows, not trust.",
     "The takeaway: the machine's failures have shapes — invention, silent loss, authoritative misreading, template leakage, and no reliable learning from your corrections — and a delegation is safe only when its shape has a check you'll actually run.",
     "The check is one decision of four: cleared data first, then a reality-based check, then a survivable and reversible worst case, then a payoff that beats the cost of checking.",
     "And the five shapes are a starter map, not a census: a failure that fits none of them becomes your map's next row."
    ],
-   "sentence_sha256": "5c0c7d86e8b7be5b251b32c6f71fad114c31bc660ab81f09fc901eec64bc22b3",
+   "sentence_sha256": "e0949a12751a123fa6c71fc5a1bd4b29260bc1e7dfa5e8c8be5153b08eb06aa2",
    "chunks": [
     {
      "id": "68132a7da79263e84db0b9328d2688a5b81075ca3ec6649775b759059abd3360",
@@ -463,13 +463,6 @@
      "sentence_start": 56,
      "sentence_end": 63,
      "text": "New York City ran a version of this experiment at city scale: its official small-business help chatbot told owners they could take a cut of workers' tips and refuse cash, advice the reporting showed was unlawful, the tip-taking under the labor rules protecting workers' tips and the cash refusal under a city rule in force since 2020 (The Markup, March 2024). Official deployment, government branding, confidently wrong about the law it existed to explain. The rule this family teaches: verify against the source of the rule, never against the bot. 4. It leaks its template. The machine has never met your business. When it needs a fact it doesn't have — your company name, your prices, your policy — it will sometimes leave the socket showing: our trials' cheap worker sent back a customer-ready email with \"[Your Company Name]\" still sitting in it."
-    },
-    {
-     "id": "8c471a53792e9cbabdd93fe1457d7117aecf047cac82248c826f69d51441f3e6",
-     "file": "chunks/8c471a53792e9cbabdd93fe1457d7117aecf047cac82248c826f69d51441f3e6.mp3",
-     "sentence_start": 76,
-     "sentence_end": 90,
-     "text": "Explain why \"are you sure?\" and AI-checking-AI are not verification Write the first rows of your own failure map, with a take-back line The map: task families and the checks that fit them The reason Chapter 1's named checks work is that each one is aimed at a failure shape. Read them as minimum checks: each cuts the risk of its shape, none removes it, and a check can miss, which is what the last column prices. Where a check says compare, it means against the original you hold, knowing what you expected to change; a difference you didn't expect is a finding, not a formatting choice. Here is the whole instrument on one page, built from the six task families in this book's logged trials and the shapes above: Task family The failure it invites The minimum check that cuts the risk If the check fails you Drafts you'll send (replies, emails) template leakage; tone off"
     },
     {
      "id": "2740eb3280849efec597c38704d5e73475f256b2c1088fdb17ca248ce68da553",
@@ -742,7 +735,7 @@
     "A pilot is not a vibe check.",
     "It is a bet with a scoreboard, and either outcome — stay or go — is a win, because both end the ambiguity that fills subscription graveyards.",
     "Do This Friday",
-    "Time required: about 45 minutes: the same thirty the filter takes, plus fifteen to price the truth and schedule the pilot.",
+    "Time required: about 45 minutes — the same thirty minutes the filter takes, plus fifteen minutes to price the truth and schedule the pilot.",
     "Cost: $0.",
     "Pick one candidate.",
     "The tool you are most tempted by right now, or one you're unsure enough about that Chapter 13's audit would file it under \"Prove.\"",
@@ -764,7 +757,7 @@
     "The takeaway: if a tool cannot survive the incentive check, five questions on an index card, and its full probation clock with a kill date, it does not deserve a line on your credit-card statement.",
     "The zero-th data gate remains a stop before any paste or connection."
    ],
-   "sentence_sha256": "aee8e1671f7bf77075c3d51928700c9d1e22a39f8ba857d4f9777149acb2e641",
+   "sentence_sha256": "7cf2156052edf6ab6e963358241c8f9f4777e2586716e4a5c3ffb4beb1588807",
    "chunks": [
     {
      "id": "8eb5308df9e3b526abb65e0d73db59ed956fc9409811fc91847312de9d96d6b8",
@@ -883,7 +876,7 @@
     "First, booked work they would have missed.",
     "Second, and they mention this almost as often: the phone stops owning them.",
     "Dinner is dinner.",
-    "That second result is why this book keeps insisting AI's best gift to a small business is not head count math.",
+    "That second result is why this book keeps insisting AI's best gift to a small business is not headcount math.",
     "It is getting pieces of your life back: capacity and relief, never a promise about cutting people.",
     "What \"answering\" needs to include",
     "An AI receptionist that just takes messages is voicemail with better manners.",
@@ -1039,7 +1032,7 @@
     "Put both review dates in your calendar.",
     "The takeaway: before you buy any AI to find new customers, stop losing the ones already calling you."
    ],
-   "sentence_sha256": "35f06e9e8508c3ffc3054de814b77c7e81fc735521e338aef54805e178cfa9ff",
+   "sentence_sha256": "028613bb2c91e527ddc9b001c4ac878ab8e4bdab03ce897b2fcf77da0788ecae",
    "chunks": [
     {
      "id": "6ae341a69911049095d38c4dbdb98ad501b82965333d53d6e243754ffef72eb4",
@@ -1141,7 +1134,7 @@
     "It survives reading aloud.",
     "Promises?",
     "Half price is a price: recompute it, confirm you'll honor it, post.",
-    "(That one goes out same-day — late bread can't wait for the schedule; the week's other drafts get scheduled as usual.)",
+    "(That one goes out the same day — late bread can't wait for the schedule; the week's other drafts get scheduled as usual.)",
     "The measured claim, in your arithmetic, not mine: count what a posted week costs you now in evenings and avoidance.",
     "The loop's price is roughly half an hour plus the checking discipline.",
     "Whether that trade clears is your number; the book promises none.",
@@ -1164,7 +1157,7 @@
     "Pictures of what you sell.",
     "A product photo is a promise about the physical world.",
     "AI-generated images of your food, your work, your space are invented promises, and Rustic Rebel shows customers punishing even the mildest version, teaser images of sandwiches not yet on sale, at one-person scale.",
-    "The take-it-back is absolute for product imagery.",
+    "The take-back is absolute for product imagery.",
     "Decorative graphics and layout still need a rights-and-provenance check: source assets, logos and trademarks, people and likenesses, commercial-use license, required attribution, misleading endorsement, and a retained creation record.",
     "Uncertain assets stay unpublished; design is not a legal-free zone.",
     "(Selling a service with nothing to photograph?",
@@ -1204,7 +1197,7 @@
     "(The full weekly loop runs three events in about 30 minutes; today is the small first rep.)",
     "Set the boundary in writing: add to the Pack: \"No AI images of products or premises.",
     "No offers I haven't recomputed.\"",
-    "Two lines, and this chapter's take-it-backs are policy instead of intentions.",
+    "Two lines, and this chapter's take-backs are policy instead of intentions.",
     "Calendar the loop and its day-30 decision.",
     "Choose one purpose before you continue: time or stress relieved, or a customer outcome you can count.",
     "Record its comparable baseline, the full capture/checking/tool cost, and a threshold large enough to matter.",
@@ -1212,7 +1205,7 @@
     "A marketing department is mostly a calendar that doesn't negotiate, including the calendar that tells it to stop.",
     "The takeaway: delegate the words about real events of your business under a one-read check; keep the camera, the claims, and the taste, because marketing is the public, permanent end of your delegation map."
    ],
-   "sentence_sha256": "03564d37f7284c34cd6bc69f9c010e504b4ae4bf7771663f40f7a347d19af09e",
+   "sentence_sha256": "48239cf5756f6944102ffc17c451fc82a599959335a7d01122eeb4aec3acad82",
    "chunks": [
     {
      "id": "acafc06fbcab3f00c6c305605b5c202350f9c00b21588410345a9d0cdb99cc11",
@@ -1250,13 +1243,6 @@
      "text": "A note on the popular fear behind all three: \"customers hate AI content.\" What customers punished, in the cases this book can verify, is deception and laziness: fake product images, generic sludge, claims that don't hold. Those cases do not show that checked drafting from true, specific events causes the same backlash. Truth, specificity, and your own read remain the test. The failure mode is not the tool. It is publishing something that was never true of you. Do this Friday About 60 minutes, $0. Write the Voice Pack (30 min, the five parts above). Use public or sanitized samples only; real customer, employee, payment, health, and contact details stay out. This is the whole setup cost of the domain. Run a starter loop (15 min): one real event from this week, a draft, the three checks, schedule or post it."
     },
     {
-     "id": "7a4b9a7a2f39adbb6ae4a7376e154419f0c59072373027ed3cf2c12bb0f52327",
-     "file": "chunks/7a4b9a7a2f39adbb6ae4a7376e154419f0c59072373027ed3cf2c12bb0f52327.mp3",
-     "sentence_start": 141,
-     "sentence_end": 150,
-     "text": "(The full weekly loop runs three events in about 30 minutes; today is the small first rep.) Set the boundary in writing: add to the Pack: \"No AI images of products or premises. No offers I haven't recomputed.\" Two lines, and this chapter's take-it-backs are policy instead of intentions. Calendar the loop and its day-30 decision. Choose one purpose before you continue: time or stress relieved, or a customer outcome you can count. Record its comparable baseline, the full capture/checking/tool cost, and a threshold large enough to matter. At day 30, keep, redesign once, or stop; two missed thresholds end the recurring loop. A marketing department is mostly a calendar that doesn't negotiate, including the calendar that tells it to stop."
-    },
-    {
      "id": "3fcf43db1da73c609cc2f60fb9a7f70ed174ba4ca162d923a9996aa2be37b7cd",
      "file": "chunks/3fcf43db1da73c609cc2f60fb9a7f70ed174ba4ca162d923a9996aa2be37b7cd.mp3",
      "sentence_start": 150,
@@ -1272,7 +1258,7 @@
     "Follow-Up You Won't Forget",
     "Somewhere in your sent folder is a quote from three weeks ago that never got an answer.",
     "You meant to follow up.",
-    "Then Thursday happened, and following up started to feel like pestering, and now it feels like too late.",
+    "Then Thursday happened, and following up started to feel like pestering, and now it feels too late.",
     "(Labeled illustration, but check your sent folder before you call it hypothetical.)",
     "Here are the plain mechanics of the leak: follow-up doesn't die of skill.",
     "You know exactly what to say to the customer who went quiet; you'd say it perfectly if they walked in.",
@@ -1320,7 +1306,7 @@
     "A sendable shape to copy: \"Measured your gutters against the quote from Tuesday — the 40-foot run is why the number looks high.",
     "Happy to walk you through it, and next week's install slots are open Thursday and Friday.\"",
     "You read it once against the two checks that matter: is everything in it true, and would you say it across the counter?",
-    "If the draft introduced or changed any fact you gave it (the measurement, the price, the slot), it goes back for a source check against the quote and the calendar before anything sends.",
+    "If the draft introduced a fact or changed any fact you gave it (the measurement, the price, the slot), it goes back for a source check against the quote and the calendar before anything sends.",
     "Before either touch goes live, confirm the lawful basis or consent for that channel, keep the proof, identify the sender, and include the unsubscribe control your rule requires; if you cannot document the basis, do not send.",
     "Rules differ by country, so check yours.",
     "Send only after those gates pass.",
@@ -1404,7 +1390,7 @@
     "Draft both touches once with your assistant, using placeholders until Chapter 12 has cleared live customer data and using your Voice Pack if you've built one (that's Chapter 5's one-pager; starting here, two standing facts plus two phrases you always say do the same job).",
     "Save them as templates; fill customer facts locally from the quote and calendar.",
     "Use the cleared lane or stop at drafts.",
-    "If this exact channel and template already have current dated Appendix B clearance, a person may send touch one to up to three eligible leads after checking every fact.",
+    "If this exact channel and template already have current, dated Appendix B clearance, a person may send touch one to up to three eligible leads after checking every fact.",
     "Otherwise save the placeholder drafts, keep customer details local, and schedule the reviewer-scope-and-quote step; do not send.",
     "Automated sends, texts, recording, or review solicitations stay manual/off until qualified communications/privacy counsel signs the applicable legal rows and a qualified privacy/security practitioner signs the technical controls.",
     "Any unresolved row means do not send.",
@@ -1412,7 +1398,7 @@
     "Predeclare a minimum eligible sample, a conversion improvement large enough to matter, and a maximum unsubscribe/complaint rate; compare like-for-like eligible quotes at day 30, and do not call activity a win.",
     "The takeaway: follow-up dies of memory and mood, not skill — give the machine the calendar and the drafts, keep the promises and the judgment (the negotiation most of all), and stop at two."
    ],
-   "sentence_sha256": "1c6292edccbce90ce6f378357be9a3402a5290d97025aa62dc610438e36f8e8f",
+   "sentence_sha256": "66873cb0cd4d1985d1936e44a0e14d7f8af02ff66d796f262f8d5f42cb625513",
    "chunks": [
     {
      "id": "973e9242ab87aa705bbe9565533ae191dde9fbcf39216d42d9c3baba9655a970",
@@ -1483,10 +1469,10 @@
     "Skip both if your \"meetings\" are two texts and a phone call: a notetaker for meetings you don't have is a subscription for a fantasy.",
     "And one fence before any notetaker joins a real call: a transcript is other people's words in a third party's cloud, so the recording take-back below applies from the first meeting, not eventually.",
     "Before the recorder joins, say its name, what it records, why, who can access it, the relevant retention/training facts, and that typed notes are the no-penalty alternative.",
-    "Document affirmative consent outside the recording by email, signed or check-box record, or a dated consent-log entry naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner.",
+    "Document affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent-log entry naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner.",
     "Use any different method local law requires.",
     "No answer, hesitation, staff pressure, or uncertainty about the local, contractual, professional, or workplace rule means typed notes instead.",
-    "The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and same-day you still know what mattered.",
+    "The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and that same day you still know what mattered.",
     "Step 3 — receipt and expense capture (the compounding win).",
     "Use snap-a-photo capture and cautious categorization inside the accounting tool you already run.",
     "QuickBooks Online, Xero, Wave, and FreshBooks are examples, not a price or feature-parity claim.",
@@ -1495,7 +1481,7 @@
     "Delegate extraction first.",
     "Auto-classify only vendors and categories already approved in your bookkeeping map; mixed-use, capital, unusual, or unclear items go to an exception queue for your bookkeeper or accountant.",
     "Once a month, reconcile the captured and categorized list to the account and clear exceptions before anything files.",
-    "You are not re-doing the work; you are staying able to catch what a receipt alone cannot prove.",
+    "You are not redoing the work; you are staying able to catch what a receipt alone cannot prove.",
     "The day you can't spot a wrong category is the day the books are managing you.",
     "Also worth their line: invoice drafting from job notes (inside the tools above, or your assistant plus your template; recompute every number before sending), plus the chasing itself: payment nudges and document reminders run as reusable drafts on Chapter 6's follow-up loop.",
     "Notion AI is one document/SOP add-on; compare its current first-party plan with the assistant you already have and skip it if the volume is trivial.",
@@ -1542,13 +1528,13 @@
     "Calendar the monthly skim.",
     "Third Friday, 20 minutes, standing.",
     "Write \"stay able to check\" on the calendar entry; that's the whole job description.",
-    "If any recorded call or meeting has someone else in it (client or not): use the informed-consent script and record affirmative consent outside the recording by email, signed/check-box record, or a dated consent log naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner.",
+    "If any recorded call or meeting has someone else in it (client or not): use the informed-consent script and record affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent log naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner.",
     "Use the method local law requires.",
     "Park the tool until you've read its data page.",
     "No answer, hesitation, pressured staff agreement, or uncertainty means typed notes instead.",
     "The takeaway: the back office is floor-work with the source of truth in the room — delegate the capture, approved mappings, drafts, and (after an affirmative yes) the notes under fast checks; never ambiguous classifications, filings, money movement, or the monthly skim that keeps you able to catch a wrong number."
    ],
-   "sentence_sha256": "326d56cb64719bd2e280874498caad008854c97f03ccec8ba7fc4b735895a4e7",
+   "sentence_sha256": "3a7d14567bd87660321293d9b2d20599050ed52ca3f886564bea24706e0b9905",
    "chunks": [
     {
      "id": "b3c9be40f5eebd55d41549fde3a62ff9b3f50bafe0d46c6ad38533f0db6211ff",
@@ -1607,7 +1593,7 @@
     "The catch is task billing that can climb as workflows multiply.",
     "Make — visual scenarios with a steeper learning curve.",
     "Record the current free and paid allowances from its first-party page and define what its billed unit means; a step may be billed separately from a finished job.",
-    "Compare completed-work cost, not unlike unit names.",
+    "Compare completed-work cost, not differently named billing units.",
     "The honest free-tier math is mechanical, not demographic: expected runs × billed steps per run, plus retries, premium connectors, seats, and overages.",
     "Estimate your own volume against both current pricing pages before choosing.",
     "Technical owners can compare n8n's hosted and self-hosted offers, but self-hosting pays in maintenance and security time.",
@@ -1629,7 +1615,7 @@
     "The measured claim, yours: Friday retype count × your timed seconds × your hourly figure, against the current all-in workflow cost.",
     "Most single retypes clear trivially or fail honestly; the count decides, not the demo.",
     "Build versus buy at your size",
-    "The internet is full of owners building custom AI platforms, agent swarms, four Mac Minis in a closet.",
+    "The internet is full of owners building custom AI platforms, agent swarms, four Mac minis in a closet.",
     "One mid-size account in this book's research, a founder's own telling through a local news segment: Growbo, a marketing agency, built a custom human-plus-AI platform and reports 700+ hours and $12,000 saved in four months with revenue up (Spectrum Bay News 9, Apr 2025; figures self-reported by the founder).",
     "Read the label twice: an agency, with technical capacity, whose product overlaps its plumbing.",
     "At 1–10 staff in a non-software trade, the rule is buy, not build: a custom system is a second business with its own payroll of maintenance hours, and its failure modes are yours alone at 2 a.m. The agent frontier gets its honest look in Chapter 14; it is not this chapter's homework.",
@@ -1670,7 +1656,7 @@
     "Then flip the assistant training controls this chapter names, confirm the desired OFF state, and keep client lists out of consumer tiers.",
     "The takeaway: one cleared, briefed assistant may cover the drafting layer before another point tool earns a dollar, and deterministic automation is a courier that repeats — compare the full cost, glue your systems one proven retype at a time, watch the runs, and keep it away from unproven sends and money entirely."
    ],
-   "sentence_sha256": "63f0f6858d5baf6a28611a6aa9486057c0b929cb3e59346bbe3abde4afa142ea",
+   "sentence_sha256": "7cac686f757261127d05eb0ce79b01f72654385c2b3a837e5ebf32a23158998d",
    "chunks": [
     {
      "id": "de0d78cd5067ea9fec0d67e31d2e9b8db1b94953cc32c13e4858415d98edf80a",
@@ -1944,7 +1930,7 @@
     "(\"Answer after-hours calls and book them.\"",
     "Not \"improve operations.\")",
     "METRIC + BASELINE: the single number that says it's working, its denominator and eligibility rule, and a comparable prior period from your own records.",
-    "Missed calls booked, quotes sent same-day, evening admin minutes.",
+    "Missed calls booked, quotes sent the same day, evening admin minutes.",
     "Predeclare the improvement large enough to matter and the minimum sample that could show it.",
     "If you can't name those, you're not ready to hire; run Chapter 7's audit first.",
     "CHECKS: which named check from your failure map (Chapter 2's list of how machine work goes wrong, and the check for each) runs on its output, who runs it, and when.",
@@ -2008,7 +1994,7 @@
     "Workflow checks keep the weekly, real-time, or every-event cadence their own chapter requires):",
     "Metric vs. baseline (5 min).",
     "Read the number, write it on the card.",
-    "Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session, the week's two already happened.",
+    "Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session — the week's two already happened.",
     "Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow.",
     "Contain it, switch to fallback, close the incident, remedy affected people, and reconcile authoritative records.",
     "A materially redesigned successor is new work with new clearance and a new clock.",
@@ -2046,7 +2032,7 @@
     "The trial runs on your real work, your real customers' shapes, with the fence intact: no customer data beyond what the live workflow itself requires enters the tool during probation (no bulk imports to see what it can do), and the export path is confirmed before any of it goes in (Chapter 12 carries the full fence).",
     "A tool that only shines on the vendor's sample data has passed the vendor's probation, not yours.",
     "Do this Friday",
-    "About 25 minutes, $0 (step 5 is its own separate 20, and most readers need it).",
+    "About 25 minutes, $0 (step 5 is its own separate 20 minutes, and most readers need it).",
     "Pick the one workflow whose chapter you jumped to first when you read this book's map.",
     "That instinct was your prioritization; honor it.",
     "Sketch the probation card for the tool you're trialing or considering: five fields, pen, done.",
@@ -2063,7 +2049,7 @@
     "Tenure requires a review it never had.",
     "The takeaway: every tool starts on probation — one job, one metric against a baseline, checks on a schedule, kill criteria written in advance, an exit confirmed before data goes in — and the workflow's own clock ends with a written decision, never drift."
    ],
-   "sentence_sha256": "cb79880b4d5a4b12b233edfb031cb66ac62c65bd4130fd59be83f1339d98a17a",
+   "sentence_sha256": "fdec631cf5e417503d83724f1b9377e534654032444bbdf73ae5c1cec176134d",
    "chunks": [
     {
      "id": "666023a1d88751ad774a4c07819791391abb1324d2247ecae0eb4c52b840188f",
@@ -2071,13 +2057,6 @@
      "sentence_start": 13,
      "sentence_end": 23,
      "text": "So assign follow-through to a person, then test whether that ownership, metric, and deadline prevent drift in your shop. The two questions, run on adoption itself This chapter's delegation isn't a task; it's a change to how work flows. So Chapter 1's two questions (can you check it at a glance, and could you survive the worst version?) bend slightly. Glance-checkable? Only if you baselined: a rollout with no before-number produces vibes, and vibes always favor the tool you just paid for. Survivable? A failed pilot is survivable by design if it was contained: one workflow, real checks, a written exit. It stops being survivable when three tools roll out at once and the failure can't be attributed, or when \"we'll see how it goes\" runs eight months on autopay."
-    },
-    {
-     "id": "1d7ee482d937d0974356703dd42f1544cb545b284f0e56964a4149559fdb5ddf",
-     "file": "chunks/1d7ee482d937d0974356703dd42f1544cb545b284f0e56964a4149559fdb5ddf.mp3",
-     "sentence_start": 37,
-     "sentence_end": 45,
-     "text": "Not \"improve operations.\") METRIC + BASELINE: the single number that says it's working, its denominator and eligibility rule, and a comparable prior period from your own records. Missed calls booked, quotes sent same-day, evening admin minutes. Predeclare the improvement large enough to matter and the minimum sample that could show it. If you can't name those, you're not ready to hire; run Chapter 7's audit first. CHECKS: which named check from your failure map (Chapter 2's list of how machine work goes wrong, and the check for each) runs on its output, who runs it, and when. (A check that means listening to customer calls has a gate first: the tool announces recording in a way your state's or province's consent rule accepts.) During probation the cadence is doubled: what will be weekly forever is twice-weekly for 30 days."
     },
     {
      "id": "bbb776dac083b7a76fecefbc5828fd8737dfee5f9dff5998d202b48fac921156",
@@ -2186,7 +2165,7 @@
     "About 60 minutes for one role: 20 to map, 20 to draft the redesign, 15 to draft or adapt the talk, and five for the charter.",
     "Additional roles, the live shop conversation, adviser time, lead time, and fees are separate and jurisdiction-dependent; schedule and price them before making an assurance.",
     "Map one role in full (20 min) (start with your own): three piles, honest minutes per week on each; the back of an order pad between jobs counts.",
-    "Circle the floor-work the machine already handles: the drafting, replying, scheduling, capture, and retyping this book's middle chapters delegate.",
+    "Circle the floor-work the machine already handles: the drafting, replying, scheduling, capturing, and retyping this book's middle chapters delegate.",
     "Schedule each additional role for a later five-minute screen; if a screen finds a week that is nearly all floor-work, that role gets its own full map and one-to-one before any group talk.",
     "Draft the redesign (20 min) for that role: which tasks move, which checks the person now owns, what refills the hours.",
     "One page.",
@@ -2210,7 +2189,7 @@
     "The takeaway: choose capacity first — unbundle roles into tasks, move people toward the work that needs a person, finish every role screen and required one-to-one before the group talk, and if you sell hours of floor-work yourself, reprice before the market unbundles you.",
     "That is a policy, not a promise that roles can never change."
    ],
-   "sentence_sha256": "318807a3a2683c648b13661cf38404a4e047bcd427fa6098daef913d788afbf4",
+   "sentence_sha256": "58ff2ba360937a24ae639d6746ea59c167846a1da7e421ffe0214717dd6c0a8b",
    "chunks": [
     {
      "id": "a8f95e01d9820edfa5701c4016892fdf33a16c052f6c435ba502805236ec5b11",
@@ -2260,13 +2239,6 @@
      "sentence_start": 69,
      "sentence_end": 80,
      "text": "The professionals who lose the unbundling race are the ones who let the client discover the machine first. The take-backs, named Nobody's whole job. The unit of delegation is the task, never the person. The day a role's entire week fits in pile one, the honest conversation is about redesigning the role, and you have it with the person, with time, like an owner and not like a memo. The quiet cut. \"We just won't replace people as they leave, the AI will absorb it\" without an actual task redesign is service decay on a delay timer. If attrition changes your shape, redesign on purpose, out loud. (And name this for what it is: the one way headcount ever falls under this book's position — never pushed, sometimes not backfilled, always redesigned in the open.) Can't-verify work, regardless of payroll pressure. A tight month does not repeal Chapter 1."
-    },
-    {
-     "id": "25f3e5955dbf3b2af6b06e9089f193032a798b0df980a4cfdca31aacf6e5b836",
-     "file": "chunks/25f3e5955dbf3b2af6b06e9089f193032a798b0df980a4cfdca31aacf6e5b836.mp3",
-     "sentence_start": 88,
-     "sentence_end": 94,
-     "text": "Circle the floor-work the machine already handles: the drafting, replying, scheduling, capture, and retyping this book's middle chapters delegate. Schedule each additional role for a later five-minute screen; if a screen finds a week that is nearly all floor-work, that role gets its own full map and one-to-one before any group talk. Draft the redesign (20 min) for that role: which tasks move, which checks the person now owns, what refills the hours. One page. Keep the pages as you work through the roles, same test, same way, with task-based reasons in writing. Before implementing any material change to duties, pay, hours, location, monitoring, employment status, accommodations, or expectations, consult the employee and have a qualified local employment adviser review the contract, human-rights and accommodation, wage and overtime, training, and notice implications."
     }
    ]
   },
@@ -2282,7 +2254,7 @@
     "That version of the policy didn't exist.",
     "Air Canada's real bereavement policy required asking before the flight; the book-now-claim-later part was the bot's invention.",
     "The airline refused to honor it, and argued, in effect, that the chatbot was responsible for its own words.",
-    "The British Columbia Civil Resolution Tribunal disagreed and made Air Canada pay: $812.02 Canadian, the fare difference plus interest and fees (Moffatt v.",
+    "The British Columbia Civil Resolution Tribunal disagreed and made Air Canada pay: CA$812.02, the fare difference plus interest and fees (Moffatt v.",
     "Air Canada, February 2024).",
     "Note the venue honestly: a provincial small-claims-style tribunal, eight hundred dollars, no grand precedent machinery.",
     "The ruling binds nobody else, and whether any bot statement is legally binding depends on the facts and local law.",
@@ -2316,7 +2288,8 @@
     "The longer rules after it are implementation notes, not extra wall copy.",
     "The one-page policy — print and sign",
     "AI use in this shop",
-    "Policy owner: __________  Effective date: __________  Next review: __________ Signed by everyone with a work account: ________________________________",
+    "Policy owner: __________  Effective date: __________  Next review: __________",
+    "Signed by everyone with a work account: ________________________________",
     "1.",
     "WHAT GOES IN — IF LOSS WOULD REQUIRE AN APOLOGY, STOP.",
     "Use shop-controlled accounts with recorded terms.",
@@ -2443,7 +2416,7 @@
     "If a defect may already have reached customers, reconcile the bot log against calls, bookings, complaints, refunds, transfers, and payments; name the owner and deadline, contact affected customers, deliver and reconcile the remedy, and close the incident with evidence.",
     "The takeaway: your business owns what its machines leak, say, and believe — so run one page and three rules: nothing confidential goes in; no new or generated customer wording goes out unread (a frozen approved template still needs the full lifecycle); and rules come from the source of the rule, never the bot."
    ],
-   "sentence_sha256": "d72798be82781786805781dd6834e87aa60deb58f1d28765e1899985b06ab550",
+   "sentence_sha256": "d7245c02e73ef36a5a25052638a20de050e908a21b5a506377a9354c33aeabd7",
    "chunks": []
   },
   "13": {
@@ -2849,11 +2822,19 @@
   },
   {
    "chapter": "2",
-   "id": "b184fb0518e7ad4e6df92e0c665063881112ccd47cfe6354c92b8eaf1faddf21",
-   "file": "chunks/b184fb0518e7ad4e6df92e0c665063881112ccd47cfe6354c92b8eaf1faddf21.mp3",
+   "id": "99e72e68fafa2930cf13c9c6414d79f6230bfc6732ba0fcdde2e44ff99fb5526",
+   "file": "chunks/99e72e68fafa2930cf13c9c6414d79f6230bfc6732ba0fcdde2e44ff99fb5526.mp3",
    "sentence_start": 70,
-   "sentence_end": 76,
-   "text": "The practical consequence is a habit: anything you find yourself correcting twice goes into your controlled instructions, script, or facts sheet, because the record is inspectable even when the model's behavior is not. If more than one person uses the tool, that record needs access control and one named owner; otherwise shape 5 just moves into separate chat histories. After this chapter, you can: Run the four delegation decisions in order (clearance, check, survivability, payoff) before any handoff Name the five failure shapes and say which one a given task invites Match each of your delegated tasks to the check that catches its shape"
+   "sentence_end": 80,
+   "text": "The practical consequence is a habit: anything you find yourself correcting twice goes into your controlled instructions, script, or facts sheet, because the record is inspectable even when the model's behavior is not. If more than one person uses the tool, that record needs access control and one named owner; otherwise shape 5 just moves into separate chat histories. After this chapter, you can: Run the four delegation decisions in order (clearance, check, survivability, payoff) before any handoff Name the five failure shapes and say which one a given task invites Match each of your delegated tasks to the check that catches its shape Explain why \"are you sure?\" and AI-checking-AI are not verification Write the first rows of your own failure map, with a take-back line The map: task families and the checks that fit them"
+  },
+  {
+   "chapter": "2",
+   "id": "f59c36328e8c915d1c63e40278e51d673381dedbfc4ba39bc35b0b04f2bdcc62",
+   "file": "chunks/f59c36328e8c915d1c63e40278e51d673381dedbfc4ba39bc35b0b04f2bdcc62.mp3",
+   "sentence_start": 80,
+   "sentence_end": 90,
+   "text": "The reason Chapter 1's named checks work is that each one is aimed at a failure shape. Read them as minimum checks: each cuts the risk of its shape, none removes it, and a check can miss, which is what the last column prices. Where a check says compare, it means compare against the original you hold, knowing what you expected to change; a difference you didn't expect is a finding, not a formatting choice. Here is the whole instrument on one page, built from the six task families in this book's logged trials and the shapes above: Task family The failure it invites The minimum check that cuts the risk If the check fails you Drafts you'll send (replies, emails) template leakage; tone off"
   },
   {
    "chapter": "2",
@@ -2897,11 +2878,11 @@
   },
   {
    "chapter": "2",
-   "id": "9a6246f36af12673a02261b06c963d4dabff1632a2ec76cf2f34ddb51a9662fa",
-   "file": "chunks/9a6246f36af12673a02261b06c963d4dabff1632a2ec76cf2f34ddb51a9662fa.mp3",
+   "id": "332713e1ef21affcb6ccf13795a33680270ab8c3630aa7a77283fc7855e717d8",
+   "file": "chunks/332713e1ef21affcb6ccf13795a33680270ab8c3630aa7a77283fc7855e717d8.mp3",
    "sentence_start": 178,
    "sentence_end": 183,
-   "text": "For your best delegation candidate, assemble its facts sheet once: prices, policies, the three answers you always give (build it only from data that clears the zero-th gate: prices, policies, stock answers, never live customer or employee details; whether a consumer tier trains on conversations varies by vendor, plan, and settings, a training toggle turned off is not permission, and Chapter 12 carries the switches and the full fence). Ten minutes now; it gives shape 1 fewer places to hide on every future run of that task. Your map will have five tasks, and a few more rows where they split. The book's has six families. Growth is adding rows, not trust."
+   "text": "For your best delegation candidate, assemble its facts sheet once: prices, policies, the three answers you always give (build it only from data that clears the zero-th gate: prices, policies, stock answers, never live customer or employee details; whether a consumer tier trains on conversations varies by vendor, plan, and settings, a training toggle turned off is not permission, and Chapter 12 carries the switches and the full fence). Ten minutes now; it gives shape 1 fewer places to hide on every future run of that task. Your map will have five tasks, and a few more rows where they split. The book's map has six families. Growth is adding rows, not trust."
   },
   {
    "chapter": "2",
@@ -3009,11 +2990,11 @@
   },
   {
    "chapter": "3",
-   "id": "f17673e25d49c202f85993717958a69d895c5d528f528236bc1eace7bf380b59",
-   "file": "chunks/f17673e25d49c202f85993717958a69d895c5d528f528236bc1eace7bf380b59.mp3",
+   "id": "7cac5bbeb63d7a776b6394cbaf03e098ff1f360e0a6dbe2040e542a77f12142f",
+   "file": "chunks/7cac5bbeb63d7a776b6394cbaf03e098ff1f360e0a6dbe2040e542a77f12142f.mp3",
    "sentence_start": 210,
    "sentence_end": 221,
-   "text": "Time required: about 45 minutes: the same thirty the filter takes, plus fifteen to price the truth and schedule the pilot. Cost: $0. Pick one candidate. The tool you are most tempted by right now, or one you're unsure enough about that Chapter 13's audit would file it under \"Prove.\" Just one. Write the incentive check and the five answers on one index card. Start with: who is making the claim, what they gain if you believe it, what evidence they offer, and whether the claim earns a place in the five-question filter. Then write the task and its number, the owner and their hour, the three data answers from the vendor's site, the real-volume annual cost, and the exit. Price the truth (the deep version of the card's cost answer). Real monthly volume × unit price, plus seats, times twelve. Put that number next to the sticker price."
+   "text": "Time required: about 45 minutes — the same thirty minutes the filter takes, plus fifteen minutes to price the truth and schedule the pilot. Cost: $0. Pick one candidate. The tool you are most tempted by right now, or one you're unsure enough about that Chapter 13's audit would file it under \"Prove.\" Just one. Write the incentive check and the five answers on one index card. Start with: who is making the claim, what they gain if you believe it, what evidence they offer, and whether the claim earns a place in the five-question filter. Then write the task and its number, the owner and their hour, the three data answers from the vendor's site, the real-volume annual cost, and the exit. Price the truth (the deep version of the card's cost answer). Real monthly volume × unit price, plus seats, times twelve. Put that number next to the sticker price."
   },
   {
    "chapter": "3",
@@ -3073,11 +3054,11 @@
   },
   {
    "chapter": "4",
-   "id": "fb90ff0f2cad66970b12d9106803514b36479a6c3505890e9ae9f054ef76628d",
-   "file": "chunks/fb90ff0f2cad66970b12d9106803514b36479a6c3505890e9ae9f054ef76628d.mp3",
+   "id": "e2701e49925d5f54a003dee6f422d2f849c621d66e2fbc33276cc6b42f21566b",
+   "file": "chunks/e2701e49925d5f54a003dee6f422d2f849c621d66e2fbc33276cc6b42f21566b.mp3",
    "sentence_start": 49,
    "sentence_end": 60,
-   "text": "For decades the options were an answering service, a hired dispatcher, or your own interrupted evening. AI adds another option: software that can answer after hours at a variable subscription and usage cost, plus setup, integration, clearance, checking, and fallback labor. Your quote and probation record — not the price of one job — decide whether it pays. Owners who set this up describe the same two results. First, booked work they would have missed. Second, and they mention this almost as often: the phone stops owning them. Dinner is dinner. That second result is why this book keeps insisting AI's best gift to a small business is not head count math. It is getting pieces of your life back: capacity and relief, never a promise about cutting people. What \"answering\" needs to include An AI receptionist that just takes messages is voicemail with better manners."
+   "text": "For decades the options were an answering service, a hired dispatcher, or your own interrupted evening. AI adds another option: software that can answer after hours at a variable subscription and usage cost, plus setup, integration, clearance, checking, and fallback labor. Your quote and probation record — not the price of one job — decide whether it pays. Owners who set this up describe the same two results. First, booked work they would have missed. Second, and they mention this almost as often: the phone stops owning them. Dinner is dinner. That second result is why this book keeps insisting AI's best gift to a small business is not headcount math. It is getting pieces of your life back: capacity and relief, never a promise about cutting people. What \"answering\" needs to include An AI receptionist that just takes messages is voicemail with better manners."
   },
   {
    "chapter": "4",
@@ -3289,11 +3270,11 @@
   },
   {
    "chapter": "5",
-   "id": "ba9357c3a2af8520a58d6ce504f9608b0ecf50fefd815839240b40d72a996743",
-   "file": "chunks/ba9357c3a2af8520a58d6ce504f9608b0ecf50fefd815839240b40d72a996743.mp3",
+   "id": "a4c2767031f5323df1a7cb3ccee66865cc8cecf6d83564e45015a825ff3376a1",
+   "file": "chunks/a4c2767031f5323df1a7cb3ccee66865cc8cecf6d83564e45015a825ff3376a1.mp3",
    "sentence_start": 81,
    "sentence_end": 88,
-   "text": "(That one goes out same-day — late bread can't wait for the schedule; the week's other drafts get scheduled as usual.) The measured claim, in your arithmetic, not mine: count what a posted week costs you now in evenings and avoidance. The loop's price is roughly half an hour plus the checking discipline. Whether that trade clears is your number; the book promises none. Where to run it (prices checked Aug 2026; they move — a verified companion page may carry a live list after release): The no-new-subscription stack: the cleared assistant you already have + a free visual tool + direct posting, if the current first-party limits cover your channels and commercial-use needs. Skip a scheduler if you post to one platform and can post directly: software for one channel can become a subscription for a habit you do not have yet."
+   "text": "(That one goes out the same day — late bread can't wait for the schedule; the week's other drafts get scheduled as usual.) The measured claim, in your arithmetic, not mine: count what a posted week costs you now in evenings and avoidance. The loop's price is roughly half an hour plus the checking discipline. Whether that trade clears is your number; the book promises none. Where to run it (prices checked Aug 2026; they move — a verified companion page may carry a live list after release): The no-new-subscription stack: the cleared assistant you already have + a free visual tool + direct posting, if the current first-party limits cover your channels and commercial-use needs. Skip a scheduler if you post to one platform and can post directly: software for one channel can become a subscription for a habit you do not have yet."
   },
   {
    "chapter": "5",
@@ -3305,11 +3286,11 @@
   },
   {
    "chapter": "5",
-   "id": "0cf8d3ad76bace12e939a0c356f2ad75dd17e5f414d7dda8282291e17626bd6a",
-   "file": "chunks/0cf8d3ad76bace12e939a0c356f2ad75dd17e5f414d7dda8282291e17626bd6a.mp3",
+   "id": "eda7c05bc5cc8e87195eb7c2a6b0e76de6402ff055611ae618373926311476d0",
+   "file": "chunks/eda7c05bc5cc8e87195eb7c2a6b0e76de6402ff055611ae618373926311476d0.mp3",
    "sentence_start": 95,
    "sentence_end": 105,
-   "text": "Treat any recommendation, including this book's, as a claim to audit. One deliberate absence: ad platforms and ad-creative generators. Paid ads amplify a message that already converts; until the organic loop above has run for a season and taught you which words work, ad spend is amplified guessing. Chapter 6 handles what happens after someone responds. The three delegations you never make here 1. Pictures of what you sell. A product photo is a promise about the physical world. AI-generated images of your food, your work, your space are invented promises, and Rustic Rebel shows customers punishing even the mildest version, teaser images of sandwiches not yet on sale, at one-person scale. The take-it-back is absolute for product imagery."
+   "text": "Treat any recommendation, including this book's, as a claim to audit. One deliberate absence: ad platforms and ad-creative generators. Paid ads amplify a message that already converts; until the organic loop above has run for a season and taught you which words work, ad spend is amplified guessing. Chapter 6 handles what happens after someone responds. The three delegations you never make here 1. Pictures of what you sell. A product photo is a promise about the physical world. AI-generated images of your food, your work, your space are invented promises, and Rustic Rebel shows customers punishing even the mildest version, teaser images of sandwiches not yet on sale, at one-person scale. The take-back is absolute for product imagery."
   },
   {
    "chapter": "5",
@@ -3328,12 +3309,20 @@
    "text": "The organizer promised refunds, and later reporting found some still being chased. The company folded its events (BBC/STV/TIME, Feb–Mar 2024; independent). AI marketing can write checks your business can't cash. Never let it write the check. 2. Claims, offers, and prices, unchecked. A published offer may create obligations under local contract and consumer-protection rules; check the rule you operate under and honor what you publish. Every draft containing a number, a deadline, or a guarantee gets the quote-arithmetic treatment from Chapter 1: recompute it, confirm you'll honor it, then post."
   },
   {
+   "chapter": "5",
+   "id": "9ef4b24bbe7ae18b380712ef1c97d5a7c358dda10a03fe70040feabbc1555faa",
+   "file": "chunks/9ef4b24bbe7ae18b380712ef1c97d5a7c358dda10a03fe70040feabbc1555faa.mp3",
+   "sentence_start": 141,
+   "sentence_end": 150,
+   "text": "(The full weekly loop runs three events in about 30 minutes; today is the small first rep.) Set the boundary in writing: add to the Pack: \"No AI images of products or premises. No offers I haven't recomputed.\" Two lines, and this chapter's take-backs are policy instead of intentions. Calendar the loop and its day-30 decision. Choose one purpose before you continue: time or stress relieved, or a customer outcome you can count. Record its comparable baseline, the full capture/checking/tool cost, and a threshold large enough to matter. At day 30, keep, redesign once, or stop; two missed thresholds end the recurring loop. A marketing department is mostly a calendar that doesn't negotiate, including the calendar that tells it to stop."
+  },
+  {
    "chapter": "6",
-   "id": "a4ec8f927d0bdbe491066637952749119a6ce097d297b0aadc81aa28c33d6e8c",
-   "file": "chunks/a4ec8f927d0bdbe491066637952749119a6ce097d297b0aadc81aa28c33d6e8c.mp3",
+   "id": "6a035742ce709f2cc682c0346852fe91df2bef3cb003750532549dfc60483b26",
+   "file": "chunks/6a035742ce709f2cc682c0346852fe91df2bef3cb003750532549dfc60483b26.mp3",
    "sentence_start": 0,
    "sentence_end": 11,
-   "text": "Chapter 6 Follow-Up You Won't Forget Somewhere in your sent folder is a quote from three weeks ago that never got an answer. You meant to follow up. Then Thursday happened, and following up started to feel like pestering, and now it feels like too late. (Labeled illustration, but check your sent folder before you call it hypothetical.) Here are the plain mechanics of the leak: follow-up doesn't die of skill. You know exactly what to say to the customer who went quiet; you'd say it perfectly if they walked in. Follow-up dies of memory and mood: remembering on the right day, and feeling like it isn't begging. Which makes this domain almost comically well-suited to the strangest employee you'll ever hire, because the machine has no Thursday and no pride. It never forgets the day, and it never feels awkward."
+   "text": "Chapter 6 Follow-Up You Won't Forget Somewhere in your sent folder is a quote from three weeks ago that never got an answer. You meant to follow up. Then Thursday happened, and following up started to feel like pestering, and now it feels too late. (Labeled illustration, but check your sent folder before you call it hypothetical.) Here are the plain mechanics of the leak: follow-up doesn't die of skill. You know exactly what to say to the customer who went quiet; you'd say it perfectly if they walked in. Follow-up dies of memory and mood: remembering on the right day, and feeling like it isn't begging. Which makes this domain almost comically well-suited to the strangest employee you'll ever hire, because the machine has no Thursday and no pride. It never forgets the day, and it never feels awkward."
   },
   {
    "chapter": "6",
@@ -3345,11 +3334,11 @@
   },
   {
    "chapter": "6",
-   "id": "e0ba8e83062b5e4ef29f3d438b21e49c44df2309e892e53565affe5b86488ea4",
-   "file": "chunks/e0ba8e83062b5e4ef29f3d438b21e49c44df2309e892e53565affe5b86488ea4.mp3",
+   "id": "e719ebd0ba5c634f2e5865e618421bc4d02b0e1e8c332f2812f1c9f55749e034",
+   "file": "chunks/e719ebd0ba5c634f2e5865e618421bc4d02b0e1e8c332f2812f1c9f55749e034.mp3",
    "sentence_start": 46,
    "sentence_end": 53,
-   "text": "Touch one, day 3: the useful nudge. Not \"just checking in.\" Until Chapter 12's live-data gate has cleared the drafting tool, build the reusable message with placeholders such as [FIRST NAME], [JOB DETAIL], and [DATE], then fill them locally from the quote and calendar. A sendable shape to copy: \"Measured your gutters against the quote from Tuesday — the 40-foot run is why the number looks high. Happy to walk you through it, and next week's install slots are open Thursday and Friday.\" You read it once against the two checks that matter: is everything in it true, and would you say it across the counter? If the draft introduced or changed any fact you gave it (the measurement, the price, the slot), it goes back for a source check against the quote and the calendar before anything sends."
+   "text": "Touch one, day 3: the useful nudge. Not \"just checking in.\" Until Chapter 12's live-data gate has cleared the drafting tool, build the reusable message with placeholders such as [FIRST NAME], [JOB DETAIL], and [DATE], then fill them locally from the quote and calendar. A sendable shape to copy: \"Measured your gutters against the quote from Tuesday — the 40-foot run is why the number looks high. Happy to walk you through it, and next week's install slots are open Thursday and Friday.\" You read it once against the two checks that matter: is everything in it true, and would you say it across the counter? If the draft introduced a fact or changed any fact you gave it (the measurement, the price, the slot), it goes back for a source check against the quote and the calendar before anything sends."
   },
   {
    "chapter": "6",
@@ -3433,11 +3422,11 @@
   },
   {
    "chapter": "6",
-   "id": "59f3fa30dbf7e6894cf765f6b9dc8637eb4513086abcba14d78a8b48cdf76c50",
-   "file": "chunks/59f3fa30dbf7e6894cf765f6b9dc8637eb4513086abcba14d78a8b48cdf76c50.mp3",
+   "id": "6443688ee6a48774169fd87c415dd38dd7e0f23e075512382b02f38ea91b5a09",
+   "file": "chunks/6443688ee6a48774169fd87c415dd38dd7e0f23e075512382b02f38ea91b5a09.mp3",
    "sentence_start": 133,
    "sentence_end": 138,
-   "text": "Draft both touches once with your assistant, using placeholders until Chapter 12 has cleared live customer data and using your Voice Pack if you've built one (that's Chapter 5's one-pager; starting here, two standing facts plus two phrases you always say do the same job). Save them as templates; fill customer facts locally from the quote and calendar. Use the cleared lane or stop at drafts. If this exact channel and template already have current dated Appendix B clearance, a person may send touch one to up to three eligible leads after checking every fact. Otherwise save the placeholder drafts, keep customer details local, and schedule the reviewer-scope-and-quote step; do not send."
+   "text": "Draft both touches once with your assistant, using placeholders until Chapter 12 has cleared live customer data and using your Voice Pack if you've built one (that's Chapter 5's one-pager; starting here, two standing facts plus two phrases you always say do the same job). Save them as templates; fill customer facts locally from the quote and calendar. Use the cleared lane or stop at drafts. If this exact channel and template already have current, dated Appendix B clearance, a person may send touch one to up to three eligible leads after checking every fact. Otherwise save the placeholder drafts, keep customer details local, and schedule the reviewer-scope-and-quote step; do not send."
   },
   {
    "chapter": "6",
@@ -3473,11 +3462,11 @@
   },
   {
    "chapter": "7",
-   "id": "d285efe06ac02a99e6346adf867a7cef8af20101cebe3f10e4c8b76e20e9c984",
-   "file": "chunks/d285efe06ac02a99e6346adf867a7cef8af20101cebe3f10e4c8b76e20e9c984.mp3",
+   "id": "12babd78a63aa0844a50eb489172681b0d746f480a286f4d71254413929f73b3",
+   "file": "chunks/12babd78a63aa0844a50eb489172681b0d746f480a286f4d71254413929f73b3.mp3",
    "sentence_start": 42,
    "sentence_end": 48,
-   "text": "Before the recorder joins, say its name, what it records, why, who can access it, the relevant retention/training facts, and that typed notes are the no-penalty alternative. Document affirmative consent outside the recording by email, signed or check-box record, or a dated consent-log entry naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use any different method local law requires. No answer, hesitation, staff pressure, or uncertainty about the local, contractual, professional, or workplace rule means typed notes instead. The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and same-day you still know what mattered. Step 3 — receipt and expense capture (the compounding win)."
+   "text": "Before the recorder joins, say its name, what it records, why, who can access it, the relevant retention/training facts, and that typed notes are the no-penalty alternative. Document affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent-log entry naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use any different method local law requires. No answer, hesitation, staff pressure, or uncertainty about the local, contractual, professional, or workplace rule means typed notes instead. The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and that same day you still know what mattered. Step 3 — receipt and expense capture (the compounding win)."
   },
   {
    "chapter": "7",
@@ -3489,11 +3478,11 @@
   },
   {
    "chapter": "7",
-   "id": "bce94d5af6ae696d49279ea013613732378ad3b304e0ed2f4aad8285de1f89ce",
-   "file": "chunks/bce94d5af6ae696d49279ea013613732378ad3b304e0ed2f4aad8285de1f89ce.mp3",
+   "id": "4bc0accda843334d22043438a83adfde168bf34412f629eeb07a2cf0cd99b488",
+   "file": "chunks/4bc0accda843334d22043438a83adfde168bf34412f629eeb07a2cf0cd99b488.mp3",
    "sentence_start": 55,
    "sentence_end": 60,
-   "text": "You are not re-doing the work; you are staying able to catch what a receipt alone cannot prove. The day you can't spot a wrong category is the day the books are managing you. Also worth their line: invoice drafting from job notes (inside the tools above, or your assistant plus your template; recompute every number before sending), plus the chasing itself: payment nudges and document reminders run as reusable drafts on Chapter 6's follow-up loop. Notion AI is one document/SOP add-on; compare its current first-party plan with the assistant you already have and skip it if the volume is trivial. Full agent platforms such as Lindy stay out at 1–10 staff until the simple pieces above are habits; vendor time-saved claims are the demo talking, and Chapter 10's probation applies to any tool making them."
+   "text": "You are not redoing the work; you are staying able to catch what a receipt alone cannot prove. The day you can't spot a wrong category is the day the books are managing you. Also worth their line: invoice drafting from job notes (inside the tools above, or your assistant plus your template; recompute every number before sending), plus the chasing itself: payment nudges and document reminders run as reusable drafts on Chapter 6's follow-up loop. Notion AI is one document/SOP add-on; compare its current first-party plan with the assistant you already have and skip it if the volume is trivial. Full agent platforms such as Lindy stay out at 1–10 staff until the simple pieces above are habits; vendor time-saved claims are the demo talking, and Chapter 10's probation applies to any tool making them."
   },
   {
    "chapter": "7",
@@ -3537,11 +3526,11 @@
   },
   {
    "chapter": "7",
-   "id": "959452e7934febd755f2ee4788adf6fe5380866cd2adcd23fca7b3613d672e7b",
-   "file": "chunks/959452e7934febd755f2ee4788adf6fe5380866cd2adcd23fca7b3613d672e7b.mp3",
+   "id": "7c99b68eee3bf653c8abbad5b2d2e787f54036ef8a10c9c607f94c32394a685f",
+   "file": "chunks/7c99b68eee3bf653c8abbad5b2d2e787f54036ef8a10c9c607f94c32394a685f.mp3",
    "sentence_start": 102,
    "sentence_end": 107,
-   "text": "If any recorded call or meeting has someone else in it (client or not): use the informed-consent script and record affirmative consent outside the recording by email, signed/check-box record, or a dated consent log naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use the method local law requires. Park the tool until you've read its data page. No answer, hesitation, pressured staff agreement, or uncertainty means typed notes instead. The takeaway: the back office is floor-work with the source of truth in the room — delegate the capture, approved mappings, drafts, and (after an affirmative yes) the notes under fast checks; never ambiguous classifications, filings, money movement, or the monthly skim that keeps you able to catch a wrong number."
+   "text": "If any recorded call or meeting has someone else in it (client or not): use the informed-consent script and record affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent log naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use the method local law requires. Park the tool until you've read its data page. No answer, hesitation, pressured staff agreement, or uncertainty means typed notes instead. The takeaway: the back office is floor-work with the source of truth in the room — delegate the capture, approved mappings, drafts, and (after an affirmative yes) the notes under fast checks; never ambiguous classifications, filings, money movement, or the monthly skim that keeps you able to catch a wrong number."
   },
   {
    "chapter": "8",
@@ -3577,11 +3566,11 @@
   },
   {
    "chapter": "8",
-   "id": "733ba29c475c86c615243c3149b691d36790fd4c2e178b1ecf45856da0c4c77e",
-   "file": "chunks/733ba29c475c86c615243c3149b691d36790fd4c2e178b1ecf45856da0c4c77e.mp3",
+   "id": "c09c2d1d05e5a4c43e67c2ada1b353565f3f3aa9c4bf3e4f9dcc5badf17f8195",
+   "file": "chunks/c09c2d1d05e5a4c43e67c2ada1b353565f3f3aa9c4bf3e4f9dcc5badf17f8195.mp3",
    "sentence_start": 37,
    "sentence_end": 45,
-   "text": "Record the current free and paid allowances from its first-party page and define what its billed unit means; a step may be billed separately from a finished job. Compare completed-work cost, not unlike unit names. The honest free-tier math is mechanical, not demographic: expected runs × billed steps per run, plus retries, premium connectors, seats, and overages. Estimate your own volume against both current pricing pages before choosing. Technical owners can compare n8n's hosted and self-hosted offers, but self-hosting pays in maintenance and security time. Treat any lifetime deal as Chapter 3's who-profits question wearing a bow tie. Skip all of it until one specific retype hurts weekly; automation adopted as a vibe becomes shelfware with credentials to your systems. The primary build: kill one retype."
+   "text": "Record the current free and paid allowances from its first-party page and define what its billed unit means; a step may be billed separately from a finished job. Compare completed-work cost, not differently named billing units. The honest free-tier math is mechanical, not demographic: expected runs × billed steps per run, plus retries, premium connectors, seats, and overages. Estimate your own volume against both current pricing pages before choosing. Technical owners can compare n8n's hosted and self-hosted offers, but self-hosting pays in maintenance and security time. Treat any lifetime deal as Chapter 3's who-profits question wearing a bow tie. Skip all of it until one specific retype hurts weekly; automation adopted as a vibe becomes shelfware with credentials to your systems. The primary build: kill one retype."
   },
   {
    "chapter": "8",
@@ -3601,11 +3590,11 @@
   },
   {
    "chapter": "8",
-   "id": "f1d1c5361d9ac47d6311ede6d5600555b35938183ab639776c363c7a73260584",
-   "file": "chunks/f1d1c5361d9ac47d6311ede6d5600555b35938183ab639776c363c7a73260584.mp3",
+   "id": "d347be4e45f0de23861750595410b24a6121b60ff58c0dbb22e947fc69450b80",
+   "file": "chunks/d347be4e45f0de23861750595410b24a6121b60ff58c0dbb22e947fc69450b80.mp3",
    "sentence_start": 55,
    "sentence_end": 61,
-   "text": "Any AI extraction, classification, summary, or transformation inherits Chapter 2's content checks and may not mutate authoritative state or message a customer on unchecked output. A person who mis-enters one booking mis-enters one booking; a misconfigured automation can mis-enter every booking, identically, at 3 a.m. The check that fits the shape is a weekly look at every run since last time, confirming the fields landed where they should and every failure raised its alert; Chapter 7's monthly skim inherits the automations as one more line. The measured claim, yours: Friday retype count × your timed seconds × your hourly figure, against the current all-in workflow cost. Most single retypes clear trivially or fail honestly; the count decides, not the demo. Build versus buy at your size The internet is full of owners building custom AI platforms, agent swarms, four Mac Minis in a closet."
+   "text": "Any AI extraction, classification, summary, or transformation inherits Chapter 2's content checks and may not mutate authoritative state or message a customer on unchecked output. A person who mis-enters one booking mis-enters one booking; a misconfigured automation can mis-enter every booking, identically, at 3 a.m. The check that fits the shape is a weekly look at every run since last time, confirming the fields landed where they should and every failure raised its alert; Chapter 7's monthly skim inherits the automations as one more line. The measured claim, yours: Friday retype count × your timed seconds × your hourly figure, against the current all-in workflow cost. Most single retypes clear trivially or fail honestly; the count decides, not the demo. Build versus buy at your size The internet is full of owners building custom AI platforms, agent swarms, four Mac minis in a closet."
   },
   {
    "chapter": "8",
@@ -3793,27 +3782,35 @@
   },
   {
    "chapter": "10",
-   "id": "d608c952725ee6f066024006559d329d1415320b0e3dfaea49455bbc70d461e8",
-   "file": "chunks/d608c952725ee6f066024006559d329d1415320b0e3dfaea49455bbc70d461e8.mp3",
+   "id": "93024af6b868bf4b8e46665cd020347d72f534346dcb412f677f5b349f9f23f0",
+   "file": "chunks/93024af6b868bf4b8e46665cd020347d72f534346dcb412f677f5b349f9f23f0.mp3",
    "sentence_start": 32,
-   "sentence_end": 37,
-   "text": "Keep a tool registry listing every active workflow card. A new workflow, permission, data category, risk class, plan, or account starts its own card, gate, and clock; passing sanitized drafting never approves customer follow-up or live-data work: JOB: the one workflow this tool owns during probation. One. (\"Answer after-hours calls and book them.\""
+   "sentence_end": 42,
+   "text": "Keep a tool registry listing every active workflow card. A new workflow, permission, data category, risk class, plan, or account starts its own card, gate, and clock; passing sanitized drafting never approves customer follow-up or live-data work: JOB: the one workflow this tool owns during probation. One. (\"Answer after-hours calls and book them.\" Not \"improve operations.\") METRIC + BASELINE: the single number that says it's working, its denominator and eligibility rule, and a comparable prior period from your own records. Missed calls booked, quotes sent the same day, evening admin minutes. Predeclare the improvement large enough to matter and the minimum sample that could show it. If you can't name those, you're not ready to hire; run Chapter 7's audit first."
   },
   {
    "chapter": "10",
-   "id": "ea20a11934323ac9383188347fd9bf49b54cde4197171526307e233f41643e06",
-   "file": "chunks/ea20a11934323ac9383188347fd9bf49b54cde4197171526307e233f41643e06.mp3",
-   "sentence_start": 45,
-   "sentence_end": 49,
-   "text": "Sampling is the quality check, not the safety net: a job where a missed call is a gas smell or a burst pipe keeps a real-time human path (Chapter 4's urgent flag and emergency line) regardless of what the sample says. KILL CRITERIA: written now, while you're sober: \"Gone unless [rate or margin, with its denominator] beats a comparable baseline by [your meaningful number] after [minimum eligible observations], while staying below [maximum recoverable error or complaint rate], with zero red-line safety, privacy, legal, or irreversible incidents.\" One red-line incident permanently fires that exact card and workflow: contain it, switch to the tested fallback, close the incident, remedy affected people, and reconcile authoritative records. A materially redesigned successor is a new workflow and starts over with new qualified clearance, card, gates, and clock."
+   "id": "63097d65768f10145b1a663c32c406132fbcb8d62837624b748a35b93687a0cb",
+   "file": "chunks/63097d65768f10145b1a663c32c406132fbcb8d62837624b748a35b93687a0cb.mp3",
+   "sentence_start": 42,
+   "sentence_end": 46,
+   "text": "CHECKS: which named check from your failure map (Chapter 2's list of how machine work goes wrong, and the check for each) runs on its output, who runs it, and when. (A check that means listening to customer calls has a gate first: the tool announces recording in a way your state's or province's consent rule accepts.) During probation the cadence is doubled: what will be weekly forever is twice-weekly for 30 days. Sampling is the quality check, not the safety net: a job where a missed call is a gas smell or a burst pipe keeps a real-time human path (Chapter 4's urgent flag and emergency line) regardless of what the sample says."
   },
   {
    "chapter": "10",
-   "id": "4193edaec9cd402a95fe6a4ad5ee07609836754be5ed259688cb02a3c94dfed5",
-   "file": "chunks/4193edaec9cd402a95fe6a4ad5ee07609836754be5ed259688cb02a3c94dfed5.mp3",
-   "sentence_start": 49,
+   "id": "e90124ad4823f4b6d5f4495ff32d1af5d67d2edbabb0a177119a6b4197d6b166",
+   "file": "chunks/e90124ad4823f4b6d5f4495ff32d1af5d67d2edbabb0a177119a6b4197d6b166.mp3",
+   "sentence_start": 46,
+   "sentence_end": 50,
+   "text": "KILL CRITERIA: written now, while you're sober: \"Gone unless [rate or margin, with its denominator] beats a comparable baseline by [your meaningful number] after [minimum eligible observations], while staying below [maximum recoverable error or complaint rate], with zero red-line safety, privacy, legal, or irreversible incidents.\" One red-line incident permanently fires that exact card and workflow: contain it, switch to the tested fallback, close the incident, remedy affected people, and reconcile authoritative records. A materially redesigned successor is a new workflow and starts over with new qualified clearance, card, gates, and clock. Redesign-and-retry and the one extension apply only to recoverable defects or insufficient evidence."
+  },
+  {
+   "chapter": "10",
+   "id": "8c6401e9560d3e8eab3a9851662dcd7ecec51f76100c15479a5714b0e0fc0b34",
+   "file": "chunks/8c6401e9560d3e8eab3a9851662dcd7ecec51f76100c15479a5714b0e0fc0b34.mp3",
+   "sentence_start": 50,
    "sentence_end": 56,
-   "text": "Redesign-and-retry and the one extension apply only to recoverable defects or insufficient evidence. If the minimum sample is too sparse by day 30, EXTEND ONCE is the inconclusive result; if the second window is still too sparse, FIRE — do not hire on hope. EXIT PATH: Probation you can't end isn't probation. Before data goes in, confirm the export and rehearse restore/import where the tool supports it and the state matters. Otherwise open, count, and sample the export, then rehearse a clean-account reconstruction from shop-held prompts, templates, facts, settings, and credential records. Also confirm the connected-system and credential inventory, one-action disable or rollback, manual fallback, authoritative-state reconciliation, retention/deletion handling, cancellation terms, and named owner sign-off. The five-minute card names this work; it does not prove it."
+   "text": "If the minimum sample is too sparse by day 30, EXTEND ONCE is the inconclusive result; if the second window is still too sparse, FIRE — do not hire on hope. EXIT PATH: Probation you can't end isn't probation. Before data goes in, confirm the export and rehearse restore/import where the tool supports it and the state matters. Otherwise open, count, and sample the export, then rehearse a clean-account reconstruction from shop-held prompts, templates, facts, settings, and credential records. Also confirm the connected-system and credential inventory, one-action disable or rollback, manual fallback, authoritative-state reconciliation, retention/deletion handling, cancellation terms, and named owner sign-off. The five-minute card names this work; it does not prove it."
   },
   {
    "chapter": "10",
@@ -3857,11 +3854,11 @@
   },
   {
    "chapter": "10",
-   "id": "1f092d8e83eca369016c784ab941c6bcc8be89942180f3358adcb0f35f7bdd15",
-   "file": "chunks/1f092d8e83eca369016c784ab941c6bcc8be89942180f3358adcb0f35f7bdd15.mp3",
+   "id": "13eeb9e78b264733f4400b20bc6a446bcfb52c2f9e55fba2cb460a19a5f18225",
+   "file": "chunks/13eeb9e78b264733f4400b20bc6a446bcfb52c2f9e55fba2cb460a19a5f18225.mp3",
    "sentence_start": 100,
    "sentence_end": 108,
-   "text": "Workflow checks keep the weekly, real-time, or every-event cadence their own chapter requires): Metric vs. baseline (5 min). Read the number, write it on the card. Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session, the week's two already happened. Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow. Contain it, switch to fallback, close the incident, remedy affected people, and reconcile authoritative records. A materially redesigned successor is new work with new clearance and a new clock. A recoverable defect that survived a check may use the single redesign extension with a fixed end date; a repeat past the redesigned check fires it."
+   "text": "Workflow checks keep the weekly, real-time, or every-event cadence their own chapter requires): Metric vs. baseline (5 min). Read the number, write it on the card. Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session — the week's two already happened. Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow. Contain it, switch to fallback, close the incident, remedy affected people, and reconcile authoritative records. A materially redesigned successor is new work with new clearance and a new clock. A recoverable defect that survived a check may use the single redesign extension with a fixed end date; a repeat past the redesigned check fires it."
   },
   {
    "chapter": "10",
@@ -3897,11 +3894,11 @@
   },
   {
    "chapter": "10",
-   "id": "40db11cbec73485fdead5c29ff143d4f155975354d2171a74669b046330ad3dc",
-   "file": "chunks/40db11cbec73485fdead5c29ff143d4f155975354d2171a74669b046330ad3dc.mp3",
+   "id": "e7b37dfe9317e2d28ac00fc47e2dd1701b0e13388c6e8a36193ba23ec40a44ae",
+   "file": "chunks/e7b37dfe9317e2d28ac00fc47e2dd1701b0e13388c6e8a36193ba23ec40a44ae.mp3",
    "sentence_start": 136,
    "sentence_end": 146,
-   "text": "A tool good enough to keep is important enough to check. Probation by demo. The trial runs on your real work, your real customers' shapes, with the fence intact: no customer data beyond what the live workflow itself requires enters the tool during probation (no bulk imports to see what it can do), and the export path is confirmed before any of it goes in (Chapter 12 carries the full fence). A tool that only shines on the vendor's sample data has passed the vendor's probation, not yours. Do this Friday About 25 minutes, $0 (step 5 is its own separate 20, and most readers need it). Pick the one workflow whose chapter you jumped to first when you read this book's map. That instinct was your prioritization; honor it. Sketch the probation card for the tool you're trialing or considering: five fields, pen, done. This is the five-minute artifact, not launch clearance."
+   "text": "A tool good enough to keep is important enough to check. Probation by demo. The trial runs on your real work, your real customers' shapes, with the fence intact: no customer data beyond what the live workflow itself requires enters the tool during probation (no bulk imports to see what it can do), and the export path is confirmed before any of it goes in (Chapter 12 carries the full fence). A tool that only shines on the vendor's sample data has passed the vendor's probation, not yours. Do this Friday About 25 minutes, $0 (step 5 is its own separate 20 minutes, and most readers need it). Pick the one workflow whose chapter you jumped to first when you read this book's map. That instinct was your prioritization; honor it. Sketch the probation card for the tool you're trialing or considering: five fields, pen, done. This is the five-minute artifact, not launch clearance."
   },
   {
    "chapter": "10",
@@ -3969,6 +3966,14 @@
   },
   {
    "chapter": "11",
+   "id": "aa134fab20608bad5b2c2fc07a52d8023eb7e3b7511b71bb0d80458baa52ddd1",
+   "file": "chunks/aa134fab20608bad5b2c2fc07a52d8023eb7e3b7511b71bb0d80458baa52ddd1.mp3",
+   "sentence_start": 88,
+   "sentence_end": 94,
+   "text": "Circle the floor-work the machine already handles: the drafting, replying, scheduling, capturing, and retyping this book's middle chapters delegate. Schedule each additional role for a later five-minute screen; if a screen finds a week that is nearly all floor-work, that role gets its own full map and one-to-one before any group talk. Draft the redesign (20 min) for that role: which tasks move, which checks the person now owns, what refills the hours. One page. Keep the pages as you work through the roles, same test, same way, with task-based reasons in writing. Before implementing any material change to duties, pay, hours, location, monitoring, employment status, accommodations, or expectations, consult the employee and have a qualified local employment adviser review the contract, human-rights and accommodation, wage and overtime, training, and notice implications."
+  },
+  {
+   "chapter": "11",
    "id": "11f1b6ce21b3cd9d794bfddbc57f07f5afe85a7bde18b27adf7930c74cb612b4",
    "file": "chunks/11f1b6ce21b3cd9d794bfddbc57f07f5afe85a7bde18b27adf7930c74cb612b4.mp3",
    "sentence_start": 94,
@@ -3993,11 +3998,11 @@
   },
   {
    "chapter": "12",
-   "id": "092023b86fafd847c8f8b5c3cdf80f7e4db8d0ff539c24cb237418ba020a113d",
-   "file": "chunks/092023b86fafd847c8f8b5c3cdf80f7e4db8d0ff539c24cb237418ba020a113d.mp3",
+   "id": "52dc6e3824f0b5070a39c18178f1dda8363d85828e2fb7ffa16d48639c0401be",
+   "file": "chunks/52dc6e3824f0b5070a39c18178f1dda8363d85828e2fb7ffa16d48639c0401be.mp3",
    "sentence_start": 9,
    "sentence_end": 16,
-   "text": "The British Columbia Civil Resolution Tribunal disagreed and made Air Canada pay: $812.02 Canadian, the fare difference plus interest and fees (Moffatt v. Air Canada, February 2024). Note the venue honestly: a provincial small-claims-style tribunal, eight hundred dollars, no grand precedent machinery. The ruling binds nobody else, and whether any bot statement is legally binding depends on the facts and local law. The risk-management lesson is still useful: treat every bot statement as something your business may have to answer for. This book turns that into house policy, not a universal legal theorem: Every promise your tools make becomes your incident to own and resolve. Nothing unsafe, unlawful, impossible, or above the approved make-good limit gets performed without the Rule 3 escalation."
+   "text": "The British Columbia Civil Resolution Tribunal disagreed and made Air Canada pay: CA$812.02, the fare difference plus interest and fees (Moffatt v. Air Canada, February 2024). Note the venue honestly: a provincial small-claims-style tribunal, eight hundred dollars, no grand precedent machinery. The ruling binds nobody else, and whether any bot statement is legally binding depends on the facts and local law. The risk-management lesson is still useful: treat every bot statement as something your business may have to answer for. This book turns that into house policy, not a universal legal theorem: Every promise your tools make becomes your incident to own and resolve. Nothing unsafe, unlawful, impossible, or above the approved make-good limit gets performed without the Rule 3 escalation."
   },
   {
    "chapter": "12",
@@ -4028,151 +4033,151 @@
    "id": "98e8775ffbf72b04751ffb70163dc256ae2bad8b284f7e1e7c7b143880d7580a",
    "file": "chunks/98e8775ffbf72b04751ffb70163dc256ae2bad8b284f7e1e7c7b143880d7580a.mp3",
    "sentence_start": 40,
-   "sentence_end": 51,
+   "sentence_end": 52,
    "text": "The longer rules after it are implementation notes, not extra wall copy. The one-page policy — print and sign AI use in this shop Policy owner: __________  Effective date: __________  Next review: __________ Signed by everyone with a work account: ________________________________ 1. WHAT GOES IN — IF LOSS WOULD REQUIRE AN APOLOGY, STOP. Use shop-controlled accounts with recorded terms. Credentials, keys, authentication or recovery codes, and payment or banking secrets never enter an assistant. Identity, children's, health, employee, tax, legal, insurance, disciplinary, NDA-bound, or restricted data enters only a named controlled workflow whose Appendix B record and qualified sign-off are identified here: __________. Consumer assistants receive synthetic, sanitized, or non-personal material only. UNKNOWN, FAIL, or blank means no live connection."
   },
   {
    "chapter": "12",
    "id": "d073d82597e71b1cc3f15c7954b094c774b86776e3ba7c374c45d3aafcf2ada5",
    "file": "chunks/d073d82597e71b1cc3f15c7954b094c774b86776e3ba7c374c45d3aafcf2ada5.mp3",
-   "sentence_start": 51,
-   "sentence_end": 64,
+   "sentence_start": 52,
+   "sentence_end": 65,
    "text": "Participants affirmatively agree before recording or transcription. 2. WHAT GOES OUT — NEW MACHINE WORDS ARE DRAFTS. A person approves every new or changed customer message. Only frozen templates and approved substitutions automate after pre-live test and Appendix C rollout. The system invents no price, deadline, guarantee, policy, remedy, or commitment. Anything outside the script hands to a person. If harm reaches someone, stop the workflow, name an incident owner and deadline, contact affected people, deliver the decided remedy, reconcile money, preserve evidence, and fix the script. Goodwill escalation: Approved internal limit: CA$__________  Authorized owner: __________. This is not a legal limit. Anything above it, or involving safety, regulated, contractual, or reliance-sensitive ground, goes to Rule 3. 3. WHAT WE BELIEVE — RULES COME FROM THE SOURCE OF THE RULE."
   },
   {
    "chapter": "12",
    "id": "b2b4b580e5e90bec4d65f77085a8b3cf6934c2feaa4582df541ba5d4c2a6b1f6",
    "file": "chunks/b2b4b580e5e90bec4d65f77085a8b3cf6934c2feaa4582df541ba5d4c2a6b1f6.mp3",
-   "sentence_start": 64,
-   "sentence_end": 74,
+   "sentence_start": 65,
+   "sentence_end": 75,
    "text": "No chatbot settles a legal, tax, safety, employment, privacy, accounting, insurance, or compliance question. Use the controlling primary source and the qualified professional for the decision. AI may organize questions and documents, but another AI does not make the answer verified. Disclosure and handoff: Our bot identifies itself as AI and offers the staffed human route during covered hours. Outside them it uses only the approved no-human script and backup path. Recording, marketing, accessibility, consumer, workplace, and sector notices require separate local clearance. Review: Re-read this page quarterly and whenever a tool, plan, purpose, data use, or customer-facing capability changes. Until the affected workflow is re-cleared, freeze new affected live-data intake and use the tested manual fallback. Implementation notes for the three rules RULE 1 — WHAT GOES IN."
   },
   {
    "chapter": "12",
    "id": "0f945b9064413e6b78277e8827d61d645b5c6a175c1647b16a64f2130a905773",
    "file": "chunks/0f945b9064413e6b78277e8827d61d645b5c6a175c1647b16a64f2130a905773.mp3",
-   "sentence_start": 74,
-   "sentence_end": 81,
+   "sentence_start": 75,
+   "sentence_end": 82,
    "text": "Nothing we'd have to apologize for losing. Consumer assistants receive only synthetic, sanitized, or non-personal material. An approved business processor receives only the minimum necessary fields after the exact-workflow clearance below. Credentials, passwords, API keys, authentication codes, recovery secrets, payment or banking secrets, and security configurations never enter any assistant. Identity documents, children's data, health data, employee records, tax, legal, accounting, insurance, or disciplinary files, trade secrets, source code, unpublished financials, material under an NDA, and other specially regulated or contract-bound material remain out unless a qualified review establishes a separate controlled process. This list is not exhaustive; uncertainty means stop. Work uses shop-controlled accounts whose current terms and settings have been recorded."
   },
   {
    "chapter": "12",
    "id": "403d5f1b3150dbd9d730ef522d8ac2b397b3369279c442eac99a1f292f79a486",
    "file": "chunks/403d5f1b3150dbd9d730ef522d8ac2b397b3369279c442eac99a1f292f79a486.mp3",
-   "sentence_start": 81,
-   "sentence_end": 88,
+   "sentence_start": 82,
+   "sentence_end": 89,
    "text": "Meetings require an affirmative yes from every participant before recording or transcription. Phone-line recording stays off until the exact disclosure/consent flow is documented against official guidance or cleared by a qualified local privacy/compliance professional; stricter contractual, professional, workplace, provincial, or state rules still govern. Any tool that stores recordings gets its exact plan's data page read before the first meeting: storage, sharing, retention, deletion, and training use. The test for gray areas: would you pin it to the shop door? Then it doesn't go in the chat either. LIVE-DATA CLEARANCE — required before any connection. The one-page policy does not itself clear live people or business data."
   },
   {
    "chapter": "12",
    "id": "154fc3cde73b32e0892947dd06b955e986be8b1fbbe50e0298822e3159810e8d",
    "file": "chunks/154fc3cde73b32e0892947dd06b955e986be8b1fbbe50e0298822e3159810e8d.mp3",
-   "sentence_start": 88,
-   "sentence_end": 90,
+   "sentence_start": 89,
+   "sentence_end": 91,
    "text": "For each exact tool, plan, account, and workflow, complete Appendix B and record evidence, date, and named owner for: operating and data-subject jurisdictions; applicable federal, provincial/state, sector, workplace, health, and contractual rules; minimum necessary fields; purpose and lawful authority or consent; privacy-impact-assessment threshold and result; privacy-officer or qualified-review sign-off where required; vendor/processor agreement; subprocessors; storage and cross-border transfer; data-subject rights; access and security; training/data-use settings; retention and deletion; required notices; breach terms and incident process; export; and the workflow's pre-live test, fallback, and rollback. Sensitive, regulated, contract-bound, cross-border, or uncertain processing gets qualified local privacy/security advice before connection."
   },
   {
    "chapter": "12",
    "id": "ad7aba7bf9bfd76d85aa185b5fda999a76c707e515ee29ba257930fe9bdc6919",
    "file": "chunks/ad7aba7bf9bfd76d85aa185b5fda999a76c707e515ee29ba257930fe9bdc6919.mp3",
-   "sentence_start": 90,
-   "sentence_end": 97,
+   "sentence_start": 91,
+   "sentence_end": 98,
    "text": "Any blank, uncertain, or failed field means NO LIVE CONNECTION. A row may be N/A only when the worksheet records the legal or contractual basis for that conclusion, its evidence, date, and owner; N/A is not a substitute for uncertainty. RULE 2 — WHAT GOES OUT. Three classes, no ambiguity. (1) New or changed generated customer language remains a draft until a person reads and approves it; it never earns autonomous promotion. (2) Fixed, human-approved templates may send automatically only after the Chapter 6 and Chapter 8 gates and the exact Appendix C card pass; approved field substitution is allowed, generated or paraphrased wording is not. (3) A receptionist may play only exact, deterministic, pre-approved templates and fill pre-approved slots after Chapter 4's phone gates and Appendix C pass, including a technically supported shadow mode."
   },
   {
    "chapter": "12",
    "id": "24af35542090381bbfc6874cab10d8e8308d4d96a5d6aff99579e51e15d52f94",
    "file": "chunks/24af35542090381bbfc6874cab10d8e8308d4d96a5d6aff99579e51e15d52f94.mp3",
-   "sentence_start": 97,
-   "sentence_end": 103,
+   "sentence_start": 98,
+   "sentence_end": 104,
    "text": "If the tool cannot support one, customer-facing promotion is prohibited. Free-form interpretation may only classify intent and select a frozen approved response or slot after the same canonical gate; it may not generate customer-facing wording. Appendix C is the single authority for event floors, watched periods, controlled-live clocks, promotion, and final decisions; this page adds no shorter route. Any paraphrase or other new language stays a draft or hands to a person; everything outside the templates and slots hands off. Every introduced or changed number, date, price, deadline, guarantee, or commitment is source-checked against the controlling record and recalculated where arithmetic applies. No improvised policies, prices, or guarantees, because of the airline story on the back of this page."
   },
   {
    "chapter": "12",
    "id": "d616eb586af2494acc62bce9cb6b98d0bf35689e0dff5274fc590824a8b821bb",
    "file": "chunks/d616eb586af2494acc62bce9cb6b98d0bf35689e0dff5274fc590824a8b821bb.mp3",
-   "sentence_start": 103,
-   "sentence_end": 107,
+   "sentence_start": 104,
+   "sentence_end": 108,
    "text": "If a tool makes a promise anyway, treat it as an incident: in Moffatt, the misstatement produced a CA$812.02 total award, including damages, interest, and tribunal fees. The page names the largest make-good we'd honor without a meeting, and that number is internal goodwill and escalation guidance only: never a legal limit, and never a basis to deny what the business actually owes. Anything above it, and any promise touching regulated, safety, financial, contract, or reliance-sensitive ground, escalates under Rule 3 to a person with the appropriate counsel or adviser in the loop, fast and honest, before anything is acted on. Escalation is a decision point, not an automatic no: the reviewer decides how to honor, correct, negotiate, or resolve it."
   },
   {
    "chapter": "12",
    "id": "4d1ddf0b89ed242664fc696457665bd1926220ea7f021329f8d44a941542e5d0",
    "file": "chunks/4d1ddf0b89ed242664fc696457665bd1926220ea7f021329f8d44a941542e5d0.mp3",
-   "sentence_start": 107,
-   "sentence_end": 113,
+   "sentence_start": 108,
+   "sentence_end": 114,
    "text": "The same day, name the incident owner and deadline, identify and contact every affected customer, deliver the decided remedy, reconcile any money, record evidence of closure, and fix the script. A vendor fix never closes a customer's incident; the error survived its check, so the task comes back (Chapter 1's firing rule, now company policy). RULE 3 — WHAT WE BELIEVE. Rules come from the source of the rule. No legal, tax, safety, or compliance question gets settled by a chatbot, ours or anyone's; the NYC story is what official-looking wrongness looks like. The machine may brief the professional (draft our questions, organize our documents); the professional or the primary source decides."
   },
   {
    "chapter": "12",
    "id": "05932493fb429f541b97e5bdb400d861f698f23b718581d0755496ac646fd987",
    "file": "chunks/05932493fb429f541b97e5bdb400d861f698f23b718581d0755496ac646fd987.mp3",
-   "sentence_start": 113,
-   "sentence_end": 118,
+   "sentence_start": 114,
+   "sentence_end": 119,
    "text": "And no AI checks another AI's work and calls it verified: a Texas lawyer tried exactly that, the second tool missed the fabrications, and the court ordered a $2,000 payment to its registry plus mandatory AI education (Chapter 2 carries the case and its record). Checks run against reality: our documents, our numbers, the actual regulation, a qualified human. Those are the implementation notes. The printable box already carries the disclosure, handoff, and review footers; the details here explain how to operate them. This book's conservative house policy says the bot identifies itself as AI up front and offers the staffed human path during documented coverage hours; outside those hours it uses the fixed no-human script and backup path from Chapter 4."
   },
   {
    "chapter": "12",
    "id": "f107cbc45c999246b617b005c7e3115ea8c5319e0cd327775065f47caa1dbf3b",
    "file": "chunks/f107cbc45c999246b617b005c7e3115ea8c5319e0cd327775065f47caa1dbf3b.mp3",
-   "sentence_start": 118,
-   "sentence_end": 123,
+   "sentence_start": 119,
+   "sentence_end": 124,
    "text": "Recording, telemarketing, consumer-protection, accessibility, and sector-specific notices remain separate jurisdiction-specific gates; the wall sentence does not pretend they are one universal bot-disclosure law. Re-read the page at the quarterly audit (Chapter 13) and re-check the recorded plan terms and controls with it, because tools and menus change, and a policy that nobody re-reads is a poster, not a policy. The measured claim, computable as always, and recomputed the way Rule 2 demands: ten minutes of switches, 40 minutes of writing, and five for the bot check — about 55 minutes for Friday's first policy draft. The separate team talk happens on paid time and is part of the price too; budget fifteen minutes for a small crew, then record what it actually takes. That under-two-hour block buys the policy shell, not permission to connect live data."
   },
   {
    "chapter": "12",
    "id": "e1d8bc4ecfa6f6a9e9db92d715289d924b0794279af5640006e411431c8dbf99",
    "file": "chunks/e1d8bc4ecfa6f6a9e9db92d715289d924b0794279af5640006e411431c8dbf99.mp3",
-   "sentence_start": 123,
-   "sentence_end": 129,
+   "sentence_start": 124,
+   "sentence_end": 130,
    "text": "Each exact workflow's Appendix B clearance, vendor-document hunt, account migration, any qualified privacy/security advice, incident investigation, staff training beyond the talk, weekly sampling, and quarterly review are separate recurring or one-time lines to price before launch. Compare the whole cost with one Moffatt-sized make-good (CA$812, in the real case), one lost client whose data you'd have to confess to pasting, or one afternoon untangling advice a bot invented. And those are the cheap failures: a leaked health or payment record can carry breach-notification duties and statutory exposure, a number with more digits than any make-good. The take-backs, named \"The AI said it was legal.\" Do not treat that as a defense you can count on."
   },
   {
    "chapter": "12",
    "id": "c2bca5ebc119d978fb69a345c4520f58b7acf468eb691b9ebb59905b364b1e44",
    "file": "chunks/c2bca5ebc119d978fb69a345c4520f58b7acf468eb691b9ebb59905b364b1e44.mp3",
-   "sentence_start": 129,
-   "sentence_end": 139,
+   "sentence_start": 130,
+   "sentence_end": 140,
    "text": "This book's policy recognizes none, and the machine offers no professional standard or remedy behind the answer; Rule 3 exists so the sentence is never uttered in your shop. Compliance-by-chatbot. Minimum wage, tips, scheduling laws, tax thresholds: source-of-rule or professional, every time. Free answers about laws are priced exactly right. The unattended bot with a wide script. Every capability you add to a customer-facing bot is surface area on Rule 2. Keep the script narrow, keep a person ready to step in, and sample its answers weekly (Chapter 9's ritual). A bot you can't audit this week is a bot you shouldn't run this week. Personal accounts for work. The cheapest data leak there is: work pasted into an account whose settings, retention, and training status you've never seen."
   },
   {
    "chapter": "12",
    "id": "1c89c2769a0831337190127e031fdfbf1b40051b052f2f43a0ea4892b404ce80",
    "file": "chunks/1c89c2769a0831337190127e031fdfbf1b40051b052f2f43a0ea4892b404ce80.mp3",
-   "sentence_start": 139,
-   "sentence_end": 146,
+   "sentence_start": 140,
+   "sentence_end": 147,
    "text": "Work uses a shop-controlled account; set available opt-outs, then complete Appendix B before any live data or connection. An opt-out is one control, never clearance. Do this Friday About 60 minutes for Friday's first-pass policy draft and bot check, $0 in tools. The oldest-chats sweep and the paid team talk are separate scheduled work; migration, investigation, further training, weekly sampling, and the quarterly review also keep their own time. Tonight, the controls (10 min for the accounts you hold): open the current first-party record for each exact account, record the plan, region, date, and policy version or saved snapshot, and read back the applicable data-use, retention, sharing, and deletion controls. Screenshot settings pages, not chat contents; those screenshots and policy records are your diligence appendix."
   },
   {
    "chapter": "12",
    "id": "1d9f1599b705d253e46a4f229b81bbdb0325bb4a100054b4ac04509a01197fe3",
    "file": "chunks/1d9f1599b705d253e46a4f229b81bbdb0325bb4a100054b4ac04509a01197fe3.mp3",
-   "sentence_start": 146,
-   "sentence_end": 152,
+   "sentence_start": 147,
+   "sentence_end": 153,
    "text": "Staff on personal accounts is its own job: this week, ask what each person actually uses and move the work onto shop-controlled accounts, priced in days, not in tonight's ten minutes. Then scroll your oldest chats once (call it 15 minutes, its own box, outside the 60-minute policy draft): whatever got pasted last year may still be sitting there. If you find sensitive content, stop. Freeze further business use and affected integrations; secure the account; revoke shared sessions, links, or tokens as appropriate; name an incident lead the same day; assess connected systems and prior exposure; rotate credentials when compromise is plausible; and invoke the tested manual fallback. Do not copy, export, or screenshot the payload casually. Record only necessary metadata — account, date, data category, people affected if known, access, and actions — in the secured incident log."
   },
   {
    "chapter": "12",
    "id": "80046cd0944c2328a59ad8bfaaaf40d27f09a9b7da346f6ccb2be68ef720c253",
    "file": "chunks/80046cd0944c2328a59ad8bfaaaf40d27f09a9b7da346f6ccb2be68ef720c253.mp3",
-   "sentence_start": 152,
-   "sentence_end": 160,
+   "sentence_start": 153,
+   "sentence_end": 161,
    "text": "Preserve content only under the incident lead's or adviser's direction, in controlled storage. If your organization is subject to PIPEDA, keep the required breach record for 24 months; separately assess whether reporting and notification are required under the real-risk threshold and applicable law. Delete only what the incident plan or adviser clears. A customer's card number or health detail is a Rule 3 call now: get qualified privacy help this week, not at the quarterly. The retention period never delays containment or the call. Write the page and install the clearance form (40 min): adapt the three rules above in your own words and examples, then copy Appendix B beside it as the required per-tool live-data clearance record. Every row gets evidence, date, owner, and a pass/no-live decision. Keep the policy itself to one page even if it hurts; the clearance records sit behind it."
   },
   {
    "chapter": "12",
    "id": "29bdf89562ac7e74b1bce63630431acd5a263e5fc57d979e3f9f4726ebc8fcee",
    "file": "chunks/29bdf89562ac7e74b1bce63630431acd5a263e5fc57d979e3f9f4726ebc8fcee.mp3",
-   "sentence_start": 160,
-   "sentence_end": 166,
+   "sentence_start": 161,
+   "sentence_end": 167,
    "text": "The talk (budget 15 min, schedule it today): walk the page, everyone signs, it goes on the wall and in the drive. Six staff at the counter often finishes in five, not a conference; solo means you sign it and mean it; a dispersed or shift crew means catching each person once this week, a few minutes each, with the time scaling by headcount, not by this page. Pair it with Chapter 11's speech only after every Chapter 11 role screen, required private one-to-one, and applicable employment-adviser review is complete. Otherwise this meeting covers only data-use policy; schedule the headcount talk separately. The bot audit (5 min, if you run one): read your customer-facing bot's script against Rule 2. If it could make a promise you would not honor, divert it to the tested manual fallback now."
   },
   {
    "chapter": "12",
    "id": "76e1a2803749fbc2b2203bc308688f4eca6d948795d6307897fa44dabe5f6629",
    "file": "chunks/76e1a2803749fbc2b2203bc308688f4eca6d948795d6307897fa44dabe5f6629.mp3",
-   "sentence_start": 166,
-   "sentence_end": 169,
+   "sentence_start": 167,
+   "sentence_end": 170,
    "text": "Edit a non-live copy, rerun the affected Appendix C tests, and resume only after the card owner records the pass. If a defect may already have reached customers, reconcile the bot log against calls, bookings, complaints, refunds, transfers, and payments; name the owner and deadline, contact affected customers, deliver and reconcile the remedy, and close the incident with evidence. The takeaway: your business owns what its machines leak, say, and believe — so run one page and three rules: nothing confidential goes in; no new or generated customer wording goes out unread (a frozen approved template still needs the full lifecycle); and rules come from the source of the rule, never the bot."
   },
   {
