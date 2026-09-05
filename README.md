@@ -1,7 +1,7 @@
 # Reading copy
 
-A rendered, mobile-friendly reading copy of a book in progress:
-**The AI Guide for Small Business**.
+A rendered, mobile-friendly reading copy of **The AI Guide for Small Business**:
+the complete manuscript, front matter to appendices.
 
 - Read it: https://sudipbha.github.io/ai-bible/
 - This repo contains only the generated `index.html`. The manuscript sources,
@@ -22,6 +22,6 @@ asset is unavailable, the reader falls back to a voice provided by the device.
 
 ## Rights
 
-Unpublished working draft. © 2026, the author. All rights reserved.
+Unpublished manuscript. © 2026, the author. All rights reserved.
 Not for distribution, reproduction, or republication. No license is granted
 for reuse of this text, in whole or in part, by people or automated systems.
