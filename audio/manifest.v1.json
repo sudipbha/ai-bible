@@ -893,7 +893,7 @@
     "For decades the options were an answering service, a hired dispatcher, or your own interrupted evening.",
     "AI adds another option: software that can answer after hours at a variable subscription and usage cost, plus setup, integration, clearance, checking, and fallback labor.",
     "Your quote and probation record — not the price of one job — decide whether it pays.",
-    "Owners who set this up describe the same two results.",
+    "The owners in this chapter's vendor tellings describe the same two results.",
     "First, booked work they would have missed.",
     "Second, and they mention this almost as often: the phone stops owning them.",
     "Dinner is dinner.",
@@ -988,14 +988,9 @@
     "Reserve twenty minutes as the minimum, then clear every exception or add reviewer capacity; the timer never excuses a backlog.",
     "Three warnings before you switch anything on",
     "Treat your AI's promises as promises you may have to answer for.",
-    "In 2024 a British Columbia small-claims-style tribunal awarded a customer damages after Air Canada's chatbot described a bereavement discount wrongly: the airline's real policy required asking before the flight, and the book-now-claim-later version the bot offered didn't exist.",
-    "The ruling binds nobody else, and legal effect depends on the facts and local law.",
-    "The risk lesson is still useful, so this book adopts it as house policy.",
-    "Keep your AI's script narrow.",
-    "It should answer the questions you gave it, book only approved appointments, and say \"I'll have someone confirm that\" for every non-safety, non-complaint, out-of-scope request.",
+    "Chapter 12 tells the Air Canada tribunal case in full.",
+    "Here, keep the operating rule: the bot may use only approved answers, slots, prices, guarantees and availability; every non-safety, non-complaint, out-of-scope request hands to a person.",
     "Safety and emergency language follows only the separately approved route above.",
-    "Never let it improvise prices, guarantees, or availability you didn't write down.",
-    "Chapter 12 goes deeper.",
     "Say it's an AI up front, clear the applicable rows, and staff the handoff.",
     "Have the bot introduce itself as an assistant instead of waiting to be asked.",
     "Identification, recording, transcription, notice, consent, jurisdiction, and sector duties vary by place and use.",
@@ -1030,20 +1025,10 @@
     "Send one capability inquiry before choosing a tool.",
     "One candidate, not three, and no paid activation or live configuration today.",
     "Goodcall and My AI Front Desk are candidates to question; this book has verified no currently eligible candidate.",
-    "Ask the vendor to confirm in writing that the exact quoted tier supports at least one accepted shadow mode from step 5, staffed handoff and logs, the intended calendar connection, and enforcement of exact frozen utterances plus approved slot substitutions with no generated or paraphrased customer wording.",
+    "Ask the vendor to confirm in writing that the exact quoted tier supports at least one accepted shadow mode from Appendix C (a vendor-supported mirrored transcript with consent and no bot speech, a live conference with immediate human takeover, or consented replay into an isolated copy), staffed handoff and logs, the intended calendar connection, and enforcement of exact frozen utterances plus approved slot substitutions with no generated or paraphrased customer wording.",
     "Require a demonstration or written technical record for the exact tier.",
     "Appointment-based shops also ask whether the receptionist can write only approved fields into the chosen booking system.",
     "If any answer is missing, do not select or configure the tool: use fixed voicemail or a human answering service plus manual callback, and treat conversational receptionists as future candidates.",
-    "Pass the phone-specific pre-live test in its own setup block.",
-    "Use a clearly labeled simulated emergency in an isolated test route; never place a test call to, or allow test routing into, a public emergency service, and pre-brief every human fallback recipient.",
-    "Also test an upset customer, a human request, an out-of-script price or guarantee, an out-of-area caller, and two people trying to take the same slot.",
-    "Test the AI disclosure, documented consent flow, text opt-out, urgent flag, and second-person escalation.",
-    "Configure and test one-action diversion, prove calls reach the fallback, name rollback owners, and write the maximum containment time.",
-    "Keep recording and outbound automation off until Appendix B's qualified legal and technical reviewers clear this exact workflow.",
-    "Then use Appendix C's single rollout clock and one technically supported shadow mode.",
-    "If none is available, customer-facing promotion is prohibited.",
-    "Generated or paraphrased wording remains a draft or human handoff.",
-    "Any miss keeps real traffic off.",
     "Set the kill criteria now, before you're attached: choose the contribution-margin improvement the tool must clear, the minimum eligible-call sample, maximum recoverable-error, complaint, and failed-handoff rates, and zero-tolerance safety, privacy, legal, and irreversible events.",
     "The watched month measures shadow accuracy, routing, handoff, exceptions, and readiness while a person handles the real customer; it does not claim incremental margin for the AI.",
     "Measure incremental contribution margin only in the separate controlled-live phase, against the same phase's subscription, usage, and amortized setup, integration, and audit labor; make the normal final economic decision at day 60.",
@@ -1051,9 +1036,20 @@
     "A materially redesigned successor starts over as a new workflow with new clearance, card, gates, and clock.",
     "If a phase misses only its predeclared sample, extend once; do not invent a universal call count.",
     "Put both review dates in your calendar.",
+    "Before launch (the separate setup block; every line passes before real traffic):",
+    "Pass the phone-specific pre-live test in its own setup block.",
+    "Use a clearly labeled simulated emergency in an isolated test route; never place a test call to, or allow test routing into, a public emergency service, and pre-brief every human fallback recipient.",
+    "Also test an upset customer, a human request, an out-of-script price or guarantee, an out-of-area caller, and two people trying to take the same slot.",
+    "Test the AI disclosure, documented consent flow, text opt-out, urgent flag, and second-person escalation.",
+    "Configure and test one-action diversion, prove calls reach the fallback, name rollback owners, and write the maximum containment time.",
+    "Keep recording and outbound automation off until Appendix B's qualified legal and technical reviewers clear this exact workflow.",
+    "Then use Appendix C's single rollout clock (the applicable row, Clock A to D) and one technically supported shadow mode.",
+    "If none is available, customer-facing promotion is prohibited.",
+    "Generated or paraphrased wording remains a draft or human handoff.",
+    "Any miss keeps real traffic off.",
     "The takeaway: before you buy any AI to find new customers, stop losing the ones already calling you."
    ],
-   "sentence_sha256": "d0dc7650dc963b4e8db3c83187dfa092512353d6e07c2dcea52f7f5a43f9ac08",
+   "sentence_sha256": "b195e8de54635f7234c3c538c3c0fb39f1e782b7bf9f5059b2bb4b6103619f45",
    "chunks": [
     {
      "id": "55c4e99b1e2b481a4be8785fa19c961b27fc5b91fbd38c9d8d13676f5da3eb83",
@@ -1451,7 +1447,7 @@
     "Split by destination.",
     "Work that stays inside (notes, drafts, categorizations you'll review): worst case is a correction.",
     "Work that lands outside (an invoice to a customer, a number in a filing): gets the recompute check, or doesn't go.",
-    "And one class in this domain has a survivability problem most owners never consider, and it gets its own take-back below: recordings of other people.",
+    "Recordings of other people get their own take-back below.",
     "After this chapter, you can:",
     "Run the admin-hours audit and name your two biggest evening-eaters in minutes per week",
     "Set up the pair with the fastest payback for most owners per your own audit: meeting notes (checked the same day) and receipt capture (checked monthly)",
@@ -1463,37 +1459,45 @@
     "Put honest minutes next to each.",
     "Two numbers will embarrass you.",
     "Those two are your delegation targets.",
-    "This chapter builds the two winners the audit most often surfaces, in this book's own judgment (meetings and money-out), and covers money-in below; if your two are scheduling or retyping-between-systems, the builds live in Chapters 4 and 8, but they run under this chapter's checks either way.",
+    "This chapter builds the two winners the audit most often surfaces, in this book's own judgment (meetings and money-out), and covers money-in below; scheduling and retyping builds live in Chapters 4 and 8, under this chapter's checks either way.",
     "Step 2 — meeting notes (the fastest win, if you meet).",
     "Transcription plus AI summary can turn an hour's meeting into searchable notes with action items.",
     "Fathom and Otter.ai are examples.",
-    "On each current first-party vendor page, record where and how it works; exact tier, limits, seats, currency, tax, and billing period; and storage, retention, deletion, and data-use terms.",
-    "Chapter 3's first-year rule still governs: use a free tier only in the placeholder-only lane or monthly billing in year one; consider an annual plan only after that year, a clean current audit, and a tested exit.",
-    "Pick by where your meetings actually happen and verify the exact recording feature at your tier.",
+    "Record each tool's exact tier, limits, seats, currency, tax, billing period, and data terms from its current first-party page.",
+    "Chapter 3's first-year rule still governs: monthly billing in year one, free tiers only in the placeholder-only lane.",
+    "Pick by where your meetings actually happen.",
     "Skip both if your \"meetings\" are two texts and a phone call: a notetaker for meetings you don't have is a subscription for a fantasy.",
-    "And one fence before any notetaker joins a real call: a transcript is other people's words in a third party's cloud, so the recording take-back below applies from the first meeting, not eventually.",
+    "One fence before any notetaker joins a real call: a transcript is other people's words in a third party's cloud, so the recording take-back below applies from the first meeting.",
     "Before the recorder joins, say its name, what it records, why, who can access it, the relevant retention/training facts, and that typed notes are the no-penalty alternative.",
-    "Document affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent-log entry naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner.",
-    "Use any different method local law requires.",
+    "Record the affirmative yes outside the recording exactly as Friday's step 5 spells out.",
     "No answer, hesitation, staff pressure, or uncertainty about the local, contractual, professional, or workplace rule means typed notes instead.",
     "The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and that same day you still know what mattered.",
     "Step 3 — receipt and expense capture (the compounding win).",
     "Use snap-a-photo capture and cautious categorization inside the accounting tool you already run.",
     "QuickBooks Online, Xero, Wave, and FreshBooks are examples, not a price or feature-parity claim.",
-    "Verify the exact current plan, receipt-capture feature, users, tax, currency, billing period, storage, retention, deletion, data-use terms, and bank-feed controls from the first-party record.",
+    "Verify the same first-party facts as step 2, plus the receipt-capture feature, users, and bank-feed controls.",
     "Do not switch suites for this chapter: migration is its own project with its own cost.",
     "Delegate extraction first.",
     "Auto-classify only vendors and categories already approved in your bookkeeping map; mixed-use, capital, unusual, or unclear items go to an exception queue for your bookkeeper or accountant.",
+    "If the person who knows the books is your external accountant, hold the exception queue for that scheduled review; do not guess between reviews.",
     "Once a month, reconcile the captured and categorized list to the account and clear exceptions before anything files.",
     "You are not redoing the work; you are staying able to catch what a receipt alone cannot prove.",
     "The day you can't spot a wrong category is the day the books are managing you.",
+    "Worked once: costing the plate.",
+    "Every input is made up and no percentage is a target; the arithmetic is real.",
+    "A $12.50 chicken wrap, costed with yields: chicken, 150 g at $8.80/kg, 90% usable, $1.47; veg, 100 g at $4.20/kg, 80% usable, $0.53; flatbread, $13.20 a case of 24, $0.55; sauce, $18.40 over 40 portions, $0.46; pickles and packaging, $0.63.",
+    "Using the displayed rounded line items, this plate costs $3.64, or 29.1% of a $12.50 selling price.",
+    "Recompute the card from current invoices before every decision.",
+    "If chicken rises 12%, the unrounded plate cost becomes $3.8077, which rounds to $3.81, or 30.5%.",
+    "And if the card ignores a 90% usable yield, it understates chicken by about 14.7 cents per plate — $132 across 900 plates a quarter.",
+    "That is a recipe-card error; your invoices still show what the business actually spent.",
+    "Never delegated: the menu price, supplier substitutions, and allergen facts.",
     "Also worth their line: invoice drafting from job notes (inside the tools above, or your assistant plus your template; recompute every number before sending), plus the chasing itself: payment nudges and document reminders run as reusable drafts on Chapter 6's follow-up loop.",
     "Notion AI is one document/SOP add-on; compare its current first-party plan with the assistant you already have and skip it if the volume is trivial.",
     "Full agent platforms such as Lindy stay out at 1–10 staff until the simple pieces above are habits; vendor time-saved claims are the demo talking, and Chapter 10's probation applies to any tool making them.",
     "The measured claim, in your arithmetic: take your two audit numbers, halve them pessimistically, and price the checking ritual honestly into the tool's cost.",
     "This book's conservative default is that priced time returned must clear the all-in cost by 2×; write a higher threshold before the trial if your risk or hassle demands it.",
     "First month, count the subscription, setup, and checking time; later, count the subscription and checking.",
-    "The tool clears only when the value of the conservative time returned beats that total by your predeclared threshold.",
     "A whole-inbox agent costs more to check than narrow receipt capture because its run log needs closer watching.",
     "Your numbers differ; the comparison is the point.",
     "The take-backs, named",
@@ -1503,9 +1507,7 @@
     "Mixed-use, capital, unusual, material, or unclear treatment stays unresolved until authoritative guidance or the qualified professional settles it.",
     "The machine's honest job at filing time is assembly: clean books, organized documents, and a list of questions.",
     "Recordings of other people.",
-    "A meeting transcript is other people's words in a third party's cloud.",
-    "Before any notetaker joins a call: ask and get the yes, then verify the exact current plan's training/data-use terms, storage country, subprocessors, retention, deletion, export, and account controls from first-party pages and preserve the dated record.",
-    "The retained Otter summary lacks stable page-level locators, so this edition prints no plan-specific training or deletion conclusion.",
+    "Before any notetaker joins a call: ask and get the yes, then clear the exact plan's data-use, storage, subprocessor, retention, deletion, export, and account-control terms through Appendix B and preserve the dated record.",
     "The fence covers your own crew too: workplace-monitoring notice or consent requirements may apply; have the assigned qualified reviewer clear the policy before recording staff.",
     "Client calls under confidentiality: do not record until Chapter 12 and Appendix B clear the exact workflow.",
     "When in doubt, type notes after the call.",
@@ -1523,10 +1525,9 @@
     "Run the audit (15 min): five buckets, honest minutes, circle the top two.",
     "Pick the matching workhorse (one, not both): meetings → Fathom or Otter only as candidates; receipts → the capture feature inside the accounting tool you already pay for.",
     "A free meeting-recorder tier stays solo/synthetic only.",
-    "If your exact paid business plan does not clear live-person use, or your accounting plan does not include receipt capture, check the vendor's current first-party feature and data pages before buying or uploading records; this book does not establish that Wave's free core includes receipt capture.",
+    "Check the vendor's current first-party feature and data pages before buying or uploading records; this book does not establish that Wave's free core includes receipt capture.",
     "Set it up and run it once on synthetic receipts or a meeting with only yourself.",
-    "A real receipt or consented meeting may run only after Appendix B clears the exact tool, plan, account, data, permissions, storage, retention, and incident process and the full Appendix C universal pre-live gate passes under its applicable probation clock.",
-    "Consent does not substitute for data or rollout clearance.",
+    "A real receipt or consented meeting may run only after Appendix B clears this exact tool, plan, account, and workflow and Appendix C's pre-live gate passes on its clock; consent does not substitute for either clearance.",
     "Do the check the same day: skim the summary, or verify approved receipt mappings and place every ambiguity in the exception queue.",
     "Calendar the monthly skim.",
     "Third Friday, 20 minutes, standing.",
@@ -1537,7 +1538,7 @@
     "No answer, hesitation, pressured staff agreement, or uncertainty means typed notes instead.",
     "The takeaway: the back office is floor-work with the source of truth in the room — delegate the capture, approved mappings, drafts, and (after an affirmative yes) the notes under fast checks; never ambiguous classifications, filings, money movement, or the monthly skim that keeps you able to catch a wrong number."
    ],
-   "sentence_sha256": "650f9f4fde6ad4914311ac52d8198c06f6dcc596c46db53f17bc344abce68b3e",
+   "sentence_sha256": "69981fa758e352ad8b4ef17f636c242a5afe44ddb1a866f98f4c6fe5e1f54993",
    "chunks": [
     {
      "id": "b3c9be40f5eebd55d41549fde3a62ff9b3f50bafe0d46c6ad38533f0db6211ff",
@@ -1545,13 +1546,6 @@
      "sentence_start": 9,
      "sentence_end": 19,
      "text": "The person best equipped to check the machine's bookkeeping is the one leaning on it hardest. One story proves nothing, but the shape it illustrates is this book's whole doctrine: delegate hardest where you can check fastest. The two questions, run on the paperwork pile Chapter 1's screen for any delegation (can you check it at a glance, and could you survive the worst version?) runs cleanly on the paperwork pile. Glance-checkable? Most of the back office, yes, and better than any other domain: a receipt confirms vendor, amount, and date, but not always the right category, tax treatment, or deductible share; a transcribed meeting has your memory of the meeting; a drafted invoice has the job you just did. The source of truth is usually in the room, but ambiguous classifications still need a person who knows the books. Survivable? Split by destination."
-    },
-    {
-     "id": "0a7fd6d71f2b9576bc2901fe71b37a576d162f7d85799fc0b48097ffeb9ea499",
-     "file": "chunks/0a7fd6d71f2b9576bc2901fe71b37a576d162f7d85799fc0b48097ffeb9ea499.mp3",
-     "sentence_start": 19,
-     "sentence_end": 29,
-     "text": "Work that stays inside (notes, drafts, categorizations you'll review): worst case is a correction. Work that lands outside (an invoice to a customer, a number in a filing): gets the recompute check, or doesn't go. And one class in this domain has a survivability problem most owners never consider, and it gets its own take-back below: recordings of other people. After this chapter, you can: Run the admin-hours audit and name your two biggest evening-eaters in minutes per week Set up the pair with the fastest payback for most owners per your own audit: meeting notes (checked the same day) and receipt capture (checked monthly) Draw the filing line: what never goes out the door without recomputation Apply the recording fence before the first meeting gets transcribed The primary build: audit first, then the two workhorses Step 1 — the admin-hours audit (15 minutes, once)."
     }
    ]
   },
@@ -1561,7 +1555,7 @@
     "Chapter 8",
     "The Glue: Assistants and Automation",
     "Watch your own hands for one day and count how many times the same fact gets typed twice: the booking that goes from the email into the calendar, the job details that go from the text thread into the invoice, the customer who gets retyped from the form into the sheet.",
-    "Each retype is thirty seconds, the illustration's round number; twenty a day is close to an hour a week of typing the same facts twice, and the pile only grows.",
+    "Each retype is thirty seconds; twenty a day is close to an hour a week of typing the same facts twice, and the pile only grows.",
     "(An illustration, not a measurement; your Friday count will be the real number.)",
     "The chapters before this one hired specialists: a phone answerer, a marketing drafter, a notetaker.",
     "This chapter hires the two generalists that make the specialists worth having: an assistant (the do-anything desk worker you brief) and automation (the courier that moves facts between your systems so your hands don't).",
@@ -1607,9 +1601,13 @@
     "Build the two-step version: trigger (the form/booking/email) → action (add the row, or send yourself the reminder text).",
     "Worked once so the shape is concrete: the booking-confirmation email is the trigger; \"add a row to the jobs sheet\" is the action.",
     "Price it using the vendor's current billed-unit definition before building.",
-    "Then test with fake records: normal, duplicate, missing-field, malformed, and retried.",
-    "Before live data, complete Chapter 12; limit permissions and fields to the minimum; name the failure alert and its owner; prove duplicate triggers make one record; and complete a continuity card: authoritative source, connected systems and credential owner, tested one-action disable, tested manual fallback, primary and backup owners, and a deadline to reconcile every event since the last successful run.",
+    "Before the action goes live, every line passes:",
+    "Test with fake records: normal, duplicate, missing-field, malformed, and retried.",
+    "Clear Chapter 12 before any live data enters; limit permissions and fields to the minimum.",
+    "Name the failure alert and its owner; prove duplicate triggers make one record.",
+    "Complete a continuity card: authoritative source, connected systems and credential owner, tested one-action disable, tested manual fallback, primary and backup owners, and a deadline to reconcile every event since the last successful run.",
     "Shadow at least ten real events across five business days and one relevant business cycle, deliberately testing its weekly or month-end run, retry, expired login, and simultaneous-edit case.",
+    "For a seasonal shop, choose the shortest period that actually includes the workflow's peak-condition path; if that path occurs only in season, do not claim the cycle passed before then.",
     "The automation cannot mutate the live system or message a customer during that window.",
     "Only after the event floor, time floor, cycle, and edge cases all pass does the narrow action go live.",
     "A deterministic transfer does not invent; it repeats.",
@@ -1619,7 +1617,7 @@
     "Most single retypes clear trivially or fail honestly; the count decides, not the demo.",
     "Build versus buy at your size",
     "The internet is full of owners building custom AI platforms, agent swarms, four Mac minis in a closet.",
-    "One mid-size account in this book's research, a founder's own telling through a local news segment: Growbo, a marketing agency, built a custom human-plus-AI platform and reports 700+ hours and $12,000 saved in four months with revenue up (Spectrum Bay News 9, Apr 2025; figures self-reported by the founder).",
+    "Growbo, the marketing agency Chapter 3 measured (700 hours and $12,000 saved in four months, self-reported), built a custom human-plus-AI platform.",
     "Read the label twice: an agency, with technical capacity, whose product overlaps its plumbing.",
     "At 1–10 staff in a non-software trade, the rule is buy, not build: a custom system is a second business with its own payroll of maintenance hours, and its failure modes are yours alone at 2 a.m. The agent frontier gets its honest look in Chapter 14; it is not this chapter's homework.",
     "The take-backs, named",
@@ -1645,7 +1643,7 @@
     "Do this Friday",
     "About 45 minutes at the desk, plus the tally riding along all day.",
     "$0.",
-    "Friday designs and schedules the build; the first connected setup gets its own 60–90-minute block because the tests and rollback proof are part of the work.",
+    "Friday designs and schedules the build; the connected setup is step 4's own block.",
     "Count the retypes for one workday: a tally mark every time the same fact enters a second system by hand.",
     "Circle the biggest repeat offender.",
     "Make the assistant decision with the arithmetic above: list your point-tool subscriptions that only draft (words, posts, replies); mark any that a cleared general assistant plus your Pack may cover; compare the full plan, clearance, checking, integration, collaboration, and placeholder-filling cost; queue only proven redundancies for Chapter 13's audit.",
@@ -1659,16 +1657,8 @@
     "Then flip the assistant training controls for your exact plan and account (the read-back Chapter 12 requires), confirm the desired OFF state, and keep client lists out of consumer tiers.",
     "The takeaway: one cleared, briefed assistant may cover the drafting layer before another point tool earns a dollar, and deterministic automation is a courier that repeats — compare the full cost, glue your systems one proven retype at a time, watch the runs, and keep it away from unproven sends and money entirely."
    ],
-   "sentence_sha256": "3b462949f85b524d66f097d18c54b387461d290f341ece04085e01c359ff72fb",
-   "chunks": [
-    {
-     "id": "e1bbe97b9695cfd93082abb0ab9fe285fa5a4bbcdae34446a808586f0369f07d",
-     "file": "chunks/e1bbe97b9695cfd93082abb0ab9fe285fa5a4bbcdae34446a808586f0369f07d.mp3",
-     "sentence_start": 61,
-     "sentence_end": 66,
-     "text": "One mid-size account in this book's research, a founder's own telling through a local news segment: Growbo, a marketing agency, built a custom human-plus-AI platform and reports 700+ hours and $12,000 saved in four months with revenue up (Spectrum Bay News 9, Apr 2025; figures self-reported by the founder). Read the label twice: an agency, with technical capacity, whose product overlaps its plumbing. At 1–10 staff in a non-software trade, the rule is buy, not build: a custom system is a second business with its own payroll of maintenance hours, and its failure modes are yours alone at 2 a.m. The agent frontier gets its honest look in Chapter 14; it is not this chapter's homework. The take-backs, named Automated sends to customers, month one."
-    }
-   ]
+   "sentence_sha256": "aa9a6048dc67542b5278d3e9cc3240f23b9187d537265f4f0820a993f89d3960",
+   "chunks": []
   },
   "9": {
    "title": "Your Trade's Own Traps",
@@ -1709,7 +1699,7 @@
     "But two vertical-specific costs change the arithmetic.",
     "Lock-in: your job history, customer records, and workflows move into the tool, so Chapter 1's firing rules get expensive; the exit question from Chapter 3 (how do I get out?)",
     "is worth double weight here.",
-    "Fee fine print: vertical pricing hides per-unit charges (per-ticket fees in restaurant POS, per-booking cuts) that the monthly headline doesn't show; price it at YOUR volume before the trial, not after.",
+    "Fee fine print: per-unit charges the monthly headline hides; question 2 prices them at your volume before the trial.",
     "After this chapter, you can:",
     "Run the vertical interview: five questions that decide vertical-versus-horizontal on arithmetic",
     "Price a vertical at your real volume, fine print included, before any demo",
@@ -1720,33 +1710,30 @@
     "It is a house rule for opening the interview, not a finding about most trades or a promise that one stack is cheaper.",
     "Compare matched work at your shop: current all-in price, setup, integrations, checking labor, migration, failure recovery, and exit cost.",
     "A vertical candidate earns its premium only when your measured trade-specific volume makes its fit pay often enough: perhaps a four-tech crew dispatching all day, a restaurant handling heavy phone-order volume, or a salon repeatedly losing money to no-shows.",
-    "Those are prompts for your local comparison, not population thresholds.",
     "When you think you're there, run the vertical interview — Chapter 3's filter, re-asked in vertical terms.",
     "Here it is run once, concretely: an HVAC owner with four techs considering Jobber for quoting, dispatch, and customer records against the horizontal stack already running.",
     "The price cell comes from Jobber's current first-party quote for that crew, not this book.",
     "What does it replace, at what total?",
     "List the horizontals it absorbs (booking links, thread list, quote drafting) with their current all-in monthly cost, against the vertical's current quote at your tier and seat count.",
     "Call those totals H and V.",
-    "The vertical must absorb H and then return more than V − H in dispatch-and-retype time you can actually point to, after setup, checking, migration, and exit cost.",
+    "The vertical must absorb H and then return more than V − H in dispatch-and-retype time you can point to.",
+    "Illustration only: if the horizontal tools cost $80 per month and the vertical quote is $240 per month, the software-price gap is $160 per month before setup, migration, checking and exit costs.",
+    "Price those separately and require measured dispatch-and-retype value to clear the complete all-in gap.",
     "Can't point to it?",
     "Badge, not hire.",
     "What's the per-unit fine print?",
-    "Per-job, per-ticket, per-booking fees at your actual volume, in writing.",
-    "(Restaurant readers: this question is most of the decision; POS-class tools are priced in fine print.)",
+    "Per-job, per-ticket, per-booking fees at your actual volume, in writing; for restaurants this question is most of the decision.",
     "Where does my data live, and how does it leave?",
-    "Ask for the export path before the import, which country stores it, which subprocessors receive it, the safeguards, retention and deletion terms, breach process, and who can access it.",
-    "A privacy notice is one check, not the whole cross-border duty.",
-    "Canadian owners handling health, legal, financial, or other sensitive records need a jurisdiction-specific privacy and security review, the right vendor agreement, and documented approval before live data enters a US-hosted tool.",
+    "Ask for the export path before the import, which country stores it, which subprocessors receive it, the safeguards, retention and deletion terms, breach process, and who can access it; a privacy notice is one check, not the whole cross-border duty, and Appendix B's cross-border and sector rows decide whether sensitive Canadian records may enter a US-hosted tool at all.",
     "Ask to see the interaction logs at your tier, because the weekly check below runs on them; a vertical that won't show you logs has answered the supervision question already.",
-    "If customer and job history can't walk out in a usable format, the firing rules from Chapter 1 have already been repealed, and the price should be judged accordingly.",
     "Is my data clean enough to feed it?",
     "This book's operational hypothesis is that vertical tools amplify existing data discipline: messy job records, inventory, or books can sink supposedly smart tools.",
-    "Treat that as [craft], then test it on your records.",
+    "This is the book's operating hypothesis, not a measured industry finding; test it on your own records.",
     "If your records are chaos, the vertical can be confidently wrong in your trade's vocabulary, which is more convincing than generic wrong.",
     "Fix the habit first; the tool second.",
     "What's the probation metric, in my numbers?",
     "One measurable thing (booked jobs, filled slots, food cost), a baseline from before, kill criteria written down now.",
-    "Chapter 10 assigns the correct clock: standard internal, customer-facing, or agent.",
+    "Chapter 10 assigns clock A (internal), B or C (customer-facing), D (agent).",
     "The reference table (tool examples, not a price list; fill the quote column from the current first-party page or written vendor quote, using every detail named in that row; keep its skip line):",
     "Trade",
     "Tool",
@@ -1771,7 +1758,7 @@
     "Restaurants, margin pain",
     "MarginEdge",
     "Plan, locations, onboarding: ______",
-    "needs clean inventory data; skip if your inventory records aren't already honest",
+    "needs clean inventory data; skip if your inventory records aren't already honest (Chapter 7 costs one plate by hand)",
     "Restaurants, phone/reservations",
     "Yelp Host",
     "Plan, location and usage terms: ______",
@@ -1784,6 +1771,10 @@
     "Shopify Sidekick / Gorgias",
     "Included-plan scope or per-ticket quote: ______",
     "platform lock-in and usage pricing; watch for invented answers and skip below real ticket volume",
+    "Job shops / small manufacturing",
+    "Job-shop or MRP (material requirements planning) system",
+    "Plan, seats, usage: ______",
+    "data discipline first; skip if travelers are still verbal",
     "Small law practices",
     "CoCounsel-class",
     "Bundled-plan quote, users, contract, jurisdiction: ______",
@@ -1791,14 +1782,14 @@
     "Regulated clinics are a separate row even when the booking screen looks identical to a salon's.",
     "Before patient calls or records touch a tool, define the minimum data it may receive, keep symptoms and treatment questions on the human path, complete the jurisdiction-specific privacy and security review, and put the required vendor agreement and safeguards in writing.",
     "And for any vertical that talks to customers (phone, chat, reservations), Chapter 4's conservative house rule rides along: the bot identifies itself up front and offers the documented human path.",
-    "Recording, telemarketing, consumer-protection, accessibility, and sector-specific notices remain separate jurisdiction-specific gates.",
+    "Chapter 12's separate notice gates still apply.",
     "Bookkeepers, accountants, and the other professional trades, one more honest line: your vertical is usually the books platform you already run (Chapter 7's capture tools are the category), and this same five-question interview applies to the AI features switching on inside it.",
     "The supervision trap, named properly",
     "The Globe reporting on Naser's category found a gap, not a system: no checking cadence, no correction workflow described anywhere, and the reporting's own clearest finding, across its interviews, was owners monitoring less over time.",
     "Run the book's arithmetic on that: the vertical answers hundreds or thousands of calls a month (a thousand-plus per store, at Naser's scale), each one glance-checkable in principle, with no checking cadence the reporting could find in practice, while the public record carries a small, checkable trace: about twenty of Naser's 1,700+ Google reviews mention the AI, most of them one- and two-star.",
     "A one-percent mention rate is not an alarm; a mostly-negative trace, with no assigned reviewer or checking cadence identified in the reporting, is exactly the drift the weekly check exists to catch.",
     "The tool can be a good hire and still be an unmanaged one.",
-    "The fix costs twenty minutes a week, written here as the vertical's standing check, with one gate first: no recording until the exact phone-line consent flow has been documented against official guidance or cleared by a qualified local privacy/compliance professional; Chapter 7's affirmative-consent house rule still governs meetings.",
+    "The fix costs twenty minutes a week, written here as the vertical's standing check, with Chapter 12's phone-recording gate first: no recording until the consent flow is documented against official guidance or cleared by a qualified local privacy/compliance professional.",
     "Then: listen to or read five random ordinary interactions (a vertical worth buying keeps logs you can reach; you asked in question 3, and for a dispatch or quoting vertical with no calls, the same check is five recent jobs or quotes read against what actually happened); review every safety, regulated, complaint, refund, requested-human-transfer, and failed-handoff event, not a sample; find those events independently by reconciling the bot log to phone/POS records, abandoned calls, refund and complaint records, and human-transfer logs, including unclassified events; track the two counts that catch drift (refunds/complaints mentioning the tool, and handoff failures where a customer wanted a human and didn't get one); keep the human path staffed, per Chapter 4's warning.",
     "Every exception gets a named owner, due date, customer contact, delivered outcome, money reconciliation where applicable, and closure check; fixing the vendor script never closes an affected customer's incident.",
     "When the weekly check finds a Kent (a customer looping) or that second customer (a refund requested, never delivered), that's a firing-rule conversation with the vendor, not a shrug: the error survived its check, so the task comes back until the script or the handoff is fixed.",
@@ -1824,7 +1815,7 @@
     "Twenty minutes; it is the whole difference between Naser's win and Kent's loop.",
     "The takeaway: a vertical tool is a specialist hire — worth its premium only when volume is real, the data is clean, the exit door exists, and the weekly check survives the honeymoon; fit breeds trust, and trust is how the checks stop."
    ],
-   "sentence_sha256": "a5510356be9a575950bda602a08a70b7f9e95cb76a0fec010380e7792f069637",
+   "sentence_sha256": "4ecb52be18050d583db55b78dbf6a9d7af18776e65daa3e500641db64baaa4ce",
    "chunks": [
     {
      "id": "cc2cc24528acf86b7e5c532cc098a5aca8f453df41b45cc85a3364ea7df40012",
@@ -1834,52 +1825,31 @@
      "text": "He employs more people than before, by his own count. His vendor claims big numbers for the category (98.6% accuracy, phone revenue up 26%), and those are the vendor's numbers, so grade them like every vendor number in this book (start by assuming the true figures are worse, and notice neither number is what anchors this chapter). What makes his story the anchor of this chapter is that one independent report (Boston Globe, Jan 18 2026, with its Jan 22 update) carries all three layers at once. The win above is layer one. Layer two is the failure: a customer named Jillian Kent, stuck \"in a loop with an automated program\" across two locations and a second day, over a $14 missing salad. Another customer's refund had been requested but not received at the follow-up. Layer three is the quiet one, the second of those traps. The reporting found owners monitoring less as the AI bedded in."
     },
     {
-     "id": "37465db5e565bd84c1d7995b39e566d19c1de8a2dc0909d5f04351c9c285961a",
-     "file": "chunks/37465db5e565bd84c1d7995b39e566d19c1de8a2dc0909d5f04351c9c285961a.mp3",
-     "sentence_start": 34,
-     "sentence_end": 43,
-     "text": "Lock-in: your job history, customer records, and workflows move into the tool, so Chapter 1's firing rules get expensive; the exit question from Chapter 3 (how do I get out?) is worth double weight here. Fee fine print: vertical pricing hides per-unit charges (per-ticket fees in restaurant POS, per-booking cuts) that the monthly headline doesn't show; price it at YOUR volume before the trial, not after. After this chapter, you can: Run the vertical interview: five questions that decide vertical-versus-horizontal on arithmetic Price a vertical at your real volume, fine print included, before any demo Name the data-quality trap and test whether your records are clean enough to feed a vertical Keep supervision alive after the tool \"just works\": the weekly check that outlasts the honeymoon The rule, then the interview"
-    },
-    {
-     "id": "1570fac22391d05a0f034e2e2e31adf7088fea0e1f9719c1a4f68a348c657dc3",
-     "file": "chunks/1570fac22391d05a0f034e2e2e31adf7088fea0e1f9719c1a4f68a348c657dc3.mp3",
-     "sentence_start": 61,
-     "sentence_end": 67,
-     "text": "Ask for the export path before the import, which country stores it, which subprocessors receive it, the safeguards, retention and deletion terms, breach process, and who can access it. A privacy notice is one check, not the whole cross-border duty. Canadian owners handling health, legal, financial, or other sensitive records need a jurisdiction-specific privacy and security review, the right vendor agreement, and documented approval before live data enters a US-hosted tool. Ask to see the interaction logs at your tier, because the weekly check below runs on them; a vertical that won't show you logs has answered the supervision question already. If customer and job history can't walk out in a usable format, the firing rules from Chapter 1 have already been repealed, and the price should be judged accordingly. Is my data clean enough to feed it?"
-    },
-    {
-     "id": "c3f5860ad0648a5077dec3f6539053f3cb93b750416ce1ed039bd8b2a695a7b1",
-     "file": "chunks/c3f5860ad0648a5077dec3f6539053f3cb93b750416ce1ed039bd8b2a695a7b1.mp3",
-     "sentence_start": 125,
-     "sentence_end": 126,
-     "text": "The fix costs twenty minutes a week, written here as the vertical's standing check, with one gate first: no recording until the exact phone-line consent flow has been documented against official guidance or cleared by a qualified local privacy/compliance professional; Chapter 7's affirmative-consent house rule still governs meetings."
-    },
-    {
      "id": "639774df33e8b3f0d4bd7859e1b1d9bb4b0d40202dc1c28028fcdc4808c8e851",
      "file": "chunks/639774df33e8b3f0d4bd7859e1b1d9bb4b0d40202dc1c28028fcdc4808c8e851.mp3",
-     "sentence_start": 127,
-     "sentence_end": 133,
+     "sentence_start": 128,
+     "sentence_end": 134,
      "text": "Every exception gets a named owner, due date, customer contact, delivered outcome, money reconciliation where applicable, and closure check; fixing the vendor script never closes an affected customer's incident. When the weekly check finds a Kent (a customer looping) or that second customer (a refund requested, never delivered), that's a firing-rule conversation with the vendor, not a shrug: the error survived its check, so the task comes back until the script or the handoff is fixed. And the capacity clause, which Naser's own story carries: more people on payroll than before, by his own count in the Globe's telling. The vertical took the phone so the people could take the counter. (Solo? Then the freed hours are the win on their own; nobody was waiting to be redeployed.)"
     },
     {
      "id": "76e2ce50c20147e12f6e0372bb35e51598c8a3fb50c2d870d2a002dc6a910e15",
      "file": "chunks/76e2ce50c20147e12f6e0372bb35e51598c8a3fb50c2d870d2a002dc6a910e15.mp3",
-     "sentence_start": 133,
-     "sentence_end": 142,
+     "sentence_start": 134,
+     "sentence_end": 143,
      "text": "That is the deal this book keeps backing; \"cheaper than an employee\" is the phrasing to retire, because the machine is not a cheaper employee. It is different labor, with different failure shapes, priced honestly only when its checking cost stays on the books. Do this Friday About 30 minutes, $0. Decide if you're even in the market: does trade-specific volume hit you daily (dispatching, phone orders, no-shows)? If not, write \"horizontal until ___\" with your own threshold number and close the tab. That sentence is worth more than most demos. If yes, prepare the interview for the one candidate tool: write the five questions, send the request, and book the demo if one is needed. Friday's deliverable is the sent request or booked meeting, not a salesperson's reply on your clock."
     },
     {
      "id": "bbf2021fe336eddc5466cea5a6a1f2d67f06a59ea1aff3740ec0f3f017fe3cbb",
      "file": "chunks/bbf2021fe336eddc5466cea5a6a1f2d67f06a59ea1aff3740ec0f3f017fe3cbb.mp3",
-     "sentence_start": 142,
-     "sentence_end": 149,
+     "sentence_start": 143,
+     "sentence_end": 150,
      "text": "Capture question 3's export answer during the demo, ask for it in writing, and do not start the trial until the written copy lands. Test question 4 honestly: pull ten recent job/order/client records. Any safety, identity, money, legal, or routing error blocks the trial. Correct minor gaps, then repeat the sample; recurring gaps mean the data habit is this month's project, not the tool. Draft the probation card for Chapter 10: metric, baseline, kill criteria, review date. If a vertical already runs your front door: do the five-interaction check today, and count last month's tool-mentioning complaints. Twenty minutes; it is the whole difference between Naser's win and Kent's loop."
     },
     {
      "id": "e85ae43e84a3695cfdaa64c4e8642c4844876a2a14840b5b7134884110ebe837",
      "file": "chunks/e85ae43e84a3695cfdaa64c4e8642c4844876a2a14840b5b7134884110ebe837.mp3",
-     "sentence_start": 149,
-     "sentence_end": 150,
+     "sentence_start": 150,
+     "sentence_end": 151,
      "text": "The takeaway: a vertical tool is a specialist hire — worth its premium only when volume is real, the data is clean, the exit door exists, and the weekly check survives the honeymoon; fit breeds trust, and trust is how the checks stop."
     }
    ]
@@ -1959,15 +1929,15 @@
     "Before controlled live",
     "Controlled-live probation",
     "Final decision",
-    "Reversible, non-destructive field transfer; no customer send, money, payroll, employment decision, access-control change, safety or regulated-status decision, or deletion",
+    "Clock A — internal/reversible field transfer (30 days): non-destructive; no customer send, money, payroll, employment decision, access-control change, safety or regulated-status decision, or deletion",
     "Appendix C's universal gate and predeclared tests; fake or injected events prove only technical behavior, and faults stay in an isolated copy or approved maintenance window with fallback active",
     "30 days",
     "Day 30: HIRE / EXTEND ONCE / FIRE for the exact bounded transfer; excluded changes remain human-executed or require a separate qualified controlled process",
-    "Frozen outbound customer template, or deterministic receptionist speech or booking",
+    "Clock B — frozen customer template or deterministic receptionist (30 watched + 30 controlled)",
     "Full watched month in draft, manual, or shadow mode after all gates pass; the system proposes or logs while a person handles the real customer",
     "Separate 30 days under the same card and controls",
     "End of live phase (normally day 60 overall): HIRE / EXTEND ONCE / FIRE",
-    "Free-form classification that selects only a frozen customer response or slot",
+    "Clock C — classifier selecting only a frozen response or slot (30 watched + 30 controlled)",
     "Full watched month of classification in draft/manual mode after all gates pass; no generated wording",
     "Separate 30 days under the same card and controls",
     "End of live phase (normally day 60 overall): HIRE / EXTEND ONCE / FIRE",
@@ -1975,7 +1945,7 @@
     "Draft or human handoff only",
     "No autonomous promotion",
     "No autonomous HIRE",
-    "Agent: multi-step planning or action",
+    "Clock D — agent (60 days; day-30 midpoint): multi-step planning or action",
     "Start with one read-only job on copies; least privilege; tested stop, backup, and rollback",
     "60 days; day 30 is a no-promotion midpoint; weekly run-log review.",
     "Under this general framework an agent never executes money movement, purchases, payroll changes, employment decisions, access-control changes, safety or regulated-status decisions, bulk or authoritative deletion, or irreversible record mutation — even with approval.",
@@ -1992,18 +1962,13 @@
     "Metric vs. baseline (5 min).",
     "Read the number, write it on the card.",
     "Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session — the week's two already happened.",
-    "Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow.",
-    "Contain it, switch to fallback, close the incident, remedy affected people, and reconcile authoritative records.",
-    "A materially redesigned successor is new work with new clearance and a new clock.",
+    "Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow under the card's kill rule above (contain, fall back, close, remedy, reconcile; a redesigned successor starts over).",
     "A recoverable defect that survived a check may use the single redesign extension with a fixed end date; a repeat past the redesigned check fires it.",
     "For a bad price or promise already delivered, identify every affected customer, deliver the decided remedy, reconcile any money, and record evidence of closure the same day.",
     "An attempted callback is not closure.",
     "One decision (5 min): continue, adjust the script/instructions (Chapter 2, shape 5: corrections go in writing), or invoke the kill criteria early.",
     "Write it on the card.",
-    "Every applicable phase ends with a written decision.",
-    "For a narrow internal workflow, day 30 is Hire / Extend once / Fire.",
-    "For a customer-send workflow, the watched month's first decision is Promote to controlled-live send / Extend once / Fire; promotion is not Hire, and a separate 30-day live phase follows.",
-    "For an agent, day 30 is a midpoint, not a final decision; day 60 is Hire / Extend once / Fire.",
+    "Every applicable phase ends with a written decision on its clock: Clock A at day 30 (Hire / Extend once / Fire); Clocks B and C first at the watched month's end (Promote to controlled-live send / Extend once / Fire, where promotion is not Hire and a separate 30-day live phase follows), then at day 60; Clock D at day 60, with day 30 only a midpoint.",
     "Hire: the applicable final phase is complete, the metric cleared, and checks held; the tool joins the payroll, the card/metric review drops to monthly, every workflow-specific check keeps its chapter-defined cadence, and the card gets filed for Chapter 13's audits.",
     "Extend once: genuine externalities ate the phase or a recoverable redesign is underway; one extension, fixed new end date, same criteria, no paused fourth state; a second extension is a fire wearing a bathrobe.",
     "Fire: criteria missed; cancel this week, per the card's exit path, and write one line about why on the card before filing it.",
@@ -2039,14 +2004,14 @@
     "If the first clock cannot supply enough ordinary evidence, extend once; a second inconclusive window is FIRE or continue-manually, not permission to lower the bar.",
     "Calendar the pre-live verification block and the reviews for the applicable clock.",
     "The first block proves the exit path, data clearance, fallback, and rollback before launch; its duration depends on the connected tool and sits outside Friday's 25 minutes.",
-    "A standard internal workflow gets four weekly reviews (add a fifth if day 30 lands past them); a customer-facing workflow gets reviews through both months; an agent gets reviews through day 60.",
+    "Clock A gets four weekly reviews (add a fifth if day 30 lands past them); Clocks B and C through both months; Clock D through day 60.",
     "They are 30 minutes each, same slot.",
     "Treat them like payroll: they are.",
     "If a tool is already running un-probationed (most readers have one): budget a separate 20 minutes to write its card retroactively, baseline from old records, and give it a real day 30.",
     "Tenure requires a review it never had.",
     "The takeaway: every tool starts on probation — one job, one metric against a baseline, checks on a schedule, kill criteria written in advance, an exit confirmed before data goes in — and the workflow's own clock ends with a written decision, never drift."
    ],
-   "sentence_sha256": "6cf4bb905623dcca90bada03ee095a8fa608299c6fb8308aa9146bb37f1d2320",
+   "sentence_sha256": "60a98737c6709a877086aac33d88156ee5e0fa49717e291d95a7181a37dc415b",
    "chunks": [
     {
      "id": "666023a1d88751ad774a4c07819791391abb1324d2247ecae0eb4c52b840188f",
@@ -2061,13 +2026,6 @@
      "sentence_start": 58,
      "sentence_end": 62,
      "text": "METRIC: qualified after-hours booking rate; BASELINE: 2 of 11 eligible calls in the comparable prior period, from the call log. MINIMUM SAMPLE: 20 calls under the same eligibility rule; if day 30 arrives before 20, extend once, and if the second window is still sparse, fire. CHECKS: Monday and Thursday, listen to three ordinary calls against the script; independently reconcile every incoming attempt, abandonment, emergency, complaint, refund, requested transfer, and failed handoff against phone, calendar, complaint, and transfer records under the cleared consent flow. KILL: gone unless the qualified booking rate beats 2/11 by my prewritten meaningful margin, while recoverable error and complaint rates stay below my ceiling, with zero red-line incidents and zero invented prices surviving a check."
-    },
-    {
-     "id": "b733b55d3d78f40792df90d7b271fe26184f719d52d092ec6d49fb9ace3c1777",
-     "file": "chunks/b733b55d3d78f40792df90d7b271fe26184f719d52d092ec6d49fb9ace3c1777.mp3",
-     "sentence_start": 77,
-     "sentence_end": 90,
-     "text": "Full watched month in draft, manual, or shadow mode after all gates pass; the system proposes or logs while a person handles the real customer Separate 30 days under the same card and controls End of live phase (normally day 60 overall): HIRE / EXTEND ONCE / FIRE Free-form classification that selects only a frozen customer response or slot Full watched month of classification in draft/manual mode after all gates pass; no generated wording Separate 30 days under the same card and controls End of live phase (normally day 60 overall): HIRE / EXTEND ONCE / FIRE Generated or paraphrased customer wording Draft or human handoff only No autonomous promotion No autonomous HIRE Agent: multi-step planning or action Start with one read-only job on copies; least privilege; tested stop, backup, and rollback"
     }
    ]
   },
@@ -3304,11 +3262,11 @@
   },
   {
    "chapter": "4",
-   "id": "e2701e49925d5f54a003dee6f422d2f849c621d66e2fbc33276cc6b42f21566b",
-   "file": "chunks/e2701e49925d5f54a003dee6f422d2f849c621d66e2fbc33276cc6b42f21566b.mp3",
+   "id": "25b1a8962949f9fd6b67b835696882c25e56fbb9c381994653ad2963d65cef11",
+   "file": "chunks/25b1a8962949f9fd6b67b835696882c25e56fbb9c381994653ad2963d65cef11.mp3",
    "sentence_start": 49,
    "sentence_end": 60,
-   "text": "For decades the options were an answering service, a hired dispatcher, or your own interrupted evening. AI adds another option: software that can answer after hours at a variable subscription and usage cost, plus setup, integration, clearance, checking, and fallback labor. Your quote and probation record — not the price of one job — decide whether it pays. Owners who set this up describe the same two results. First, booked work they would have missed. Second, and they mention this almost as often: the phone stops owning them. Dinner is dinner. That second result is why this book keeps insisting AI's best gift to a small business is not headcount math. It is getting pieces of your life back: capacity and relief, never a promise about cutting people. What \"answering\" needs to include An AI receptionist that just takes messages is voicemail with better manners."
+   "text": "For decades the options were an answering service, a hired dispatcher, or your own interrupted evening. AI adds another option: software that can answer after hours at a variable subscription and usage cost, plus setup, integration, clearance, checking, and fallback labor. Your quote and probation record — not the price of one job — decide whether it pays. The owners in this chapter's vendor tellings describe the same two results. First, booked work they would have missed. Second, and they mention this almost as often: the phone stops owning them. Dinner is dinner. That second result is why this book keeps insisting AI's best gift to a small business is not headcount math. It is getting pieces of your life back: capacity and relief, never a promise about cutting people. What \"answering\" needs to include An AI receptionist that just takes messages is voicemail with better manners."
   },
   {
    "chapter": "4",
@@ -3392,75 +3350,75 @@
   },
   {
    "chapter": "4",
-   "id": "7f57e52aad858a2cd1b92c0524fffcc8d0a28e38857b88903094149119118023",
-   "file": "chunks/7f57e52aad858a2cd1b92c0524fffcc8d0a28e38857b88903094149119118023.mp3",
+   "id": "af1543fdf8826832829a80b2654b61893b787ad145df3740e029807cb8c7e07e",
+   "file": "chunks/af1543fdf8826832829a80b2654b61893b787ad145df3740e029807cb8c7e07e.mp3",
    "sentence_start": 143,
-   "sentence_end": 151,
-   "text": "Once a week, listen to or read five ordinary calls, review every exception, and reconcile bot, phone, calendar, refund, complaint, and transfer records. Reserve twenty minutes as the minimum, then clear every exception or add reviewer capacity; the timer never excuses a backlog. Three warnings before you switch anything on Treat your AI's promises as promises you may have to answer for. In 2024 a British Columbia small-claims-style tribunal awarded a customer damages after Air Canada's chatbot described a bereavement discount wrongly: the airline's real policy required asking before the flight, and the book-now-claim-later version the bot offered didn't exist. The ruling binds nobody else, and legal effect depends on the facts and local law. The risk lesson is still useful, so this book adopts it as house policy. Keep your AI's script narrow."
+   "sentence_end": 152,
+   "text": "Once a week, listen to or read five ordinary calls, review every exception, and reconcile bot, phone, calendar, refund, complaint, and transfer records. Reserve twenty minutes as the minimum, then clear every exception or add reviewer capacity; the timer never excuses a backlog. Three warnings before you switch anything on Treat your AI's promises as promises you may have to answer for. Chapter 12 tells the Air Canada tribunal case in full. Here, keep the operating rule: the bot may use only approved answers, slots, prices, guarantees and availability; every non-safety, non-complaint, out-of-scope request hands to a person. Safety and emergency language follows only the separately approved route above. Say it's an AI up front, clear the applicable rows, and staff the handoff. Have the bot introduce itself as an assistant instead of waiting to be asked."
   },
   {
    "chapter": "4",
-   "id": "d69af2c0f61c06fbc26a068c43d345a73c79de3a962b1e7e1317a0e8324880b6",
-   "file": "chunks/d69af2c0f61c06fbc26a068c43d345a73c79de3a962b1e7e1317a0e8324880b6.mp3",
-   "sentence_start": 151,
+   "id": "cfb345fef5adc980d703f53b822e59db7decc888d9264dbbeaf318bd70c5905b",
+   "file": "chunks/cfb345fef5adc980d703f53b822e59db7decc888d9264dbbeaf318bd70c5905b.mp3",
+   "sentence_start": 152,
    "sentence_end": 159,
-   "text": "It should answer the questions you gave it, book only approved appointments, and say \"I'll have someone confirm that\" for every non-safety, non-complaint, out-of-scope request. Safety and emergency language follows only the separately approved route above. Never let it improvise prices, guarantees, or availability you didn't write down. Chapter 12 goes deeper. Say it's an AI up front, clear the applicable rows, and staff the handoff. Have the bot introduce itself as an assistant instead of waiting to be asked. Identification, recording, transcription, notice, consent, jurisdiction, and sector duties vary by place and use. Before launch, complete Appendix B: counsel signs the applicable legal rows, a qualified privacy/security practitioner signs the technical and operational rows, and any blank or UNKNOWN keeps the flow off."
+   "text": "Identification, recording, transcription, notice, consent, jurisdiction, and sector duties vary by place and use. Before launch, complete Appendix B: counsel signs the applicable legal rows, a qualified privacy/security practitioner signs the technical and operational rows, and any blank or UNKNOWN keeps the flow off. Some callers will want a human: a message, an urgent flag, and a person who actually sees it. An AI receptionist with no human backstop is how you miss the one call that mattered while feeling covered. Know where the recordings live. A phone AI processes callers' audio and may record and/or transcribe it; callers blurt things they would only tell you: the panicked tax question, the address, the medical detail. Before switch-on, read the tool's data page (where calls and transcripts are stored, for how long, whether they train models)."
   },
   {
    "chapter": "4",
-   "id": "8416932eb5050203fd058a3903b5137a5dfd131b35f92782d545c48a6081fb05",
-   "file": "chunks/8416932eb5050203fd058a3903b5137a5dfd131b35f92782d545c48a6081fb05.mp3",
+   "id": "5bc28181b5cac437f77397b472d8935e684856b82236a3552617a760c31bd217",
+   "file": "chunks/5bc28181b5cac437f77397b472d8935e684856b82236a3552617a760c31bd217.mp3",
    "sentence_start": 159,
-   "sentence_end": 168,
-   "text": "Some callers will want a human: a message, an urgent flag, and a person who actually sees it. An AI receptionist with no human backstop is how you miss the one call that mattered while feeling covered. Know where the recordings live. A phone AI processes callers' audio and may record and/or transcribe it; callers blurt things they would only tell you: the panicked tax question, the address, the medical detail. Before switch-on, read the tool's data page (where calls and transcripts are stored, for how long, whether they train models). Chapter 12's fence (where your data may and may not go) applies to the phone line too. Do this Friday Time required today: about 60 minutes for the audit, script, and demo or trial booking. Cost: $0 today."
+   "sentence_end": 169,
+   "text": "Chapter 12's fence (where your data may and may not go) applies to the phone line too. Do this Friday Time required today: about 60 minutes for the audit, script, and demo or trial booking. Cost: $0 today. Configuration, integrations, and the full pre-live test are a separate setup block whose length depends on the tool; do not compress them to meet Friday's clock, and do not pay or route real traffic until every gate passes. Count two leaks. Open your phone's call log for the last seven days. For the acquisition lane, remove spam, repeat attempts from the same person, current customers, and callers outside the work you take. What remains is unique qualified missed prospects. Estimate how many an answering system could realistically recover, then multiply that range by your close rate and the contribution margin on an average job, not its full revenue."
   },
   {
    "chapter": "4",
-   "id": "b22e992c31a305283f78d4f72512151ab20814aff8d863cd5a8286543617242b",
-   "file": "chunks/b22e992c31a305283f78d4f72512151ab20814aff8d863cd5a8286543617242b.mp3",
-   "sentence_start": 168,
-   "sentence_end": 175,
-   "text": "Configuration, integrations, and the full pre-live test are a separate setup block whose length depends on the tool; do not compress them to meet Friday's clock, and do not pay or route real traffic until every gate passes. Count two leaks. Open your phone's call log for the last seven days. For the acquisition lane, remove spam, repeat attempts from the same person, current customers, and callers outside the work you take. What remains is unique qualified missed prospects. Estimate how many an answering system could realistically recover, then multiply that range by your close rate and the contribution margin on an average job, not its full revenue. For the service lane, separately count missed current-customer calls, response time, failed handoffs, complaints, and urgent or safety-sensitive calls; do not turn that lane into speculative acquisition revenue."
+   "id": "b08a4742b950e737ed3d0760a4f4e55f4710a018a640a6a225bdc92d9be6d93a",
+   "file": "chunks/b08a4742b950e737ed3d0760a4f4e55f4710a018a640a6a225bdc92d9be6d93a.mp3",
+   "sentence_start": 169,
+   "sentence_end": 181,
+   "text": "For the service lane, separately count missed current-customer calls, response time, failed handoffs, complaints, and urgent or safety-sensitive calls; do not turn that lane into speculative acquisition revenue. Label every assumption and every unresolved urgent call. Call your own business after closing time, from a friend's phone. Listen to what a new customer hears. Most owners find this genuinely painful. Good. Use the pain. Script your top three. Write the three questions you answer most, with your real answers, in plain words. Add the booking rule: the machine may hand out a firm slot only for the job types you list as safe to book unseen; everything else gets a callback window, not a slot. Set your travel buffer and service zone in the calendar before the first live call. Whatever tool you pick, this script is its training material, and writing it costs nothing."
   },
   {
    "chapter": "4",
-   "id": "d842da6ec2b33f505e7bf76ad57a95ce64812173e4cf90fa7977ab22b34397a1",
-   "file": "chunks/d842da6ec2b33f505e7bf76ad57a95ce64812173e4cf90fa7977ab22b34397a1.mp3",
-   "sentence_start": 175,
-   "sentence_end": 188,
-   "text": "Label every assumption and every unresolved urgent call. Call your own business after closing time, from a friend's phone. Listen to what a new customer hears. Most owners find this genuinely painful. Good. Use the pain. Script your top three. Write the three questions you answer most, with your real answers, in plain words. Add the booking rule: the machine may hand out a firm slot only for the job types you list as safe to book unseen; everything else gets a callback window, not a slot. Set your travel buffer and service zone in the calendar before the first live call. Whatever tool you pick, this script is its training material, and writing it costs nothing. Send one capability inquiry before choosing a tool. One candidate, not three, and no paid activation or live configuration today."
+   "id": "d37e1b56d0e365ef361d574a46e5814efcfd55fcb20b70a0bfe48d78697d89f0",
+   "file": "chunks/d37e1b56d0e365ef361d574a46e5814efcfd55fcb20b70a0bfe48d78697d89f0.mp3",
+   "sentence_start": 181,
+   "sentence_end": 186,
+   "text": "Send one capability inquiry before choosing a tool. One candidate, not three, and no paid activation or live configuration today. Goodcall and My AI Front Desk are candidates to question; this book has verified no currently eligible candidate. Ask the vendor to confirm in writing that the exact quoted tier supports at least one accepted shadow mode from Appendix C (a vendor-supported mirrored transcript with consent and no bot speech, a live conference with immediate human takeover, or consented replay into an isolated copy), staffed handoff and logs, the intended calendar connection, and enforcement of exact frozen utterances plus approved slot substitutions with no generated or paraphrased customer wording. Require a demonstration or written technical record for the exact tier."
   },
   {
    "chapter": "4",
-   "id": "09982590648a1e0a6ef0de2b61eb7001224dceca62cc7330ee260424f860b2b0",
-   "file": "chunks/09982590648a1e0a6ef0de2b61eb7001224dceca62cc7330ee260424f860b2b0.mp3",
-   "sentence_start": 188,
-   "sentence_end": 194,
-   "text": "Goodcall and My AI Front Desk are candidates to question; this book has verified no currently eligible candidate. Ask the vendor to confirm in writing that the exact quoted tier supports at least one accepted shadow mode from step 5, staffed handoff and logs, the intended calendar connection, and enforcement of exact frozen utterances plus approved slot substitutions with no generated or paraphrased customer wording. Require a demonstration or written technical record for the exact tier. Appointment-based shops also ask whether the receptionist can write only approved fields into the chosen booking system. If any answer is missing, do not select or configure the tool: use fixed voicemail or a human answering service plus manual callback, and treat conversational receptionists as future candidates. Pass the phone-specific pre-live test in its own setup block."
+   "id": "735479189a6758b0690e18c3d8e6dd501e349c2f0b0e8a6efbea05ff7aff16ba",
+   "file": "chunks/735479189a6758b0690e18c3d8e6dd501e349c2f0b0e8a6efbea05ff7aff16ba.mp3",
+   "sentence_start": 186,
+   "sentence_end": 190,
+   "text": "Appointment-based shops also ask whether the receptionist can write only approved fields into the chosen booking system. If any answer is missing, do not select or configure the tool: use fixed voicemail or a human answering service plus manual callback, and treat conversational receptionists as future candidates. Set the kill criteria now, before you're attached: choose the contribution-margin improvement the tool must clear, the minimum eligible-call sample, maximum recoverable-error, complaint, and failed-handoff rates, and zero-tolerance safety, privacy, legal, and irreversible events. The watched month measures shadow accuracy, routing, handoff, exceptions, and readiness while a person handles the real customer; it does not claim incremental margin for the AI."
   },
   {
    "chapter": "4",
-   "id": "e78892e3e73321080653a8ebd3234c92f107a1f0cda66a13b00381db53b22fe2",
-   "file": "chunks/e78892e3e73321080653a8ebd3234c92f107a1f0cda66a13b00381db53b22fe2.mp3",
-   "sentence_start": 194,
-   "sentence_end": 201,
-   "text": "Use a clearly labeled simulated emergency in an isolated test route; never place a test call to, or allow test routing into, a public emergency service, and pre-brief every human fallback recipient. Also test an upset customer, a human request, an out-of-script price or guarantee, an out-of-area caller, and two people trying to take the same slot. Test the AI disclosure, documented consent flow, text opt-out, urgent flag, and second-person escalation. Configure and test one-action diversion, prove calls reach the fallback, name rollback owners, and write the maximum containment time. Keep recording and outbound automation off until Appendix B's qualified legal and technical reviewers clear this exact workflow. Then use Appendix C's single rollout clock and one technically supported shadow mode. If none is available, customer-facing promotion is prohibited."
+   "id": "d6a4c39cca1fca205d31923986e71185eceb4e58a1355b1a879d66ff3530c98f",
+   "file": "chunks/d6a4c39cca1fca205d31923986e71185eceb4e58a1355b1a879d66ff3530c98f.mp3",
+   "sentence_start": 190,
+   "sentence_end": 197,
+   "text": "Measure incremental contribution margin only in the separate controlled-live phase, against the same phase's subscription, usage, and amortized setup, integration, and audit labor; make the normal final economic decision at day 60. One red-line event permanently fires that exact card and workflow, triggers diversion to the tested fallback, and requires incident closure and customer remedy. A materially redesigned successor starts over as a new workflow with new clearance, card, gates, and clock. If a phase misses only its predeclared sample, extend once; do not invent a universal call count. Put both review dates in your calendar. Before launch (the separate setup block; every line passes before real traffic): Pass the phone-specific pre-live test in its own setup block."
   },
   {
    "chapter": "4",
-   "id": "375efcbfde9dac815c481117cdfa79d8cbb18679cb99637aef5003d30c1b8942",
-   "file": "chunks/375efcbfde9dac815c481117cdfa79d8cbb18679cb99637aef5003d30c1b8942.mp3",
-   "sentence_start": 201,
-   "sentence_end": 206,
-   "text": "Generated or paraphrased wording remains a draft or human handoff. Any miss keeps real traffic off. Set the kill criteria now, before you're attached: choose the contribution-margin improvement the tool must clear, the minimum eligible-call sample, maximum recoverable-error, complaint, and failed-handoff rates, and zero-tolerance safety, privacy, legal, and irreversible events. The watched month measures shadow accuracy, routing, handoff, exceptions, and readiness while a person handles the real customer; it does not claim incremental margin for the AI. Measure incremental contribution margin only in the separate controlled-live phase, against the same phase's subscription, usage, and amortized setup, integration, and audit labor; make the normal final economic decision at day 60."
+   "id": "520a4510a1b5909f1e41bb93eabcead0002b35942126c664ca118197b9cbaa1b",
+   "file": "chunks/520a4510a1b5909f1e41bb93eabcead0002b35942126c664ca118197b9cbaa1b.mp3",
+   "sentence_start": 197,
+   "sentence_end": 203,
+   "text": "Use a clearly labeled simulated emergency in an isolated test route; never place a test call to, or allow test routing into, a public emergency service, and pre-brief every human fallback recipient. Also test an upset customer, a human request, an out-of-script price or guarantee, an out-of-area caller, and two people trying to take the same slot. Test the AI disclosure, documented consent flow, text opt-out, urgent flag, and second-person escalation. Configure and test one-action diversion, prove calls reach the fallback, name rollback owners, and write the maximum containment time. Keep recording and outbound automation off until Appendix B's qualified legal and technical reviewers clear this exact workflow. Then use Appendix C's single rollout clock (the applicable row, Clock A to D) and one technically supported shadow mode."
   },
   {
    "chapter": "4",
-   "id": "778942f800bebd89972f74cb402dfcb09767ac174c5b5a67a5754026535721f0",
-   "file": "chunks/778942f800bebd89972f74cb402dfcb09767ac174c5b5a67a5754026535721f0.mp3",
-   "sentence_start": 206,
-   "sentence_end": 211,
-   "text": "One red-line event permanently fires that exact card and workflow, triggers diversion to the tested fallback, and requires incident closure and customer remedy. A materially redesigned successor starts over as a new workflow with new clearance, card, gates, and clock. If a phase misses only its predeclared sample, extend once; do not invent a universal call count. Put both review dates in your calendar. The takeaway: before you buy any AI to find new customers, stop losing the ones already calling you."
+   "id": "def38004e7e83d1aa0a95a2583512f5a3accb73f488409b80aa9db55765e1b26",
+   "file": "chunks/def38004e7e83d1aa0a95a2583512f5a3accb73f488409b80aa9db55765e1b26.mp3",
+   "sentence_start": 203,
+   "sentence_end": 207,
+   "text": "If none is available, customer-facing promotion is prohibited. Generated or paraphrased wording remains a draft or human handoff. Any miss keeps real traffic off. The takeaway: before you buy any AI to find new customers, stop losing the ones already calling you."
   },
   {
    "chapter": "5",
@@ -3704,99 +3662,107 @@
   },
   {
    "chapter": "7",
-   "id": "c4354d62bfd4ba331fe7e8b96b6ab5020444869aa86bb99cdc701627544fb303",
-   "file": "chunks/c4354d62bfd4ba331fe7e8b96b6ab5020444869aa86bb99cdc701627544fb303.mp3",
+   "id": "5f83250de3a32a6c871b526e3c8b10104d9c1dc773481c819eb02b853aab289c",
+   "file": "chunks/5f83250de3a32a6c871b526e3c8b10104d9c1dc773481c819eb02b853aab289c.mp3",
+   "sentence_start": 19,
+   "sentence_end": 29,
+   "text": "Work that stays inside (notes, drafts, categorizations you'll review): worst case is a correction. Work that lands outside (an invoice to a customer, a number in a filing): gets the recompute check, or doesn't go. Recordings of other people get their own take-back below. After this chapter, you can: Run the admin-hours audit and name your two biggest evening-eaters in minutes per week Set up the pair with the fastest payback for most owners per your own audit: meeting notes (checked the same day) and receipt capture (checked monthly) Draw the filing line: what never goes out the door without recomputation Apply the recording fence before the first meeting gets transcribed The primary build: audit first, then the two workhorses Step 1 — the admin-hours audit (15 minutes, once)."
+  },
+  {
+   "chapter": "7",
+   "id": "463f64e9e3315039e0bf921300cb82f70d523d1ecc8746f809b492fc29343caa",
+   "file": "chunks/463f64e9e3315039e0bf921300cb82f70d523d1ecc8746f809b492fc29343caa.mp3",
    "sentence_start": 29,
-   "sentence_end": 37,
-   "text": "List last week's non-trade work in five buckets: money-in (invoices, chasing payments, chasing the documents clients owe you) · money-out (receipts, bills, categorizing) · meetings-and-notes · scheduling · retyping-between-systems. Put honest minutes next to each. Two numbers will embarrass you. Those two are your delegation targets. This chapter builds the two winners the audit most often surfaces, in this book's own judgment (meetings and money-out), and covers money-in below; if your two are scheduling or retyping-between-systems, the builds live in Chapters 4 and 8, but they run under this chapter's checks either way. Step 2 — meeting notes (the fastest win, if you meet). Transcription plus AI summary can turn an hour's meeting into searchable notes with action items. Fathom and Otter.ai are examples."
+   "sentence_end": 38,
+   "text": "List last week's non-trade work in five buckets: money-in (invoices, chasing payments, chasing the documents clients owe you) · money-out (receipts, bills, categorizing) · meetings-and-notes · scheduling · retyping-between-systems. Put honest minutes next to each. Two numbers will embarrass you. Those two are your delegation targets. This chapter builds the two winners the audit most often surfaces, in this book's own judgment (meetings and money-out), and covers money-in below; scheduling and retyping builds live in Chapters 4 and 8, under this chapter's checks either way. Step 2 — meeting notes (the fastest win, if you meet). Transcription plus AI summary can turn an hour's meeting into searchable notes with action items. Fathom and Otter.ai are examples. Record each tool's exact tier, limits, seats, currency, tax, billing period, and data terms from its current first-party page."
   },
   {
    "chapter": "7",
-   "id": "62b6f824f38572c629bb1e381723b87d7e136cc06d0c558a842b86e1f0b17ac1",
-   "file": "chunks/62b6f824f38572c629bb1e381723b87d7e136cc06d0c558a842b86e1f0b17ac1.mp3",
-   "sentence_start": 37,
-   "sentence_end": 42,
-   "text": "On each current first-party vendor page, record where and how it works; exact tier, limits, seats, currency, tax, and billing period; and storage, retention, deletion, and data-use terms. Chapter 3's first-year rule still governs: use a free tier only in the placeholder-only lane or monthly billing in year one; consider an annual plan only after that year, a clean current audit, and a tested exit. Pick by where your meetings actually happen and verify the exact recording feature at your tier. Skip both if your \"meetings\" are two texts and a phone call: a notetaker for meetings you don't have is a subscription for a fantasy. And one fence before any notetaker joins a real call: a transcript is other people's words in a third party's cloud, so the recording take-back below applies from the first meeting, not eventually."
+   "id": "b81b3c14ae4e7c7ee65a4a395b5505aea4e2641e9d2bffc5f9523b3f15d11272",
+   "file": "chunks/b81b3c14ae4e7c7ee65a4a395b5505aea4e2641e9d2bffc5f9523b3f15d11272.mp3",
+   "sentence_start": 38,
+   "sentence_end": 45,
+   "text": "Chapter 3's first-year rule still governs: monthly billing in year one, free tiers only in the placeholder-only lane. Pick by where your meetings actually happen. Skip both if your \"meetings\" are two texts and a phone call: a notetaker for meetings you don't have is a subscription for a fantasy. One fence before any notetaker joins a real call: a transcript is other people's words in a third party's cloud, so the recording take-back below applies from the first meeting. Before the recorder joins, say its name, what it records, why, who can access it, the relevant retention/training facts, and that typed notes are the no-penalty alternative. Record the affirmative yes outside the recording exactly as Friday's step 5 spells out. No answer, hesitation, staff pressure, or uncertainty about the local, contractual, professional, or workplace rule means typed notes instead."
   },
   {
    "chapter": "7",
-   "id": "12babd78a63aa0844a50eb489172681b0d746f480a286f4d71254413929f73b3",
-   "file": "chunks/12babd78a63aa0844a50eb489172681b0d746f480a286f4d71254413929f73b3.mp3",
-   "sentence_start": 42,
-   "sentence_end": 48,
-   "text": "Before the recorder joins, say its name, what it records, why, who can access it, the relevant retention/training facts, and that typed notes are the no-penalty alternative. Document affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent-log entry naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use any different method local law requires. No answer, hesitation, staff pressure, or uncertainty about the local, contractual, professional, or workplace rule means typed notes instead. The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and that same day you still know what mattered. Step 3 — receipt and expense capture (the compounding win)."
+   "id": "38c14b291034871cf86da154646ca75c76c7c22fb8764dbd8e727d7b078b55ac",
+   "file": "chunks/38c14b291034871cf86da154646ca75c76c7c22fb8764dbd8e727d7b078b55ac.mp3",
+   "sentence_start": 45,
+   "sentence_end": 53,
+   "text": "The check: skim the summary against your own memory the same day; machine summaries can drop things silently (Chapter 2, shape 2), and that same day you still know what mattered. Step 3 — receipt and expense capture (the compounding win). Use snap-a-photo capture and cautious categorization inside the accounting tool you already run. QuickBooks Online, Xero, Wave, and FreshBooks are examples, not a price or feature-parity claim. Verify the same first-party facts as step 2, plus the receipt-capture feature, users, and bank-feed controls. Do not switch suites for this chapter: migration is its own project with its own cost. Delegate extraction first. Auto-classify only vendors and categories already approved in your bookkeeping map; mixed-use, capital, unusual, or unclear items go to an exception queue for your bookkeeper or accountant."
   },
   {
    "chapter": "7",
-   "id": "5b3fb89ab4be8187d2d718e9aa465416d947b54d57cf4a3af64adf0ae54f6933",
-   "file": "chunks/5b3fb89ab4be8187d2d718e9aa465416d947b54d57cf4a3af64adf0ae54f6933.mp3",
-   "sentence_start": 48,
-   "sentence_end": 55,
-   "text": "Use snap-a-photo capture and cautious categorization inside the accounting tool you already run. QuickBooks Online, Xero, Wave, and FreshBooks are examples, not a price or feature-parity claim. Verify the exact current plan, receipt-capture feature, users, tax, currency, billing period, storage, retention, deletion, data-use terms, and bank-feed controls from the first-party record. Do not switch suites for this chapter: migration is its own project with its own cost. Delegate extraction first. Auto-classify only vendors and categories already approved in your bookkeeping map; mixed-use, capital, unusual, or unclear items go to an exception queue for your bookkeeper or accountant. Once a month, reconcile the captured and categorized list to the account and clear exceptions before anything files."
+   "id": "ca781290c056f13c808baf003dc2adb17092c9f4cbaed299e0c1ece4d970a1fc",
+   "file": "chunks/ca781290c056f13c808baf003dc2adb17092c9f4cbaed299e0c1ece4d970a1fc.mp3",
+   "sentence_start": 53,
+   "sentence_end": 61,
+   "text": "If the person who knows the books is your external accountant, hold the exception queue for that scheduled review; do not guess between reviews. Once a month, reconcile the captured and categorized list to the account and clear exceptions before anything files. You are not redoing the work; you are staying able to catch what a receipt alone cannot prove. The day you can't spot a wrong category is the day the books are managing you. Worked once: costing the plate. Every input is made up and no percentage is a target; the arithmetic is real. A $12.50 chicken wrap, costed with yields: chicken, 150 g at $8.80/kg, 90% usable, $1.47; veg, 100 g at $4.20/kg, 80% usable, $0.53; flatbread, $13.20 a case of 24, $0.55; sauce, $18.40 over 40 portions, $0.46; pickles and packaging, $0.63. Using the displayed rounded line items, this plate costs $3.64, or 29.1% of a $12.50 selling price."
   },
   {
    "chapter": "7",
-   "id": "4bc0accda843334d22043438a83adfde168bf34412f629eeb07a2cf0cd99b488",
-   "file": "chunks/4bc0accda843334d22043438a83adfde168bf34412f629eeb07a2cf0cd99b488.mp3",
-   "sentence_start": 55,
-   "sentence_end": 60,
-   "text": "You are not redoing the work; you are staying able to catch what a receipt alone cannot prove. The day you can't spot a wrong category is the day the books are managing you. Also worth their line: invoice drafting from job notes (inside the tools above, or your assistant plus your template; recompute every number before sending), plus the chasing itself: payment nudges and document reminders run as reusable drafts on Chapter 6's follow-up loop. Notion AI is one document/SOP add-on; compare its current first-party plan with the assistant you already have and skip it if the volume is trivial. Full agent platforms such as Lindy stay out at 1–10 staff until the simple pieces above are habits; vendor time-saved claims are the demo talking, and Chapter 10's probation applies to any tool making them."
+   "id": "570c32d1b81a0396a27ef518a242d7119313aeaa69c4805d0097202cc407722c",
+   "file": "chunks/570c32d1b81a0396a27ef518a242d7119313aeaa69c4805d0097202cc407722c.mp3",
+   "sentence_start": 61,
+   "sentence_end": 68,
+   "text": "Recompute the card from current invoices before every decision. If chicken rises 12%, the unrounded plate cost becomes $3.8077, which rounds to $3.81, or 30.5%. And if the card ignores a 90% usable yield, it understates chicken by about 14.7 cents per plate — $132 across 900 plates a quarter. That is a recipe-card error; your invoices still show what the business actually spent. Never delegated: the menu price, supplier substitutions, and allergen facts. Also worth their line: invoice drafting from job notes (inside the tools above, or your assistant plus your template; recompute every number before sending), plus the chasing itself: payment nudges and document reminders run as reusable drafts on Chapter 6's follow-up loop. Notion AI is one document/SOP add-on; compare its current first-party plan with the assistant you already have and skip it if the volume is trivial."
   },
   {
    "chapter": "7",
-   "id": "98da5386e16c9a9e1ffbb5efec1eb2076ea7da2a3091c6b36da6ac11fa7d6c06",
-   "file": "chunks/98da5386e16c9a9e1ffbb5efec1eb2076ea7da2a3091c6b36da6ac11fa7d6c06.mp3",
-   "sentence_start": 60,
-   "sentence_end": 69,
-   "text": "The measured claim, in your arithmetic: take your two audit numbers, halve them pessimistically, and price the checking ritual honestly into the tool's cost. This book's conservative default is that priced time returned must clear the all-in cost by 2×; write a higher threshold before the trial if your risk or hassle demands it. First month, count the subscription, setup, and checking time; later, count the subscription and checking. The tool clears only when the value of the conservative time returned beats that total by your predeclared threshold. A whole-inbox agent costs more to check than narrow receipt capture because its run log needs closer watching. Your numbers differ; the comparison is the point. The take-backs, named Anything that lands in a filing. Categorization is delegable; tax positions are not."
-  },
-  {
-   "chapter": "7",
-   "id": "2a64cfa252cd8d32af1304ccd76713291d82f0237bd9a0a9a2b17aa7c09bff9a",
-   "file": "chunks/2a64cfa252cd8d32af1304ccd76713291d82f0237bd9a0a9a2b17aa7c09bff9a.mp3",
-   "sentence_start": 69,
+   "id": "e19cfb4f63293beb379538708d4b27d0070108a9046000d24cf2f282acea5eba",
+   "file": "chunks/e19cfb4f63293beb379538708d4b27d0070108a9046000d24cf2f282acea5eba.mp3",
+   "sentence_start": 68,
    "sentence_end": 76,
-   "text": "The owner or qualified tax professional decides; filing software computes and populates forms only after verified answers. Mixed-use, capital, unusual, material, or unclear treatment stays unresolved until authoritative guidance or the qualified professional settles it. The machine's honest job at filing time is assembly: clean books, organized documents, and a list of questions. Recordings of other people. A meeting transcript is other people's words in a third party's cloud. Before any notetaker joins a call: ask and get the yes, then verify the exact current plan's training/data-use terms, storage country, subprocessors, retention, deletion, export, and account controls from first-party pages and preserve the dated record. The retained Otter summary lacks stable page-level locators, so this edition prints no plan-specific training or deletion conclusion."
+   "text": "Full agent platforms such as Lindy stay out at 1–10 staff until the simple pieces above are habits; vendor time-saved claims are the demo talking, and Chapter 10's probation applies to any tool making them. The measured claim, in your arithmetic: take your two audit numbers, halve them pessimistically, and price the checking ritual honestly into the tool's cost. This book's conservative default is that priced time returned must clear the all-in cost by 2×; write a higher threshold before the trial if your risk or hassle demands it. First month, count the subscription, setup, and checking time; later, count the subscription and checking. A whole-inbox agent costs more to check than narrow receipt capture because its run log needs closer watching. Your numbers differ; the comparison is the point. The take-backs, named Anything that lands in a filing."
   },
   {
    "chapter": "7",
-   "id": "1a906e20c0701e24c21a251bff03a28be06ffd9c95ecc2b34fff85d555087cbb",
-   "file": "chunks/1a906e20c0701e24c21a251bff03a28be06ffd9c95ecc2b34fff85d555087cbb.mp3",
+   "id": "cd2bdad6a6b501c0d845a51575fe3843301de39f3847410c7285f3077382f3a7",
+   "file": "chunks/cd2bdad6a6b501c0d845a51575fe3843301de39f3847410c7285f3077382f3a7.mp3",
    "sentence_start": 76,
-   "sentence_end": 86,
-   "text": "The fence covers your own crew too: workplace-monitoring notice or consent requirements may apply; have the assigned qualified reviewer clear the policy before recording staff. Client calls under confidentiality: do not record until Chapter 12 and Appendix B clear the exact workflow. When in doubt, type notes after the call. Payment execution. Drafting the invoice: machine. Chasing the overdue invoice with a polite note: machine, under the Chapter 6 rules. Moving money (paying bills, issuing refunds, changing banking details): never, and not because today's tools ask to; the fence exists before the request does. Anything touching where money actually moves is a survivability fail by definition. The monthly skim itself. The one back-office task you never delegate is the checking of the delegations."
+   "sentence_end": 83,
+   "text": "Categorization is delegable; tax positions are not. The owner or qualified tax professional decides; filing software computes and populates forms only after verified answers. Mixed-use, capital, unusual, material, or unclear treatment stays unresolved until authoritative guidance or the qualified professional settles it. The machine's honest job at filing time is assembly: clean books, organized documents, and a list of questions. Recordings of other people. Before any notetaker joins a call: ask and get the yes, then clear the exact plan's data-use, storage, subprocessor, retention, deletion, export, and account-control terms through Appendix B and preserve the dated record. The fence covers your own crew too: workplace-monitoring notice or consent requirements may apply; have the assigned qualified reviewer clear the policy before recording staff."
   },
   {
    "chapter": "7",
-   "id": "f02d1fd14fe865df734e61c7ea2c8362c9f51ecc0868006dc6186a28118768e7",
-   "file": "chunks/f02d1fd14fe865df734e61c7ea2c8362c9f51ecc0868006dc6186a28118768e7.mp3",
-   "sentence_start": 86,
-   "sentence_end": 94,
-   "text": "Reserve twenty minutes as the minimum, then clear every exception or add reviewer capacity; a growing queue does not become sampled away because the timer rang. It is the difference between books you supervise and books you hope about. Do this Friday About 40 minutes, $0 today. Run the audit (15 min): five buckets, honest minutes, circle the top two. Pick the matching workhorse (one, not both): meetings → Fathom or Otter only as candidates; receipts → the capture feature inside the accounting tool you already pay for. A free meeting-recorder tier stays solo/synthetic only. If your exact paid business plan does not clear live-person use, or your accounting plan does not include receipt capture, check the vendor's current first-party feature and data pages before buying or uploading records; this book does not establish that Wave's free core includes receipt capture."
+   "id": "1aaf63c2970e8a390ef03a6990d8e281312c5e9052b061fc08f065387697f168",
+   "file": "chunks/1aaf63c2970e8a390ef03a6990d8e281312c5e9052b061fc08f065387697f168.mp3",
+   "sentence_start": 83,
+   "sentence_end": 95,
+   "text": "Client calls under confidentiality: do not record until Chapter 12 and Appendix B clear the exact workflow. When in doubt, type notes after the call. Payment execution. Drafting the invoice: machine. Chasing the overdue invoice with a polite note: machine, under the Chapter 6 rules. Moving money (paying bills, issuing refunds, changing banking details): never, and not because today's tools ask to; the fence exists before the request does. Anything touching where money actually moves is a survivability fail by definition. The monthly skim itself. The one back-office task you never delegate is the checking of the delegations. Reserve twenty minutes as the minimum, then clear every exception or add reviewer capacity; a growing queue does not become sampled away because the timer rang. It is the difference between books you supervise and books you hope about. Do this Friday"
   },
   {
    "chapter": "7",
-   "id": "e4e44bc36eaabd3922052e778867382f9fdfb3bed1f2b8a4a860105c172f28d9",
-   "file": "chunks/e4e44bc36eaabd3922052e778867382f9fdfb3bed1f2b8a4a860105c172f28d9.mp3",
-   "sentence_start": 94,
-   "sentence_end": 101,
-   "text": "Set it up and run it once on synthetic receipts or a meeting with only yourself. A real receipt or consented meeting may run only after Appendix B clears the exact tool, plan, account, data, permissions, storage, retention, and incident process and the full Appendix C universal pre-live gate passes under its applicable probation clock. Consent does not substitute for data or rollout clearance. Do the check the same day: skim the summary, or verify approved receipt mappings and place every ambiguity in the exception queue. Calendar the monthly skim. Third Friday, 20 minutes, standing. Write \"stay able to check\" on the calendar entry; that's the whole job description."
+   "id": "66461942828634b9940b06ead30ff6346d02c7a7ab82e713b8714f50211f3a65",
+   "file": "chunks/66461942828634b9940b06ead30ff6346d02c7a7ab82e713b8714f50211f3a65.mp3",
+   "sentence_start": 95,
+   "sentence_end": 102,
+   "text": "About 40 minutes, $0 today. Run the audit (15 min): five buckets, honest minutes, circle the top two. Pick the matching workhorse (one, not both): meetings → Fathom or Otter only as candidates; receipts → the capture feature inside the accounting tool you already pay for. A free meeting-recorder tier stays solo/synthetic only. Check the vendor's current first-party feature and data pages before buying or uploading records; this book does not establish that Wave's free core includes receipt capture. Set it up and run it once on synthetic receipts or a meeting with only yourself. A real receipt or consented meeting may run only after Appendix B clears this exact tool, plan, account, and workflow and Appendix C's pre-live gate passes on its clock; consent does not substitute for either clearance."
   },
   {
    "chapter": "7",
-   "id": "7c99b68eee3bf653c8abbad5b2d2e787f54036ef8a10c9c607f94c32394a685f",
-   "file": "chunks/7c99b68eee3bf653c8abbad5b2d2e787f54036ef8a10c9c607f94c32394a685f.mp3",
-   "sentence_start": 101,
-   "sentence_end": 106,
-   "text": "If any recorded call or meeting has someone else in it (client or not): use the informed-consent script and record affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent log naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use the method local law requires. Park the tool until you've read its data page. No answer, hesitation, pressured staff agreement, or uncertainty means typed notes instead. The takeaway: the back office is floor-work with the source of truth in the room — delegate the capture, approved mappings, drafts, and (after an affirmative yes) the notes under fast checks; never ambiguous classifications, filings, money movement, or the monthly skim that keeps you able to catch a wrong number."
+   "id": "57df1acccd43545cd56b742f50889a1373ad96f1474b94dfdc7470e927f7fac2",
+   "file": "chunks/57df1acccd43545cd56b742f50889a1373ad96f1474b94dfdc7470e927f7fac2.mp3",
+   "sentence_start": 102,
+   "sentence_end": 110,
+   "text": "Do the check the same day: skim the summary, or verify approved receipt mappings and place every ambiguity in the exception queue. Calendar the monthly skim. Third Friday, 20 minutes, standing. Write \"stay able to check\" on the calendar entry; that's the whole job description. If any recorded call or meeting has someone else in it (client or not): use the informed-consent script and record affirmative consent outside the recording by email, a signed record, a checkbox record, or a dated consent log naming participants, tool, purpose, retention notice, alternative, withdrawal route, and owner. Use the method local law requires. Park the tool until you've read its data page. No answer, hesitation, pressured staff agreement, or uncertainty means typed notes instead."
+  },
+  {
+   "chapter": "7",
+   "id": "77dd177238915b2a03c97684a20a80593e01afd05c09c2d24ab3cf293cd61945",
+   "file": "chunks/77dd177238915b2a03c97684a20a80593e01afd05c09c2d24ab3cf293cd61945.mp3",
+   "sentence_start": 110,
+   "sentence_end": 111,
+   "text": "The takeaway: the back office is floor-work with the source of truth in the room — delegate the capture, approved mappings, drafts, and (after an affirmative yes) the notes under fast checks; never ambiguous classifications, filings, money movement, or the monthly skim that keeps you able to catch a wrong number."
   },
   {
    "chapter": "8",
-   "id": "4b213d8b71b20b82174d40768e782d58508cdffbd36271294f360351474388a9",
-   "file": "chunks/4b213d8b71b20b82174d40768e782d58508cdffbd36271294f360351474388a9.mp3",
+   "id": "8e95e71242aa8474d5dd40f1bfac9820c88e16b3cf63913d4dd8ac6bb2539847",
+   "file": "chunks/8e95e71242aa8474d5dd40f1bfac9820c88e16b3cf63913d4dd8ac6bb2539847.mp3",
    "sentence_start": 0,
    "sentence_end": 7,
-   "text": "Chapter 8 The Glue: Assistants and Automation Watch your own hands for one day and count how many times the same fact gets typed twice: the booking that goes from the email into the calendar, the job details that go from the text thread into the invoice, the customer who gets retyped from the form into the sheet. Each retype is thirty seconds, the illustration's round number; twenty a day is close to an hour a week of typing the same facts twice, and the pile only grows. (An illustration, not a measurement; your Friday count will be the real number.) The chapters before this one hired specialists: a phone answerer, a marketing drafter, a notetaker. This chapter hires the two generalists that make the specialists worth having: an assistant (the do-anything desk worker you brief) and automation (the courier that moves facts between your systems so your hands don't)."
+   "text": "Chapter 8 The Glue: Assistants and Automation Watch your own hands for one day and count how many times the same fact gets typed twice: the booking that goes from the email into the calendar, the job details that go from the text thread into the invoice, the customer who gets retyped from the form into the sheet. Each retype is thirty seconds; twenty a day is close to an hour a week of typing the same facts twice, and the pile only grows. (An illustration, not a measurement; your Friday count will be the real number.) The chapters before this one hired specialists: a phone answerer, a marketing drafter, a notetaker. This chapter hires the two generalists that make the specialists worth having: an assistant (the do-anything desk worker you brief) and automation (the courier that moves facts between your systems so your hands don't)."
   },
   {
    "chapter": "8",
@@ -3840,67 +3806,67 @@
   },
   {
    "chapter": "8",
-   "id": "d0995f8e66af0972d8a262e989a0e851e9d9d82588eed31c7d564aa29dcf7f9c",
-   "file": "chunks/d0995f8e66af0972d8a262e989a0e851e9d9d82588eed31c7d564aa29dcf7f9c.mp3",
+   "id": "3ebf3f04eb41682507132151090d5d5a395106ab0d9d0c0aa40cdb0c7004bdc1",
+   "file": "chunks/3ebf3f04eb41682507132151090d5d5a395106ab0d9d0c0aa40cdb0c7004bdc1.mp3",
    "sentence_start": 45,
-   "sentence_end": 50,
-   "text": "Pick the fact you retype most (bookings into the sheet, form leads into Chapter 6's thread list — the one-line-per-open-lead page). Build the two-step version: trigger (the form/booking/email) → action (add the row, or send yourself the reminder text). Worked once so the shape is concrete: the booking-confirmation email is the trigger; \"add a row to the jobs sheet\" is the action. Price it using the vendor's current billed-unit definition before building. Then test with fake records: normal, duplicate, missing-field, malformed, and retried."
+   "sentence_end": 53,
+   "text": "Pick the fact you retype most (bookings into the sheet, form leads into Chapter 6's thread list — the one-line-per-open-lead page). Build the two-step version: trigger (the form/booking/email) → action (add the row, or send yourself the reminder text). Worked once so the shape is concrete: the booking-confirmation email is the trigger; \"add a row to the jobs sheet\" is the action. Price it using the vendor's current billed-unit definition before building. Before the action goes live, every line passes: Test with fake records: normal, duplicate, missing-field, malformed, and retried. Clear Chapter 12 before any live data enters; limit permissions and fields to the minimum. Name the failure alert and its owner; prove duplicate triggers make one record."
   },
   {
    "chapter": "8",
-   "id": "90ce3ee858f1acac3b2acd5d06ae35299f3c12ebcea17913f85bddee79d8cdf5",
-   "file": "chunks/90ce3ee858f1acac3b2acd5d06ae35299f3c12ebcea17913f85bddee79d8cdf5.mp3",
-   "sentence_start": 50,
-   "sentence_end": 55,
-   "text": "Before live data, complete Chapter 12; limit permissions and fields to the minimum; name the failure alert and its owner; prove duplicate triggers make one record; and complete a continuity card: authoritative source, connected systems and credential owner, tested one-action disable, tested manual fallback, primary and backup owners, and a deadline to reconcile every event since the last successful run. Shadow at least ten real events across five business days and one relevant business cycle, deliberately testing its weekly or month-end run, retry, expired login, and simultaneous-edit case. The automation cannot mutate the live system or message a customer during that window. Only after the event floor, time floor, cycle, and edge cases all pass does the narrow action go live. A deterministic transfer does not invent; it repeats."
+   "id": "fb77cc648268678f1eb2aa8457dd30f154e513d9c17a50d91ddd947a99768cfa",
+   "file": "chunks/fb77cc648268678f1eb2aa8457dd30f154e513d9c17a50d91ddd947a99768cfa.mp3",
+   "sentence_start": 53,
+   "sentence_end": 59,
+   "text": "Complete a continuity card: authoritative source, connected systems and credential owner, tested one-action disable, tested manual fallback, primary and backup owners, and a deadline to reconcile every event since the last successful run. Shadow at least ten real events across five business days and one relevant business cycle, deliberately testing its weekly or month-end run, retry, expired login, and simultaneous-edit case. For a seasonal shop, choose the shortest period that actually includes the workflow's peak-condition path; if that path occurs only in season, do not claim the cycle passed before then. The automation cannot mutate the live system or message a customer during that window. Only after the event floor, time floor, cycle, and edge cases all pass does the narrow action go live. A deterministic transfer does not invent; it repeats."
   },
   {
    "chapter": "8",
    "id": "d347be4e45f0de23861750595410b24a6121b60ff58c0dbb22e947fc69450b80",
    "file": "chunks/d347be4e45f0de23861750595410b24a6121b60ff58c0dbb22e947fc69450b80.mp3",
-   "sentence_start": 55,
-   "sentence_end": 61,
+   "sentence_start": 59,
+   "sentence_end": 65,
    "text": "Any AI extraction, classification, summary, or transformation inherits Chapter 2's content checks and may not mutate authoritative state or message a customer on unchecked output. A person who mis-enters one booking mis-enters one booking; a misconfigured automation can mis-enter every booking, identically, at 3 a.m. The check that fits the shape is a weekly look at every run since last time, confirming the fields landed where they should and every failure raised its alert; Chapter 7's monthly skim inherits the automations as one more line. The measured claim, yours: Friday retype count × your timed seconds × your hourly figure, against the current all-in workflow cost. Most single retypes clear trivially or fail honestly; the count decides, not the demo. Build versus buy at your size The internet is full of owners building custom AI platforms, agent swarms, four Mac minis in a closet."
   },
   {
    "chapter": "8",
-   "id": "78674af72af5f2a862a51277aa7b1ee24fbe0ddde2f2729a0aee84cd6d13b85e",
-   "file": "chunks/78674af72af5f2a862a51277aa7b1ee24fbe0ddde2f2729a0aee84cd6d13b85e.mp3",
-   "sentence_start": 66,
-   "sentence_end": 75,
-   "text": "Any automation whose last step messages a real customer runs in draft mode first (it prepares, you send) until a month of run-watching has shown you its shape. After that, only a frozen, human-approved lowest-stakes template with approved field substitution may run alone. Generated or paraphrased customer wording remains draft-only. (Chapter 6's rule, now as plumbing; and a sent message is a regulated message, so the consent and opt-out lanes Chapter 6 names, TCPA in the US and CASL in Canada, ride along no matter which courier fires it.) Anything that moves money. No automation touches payments, refunds, payroll, or banking details. Not \"carefully.\" Not at all. It may prepare an invoice draft or a locked notification that points to an existing first-party processor record."
+   "id": "6c4639220603e30ababc8c4b0e1b3b5e8382087f0385b13b7fb32ea884dfa647",
+   "file": "chunks/6c4639220603e30ababc8c4b0e1b3b5e8382087f0385b13b7fb32ea884dfa647.mp3",
+   "sentence_start": 65,
+   "sentence_end": 72,
+   "text": "Growbo, the marketing agency Chapter 3 measured (700 hours and $12,000 saved in four months, self-reported), built a custom human-plus-AI platform. Read the label twice: an agency, with technical capacity, whose product overlaps its plumbing. At 1–10 staff in a non-software trade, the rule is buy, not build: a custom system is a second business with its own payroll of maintenance hours, and its failure modes are yours alone at 2 a.m. The agent frontier gets its honest look in Chapter 14; it is not this chapter's homework. The take-backs, named Automated sends to customers, month one. Any automation whose last step messages a real customer runs in draft mode first (it prepares, you send) until a month of run-watching has shown you its shape. After that, only a frozen, human-approved lowest-stakes template with approved field substitution may run alone."
   },
   {
    "chapter": "8",
-   "id": "301ad308f5d26654050a3fc1dd6a81040fcf3e1575541f0139b26cf9a5ec44cc",
-   "file": "chunks/301ad308f5d26654050a3fc1dd6a81040fcf3e1575541f0139b26cf9a5ec44cc.mp3",
-   "sentence_start": 75,
-   "sentence_end": 84,
-   "text": "A human independently verifies the customer, amount, destination, and terms before sending or creating any new or changed payment link. A changed destination or unexpected link is a red-line incident. The blast radius fails the survivability question by definition (Chapter 7's fence, extended to the couriers). Building your own platform. Until the day your business is a software business, buying beats building; revisit annually, not after each impressive demo. The consolidation migration. \"Replace your five tools with our one platform\" is a hypothesis, not a demographic rule. Compare both architectures using your current all-in subscription, setup, migration, integration, permission, checking, failure-recovery, support, and tested-exit costs. Moving systems can consume a quarter; let the evidence — not a generic team-size claim — decide whether to connect what works or move house."
+   "id": "a4d141d3cc633f7f4d7a8b75953f2c9f299457cd72e5e4f51ce0323aecc9905d",
+   "file": "chunks/a4d141d3cc633f7f4d7a8b75953f2c9f299457cd72e5e4f51ce0323aecc9905d.mp3",
+   "sentence_start": 72,
+   "sentence_end": 83,
+   "text": "Generated or paraphrased customer wording remains draft-only. (Chapter 6's rule, now as plumbing; and a sent message is a regulated message, so the consent and opt-out lanes Chapter 6 names, TCPA in the US and CASL in Canada, ride along no matter which courier fires it.) Anything that moves money. No automation touches payments, refunds, payroll, or banking details. Not \"carefully.\" Not at all. It may prepare an invoice draft or a locked notification that points to an existing first-party processor record. A human independently verifies the customer, amount, destination, and terms before sending or creating any new or changed payment link. A changed destination or unexpected link is a red-line incident. The blast radius fails the survivability question by definition (Chapter 7's fence, extended to the couriers). Building your own platform."
   },
   {
    "chapter": "8",
-   "id": "6ee19921522ca36fb3be8d64a64d6c417893840e4e5b6d9135211b16506ad1fe",
-   "file": "chunks/6ee19921522ca36fb3be8d64a64d6c417893840e4e5b6d9135211b16506ad1fe.mp3",
-   "sentence_start": 84,
-   "sentence_end": 91,
-   "text": "Do this Friday About 45 minutes at the desk, plus the tally riding along all day. $0. Friday designs and schedules the build; the first connected setup gets its own 60–90-minute block because the tests and rollback proof are part of the work. Count the retypes for one workday: a tally mark every time the same fact enters a second system by hand. Circle the biggest repeat offender. Make the assistant decision with the arithmetic above: list your point-tool subscriptions that only draft (words, posts, replies); mark any that a cleared general assistant plus your Pack may cover; compare the full plan, clearance, checking, integration, collaboration, and placeholder-filling cost; queue only proven redundancies for Chapter 13's audit."
+   "id": "03b47189fa0deaef5318bfdb2c0ced21bd776f6b1b445561c944b5779363c5e5",
+   "file": "chunks/03b47189fa0deaef5318bfdb2c0ced21bd776f6b1b445561c944b5779363c5e5.mp3",
+   "sentence_start": 83,
+   "sentence_end": 94,
+   "text": "Until the day your business is a software business, buying beats building; revisit annually, not after each impressive demo. The consolidation migration. \"Replace your five tools with our one platform\" is a hypothesis, not a demographic rule. Compare both architectures using your current all-in subscription, setup, migration, integration, permission, checking, failure-recovery, support, and tested-exit costs. Moving systems can consume a quarter; let the evidence — not a generic team-size claim — decide whether to connect what works or move house. Do this Friday About 45 minutes at the desk, plus the tally riding along all day. $0. Friday designs and schedules the build; the connected setup is step 4's own block. Count the retypes for one workday: a tally mark every time the same fact enters a second system by hand. Circle the biggest repeat offender."
   },
   {
    "chapter": "8",
-   "id": "71a0c17ae48d025d8695035a4d5d28fd91df2068649da07d5aba86d3c35d83de",
-   "file": "chunks/71a0c17ae48d025d8695035a4d5d28fd91df2068649da07d5aba86d3c35d83de.mp3",
-   "sentence_start": 91,
+   "id": "0affa2a6f9d08c4096c09fa976b7485b463ffda48e6f25451983875f0afe0630",
+   "file": "chunks/0affa2a6f9d08c4096c09fa976b7485b463ffda48e6f25451983875f0afe0630.mp3",
+   "sentence_start": 94,
    "sentence_end": 98,
-   "text": "Sketch one two-step automation without connecting live data: name the trigger, action, authoritative source, minimum permissions, owner, alert, manual fallback, rollback, and the normal, duplicate, missing-field, malformed, and retry tests it must pass. Calendar a 60–90-minute setup block to build and run those fake-record tests. Appendix C is the single authority for shadow evidence, clocks, promotion, and weekly review; do not invent a shorter local version. Live mutation waits until that exact tool-workflow card passes every applicable gate. Write the two fences at the top of your notes: \"Nothing generated sends to customers. Only Appendix C can promote a frozen approved template with approved fields. Nothing touches money, ever.\""
+   "text": "Make the assistant decision with the arithmetic above: list your point-tool subscriptions that only draft (words, posts, replies); mark any that a cleared general assistant plus your Pack may cover; compare the full plan, clearance, checking, integration, collaboration, and placeholder-filling cost; queue only proven redundancies for Chapter 13's audit. Sketch one two-step automation without connecting live data: name the trigger, action, authoritative source, minimum permissions, owner, alert, manual fallback, rollback, and the normal, duplicate, missing-field, malformed, and retry tests it must pass. Calendar a 60–90-minute setup block to build and run those fake-record tests. Appendix C is the single authority for shadow evidence, clocks, promotion, and weekly review; do not invent a shorter local version."
   },
   {
    "chapter": "8",
-   "id": "8e2ee5f152c8529afcf15fa224d5a86a3562cbe45875e507d1ddb0675643ceab",
-   "file": "chunks/8e2ee5f152c8529afcf15fa224d5a86a3562cbe45875e507d1ddb0675643ceab.mp3",
+   "id": "e8d71e449e74a7ad6282e5fa82266acb964a8103fe5b0725c9ba6f7ccd4f5f20",
+   "file": "chunks/e8d71e449e74a7ad6282e5fa82266acb964a8103fe5b0725c9ba6f7ccd4f5f20.mp3",
    "sentence_start": 98,
-   "sentence_end": 100,
-   "text": "Then flip the assistant training controls for your exact plan and account (the read-back Chapter 12 requires), confirm the desired OFF state, and keep client lists out of consumer tiers. The takeaway: one cleared, briefed assistant may cover the drafting layer before another point tool earns a dollar, and deterministic automation is a courier that repeats — compare the full cost, glue your systems one proven retype at a time, watch the runs, and keep it away from unproven sends and money entirely."
+   "sentence_end": 104,
+   "text": "Live mutation waits until that exact tool-workflow card passes every applicable gate. Write the two fences at the top of your notes: \"Nothing generated sends to customers. Only Appendix C can promote a frozen approved template with approved fields. Nothing touches money, ever.\" Then flip the assistant training controls for your exact plan and account (the read-back Chapter 12 requires), confirm the desired OFF state, and keep client lists out of consumer tiers. The takeaway: one cleared, briefed assistant may cover the drafting layer before another point tool earns a dollar, and deterministic automation is a courier that repeats — compare the full cost, glue your systems one proven retype at a time, watch the runs, and keep it away from unproven sends and money entirely."
   },
   {
    "chapter": "9",
@@ -3936,90 +3902,98 @@
   },
   {
    "chapter": "9",
-   "id": "4e20c8329bf218dc27f73e109c23e962aa950a698b2b1c70fa0e0b982bf64d23",
-   "file": "chunks/4e20c8329bf218dc27f73e109c23e962aa950a698b2b1c70fa0e0b982bf64d23.mp3",
+   "id": "50b05721bb6c8c5b3128c8042df15aed2a273d0e0f6cf3d2775b482bbd3b1439",
+   "file": "chunks/50b05721bb6c8c5b3128c8042df15aed2a273d0e0f6cf3d2775b482bbd3b1439.mp3",
    "sentence_start": 32,
-   "sentence_end": 34,
-   "text": "The tool may give only a fixed safety notice and collect contact details; it does not interpret an approved record or decide whether handoff is needed. But two vertical-specific costs change the arithmetic."
+   "sentence_end": 41,
+   "text": "The tool may give only a fixed safety notice and collect contact details; it does not interpret an approved record or decide whether handoff is needed. But two vertical-specific costs change the arithmetic. Lock-in: your job history, customer records, and workflows move into the tool, so Chapter 1's firing rules get expensive; the exit question from Chapter 3 (how do I get out?) is worth double weight here. Fee fine print: per-unit charges the monthly headline hides; question 2 prices them at your volume before the trial. After this chapter, you can: Run the vertical interview: five questions that decide vertical-versus-horizontal on arithmetic Price a vertical at your real volume, fine print included, before any demo Name the data-quality trap and test whether your records are clean enough to feed a vertical"
   },
   {
    "chapter": "9",
-   "id": "fb1e9352078ad38daa62e8ad42b746248156670f82d4dec4199bf89800267296",
-   "file": "chunks/fb1e9352078ad38daa62e8ad42b746248156670f82d4dec4199bf89800267296.mp3",
-   "sentence_start": 43,
-   "sentence_end": 49,
-   "text": "The book's starting heuristic is horizontal until your own workflow and total-cost comparison justifies vertical. It is a house rule for opening the interview, not a finding about most trades or a promise that one stack is cheaper. Compare matched work at your shop: current all-in price, setup, integrations, checking labor, migration, failure recovery, and exit cost. A vertical candidate earns its premium only when your measured trade-specific volume makes its fit pay often enough: perhaps a four-tech crew dispatching all day, a restaurant handling heavy phone-order volume, or a salon repeatedly losing money to no-shows. Those are prompts for your local comparison, not population thresholds. When you think you're there, run the vertical interview — Chapter 3's filter, re-asked in vertical terms."
+   "id": "b841843b535b79a60ab3a5345c0de7bb21e0f6dda151e8e369e562d61aa933f5",
+   "file": "chunks/b841843b535b79a60ab3a5345c0de7bb21e0f6dda151e8e369e562d61aa933f5.mp3",
+   "sentence_start": 41,
+   "sentence_end": 48,
+   "text": "Keep supervision alive after the tool \"just works\": the weekly check that outlasts the honeymoon The rule, then the interview The book's starting heuristic is horizontal until your own workflow and total-cost comparison justifies vertical. It is a house rule for opening the interview, not a finding about most trades or a promise that one stack is cheaper. Compare matched work at your shop: current all-in price, setup, integrations, checking labor, migration, failure recovery, and exit cost. A vertical candidate earns its premium only when your measured trade-specific volume makes its fit pay often enough: perhaps a four-tech crew dispatching all day, a restaurant handling heavy phone-order volume, or a salon repeatedly losing money to no-shows. When you think you're there, run the vertical interview — Chapter 3's filter, re-asked in vertical terms."
   },
   {
    "chapter": "9",
-   "id": "76f72dc5f3529a985cf7ebfdc798736ca18fdfaf63e372df955046af26300b4f",
-   "file": "chunks/76f72dc5f3529a985cf7ebfdc798736ca18fdfaf63e372df955046af26300b4f.mp3",
-   "sentence_start": 49,
-   "sentence_end": 59,
-   "text": "Here it is run once, concretely: an HVAC owner with four techs considering Jobber for quoting, dispatch, and customer records against the horizontal stack already running. The price cell comes from Jobber's current first-party quote for that crew, not this book. What does it replace, at what total? List the horizontals it absorbs (booking links, thread list, quote drafting) with their current all-in monthly cost, against the vertical's current quote at your tier and seat count. Call those totals H and V. The vertical must absorb H and then return more than V − H in dispatch-and-retype time you can actually point to, after setup, checking, migration, and exit cost. Can't point to it? Badge, not hire. What's the per-unit fine print? Per-job, per-ticket, per-booking fees at your actual volume, in writing."
+   "id": "50a2eefe1290a1315b15c192b9704a8c37c2158243457f508ff79ddc5e0d4bb2",
+   "file": "chunks/50a2eefe1290a1315b15c192b9704a8c37c2158243457f508ff79ddc5e0d4bb2.mp3",
+   "sentence_start": 48,
+   "sentence_end": 55,
+   "text": "Here it is run once, concretely: an HVAC owner with four techs considering Jobber for quoting, dispatch, and customer records against the horizontal stack already running. The price cell comes from Jobber's current first-party quote for that crew, not this book. What does it replace, at what total? List the horizontals it absorbs (booking links, thread list, quote drafting) with their current all-in monthly cost, against the vertical's current quote at your tier and seat count. Call those totals H and V. The vertical must absorb H and then return more than V − H in dispatch-and-retype time you can point to. Illustration only: if the horizontal tools cost $80 per month and the vertical quote is $240 per month, the software-price gap is $160 per month before setup, migration, checking and exit costs."
   },
   {
    "chapter": "9",
-   "id": "a516aafe446f10fb82cf55aa27fd9fff3d6ce1dea7a490f8d6fd3fc34f48e411",
-   "file": "chunks/a516aafe446f10fb82cf55aa27fd9fff3d6ce1dea7a490f8d6fd3fc34f48e411.mp3",
-   "sentence_start": 59,
-   "sentence_end": 61,
-   "text": "(Restaurant readers: this question is most of the decision; POS-class tools are priced in fine print.) Where does my data live, and how does it leave?"
+   "id": "6d4b1c1e3b7ab6b299ad704c3140a41cf139c612130622a3ed90e398b60b8f7e",
+   "file": "chunks/6d4b1c1e3b7ab6b299ad704c3140a41cf139c612130622a3ed90e398b60b8f7e.mp3",
+   "sentence_start": 55,
+   "sentence_end": 63,
+   "text": "Price those separately and require measured dispatch-and-retype value to clear the complete all-in gap. Can't point to it? Badge, not hire. What's the per-unit fine print? Per-job, per-ticket, per-booking fees at your actual volume, in writing; for restaurants this question is most of the decision. Where does my data live, and how does it leave? Ask for the export path before the import, which country stores it, which subprocessors receive it, the safeguards, retention and deletion terms, breach process, and who can access it; a privacy notice is one check, not the whole cross-border duty, and Appendix B's cross-border and sector rows decide whether sensitive Canadian records may enter a US-hosted tool at all. Ask to see the interaction logs at your tier, because the weekly check below runs on them; a vertical that won't show you logs has answered the supervision question already."
   },
   {
    "chapter": "9",
-   "id": "27ef83d30eb242d0950f1531b916d67755721e1191f230aa7ac3545720e1d7d6",
-   "file": "chunks/27ef83d30eb242d0950f1531b916d67755721e1191f230aa7ac3545720e1d7d6.mp3",
-   "sentence_start": 67,
-   "sentence_end": 78,
-   "text": "This book's operational hypothesis is that vertical tools amplify existing data discipline: messy job records, inventory, or books can sink supposedly smart tools. Treat that as [craft], then test it on your records. If your records are chaos, the vertical can be confidently wrong in your trade's vocabulary, which is more convincing than generic wrong. Fix the habit first; the tool second. What's the probation metric, in my numbers? One measurable thing (booked jobs, filled slots, food cost), a baseline from before, kill criteria written down now. Chapter 10 assigns the correct clock: standard internal, customer-facing, or agent. The reference table (tool examples, not a price list; fill the quote column from the current first-party page or written vendor quote, using every detail named in that row; keep its skip line): Trade Tool Current first-party quote to record"
+   "id": "00118218524dbd97787498bc9a4a00119ef196d11dfbbd892b48b5042cc5e7ce",
+   "file": "chunks/00118218524dbd97787498bc9a4a00119ef196d11dfbbd892b48b5042cc5e7ce.mp3",
+   "sentence_start": 63,
+   "sentence_end": 71,
+   "text": "Is my data clean enough to feed it? This book's operational hypothesis is that vertical tools amplify existing data discipline: messy job records, inventory, or books can sink supposedly smart tools. This is the book's operating hypothesis, not a measured industry finding; test it on your own records. If your records are chaos, the vertical can be confidently wrong in your trade's vocabulary, which is more convincing than generic wrong. Fix the habit first; the tool second. What's the probation metric, in my numbers? One measurable thing (booked jobs, filled slots, food cost), a baseline from before, kill criteria written down now. Chapter 10 assigns clock A (internal), B or C (customer-facing), D (agent)."
   },
   {
    "chapter": "9",
-   "id": "44a8fb9a206b49ac5beb8f01d189d528a0775a21e78182c44a1fe2ef48fbece8",
-   "file": "chunks/44a8fb9a206b49ac5beb8f01d189d528a0775a21e78182c44a1fe2ef48fbece8.mp3",
-   "sentence_start": 78,
-   "sentence_end": 103,
-   "text": "The catch — and skip it if Home services Jobber Plan, seats, usage, currency, tax, billing period: ______ complex setup; skip until measured dispatch-and-retype time earns the premium over the Ch 4–8 stack Home services, bigger ops ServiceTitan Quote and commitment: ______ steep curve and commitments; skip below a multi-crew operation Solo trades quoting QuoteIQ Plan and usage: ______ quoting-only; skip if quotes aren't your bottleneck Restaurants Toast (+AI) Hardware, plan, per-ticket and payment fees: ______ hidden transaction economics; skip until you've priced fine print at your covers Restaurants, margin pain MarginEdge Plan, locations, onboarding: ______ needs clean inventory data; skip if your inventory records aren't already honest Restaurants, phone/reservations Yelp Host Plan, location and usage terms: ______ call quality on complex orders; skip if your menu is the complex kind"
+   "id": "aad949f62bbbbac494ad7664aa01fe0a83c0c8652473798d16c30009fb584919",
+   "file": "chunks/aad949f62bbbbac494ad7664aa01fe0a83c0c8652473798d16c30009fb584919.mp3",
+   "sentence_start": 71,
+   "sentence_end": 94,
+   "text": "The reference table (tool examples, not a price list; fill the quote column from the current first-party page or written vendor quote, using every detail named in that row; keep its skip line): Trade Tool Current first-party quote to record The catch — and skip it if Home services Jobber Plan, seats, usage, currency, tax, billing period: ______ complex setup; skip until measured dispatch-and-retype time earns the premium over the Ch 4–8 stack Home services, bigger ops ServiceTitan Quote and commitment: ______ steep curve and commitments; skip below a multi-crew operation Solo trades quoting QuoteIQ Plan and usage: ______ quoting-only; skip if quotes aren't your bottleneck Restaurants Toast (+AI) Hardware, plan, per-ticket and payment fees: ______ hidden transaction economics; skip until you've priced fine print at your covers Restaurants, margin pain MarginEdge"
   },
   {
    "chapter": "9",
-   "id": "0e9e936f2f4cee61bb3636bb234e62c8e7978d2bb1eaf89f8160aaf3d0ec3fa1",
-   "file": "chunks/0e9e936f2f4cee61bb3636bb234e62c8e7978d2bb1eaf89f8160aaf3d0ec3fa1.mp3",
-   "sentence_start": 103,
-   "sentence_end": 116,
-   "text": "Salons / appointment services Acuity / Voksha Plan, seats, booking/call usage: ______ reporting and integration setup; skip the receptionist until missed calls are measured (Ch 4) E-commerce Shopify Sidekick / Gorgias Included-plan scope or per-ticket quote: ______ platform lock-in and usage pricing; watch for invented answers and skip below real ticket volume Small law practices CoCounsel-class Bundled-plan quote, users, contract, jurisdiction: ______ legal research and confidentiality duties; a general assistant is not a substitute for legal research or advice; the responsible lawyer verifies every authority in the primary record and follows the bar's data rules Regulated clinics are a separate row even when the booking screen looks identical to a salon's."
+   "id": "61e7d0328a7b797aa7c40b15ece566f06bb06661c5f14ece5ef3ee15458799f6",
+   "file": "chunks/61e7d0328a7b797aa7c40b15ece566f06bb06661c5f14ece5ef3ee15458799f6.mp3",
+   "sentence_start": 94,
+   "sentence_end": 114,
+   "text": "Plan, locations, onboarding: ______ needs clean inventory data; skip if your inventory records aren't already honest (Chapter 7 costs one plate by hand) Restaurants, phone/reservations Yelp Host Plan, location and usage terms: ______ call quality on complex orders; skip if your menu is the complex kind Salons / appointment services Acuity / Voksha Plan, seats, booking/call usage: ______ reporting and integration setup; skip the receptionist until missed calls are measured (Ch 4) E-commerce Shopify Sidekick / Gorgias Included-plan scope or per-ticket quote: ______ platform lock-in and usage pricing; watch for invented answers and skip below real ticket volume Job shops / small manufacturing Job-shop or MRP (material requirements planning) system Plan, seats, usage: ______ data discipline first; skip if travelers are still verbal Small law practices CoCounsel-class"
   },
   {
    "chapter": "9",
-   "id": "8bc0126a64d2cc772f10114f193b58ab7894dccf478e88dfc6543bd32a77d52c",
-   "file": "chunks/8bc0126a64d2cc772f10114f193b58ab7894dccf478e88dfc6543bd32a77d52c.mp3",
-   "sentence_start": 116,
+   "id": "f94883fff3d9d8eaaf8263d97250df30df0c60904792c07bfa64c6d1d7390cb8",
+   "file": "chunks/f94883fff3d9d8eaaf8263d97250df30df0c60904792c07bfa64c6d1d7390cb8.mp3",
+   "sentence_start": 114,
    "sentence_end": 120,
-   "text": "Before patient calls or records touch a tool, define the minimum data it may receive, keep symptoms and treatment questions on the human path, complete the jurisdiction-specific privacy and security review, and put the required vendor agreement and safeguards in writing. And for any vertical that talks to customers (phone, chat, reservations), Chapter 4's conservative house rule rides along: the bot identifies itself up front and offers the documented human path. Recording, telemarketing, consumer-protection, accessibility, and sector-specific notices remain separate jurisdiction-specific gates. Bookkeepers, accountants, and the other professional trades, one more honest line: your vertical is usually the books platform you already run (Chapter 7's capture tools are the category), and this same five-question interview applies to the AI features switching on inside it."
+   "text": "Bundled-plan quote, users, contract, jurisdiction: ______ legal research and confidentiality duties; a general assistant is not a substitute for legal research or advice; the responsible lawyer verifies every authority in the primary record and follows the bar's data rules Regulated clinics are a separate row even when the booking screen looks identical to a salon's. Before patient calls or records touch a tool, define the minimum data it may receive, keep symptoms and treatment questions on the human path, complete the jurisdiction-specific privacy and security review, and put the required vendor agreement and safeguards in writing. And for any vertical that talks to customers (phone, chat, reservations), Chapter 4's conservative house rule rides along: the bot identifies itself up front and offers the documented human path. Chapter 12's separate notice gates still apply."
   },
   {
    "chapter": "9",
-   "id": "44de007d2e174893026ef0302d3e6d671b1c08270b673b4aa605a1e9bb618c95",
-   "file": "chunks/44de007d2e174893026ef0302d3e6d671b1c08270b673b4aa605a1e9bb618c95.mp3",
+   "id": "62d0b2338c19b0f70c8b3247cfda6f84132d25e70b5c858e38c4ba819e74e8c2",
+   "file": "chunks/62d0b2338c19b0f70c8b3247cfda6f84132d25e70b5c858e38c4ba819e74e8c2.mp3",
    "sentence_start": 120,
-   "sentence_end": 124,
-   "text": "The supervision trap, named properly The Globe reporting on Naser's category found a gap, not a system: no checking cadence, no correction workflow described anywhere, and the reporting's own clearest finding, across its interviews, was owners monitoring less over time. Run the book's arithmetic on that: the vertical answers hundreds or thousands of calls a month (a thousand-plus per store, at Naser's scale), each one glance-checkable in principle, with no checking cadence the reporting could find in practice, while the public record carries a small, checkable trace: about twenty of Naser's 1,700+ Google reviews mention the AI, most of them one- and two-star. A one-percent mention rate is not an alarm; a mostly-negative trace, with no assigned reviewer or checking cadence identified in the reporting, is exactly the drift the weekly check exists to catch."
+   "sentence_end": 123,
+   "text": "Bookkeepers, accountants, and the other professional trades, one more honest line: your vertical is usually the books platform you already run (Chapter 7's capture tools are the category), and this same five-question interview applies to the AI features switching on inside it. The supervision trap, named properly The Globe reporting on Naser's category found a gap, not a system: no checking cadence, no correction workflow described anywhere, and the reporting's own clearest finding, across its interviews, was owners monitoring less over time."
   },
   {
    "chapter": "9",
-   "id": "9302363be84e05bf1417f81166800e6159bf76d2e9047df265e0c9a1f083589c",
-   "file": "chunks/9302363be84e05bf1417f81166800e6159bf76d2e9047df265e0c9a1f083589c.mp3",
-   "sentence_start": 124,
-   "sentence_end": 125,
-   "text": "The tool can be a good hire and still be an unmanaged one."
+   "id": "0f1003ff6b365430733045bd1c308261dd09189e7730762fb8af8b7c44e10235",
+   "file": "chunks/0f1003ff6b365430733045bd1c308261dd09189e7730762fb8af8b7c44e10235.mp3",
+   "sentence_start": 123,
+   "sentence_end": 126,
+   "text": "Run the book's arithmetic on that: the vertical answers hundreds or thousands of calls a month (a thousand-plus per store, at Naser's scale), each one glance-checkable in principle, with no checking cadence the reporting could find in practice, while the public record carries a small, checkable trace: about twenty of Naser's 1,700+ Google reviews mention the AI, most of them one- and two-star. A one-percent mention rate is not an alarm; a mostly-negative trace, with no assigned reviewer or checking cadence identified in the reporting, is exactly the drift the weekly check exists to catch. The tool can be a good hire and still be an unmanaged one."
+  },
+  {
+   "chapter": "9",
+   "id": "2a2d3e72042fc52187034f4651b9eb20dab1a3b169263d40b3fdbbf3fb56a0c3",
+   "file": "chunks/2a2d3e72042fc52187034f4651b9eb20dab1a3b169263d40b3fdbbf3fb56a0c3.mp3",
+   "sentence_start": 126,
+   "sentence_end": 127,
+   "text": "The fix costs twenty minutes a week, written here as the vertical's standing check, with Chapter 12's phone-recording gate first: no recording until the consent flow is documented against official guidance or cleared by a qualified local privacy/compliance professional."
   },
   {
    "chapter": "9",
    "id": "564ab7c6a21aab46994c9379c52ff690b7aac65ead047867cf3fc91e38cffa62",
    "file": "chunks/564ab7c6a21aab46994c9379c52ff690b7aac65ead047867cf3fc91e38cffa62.mp3",
-   "sentence_start": 126,
-   "sentence_end": 127,
+   "sentence_start": 127,
+   "sentence_end": 128,
    "text": "Then: listen to or read five random ordinary interactions (a vertical worth buying keeps logs you can reach; you asked in question 3, and for a dispatch or quoting vertical with no calls, the same check is five recent jobs or quotes read against what actually happened); review every safety, regulated, complaint, refund, requested-human-transfer, and failed-handoff event, not a sample; find those events independently by reconciling the bot log to phone/POS records, abandoned calls, refund and complaint records, and human-transfer logs, including unclassified events; track the two counts that catch drift (refunds/complaints mentioning the tool, and handoff failures where a customer wanted a human and didn't get one); keep the human path staffed, per Chapter 4's warning."
   },
   {
@@ -4088,99 +4062,107 @@
   },
   {
    "chapter": "10",
-   "id": "a59000c5c899c5fcee2ab63f776cc5dc898ea73d6dca92776b7830a2522b6d8f",
-   "file": "chunks/a59000c5c899c5fcee2ab63f776cc5dc898ea73d6dca92776b7830a2522b6d8f.mp3",
+   "id": "2008e79b1429436d0b193833ac4f8b93c6e5c1103e4e235d91e5d780e421022c",
+   "file": "chunks/2008e79b1429436d0b193833ac4f8b93c6e5c1103e4e235d91e5d780e421022c.mp3",
    "sentence_start": 62,
    "sentence_end": 73,
-   "text": "EXIT: spreadsheet export restore-tested; diversion to the staffed fallback tested; connections and credentials listed for removal; records reconciled from the last good run; deletion/retention and monthly cancellation confirmed; named owner signs off. Every field has a number, denominator, or name; that is the whole trick. Which clock applies? The card is universal. The clock is not. Use the riskiest row that touches the workflow; a hybrid inherits the stricter clock. Workflow class Before controlled live Controlled-live probation Final decision Reversible, non-destructive field transfer; no customer send, money, payroll, employment decision, access-control change, safety or regulated-status decision, or deletion"
+   "text": "EXIT: spreadsheet export restore-tested; diversion to the staffed fallback tested; connections and credentials listed for removal; records reconciled from the last good run; deletion/retention and monthly cancellation confirmed; named owner signs off. Every field has a number, denominator, or name; that is the whole trick. Which clock applies? The card is universal. The clock is not. Use the riskiest row that touches the workflow; a hybrid inherits the stricter clock. Workflow class Before controlled live Controlled-live probation Final decision Clock A — internal/reversible field transfer (30 days): non-destructive; no customer send, money, payroll, employment decision, access-control change, safety or regulated-status decision, or deletion"
   },
   {
    "chapter": "10",
-   "id": "49392ba1c825cbecc06bc8ee818e5f828a242fbe185c91a17fc815da5caa75ec",
-   "file": "chunks/49392ba1c825cbecc06bc8ee818e5f828a242fbe185c91a17fc815da5caa75ec.mp3",
+   "id": "3f8553dfe17277b770d0f151c0b6c271ceab69df171de550c830e67b5032561d",
+   "file": "chunks/3f8553dfe17277b770d0f151c0b6c271ceab69df171de550c830e67b5032561d.mp3",
    "sentence_start": 73,
-   "sentence_end": 77,
-   "text": "Appendix C's universal gate and predeclared tests; fake or injected events prove only technical behavior, and faults stay in an isolated copy or approved maintenance window with fallback active 30 days Day 30: HIRE / EXTEND ONCE / FIRE for the exact bounded transfer; excluded changes remain human-executed or require a separate qualified controlled process Frozen outbound customer template, or deterministic receptionist speech or booking"
+   "sentence_end": 81,
+   "text": "Appendix C's universal gate and predeclared tests; fake or injected events prove only technical behavior, and faults stay in an isolated copy or approved maintenance window with fallback active 30 days Day 30: HIRE / EXTEND ONCE / FIRE for the exact bounded transfer; excluded changes remain human-executed or require a separate qualified controlled process Clock B — frozen customer template or deterministic receptionist (30 watched + 30 controlled) Full watched month in draft, manual, or shadow mode after all gates pass; the system proposes or logs while a person handles the real customer Separate 30 days under the same card and controls End of live phase (normally day 60 overall): HIRE / EXTEND ONCE / FIRE Clock C — classifier selecting only a frozen response or slot (30 watched + 30 controlled)"
   },
   {
    "chapter": "10",
-   "id": "3e275ff25de023295db1f2bcf4fa782b646fc7de2f0c31a64c19f857f077e1ea",
-   "file": "chunks/3e275ff25de023295db1f2bcf4fa782b646fc7de2f0c31a64c19f857f077e1ea.mp3",
-   "sentence_start": 90,
-   "sentence_end": 95,
-   "text": "60 days; day 30 is a no-promotion midpoint; weekly run-log review. Under this general framework an agent never executes money movement, purchases, payroll changes, employment decisions, access-control changes, safety or regulated-status decisions, bulk or authoritative deletion, or irreversible record mutation — even with approval. It may prepare a recommendation or change packet; a qualified human independently verifies the authoritative record and completes any permitted action in the first-party system. Any other outside effect needs per-action approval and must be reversible, logged, and inside the exact tested allowlist Day 60: HIRE / EXTEND ONCE / FIRE for the exact tested scope; per-action approval continues, no standing approval exists, and any new action or permission restarts the gate and 60-day clock"
+   "id": "f36b7517ee47b2a2d574063b5ea5d5eb34e87f9038af99793b359471cf11c001",
+   "file": "chunks/f36b7517ee47b2a2d574063b5ea5d5eb34e87f9038af99793b359471cf11c001.mp3",
+   "sentence_start": 81,
+   "sentence_end": 92,
+   "text": "Full watched month of classification in draft/manual mode after all gates pass; no generated wording Separate 30 days under the same card and controls End of live phase (normally day 60 overall): HIRE / EXTEND ONCE / FIRE Generated or paraphrased customer wording Draft or human handoff only No autonomous promotion No autonomous HIRE Clock D — agent (60 days; day-30 midpoint): multi-step planning or action Start with one read-only job on copies; least privilege; tested stop, backup, and rollback 60 days; day 30 is a no-promotion midpoint; weekly run-log review. Under this general framework an agent never executes money movement, purchases, payroll changes, employment decisions, access-control changes, safety or regulated-status decisions, bulk or authoritative deletion, or irreversible record mutation — even with approval."
   },
   {
    "chapter": "10",
-   "id": "e7d29707465082274af376677dbde85a2dd3b0eac8647857cb4597d8407cf762",
-   "file": "chunks/e7d29707465082274af376677dbde85a2dd3b0eac8647857cb4597d8407cf762.mp3",
-   "sentence_start": 95,
-   "sentence_end": 101,
-   "text": "For a customer-facing watched month, \"shadow\" means the system proposes or logs the exact frozen response, slot, or action while a person still handles the real interaction. That phase measures accuracy, routing, handoff, exceptions, and readiness — not incremental margin attributed to the AI. Promotion after it is permission to begin controlled-live work, not a hire; measure incremental contribution margin during the controlled-live phase and make the normal final economic decision at day 60. For an agent, an approved reversible allowlisted effect tests only that exact action; it never grants standing autonomy or a wider permission. A card is filed for Chapter 13 only after the applicable row reaches its final decision. The weekly probation-card review (30 minutes, same slot, non-negotiable during any probation; only this card/metric meeting shrinks to monthly for tenured tools."
+   "id": "0aff58443723a1ae3f4c538a5b885573c0570d4e295b05c20bf8ec097886c57c",
+   "file": "chunks/0aff58443723a1ae3f4c538a5b885573c0570d4e295b05c20bf8ec097886c57c.mp3",
+   "sentence_start": 92,
+   "sentence_end": 97,
+   "text": "It may prepare a recommendation or change packet; a qualified human independently verifies the authoritative record and completes any permitted action in the first-party system. Any other outside effect needs per-action approval and must be reversible, logged, and inside the exact tested allowlist Day 60: HIRE / EXTEND ONCE / FIRE for the exact tested scope; per-action approval continues, no standing approval exists, and any new action or permission restarts the gate and 60-day clock For a customer-facing watched month, \"shadow\" means the system proposes or logs the exact frozen response, slot, or action while a person still handles the real interaction. That phase measures accuracy, routing, handoff, exceptions, and readiness — not incremental margin attributed to the AI."
   },
   {
    "chapter": "10",
-   "id": "13eeb9e78b264733f4400b20bc6a446bcfb52c2f9e55fba2cb460a19a5f18225",
-   "file": "chunks/13eeb9e78b264733f4400b20bc6a446bcfb52c2f9e55fba2cb460a19a5f18225.mp3",
-   "sentence_start": 101,
+   "id": "f99e08f0df08730961c421c9e30e940070cedcadcfc50082fe89ff530deedf05",
+   "file": "chunks/f99e08f0df08730961c421c9e30e940070cedcadcfc50082fe89ff530deedf05.mp3",
+   "sentence_start": 97,
+   "sentence_end": 104,
+   "text": "Promotion after it is permission to begin controlled-live work, not a hire; measure incremental contribution margin during the controlled-live phase and make the normal final economic decision at day 60. For an agent, an approved reversible allowlisted effect tests only that exact action; it never grants standing autonomy or a wider permission. A card is filed for Chapter 13 only after the applicable row reaches its final decision. The weekly probation-card review (30 minutes, same slot, non-negotiable during any probation; only this card/metric meeting shrinks to monthly for tenured tools. Workflow checks keep the weekly, real-time, or every-event cadence their own chapter requires): Metric vs. baseline (5 min). Read the number, write it on the card."
+  },
+  {
+   "chapter": "10",
+   "id": "7d4c469ae09145b29b165610250cc931a7821258ecc60bc6d2af7d9b5b868d2b",
+   "file": "chunks/7d4c469ae09145b29b165610250cc931a7821258ecc60bc6d2af7d9b5b868d2b.mp3",
+   "sentence_start": 104,
    "sentence_end": 109,
-   "text": "Workflow checks keep the weekly, real-time, or every-event cadence their own chapter requires): Metric vs. baseline (5 min). Read the number, write it on the card. Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session — the week's two already happened. Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow. Contain it, switch to fallback, close the incident, remedy affected people, and reconcile authoritative records. A materially redesigned successor is new work with new clearance and a new clock. A recoverable defect that survived a check may use the single redesign extension with a fixed end date; a repeat past the redesigned check fires it."
+   "text": "Check the checks (10 min): confirm the named checks actually ran and re-read their notes (the honest question is \"did I skip Thursday?\"); no third sampling session — the week's two already happened. Errors and near-misses (10 min): one red-line safety, privacy, legal, or irreversible incident permanently fires that exact card and workflow under the card's kill rule above (contain, fall back, close, remedy, reconcile; a redesigned successor starts over). A recoverable defect that survived a check may use the single redesign extension with a fixed end date; a repeat past the redesigned check fires it. For a bad price or promise already delivered, identify every affected customer, deliver the decided remedy, reconcile any money, and record evidence of closure the same day. An attempted callback is not closure."
   },
   {
    "chapter": "10",
-   "id": "84306a3efb390781308aabb10974bc1492434f556820863c1aa641a5633dc298",
-   "file": "chunks/84306a3efb390781308aabb10974bc1492434f556820863c1aa641a5633dc298.mp3",
+   "id": "481729651bf5491bf39513a40d02314e12f0cd798377202449786bf47dff2944",
+   "file": "chunks/481729651bf5491bf39513a40d02314e12f0cd798377202449786bf47dff2944.mp3",
    "sentence_start": 109,
-   "sentence_end": 117,
-   "text": "For a bad price or promise already delivered, identify every affected customer, deliver the decided remedy, reconcile any money, and record evidence of closure the same day. An attempted callback is not closure. One decision (5 min): continue, adjust the script/instructions (Chapter 2, shape 5: corrections go in writing), or invoke the kill criteria early. Write it on the card. Every applicable phase ends with a written decision. For a narrow internal workflow, day 30 is Hire / Extend once / Fire. For a customer-send workflow, the watched month's first decision is Promote to controlled-live send / Extend once / Fire; promotion is not Hire, and a separate 30-day live phase follows. For an agent, day 30 is a midpoint, not a final decision; day 60 is Hire / Extend once / Fire."
+   "sentence_end": 113,
+   "text": "One decision (5 min): continue, adjust the script/instructions (Chapter 2, shape 5: corrections go in writing), or invoke the kill criteria early. Write it on the card. Every applicable phase ends with a written decision on its clock: Clock A at day 30 (Hire / Extend once / Fire); Clocks B and C first at the watched month's end (Promote to controlled-live send / Extend once / Fire, where promotion is not Hire and a separate 30-day live phase follows), then at day 60; Clock D at day 60, with day 30 only a midpoint. Hire: the applicable final phase is complete, the metric cleared, and checks held; the tool joins the payroll, the card/metric review drops to monthly, every workflow-specific check keeps its chapter-defined cadence, and the card gets filed for Chapter 13's audits."
   },
   {
    "chapter": "10",
-   "id": "4dc048693898e31969174d35747e2bc0af6501b8e83f56cb62cd5abd1ea080b4",
-   "file": "chunks/4dc048693898e31969174d35747e2bc0af6501b8e83f56cb62cd5abd1ea080b4.mp3",
-   "sentence_start": 117,
-   "sentence_end": 122,
-   "text": "Hire: the applicable final phase is complete, the metric cleared, and checks held; the tool joins the payroll, the card/metric review drops to monthly, every workflow-specific check keeps its chapter-defined cadence, and the card gets filed for Chapter 13's audits. Extend once: genuine externalities ate the phase or a recoverable redesign is underway; one extension, fixed new end date, same criteria, no paused fourth state; a second extension is a fire wearing a bathrobe. Fire: criteria missed; cancel this week, per the card's exit path, and write one line about why on the card before filing it. That line is your growing private database of what doesn't work in your shop, worth more than any review site. One workflow per card and per tool is the rule that makes all of it legible."
+   "id": "f44f2e60a229a7de4a4d5e5c0ea9bcfb7967046cc7562e016ff2d1ae55540b42",
+   "file": "chunks/f44f2e60a229a7de4a4d5e5c0ea9bcfb7967046cc7562e016ff2d1ae55540b42.mp3",
+   "sentence_start": 113,
+   "sentence_end": 118,
+   "text": "Extend once: genuine externalities ate the phase or a recoverable redesign is underway; one extension, fixed new end date, same criteria, no paused fourth state; a second extension is a fire wearing a bathrobe. Fire: criteria missed; cancel this week, per the card's exit path, and write one line about why on the card before filing it. That line is your growing private database of what doesn't work in your shop, worth more than any review site. One workflow per card and per tool is the rule that makes all of it legible. At most two disjoint workflows may be on probation concurrently, and only when they share no metric, data, system, or supervision bottleneck; three is how you end up unable to say which change moved the number."
   },
   {
    "chapter": "10",
-   "id": "cd800c09baade8e18aadb134c4e846f0ead01b2ce24550513169dfc3cd9ee855",
-   "file": "chunks/cd800c09baade8e18aadb134c4e846f0ead01b2ce24550513169dfc3cd9ee855.mp3",
-   "sentence_start": 122,
-   "sentence_end": 125,
-   "text": "At most two disjoint workflows may be on probation concurrently, and only when they share no metric, data, system, or supervision bottleneck; three is how you end up unable to say which change moved the number. The measured claim, yours as always: a probation costs you the card sketch (five minutes to write, ten if you're deciding the numbers as you go), a separate pre-live block long enough to verify the exit and data gates, the baseline (usually free: last month's number off your own records, a week of counting only when no record exists), four-to-five weekly reviews (about two to two and a half hours total), and the doubled check cadence for the month: your named check, run twice a week instead of once, priced at whatever it costs you. That last line belongs on the tag."
+   "id": "288cbc7889300ab8d49eb20ea1867f1a39f58e2b61f170ee615fab495449951a",
+   "file": "chunks/288cbc7889300ab8d49eb20ea1867f1a39f58e2b61f170ee615fab495449951a.mp3",
+   "sentence_start": 118,
+   "sentence_end": 124,
+   "text": "The measured claim, yours as always: a probation costs you the card sketch (five minutes to write, ten if you're deciding the numbers as you go), a separate pre-live block long enough to verify the exit and data gates, the baseline (usually free: last month's number off your own records, a week of counting only when no record exists), four-to-five weekly reviews (about two to two and a half hours total), and the doubled check cadence for the month: your named check, run twice a week instead of once, priced at whatever it costs you. That last line belongs on the tag. Price all of it against the subscription's annual cost times the years it survives unused on autopay, and the ritual funds itself the first time it fires something. The take-backs, named The big-bang rollout. Everything-at-once adoption makes failures harder to attribute and unwind."
   },
   {
    "chapter": "10",
-   "id": "bc89d03ab23980564738476dcaffb79cb53c6e2f7450e0864ba8ce03097ba949",
-   "file": "chunks/bc89d03ab23980564738476dcaffb79cb53c6e2f7450e0864ba8ce03097ba949.mp3",
-   "sentence_start": 125,
-   "sentence_end": 137,
-   "text": "Price all of it against the subscription's annual cost times the years it survives unused on autopay, and the ritual funds itself the first time it fires something. The take-backs, named The big-bang rollout. Everything-at-once adoption makes failures harder to attribute and unwind. Read Chapters 1–3 first, then choose one measured pain workflow from Chapters 4–9; their printed order is not a mandatory rollout sequence. A second disjoint workflow may run only under the two-card rule above. The unbaselined pilot. No before-number, no trial. A tool that can't be measured can't be fired, and unfireable workers run the shop (Chapter 1's owner-who-can't-fire line, now as procedure). \"Set and forget.\" The drift Chapter 9 documented (supervision decaying as fit breeds trust) is the failure mode of successful pilots. The weekly-then-monthly review is not paranoia; it is the price on the tag."
+   "id": "408765576f0076ba210696042ac5478f7f21c9ed58eb26de282c4ca51138d7ee",
+   "file": "chunks/408765576f0076ba210696042ac5478f7f21c9ed58eb26de282c4ca51138d7ee.mp3",
+   "sentence_start": 124,
+   "sentence_end": 134,
+   "text": "Read Chapters 1–3 first, then choose one measured pain workflow from Chapters 4–9; their printed order is not a mandatory rollout sequence. A second disjoint workflow may run only under the two-card rule above. The unbaselined pilot. No before-number, no trial. A tool that can't be measured can't be fired, and unfireable workers run the shop (Chapter 1's owner-who-can't-fire line, now as procedure). \"Set and forget.\" The drift Chapter 9 documented (supervision decaying as fit breeds trust) is the failure mode of successful pilots. The weekly-then-monthly review is not paranoia; it is the price on the tag. A tool good enough to keep is important enough to check. Probation by demo."
   },
   {
    "chapter": "10",
-   "id": "e7b37dfe9317e2d28ac00fc47e2dd1701b0e13388c6e8a36193ba23ec40a44ae",
-   "file": "chunks/e7b37dfe9317e2d28ac00fc47e2dd1701b0e13388c6e8a36193ba23ec40a44ae.mp3",
-   "sentence_start": 137,
-   "sentence_end": 147,
-   "text": "A tool good enough to keep is important enough to check. Probation by demo. The trial runs on your real work, your real customers' shapes, with the fence intact: no customer data beyond what the live workflow itself requires enters the tool during probation (no bulk imports to see what it can do), and the export path is confirmed before any of it goes in (Chapter 12 carries the full fence). A tool that only shines on the vendor's sample data has passed the vendor's probation, not yours. Do this Friday About 25 minutes, $0 (step 5 is its own separate 20 minutes, and most readers need it). Pick the one workflow whose chapter you jumped to first when you read this book's map. That instinct was your prioritization; honor it. Sketch the probation card for the tool you're trialing or considering: five fields, pen, done. This is the five-minute artifact, not launch clearance."
+   "id": "3811e3a8c1029aa76f4243aadd92bcf9dfe510eaa543e22e3b067cecaae5a088",
+   "file": "chunks/3811e3a8c1029aa76f4243aadd92bcf9dfe510eaa543e22e3b067cecaae5a088.mp3",
+   "sentence_start": 134,
+   "sentence_end": 142,
+   "text": "The trial runs on your real work, your real customers' shapes, with the fence intact: no customer data beyond what the live workflow itself requires enters the tool during probation (no bulk imports to see what it can do), and the export path is confirmed before any of it goes in (Chapter 12 carries the full fence). A tool that only shines on the vendor's sample data has passed the vendor's probation, not yours. Do this Friday About 25 minutes, $0 (step 5 is its own separate 20 minutes, and most readers need it). Pick the one workflow whose chapter you jumped to first when you read this book's map. That instinct was your prioritization; honor it. Sketch the probation card for the tool you're trialing or considering: five fields, pen, done. This is the five-minute artifact, not launch clearance."
   },
   {
    "chapter": "10",
-   "id": "c4d104f1a8576e67e3a6e02228ed7cc69faa807b27788debd4a8a7435d4fe5bf",
-   "file": "chunks/c4d104f1a8576e67e3a6e02228ed7cc69faa807b27788debd4a8a7435d4fe5bf.mp3",
-   "sentence_start": 147,
+   "id": "017a2459f41a8fd56ab353a9695b88d97fd4c456c0250950c6f8f05efee41da8",
+   "file": "chunks/017a2459f41a8fd56ab353a9695b88d97fd4c456c0250950c6f8f05efee41da8.mp3",
+   "sentence_start": 142,
+   "sentence_end": 149,
+   "text": "Start the baseline if you don't have one: use the workflow-specific window and minimum sample you predeclared from event frequency, variability, seasonality, and the decision threshold. Rare safety, privacy, legal, or irreversible harms remain zero-tolerance regardless of sample. If the first clock cannot supply enough ordinary evidence, extend once; a second inconclusive window is FIRE or continue-manually, not permission to lower the bar. Calendar the pre-live verification block and the reviews for the applicable clock. The first block proves the exit path, data clearance, fallback, and rollback before launch; its duration depends on the connected tool and sits outside Friday's 25 minutes. Clock A gets four weekly reviews (add a fifth if day 30 lands past them); Clocks B and C through both months; Clock D through day 60. They are 30 minutes each, same slot."
+  },
+  {
+   "chapter": "10",
+   "id": "19c09325b30243d75fdcecda61a0a4bbcb4c1e420a39ea416405ab02e337d08d",
+   "file": "chunks/19c09325b30243d75fdcecda61a0a4bbcb4c1e420a39ea416405ab02e337d08d.mp3",
+   "sentence_start": 149,
    "sentence_end": 153,
-   "text": "Start the baseline if you don't have one: use the workflow-specific window and minimum sample you predeclared from event frequency, variability, seasonality, and the decision threshold. Rare safety, privacy, legal, or irreversible harms remain zero-tolerance regardless of sample. If the first clock cannot supply enough ordinary evidence, extend once; a second inconclusive window is FIRE or continue-manually, not permission to lower the bar. Calendar the pre-live verification block and the reviews for the applicable clock. The first block proves the exit path, data clearance, fallback, and rollback before launch; its duration depends on the connected tool and sits outside Friday's 25 minutes. A standard internal workflow gets four weekly reviews (add a fifth if day 30 lands past them); a customer-facing workflow gets reviews through both months; an agent gets reviews through day 60."
-  },
-  {
-   "chapter": "10",
-   "id": "1018d981a218b989e22126f1d4d7a05f06900e73cc73dc22e0f9fcf80545d646",
-   "file": "chunks/1018d981a218b989e22126f1d4d7a05f06900e73cc73dc22e0f9fcf80545d646.mp3",
-   "sentence_start": 153,
-   "sentence_end": 158,
-   "text": "They are 30 minutes each, same slot. Treat them like payroll: they are. If a tool is already running un-probationed (most readers have one): budget a separate 20 minutes to write its card retroactively, baseline from old records, and give it a real day 30. Tenure requires a review it never had. The takeaway: every tool starts on probation — one job, one metric against a baseline, checks on a schedule, kill criteria written in advance, an exit confirmed before data goes in — and the workflow's own clock ends with a written decision, never drift."
+   "text": "Treat them like payroll: they are. If a tool is already running un-probationed (most readers have one): budget a separate 20 minutes to write its card retroactively, baseline from old records, and give it a real day 30. Tenure requires a review it never had. The takeaway: every tool starts on probation — one job, one metric against a baseline, checks on a schedule, kill criteria written in advance, an exit confirmed before data goes in — and the workflow's own clock ends with a written decision, never drift."
   },
   {
    "chapter": "11",
