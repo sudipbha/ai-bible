@@ -1728,7 +1728,7 @@
     "Ask to see the interaction logs at your tier, because the weekly check below runs on them; a vertical that won't show you logs has answered the supervision question already.",
     "Is my data clean enough to feed it?",
     "This book's operational hypothesis is that vertical tools amplify existing data discipline: messy job records, inventory, or books can sink supposedly smart tools.",
-    "This is the book's operating hypothesis, not a measured industry finding; test it on your own records.",
+    "It is not a measured industry finding; test it on your own records.",
     "If your records are chaos, the vertical can be confidently wrong in your trade's vocabulary, which is more convincing than generic wrong.",
     "Fix the habit first; the tool second.",
     "What's the probation metric, in my numbers?",
@@ -1815,7 +1815,7 @@
     "Twenty minutes; it is the whole difference between Naser's win and Kent's loop.",
     "The takeaway: a vertical tool is a specialist hire — worth its premium only when volume is real, the data is clean, the exit door exists, and the weekly check survives the honeymoon; fit breeds trust, and trust is how the checks stop."
    ],
-   "sentence_sha256": "4ecb52be18050d583db55b78dbf6a9d7af18776e65daa3e500641db64baaa4ce",
+   "sentence_sha256": "41853498981b8f92b32da29cf97889ff17c68c9675cd5cbdc2ea897ed03bffbf",
    "chunks": [
     {
      "id": "cc2cc24528acf86b7e5c532cc098a5aca8f453df41b45cc85a3364ea7df40012",
@@ -3934,35 +3934,35 @@
   },
   {
    "chapter": "9",
-   "id": "00118218524dbd97787498bc9a4a00119ef196d11dfbbd892b48b5042cc5e7ce",
-   "file": "chunks/00118218524dbd97787498bc9a4a00119ef196d11dfbbd892b48b5042cc5e7ce.mp3",
+   "id": "56340c65aa11ca613ede68cb776a3d96df54d7f69aaa24a60d3901215b8b5764",
+   "file": "chunks/56340c65aa11ca613ede68cb776a3d96df54d7f69aaa24a60d3901215b8b5764.mp3",
    "sentence_start": 63,
-   "sentence_end": 71,
-   "text": "Is my data clean enough to feed it? This book's operational hypothesis is that vertical tools amplify existing data discipline: messy job records, inventory, or books can sink supposedly smart tools. This is the book's operating hypothesis, not a measured industry finding; test it on your own records. If your records are chaos, the vertical can be confidently wrong in your trade's vocabulary, which is more convincing than generic wrong. Fix the habit first; the tool second. What's the probation metric, in my numbers? One measurable thing (booked jobs, filled slots, food cost), a baseline from before, kill criteria written down now. Chapter 10 assigns clock A (internal), B or C (customer-facing), D (agent)."
+   "sentence_end": 74,
+   "text": "Is my data clean enough to feed it? This book's operational hypothesis is that vertical tools amplify existing data discipline: messy job records, inventory, or books can sink supposedly smart tools. It is not a measured industry finding; test it on your own records. If your records are chaos, the vertical can be confidently wrong in your trade's vocabulary, which is more convincing than generic wrong. Fix the habit first; the tool second. What's the probation metric, in my numbers? One measurable thing (booked jobs, filled slots, food cost), a baseline from before, kill criteria written down now. Chapter 10 assigns clock A (internal), B or C (customer-facing), D (agent). The reference table (tool examples, not a price list; fill the quote column from the current first-party page or written vendor quote, using every detail named in that row; keep its skip line): Trade Tool"
   },
   {
    "chapter": "9",
-   "id": "aad949f62bbbbac494ad7664aa01fe0a83c0c8652473798d16c30009fb584919",
-   "file": "chunks/aad949f62bbbbac494ad7664aa01fe0a83c0c8652473798d16c30009fb584919.mp3",
-   "sentence_start": 71,
-   "sentence_end": 94,
-   "text": "The reference table (tool examples, not a price list; fill the quote column from the current first-party page or written vendor quote, using every detail named in that row; keep its skip line): Trade Tool Current first-party quote to record The catch — and skip it if Home services Jobber Plan, seats, usage, currency, tax, billing period: ______ complex setup; skip until measured dispatch-and-retype time earns the premium over the Ch 4–8 stack Home services, bigger ops ServiceTitan Quote and commitment: ______ steep curve and commitments; skip below a multi-crew operation Solo trades quoting QuoteIQ Plan and usage: ______ quoting-only; skip if quotes aren't your bottleneck Restaurants Toast (+AI) Hardware, plan, per-ticket and payment fees: ______ hidden transaction economics; skip until you've priced fine print at your covers Restaurants, margin pain MarginEdge"
+   "id": "5a436fefb25a62e21bf81b8a7875414da45fd00e79b8651ec3ac20bf954951e0",
+   "file": "chunks/5a436fefb25a62e21bf81b8a7875414da45fd00e79b8651ec3ac20bf954951e0.mp3",
+   "sentence_start": 74,
+   "sentence_end": 98,
+   "text": "Current first-party quote to record The catch — and skip it if Home services Jobber Plan, seats, usage, currency, tax, billing period: ______ complex setup; skip until measured dispatch-and-retype time earns the premium over the Ch 4–8 stack Home services, bigger ops ServiceTitan Quote and commitment: ______ steep curve and commitments; skip below a multi-crew operation Solo trades quoting QuoteIQ Plan and usage: ______ quoting-only; skip if quotes aren't your bottleneck Restaurants Toast (+AI) Hardware, plan, per-ticket and payment fees: ______ hidden transaction economics; skip until you've priced fine print at your covers Restaurants, margin pain MarginEdge Plan, locations, onboarding: ______ needs clean inventory data; skip if your inventory records aren't already honest (Chapter 7 costs one plate by hand) Restaurants, phone/reservations Yelp Host"
   },
   {
    "chapter": "9",
-   "id": "61e7d0328a7b797aa7c40b15ece566f06bb06661c5f14ece5ef3ee15458799f6",
-   "file": "chunks/61e7d0328a7b797aa7c40b15ece566f06bb06661c5f14ece5ef3ee15458799f6.mp3",
-   "sentence_start": 94,
-   "sentence_end": 114,
-   "text": "Plan, locations, onboarding: ______ needs clean inventory data; skip if your inventory records aren't already honest (Chapter 7 costs one plate by hand) Restaurants, phone/reservations Yelp Host Plan, location and usage terms: ______ call quality on complex orders; skip if your menu is the complex kind Salons / appointment services Acuity / Voksha Plan, seats, booking/call usage: ______ reporting and integration setup; skip the receptionist until missed calls are measured (Ch 4) E-commerce Shopify Sidekick / Gorgias Included-plan scope or per-ticket quote: ______ platform lock-in and usage pricing; watch for invented answers and skip below real ticket volume Job shops / small manufacturing Job-shop or MRP (material requirements planning) system Plan, seats, usage: ______ data discipline first; skip if travelers are still verbal Small law practices CoCounsel-class"
+   "id": "b3af8226baec7788c7ea4ebfc7aa6a78f2a9a1fd2b163eec72d337697742cd64",
+   "file": "chunks/b3af8226baec7788c7ea4ebfc7aa6a78f2a9a1fd2b163eec72d337697742cd64.mp3",
+   "sentence_start": 98,
+   "sentence_end": 115,
+   "text": "Plan, location and usage terms: ______ call quality on complex orders; skip if your menu is the complex kind Salons / appointment services Acuity / Voksha Plan, seats, booking/call usage: ______ reporting and integration setup; skip the receptionist until missed calls are measured (Ch 4) E-commerce Shopify Sidekick / Gorgias Included-plan scope or per-ticket quote: ______ platform lock-in and usage pricing; watch for invented answers and skip below real ticket volume Job shops / small manufacturing Job-shop or MRP (material requirements planning) system Plan, seats, usage: ______ data discipline first; skip if travelers are still verbal Small law practices CoCounsel-class Bundled-plan quote, users, contract, jurisdiction: ______"
   },
   {
    "chapter": "9",
-   "id": "f94883fff3d9d8eaaf8263d97250df30df0c60904792c07bfa64c6d1d7390cb8",
-   "file": "chunks/f94883fff3d9d8eaaf8263d97250df30df0c60904792c07bfa64c6d1d7390cb8.mp3",
-   "sentence_start": 114,
+   "id": "c79287ec6bf474fad49c959bd25ba03d2825f3394ccf5f77818383010dbf5391",
+   "file": "chunks/c79287ec6bf474fad49c959bd25ba03d2825f3394ccf5f77818383010dbf5391.mp3",
+   "sentence_start": 115,
    "sentence_end": 120,
-   "text": "Bundled-plan quote, users, contract, jurisdiction: ______ legal research and confidentiality duties; a general assistant is not a substitute for legal research or advice; the responsible lawyer verifies every authority in the primary record and follows the bar's data rules Regulated clinics are a separate row even when the booking screen looks identical to a salon's. Before patient calls or records touch a tool, define the minimum data it may receive, keep symptoms and treatment questions on the human path, complete the jurisdiction-specific privacy and security review, and put the required vendor agreement and safeguards in writing. And for any vertical that talks to customers (phone, chat, reservations), Chapter 4's conservative house rule rides along: the bot identifies itself up front and offers the documented human path. Chapter 12's separate notice gates still apply."
+   "text": "legal research and confidentiality duties; a general assistant is not a substitute for legal research or advice; the responsible lawyer verifies every authority in the primary record and follows the bar's data rules Regulated clinics are a separate row even when the booking screen looks identical to a salon's. Before patient calls or records touch a tool, define the minimum data it may receive, keep symptoms and treatment questions on the human path, complete the jurisdiction-specific privacy and security review, and put the required vendor agreement and safeguards in writing. And for any vertical that talks to customers (phone, chat, reservations), Chapter 4's conservative house rule rides along: the bot identifies itself up front and offers the documented human path. Chapter 12's separate notice gates still apply."
   },
   {
    "chapter": "9",
