@@ -21,11 +21,17 @@ struct ReaderView: View {
     /// most once for this reader. Dispatch is not arrival: only acknowledgement clears the
     /// pending block.
     @State private var didDispatchPending = false
-    /// Whether any part of the requested block is inside the scroll view's visible area. A
-    /// block near the end of a chapter can be on screen without ever becoming the top block
-    /// (the scroll view stops at the bottom), so reaching the requested place is judged by
-    /// visibility, not only by the top-block report.
-    @State private var requestedBlockVisible = false
+    /// Blocks with any part inside the scroll view's visible area. A block near the end of a
+    /// chapter can be on screen without ever becoming the top block (the scroll view stops at
+    /// the bottom), so reaching a requested place is judged by visibility, not only by the
+    /// top-block report.
+    @State private var visibleBlockIDs: Set<String> = []
+    /// The passage the reader explicitly navigated to (the route's block from Search, a
+    /// bookmark or Continue, or a heading jump). While it is on screen it is the reader's place
+    /// for bookmarking, even if the top-block report still names an earlier block. It expires
+    /// once it has been on screen and then leaves it, and a new jump replaces it.
+    @State private var explicitTargetID: String?
+    @State private var explicitTargetSeen = false
     /// The top visible block, as reported by the scroll view. Observed only: the reader
     /// scrolls through the `ScrollViewReader` proxy, never by writing this value.
     @State private var visibleBlockID: String?
@@ -36,6 +42,7 @@ struct ReaderView: View {
         self.position = position
         self.open = open
         _pendingBlockID = State(initialValue: position.blockID)
+        _explicitTargetID = State(initialValue: position.blockID)
     }
 
     // Access is checked on every render, not only when the route is opened, so an
@@ -122,10 +129,8 @@ struct ReaderView: View {
                 // Record the opened place right away. onChange below only fires after a
                 // scroll, so without this a chapter opened from Contents, Search, a bookmark
                 // or the footer was never saved as the place to resume.
-                // On reappearance this keeps the current place: the pending block if it
-                // hasn't been reached yet, otherwise the visible block, and only then the
-                // route's block or the chapter's first block.
-                if let id = pendingBlockID ?? visibleBlockID ?? position.blockID ?? chapter.blocks.first?.id {
+                // On reappearance this keeps the current place (see `currentPlace`).
+                if let id = currentPlace(chapter).id {
                     model.updatePosition(blockID: id)
                 }
                 dispatchPendingIfReady(proxy, chapter)
@@ -160,7 +165,7 @@ struct ReaderView: View {
         }
         proxy.scrollTo(target, anchor: .top)
         // Already on screen before the scroll (no visibility change will follow): reached.
-        if requestedBlockVisible { acknowledgePending("visible at dispatch") }
+        if visibleBlockIDs.contains(target) { acknowledgePending("visible at dispatch") }
         #if DEBUG
         // Dispatch evidence only; arrival is shown by acknowledgement.
         Logger(subsystem: "AIBible", category: "reader")
@@ -168,26 +173,49 @@ struct ReaderView: View {
         #endif
     }
 
-    /// Adds visibility tracking to the route's requested block only (the route never changes
-    /// for this view, so other blocks are left exactly as they were). Uses the documented
-    /// `.scrollView` coordinate space and `bounds(of:)` (iOS 17) to test whether any part of
-    /// the block is inside the scroll view's visible area.
-    @ViewBuilder
+    /// Adds visibility tracking to a block row, using the documented `.scrollView` coordinate
+    /// space and `bounds(of:)` (iOS 17) to test whether any part of the block is inside the
+    /// scroll view's visible area. The action runs only when that answer changes (and a row
+    /// leaving the lazy stack counts as no longer visible).
     private func tracksVisibility(of block: Block, _ content: some View) -> some View {
-        if block.id == position.blockID {
-            content.onGeometryChange(for: Bool.self) { geometry in
+        content
+            .onGeometryChange(for: Bool.self) { geometry in
                 guard let bounds = geometry.bounds(of: .scrollView) else { return false }
                 let frame = geometry.frame(in: .scrollView)
                 return frame.intersects(CGRect(origin: .zero, size: bounds.size))
             } action: { visible in
-                requestedBlockVisible = visible
-                if visible, didDispatchPending, pendingBlockID == block.id {
-                    acknowledgePending("visible after scroll")
-                }
+                blockVisibilityChanged(block.id, visible)
             }
-        } else {
-            content
+            // Leaving the lazy stack, or the whole reader leaving the screen (a tab switch),
+            // removes the row from the visible set but doesn't count as reading past it.
+            .onDisappear { blockVisibilityChanged(block.id, false, scrolledAway: false) }
+    }
+
+    private func blockVisibilityChanged(_ id: String, _ visible: Bool, scrolledAway: Bool = true) {
+        if visible { visibleBlockIDs.insert(id) } else { visibleBlockIDs.remove(id) }
+        if id == explicitTargetID, visible || scrolledAway {
+            if visible {
+                explicitTargetSeen = true
+            } else if explicitTargetSeen {
+                // Read past it: from now on the reader's place is where the user is.
+                explicitTargetID = nil
+                explicitTargetSeen = false
+            }
         }
+        if visible, didDispatchPending, id == pendingBlockID {
+            acknowledgePending("visible after scroll")
+        }
+    }
+
+    /// The reader's current place and where that answer came from, in priority order: the
+    /// explicit navigation target while it is on screen; a requested block not yet reached;
+    /// the scroll view's top-block report; the route's block; the chapter's first block.
+    private func currentPlace(_ chapter: Chapter) -> (id: String?, source: String) {
+        if let target = explicitTargetID, visibleBlockIDs.contains(target) { return (target, "explicit") }
+        if let pending = pendingBlockID { return (pending, "pending") }
+        if let observed = visibleBlockID { return (observed, "observed") }
+        if let routed = position.blockID { return (routed, "route") }
+        return (chapter.blocks.first?.id, "first")
     }
 
     /// The requested block has been reached: stop treating reports as provisional. Its place is
@@ -203,7 +231,8 @@ struct ReaderView: View {
     }
 
     private func bookmarkButton(_ chapter: Chapter) -> some View {
-        let target = pendingBlockID ?? visibleBlockID ?? chapter.blocks.first?.id
+        let place = currentPlace(chapter)
+        let target = place.id
         let marked = target.map { model.isBookmarked(blockID: $0) } ?? false
         return Button {
             if let target { model.toggleBookmark(blockID: target) }
@@ -213,6 +242,10 @@ struct ReaderView: View {
         }
         .disabled(target == nil)
         .accessibilityIdentifier("reader.bookmark")
+        #if DEBUG
+        // Debug builds only (UI tests): which block the button would bookmark, and why.
+        .accessibilityValue("target \(target ?? "none") (\(place.source))")
+        #endif
     }
 
     @ViewBuilder
@@ -239,9 +272,11 @@ struct ReaderView: View {
     private func jump(to blockID: String, _ proxy: ScrollViewProxy) {
         // An explicit jump replaces any opening request, reached or not, and resumes normal
         // tracking at once, so a jump to a block that is already visible (no change reported)
-        // can't leave later scrolling ignored.
+        // can't leave later scrolling ignored. It also becomes the new explicit target.
         pendingBlockID = nil
         didDispatchPending = true
+        explicitTargetID = blockID
+        explicitTargetSeen = visibleBlockIDs.contains(blockID)
         if reduceMotion {
             proxy.scrollTo(blockID, anchor: .top)
         } else {

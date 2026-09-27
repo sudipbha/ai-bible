@@ -44,9 +44,16 @@ final class ReaderJourneyUITests: XCTestCase {
         field.typeText("resume")
         app.element("search.result.fx.ch01.p4").waitToAppear().tap()
 
-        // Bookmark the opened passage.
-        app.element("block.fx.ch01.p4").waitToAppear()
+        // Bookmark the opened passage. First prove it was actually reached: p4 on screen and the
+        // chapter start (p1) not. Then log every p4/p1 match and the toolbar button's target
+        // (its Debug-only accessibility value) just before the tap.
+        let bookmarkDiagnostics = ["block.fx.ch01.p4", "block.fx.ch01.p1", "reader.bookmark"]
+        app.expectHittable("block.fx.ch01.p4", diagnose: bookmarkDiagnostics)
+        app.expectNotHittable("block.fx.ch01.p1", "The chapter start is still on screen after opening p4",
+                              diagnose: bookmarkDiagnostics)
         let bookmark = app.element("reader.bookmark").waitToAppear()
+        app.logDiagnostics("before toolbar bookmark of p4", focus: bookmarkDiagnostics)
+        bookmark.waitFor("value BEGINSWITH 'target fx.ch01.p4 '")
         bookmark.tap()
         bookmark.waitFor("label == 'Remove bookmark'")
 
@@ -132,12 +139,37 @@ final class ReaderJourneyUITests: XCTestCase {
         app.expectNotHittable("block.fx.ch01.f12", "Still showing the requested passage after scrolling back", diagnose: diagnose)
         app.expectNotHittable("block.fx.ch01.p4", "Scrolled back too little to be a distinct place", diagnose: diagnose)
 
+        // In this same reader, bookmarking after reading elsewhere must use the current place,
+        // not the old target (f12) or p4. Normal toolbar button; checked after the relaunch.
+        let bookmarkDiagnose = diagnose + ["reader.bookmark"]
+        let bookmark = app.element("reader.bookmark").waitToAppear()
+        app.logDiagnostics("before toolbar bookmark after scrolling back", focus: bookmarkDiagnose)
+        bookmark.tap()
+        bookmark.waitFor("label == 'Remove bookmark'")
+
         // Relaunch without a reset: the new place is restored, not the original request.
         app.relaunchKeepingData(store: store)
         app.expectHittable("block.fx.ch01.f2", diagnose: diagnose)
         app.expectNotHittable("block.fx.ch01.f12", "Reopened at the originally requested passage, not the new place",
                               diagnose: diagnose)
         app.expectNotHittable("block.fx.ch01.p4", "Reopened near the requested passage, not the new place", diagnose: diagnose)
+
+        // The bookmark saved before the relaunch opens at the earlier place, through the single
+        // saved row (its exact block is whatever was current; the test never observed it).
+        app.backToContents()
+        app.element("contents.bookmarks").waitToAppear().tap()
+        let rows = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'bookmark.'"))
+        rows.firstMatch.waitToAppear()
+        XCTAssertEqual(rows.count, 1, "Exactly one saved bookmark expected")
+        let row = rows.firstMatch
+        XCTAssertNotEqual(row.identifier, "bookmark.fx.ch01.f12", "The bookmark kept the originally requested passage")
+        XCTAssertNotEqual(row.identifier, "bookmark.fx.ch01.p4", "The bookmark is near the requested passage, not the new place")
+        row.tap()
+        app.expectHittable("block.fx.ch01.f2", diagnose: bookmarkDiagnose)
+        app.expectNotHittable("block.fx.ch01.f12", "The saved bookmark opened at the originally requested passage",
+                              diagnose: bookmarkDiagnose)
+        app.expectNotHittable("block.fx.ch01.p4", "The saved bookmark opened near the requested passage",
+                              diagnose: bookmarkDiagnose)
         withExtendedLifetime(storeKit) {}
     }
 }
