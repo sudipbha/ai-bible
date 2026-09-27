@@ -1,0 +1,94 @@
+{
+  "contentVersion": "fixture-2026-09-27.1",
+  "isFixture": true,
+  "title": "AI Bible (test fixture)",
+  "idMap": {
+    "fx.ch02.p-renamed-old": "fx.ch02.p1"
+  },
+  "tools": {
+    "filterChapterID": "fx.ch02",
+    "rolloutChapterID": "fx.ch03",
+    "costChapterID": "fx.ch02",
+    "filterQuestions": [
+      { "id": "fx.filter.q1", "text": "Fixture question 1. Placeholder wording; the real question comes from the approved book edition." },
+      { "id": "fx.filter.q2", "text": "Fixture question 2. Placeholder wording; the real question comes from the approved book edition." },
+      { "id": "fx.filter.q3", "text": "Fixture question 3. Placeholder wording; the real question comes from the approved book edition." },
+      { "id": "fx.filter.q4", "text": "Fixture question 4. Placeholder wording; the real question comes from the approved book edition." },
+      { "id": "fx.filter.q5", "text": "Fixture question 5. Placeholder wording; the real question comes from the approved book edition." }
+    ],
+    "rolloutItems": [
+      { "id": "fx.rollout.s1", "text": "Fixture step 1. Placeholder checklist item." },
+      { "id": "fx.rollout.s2", "text": "Fixture step 2. Placeholder checklist item." },
+      { "id": "fx.rollout.s3", "text": "Fixture step 3. Placeholder checklist item." },
+      { "id": "fx.rollout.s4", "text": "Fixture step 4. Placeholder checklist item." },
+      { "id": "fx.rollout.s5", "text": "Fixture step 5. Placeholder checklist item." },
+      { "id": "fx.rollout.s6", "text": "Fixture step 6. Placeholder checklist item." }
+    ]
+  },
+  "chapters": [
+    {
+      "id": "fx.ch01",
+      "label": "Fixture 1",
+      "title": "Reading comfortably (synthetic)",
+      "access": "free",
+      "blocks": [
+        { "id": "fx.ch01.p1", "kind": "paragraph", "text": "This is **synthetic fixture text** used to test the reader. It is *not* taken from AI Bible for Small Business, its sample chapter or its website." },
+        { "id": "fx.ch01.h1", "kind": "heading", "level": 2, "text": "Short sessions" },
+        { "id": "fx.ch01.p2", "kind": "paragraph", "text": "A paragraph long enough to wrap across several lines at the default text size, so line spacing, reading width and Dynamic Type reflow can be checked on a real iPhone. The quick brown fox jumps over the lazy dog, twice, to fill the line." },
+        { "id": "fx.ch01.p3", "kind": "paragraph", "text": "Inline formatting check: *emphasis*, **strong**, `inline code` and a link to [example.com](https://example.com)." },
+        { "id": "fx.ch01.h2", "kind": "heading", "level": 3, "text": "Accents and search" },
+        { "id": "fx.ch01.p4", "kind": "paragraph", "text": "Search should find café when you type cafe, and Résumé when you type resume." },
+        { "id": "fx.ch01.l1", "kind": "list", "items": ["First list item", "Second list item with **strong** text", "Third list item"] }
+      ]
+    },
+    {
+      "id": "fx.ch02",
+      "label": "Fixture 2",
+      "title": "Tables, links and checklists (synthetic)",
+      "access": "paid",
+      "blocks": [
+        { "id": "fx.ch02.p1", "kind": "paragraph", "text": "Paid fixture chapter. Its first paragraph is the target of an idMap entry so migration can be tested." },
+        { "id": "fx.ch02.h1", "kind": "heading", "level": 2, "text": "A wide table" },
+        {
+          "id": "fx.ch02.t1",
+          "kind": "table",
+          "table": {
+            "caption": "Fictional tools (made-up names and figures)",
+            "header": ["Tool", "Use", "Monthly price", "Setup", "Notes"],
+            "rows": [
+              ["Fixture Tool A", "Drafting replies", "20 (hypothetical)", "90 min", "Invented row"],
+              ["Fixture Tool B", "Scheduling", "0 (hypothetical)", "30 min", "Invented row"],
+              ["Fixture Tool C", "Summaries", "12 (hypothetical)", "45 min", "Invented row"]
+            ]
+          }
+        },
+        { "id": "fx.ch02.p2", "kind": "paragraph", "text": "Long URL wrapping check: [https://example.com/a/very/long/path/that/keeps/going/to/test/wrapping/on/narrow/screens?with=query&and=more](https://example.com/a/very/long/path/that/keeps/going/to/test/wrapping/on/narrow/screens?with=query&and=more)" },
+        { "id": "fx.ch02.h2", "kind": "heading", "level": 2, "text": "A printed checklist" },
+        { "id": "fx.ch02.c1", "kind": "checklist", "items": ["Fixture checklist item one", "Fixture checklist item two", "Fixture checklist item three"] },
+        { "id": "fx.ch02.p3", "kind": "paragraph", "text": "Cost vector used in tests: 20 tasks at 12 manual minutes is 240 minutes; at 8 whole-job minutes plus 90 minutes of setup it is 250 minutes; later periods are 160 minutes. A hypothetical 20 per month is kept separate." }
+      ]
+    },
+    {
+      "id": "fx.ch03",
+      "label": "Fixture 3",
+      "title": "Notes and long passages (synthetic)",
+      "access": "paid",
+      "blocks": [
+        { "id": "fx.ch03.h1", "kind": "heading", "level": 2, "text": "A source note" },
+        { "id": "fx.ch03.p1", "kind": "paragraph", "text": "The next block is a source note. Real notes keep their links and dates from the approved edition." },
+        { "id": "fx.ch03.n1", "kind": "note", "text": "Fixture source note: [example.org](https://example.org), checked on a made-up date for testing only." },
+        { "id": "fx.ch03.h2", "kind": "heading", "level": 2, "text": "Scrolling" },
+        { "id": "fx.ch03.p2", "kind": "paragraph", "text": "Repeat this chapter's content in a larger generated fixture before measuring scrolling on the oldest supported iPhone. This short fixture is not a performance test." }
+      ]
+    },
+    {
+      "id": "fx.appA",
+      "label": "Fixture appendix",
+      "title": "Glossary (synthetic)",
+      "access": "paid",
+      "blocks": [
+        { "id": "fx.appA.p1", "kind": "paragraph", "text": "**Fixture term.** A made-up definition used to test glossary lookups through search." }
+      ]
+    }
+  ]
+}
