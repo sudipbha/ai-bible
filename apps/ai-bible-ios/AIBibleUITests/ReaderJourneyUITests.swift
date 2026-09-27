@@ -1,8 +1,16 @@
 import XCTest
+import StoreKitTest
 
 /// Free reading journey through the rendered app: launch, read, gated navigation, search,
 /// bookmark, and resume after a relaunch. Synthetic fixture content only.
+///
+/// Each test starts with no local StoreKit transactions, so paid chapters are locked because
+/// nothing was bought, not because of whichever test ran before.
 final class ReaderJourneyUITests: XCTestCase {
+    /// Identifiers whose every match is logged if a reader step fails.
+    private let readerDiagnostics = ["block.fx.ch01.p4", "block.fx.ch01.p1", "reader.chapterTitle",
+                                     "search.result.fx.ch01.p4"]
+
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
@@ -10,6 +18,7 @@ final class ReaderJourneyUITests: XCTestCase {
     @MainActor
     func testReadSearchBookmarkAndResumeAfterRelaunch() throws {
         let store = "reader-journey"
+        let storeKit = try LocalStoreKit.cleanSession()
         let app = XCUIApplication()
         app.launch(store: store, reset: true)
 
@@ -49,6 +58,7 @@ final class ReaderJourneyUITests: XCTestCase {
         app.element("contents.bookmarks").tap()
         app.element("bookmark.fx.ch01.p4").waitToAppear().tap()
         app.element("block.fx.ch01.p4").waitToAppear()
+        withExtendedLifetime(storeKit) {}
     }
 
     /// Opening a passage from Search, with no scrolling at all, must still become the place
@@ -58,15 +68,15 @@ final class ReaderJourneyUITests: XCTestCase {
     @MainActor
     func testPassageOpenedWithoutScrollingIsWhereTheAppReopens() throws {
         let store = "reader-resume-no-scroll"
+        let storeKit = try LocalStoreKit.cleanSession()
         let app = XCUIApplication()
         app.launch(store: store, reset: true)
 
         // Fresh store: the reader opens at the chapter start and p4 is not on screen,
         // which proves the fixture is tall enough on this device for the check below.
-        let start = app.element("block.fx.ch01.p1")
-        let passage = app.element("block.fx.ch01.p4")
-        start.waitToAppear().waitFor("isHittable == true")
-        XCTAssertFalse(passage.exists && passage.isHittable, "Fixture too short: p4 is already on screen at launch")
+        app.expectHittable("block.fx.ch01.p1", diagnose: readerDiagnostics)
+        app.expectNotHittable("block.fx.ch01.p4", "Fixture too short: p4 is already on screen at launch",
+                              diagnose: readerDiagnostics)
 
         // Open p4 from Search and don't scroll.
         app.openTab("Search")
@@ -74,11 +84,17 @@ final class ReaderJourneyUITests: XCTestCase {
         field.tap()
         field.typeText("resume")
         app.element("search.result.fx.ch01.p4").waitToAppear().tap()
-        passage.waitToAppear().waitFor("isHittable == true")
+        // One bounded snapshot of the state straight after the Search navigation (navigation
+        // bars, keyboard, every p4/p1 match with frame and hittability), whether or not the
+        // next check passes. Run 36346633175 failed at the next line with no such detail.
+        app.logDiagnostics("after opening p4 from Search", focus: readerDiagnostics)
+        app.expectHittable("block.fx.ch01.p4", diagnose: readerDiagnostics)
 
         // Relaunch without a reset. The Read tab reopens the reader at the saved position.
         app.relaunchKeepingData(store: store)
-        passage.waitToAppear().waitFor("isHittable == true")
-        XCTAssertFalse(start.exists && start.isHittable, "Reopened at the chapter start, not at the opened passage")
+        app.expectHittable("block.fx.ch01.p4", diagnose: readerDiagnostics)
+        app.expectNotHittable("block.fx.ch01.p1", "Reopened at the chapter start, not at the opened passage",
+                              diagnose: readerDiagnostics)
+        withExtendedLifetime(storeKit) {}
     }
 }

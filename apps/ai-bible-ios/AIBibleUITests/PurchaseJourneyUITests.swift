@@ -14,13 +14,16 @@ final class PurchaseJourneyUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Runs even when the test failed part-way, so a simulated purchase made before the
+    /// failure can't leave later tests unlocked.
+    override func tearDown() async throws {
+        try await LocalStoreKit.clearAll()
+        try await super.tearDown()
+    }
+
     @MainActor
     private func makeSession() throws -> SKTestSession {
-        let session = try SKTestSession(configurationFileNamed: "Products")
-        session.resetToDefaultState()
-        session.disableDialogs = true
-        session.clearTransactions()
-        return session
+        try LocalStoreKit.cleanSession()
     }
 
     @MainActor
@@ -54,14 +57,14 @@ final class PurchaseJourneyUITests: XCTestCase {
         // Cost worksheet with the fictional vector: 20 × 12 = 240, 20 × 8 + 90 = 250, later 160.
         app.element("tools.new.cost").waitToAppear().tap()
         app.type("UI test sheet", into: "cost.title")
-        app.type("20", into: "cost.tasks")
-        app.type("12", into: "cost.manual")
-        app.type("8", into: "cost.wholeJob")
-        app.type("90", into: "cost.setup")
+        app.replaceNumber("20", in: "cost.tasks")
+        app.replaceNumber("12", in: "cost.manual")
+        app.replaceNumber("8", in: "cost.wholeJob")
+        app.replaceNumber("90", in: "cost.setup")
         app.element("cost.title").tap()   // moving focus commits the last number
-        app.staticTexts["240 min (4 h)"].waitToAppear()
-        app.staticTexts["250 min (4 h 10 min)"].waitToAppear()
-        app.staticTexts["160 min (2 h 40 min)"].waitToAppear()
+        app.expectText(containing: "Manual, 240 min (4 h)")
+        app.expectText(containing: "First trial period, 250 min (4 h 10 min)")
+        app.expectText(containing: "Later periods, 160 min (2 h 40 min)")
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         // Both records persist across a relaunch, and the purchase is found again.
