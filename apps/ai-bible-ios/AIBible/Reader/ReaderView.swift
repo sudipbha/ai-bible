@@ -37,7 +37,11 @@ struct ReaderView: View {
 
     private func reader(_ chapter: Chapter) -> some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            // One lazy stack is the scroll view's direct content and its scroll target layout,
+            // so `.scrollPosition(id:)` below resolves block IDs against the container it
+            // scrolls. (Before, the lazy stack was nested in a non-lazy VStack between the
+            // header and footer.) Only the blocks carry IDs; header and footer are plain rows.
+            LazyVStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(chapter.label).font(.subheadline).foregroundStyle(.secondary)
                     Text(chapter.title).font(.largeTitle.weight(.bold))
@@ -45,19 +49,19 @@ struct ReaderView: View {
                 .accessibilityElement(children: .combine)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityIdentifier("reader.chapterTitle")
+                .padding(.bottom, 4)   // keeps the earlier 20-point gap before the first block
 
-                LazyVStack(alignment: .leading, spacing: 16) {
-                    ForEach(chapter.blocks) { block in
-                        BlockView(block: block)
-                            .id(block.id)
-                            .accessibilityIdentifier("block.\(block.id)")
-                            .contextMenu { blockMenu(block) }
-                    }
+                ForEach(chapter.blocks) { block in
+                    BlockView(block: block)
+                        .id(block.id)
+                        .accessibilityIdentifier("block.\(block.id)")
+                        .contextMenu { blockMenu(block) }
                 }
-                .scrollTargetLayout()
 
                 ChapterFooter(chapter: chapter, open: open)
+                    .padding(.top, 4)   // keeps the earlier 20-point gap after the last block
             }
+            .scrollTargetLayout()
             // Keeps lines near a comfortable reading length on wide screens.
             .frame(maxWidth: 680, alignment: .leading)
             .padding(.horizontal, 20)

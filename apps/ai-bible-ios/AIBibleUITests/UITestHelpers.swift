@@ -30,9 +30,12 @@ enum LocalStoreKit {
 
     /// Removes every local transaction. Called from tearDown so a test that fails after a
     /// simulated purchase can't leave the next test unlocked.
-    static func clearAll() throws {
+    /// Returns how many transactions remain afterwards (expected 0).
+    @discardableResult
+    static func clearAll() throws -> Int {
         let session = try SKTestSession(configurationFileNamed: "Products")
         session.clearTransactions()
+        return session.allTransactions().count
     }
 }
 
@@ -102,6 +105,33 @@ extension XCUIApplication {
         }
     }
 
+    /// Drags the visible content up by about 60% of its height. The drag stays inside the
+    /// region between the navigation bar and whichever is higher of the tab bar and the
+    /// keyboard, so it moves the Form or scroll view and never starts on the bars or the
+    /// keyboard. A plain `app.swipeUp()`
+    /// starts at the window's centre and did not reach the Filter summary in run 36350115237.
+    func dragContentUp() {
+        let window = windows.firstMatch.frame
+        var top = window.minY
+        var bottom = window.maxY
+        let bar = navigationBars.firstMatch
+        if bar.exists { top = max(top, bar.frame.maxY) }
+        let tabs = tabBars.firstMatch
+        if tabs.exists { bottom = min(bottom, tabs.frame.minY) }
+        let keyboard = keyboards.firstMatch
+        if keyboard.exists { bottom = min(bottom, keyboard.frame.minY) }
+        let height = bottom - top
+        guard height > 40 else {
+            logDiagnostics("no content region to drag (top \(top), bottom \(bottom))")
+            XCTFail("No content region to drag")
+            return
+        }
+        let origin = coordinate(withNormalizedOffset: .zero)
+        let start = origin.withOffset(CGVector(dx: window.midX, dy: top + height * 0.8))
+        let end = origin.withOffset(CGVector(dx: window.midX, dy: top + height * 0.2))
+        start.press(forDuration: 0.1, thenDragTo: end)
+    }
+
     /// Swipes up at most `maxSwipes` times until the element exists and is hittable.
     /// Lists and Forms create rows lazily, so an element further down may not exist yet.
     @discardableResult
@@ -109,7 +139,7 @@ extension XCUIApplication {
         let target = element(identifier)
         var swipes = 0
         while !(target.exists && target.isHittable) && swipes < maxSwipes {
-            swipeUp()
+            dragContentUp()
             swipes += 1
         }
         if !(target.exists && target.isHittable) {
@@ -127,7 +157,7 @@ extension XCUIApplication {
         let match = staticTexts.matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
         var swipes = 0
         while !match.waitForExistence(timeout: 2) && swipes < maxSwipes {
-            swipeUp()
+            dragContentUp()
             swipes += 1
         }
         if !match.exists {
@@ -138,30 +168,46 @@ extension XCUIApplication {
 
     /// Replaces the number in a trailing-aligned numeric field and reads it back.
     ///
-    /// The field sits inside `LabeledContent`. In run 36346633175 the `cost.tasks` field's
-    /// accessibility frame was {{32, 181.5}, {311, 46.5}} and its wrapped label occupied the
-    /// top 20.5 points of that same frame, so the earlier tap at the frame's centre could miss
-    /// the editor. This taps once in the lower trailing part of the frame, below the label,
-    /// where the trailing-aligned number is drawn. `typeText` on the field itself then fails
-    /// the test explicitly if that field did not take focus; there is no retry. One bounded
-    /// line with the field's state is logged first, so it is in the log even if typing aborts.
+    /// Run 36350115237 showed the tap at (0.95, 0.8) focuses the field (typing reached it),
+    /// but the value became "200" instead of "20". The caret position
+    /// wasn't observed, so this selects the whole current text with the system edit menu's
+    /// Select All and types over the selection. If the menu doesn't offer Select All after
+    /// two bounded attempts (a second tap, then a press), the test fails with diagnostics;
+    /// it never deletes by length at an unknown caret position.
     func replaceNumber(_ text: String, in identifier: String, file: StaticString = #filePath, line: UInt = #line) {
         let field = scrollUntilHittable(identifier)
-        field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.8)).tap()
+        let point = field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.8))
+        point.tap()
         let keyboard = keyboards.firstMatch
         if !keyboard.waitForExistence(timeout: 5) {
             logDiagnostics("no keyboard after tapping \(identifier)", focus: [identifier])
             XCTFail("No keyboard after tapping \(identifier)", file: file, line: line)
             return
         }
-        let current = field.value as? String ?? ""
-        XCTContext.runActivity(named: "AIBIBLE-DIAG before typing into \(identifier): frame \(field.frame) "
-                               + "hittable \(field.isHittable) value '\(current.prefix(40))' keyboard \(keyboard.frame)") { _ in }
-        // Replace rather than append: delete the characters currently shown, then type.
-        if !current.isEmpty {
-            field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: current.count))
+        let before = field.value as? String ?? ""
+        XCTContext.runActivity(named: "AIBIBLE-DIAG before replacing \(identifier): frame \(field.frame) "
+                               + "value '\(before.prefix(40))' keyboard \(keyboard.frame)") { _ in }
+        if !before.isEmpty {
+            // Matched by label, not element type: depending on the iOS version the edit menu's
+            // entries are exposed as menu items or as buttons.
+            let selectAll = descendants(matching: .any).matching(NSPredicate(format: "label == 'Select All'")).firstMatch
+            point.tap()   // a tap on the focused field shows the edit menu
+            if !selectAll.waitForExistence(timeout: 3) {
+                point.press(forDuration: 1.0)
+            }
+            guard selectAll.waitForExistence(timeout: 3) else {
+                let editLabels = NSPredicate(format: "label IN {'Select', 'Select All', 'Paste', 'Copy', 'Cut', 'AutoFill'}")
+                let offered = descendants(matching: .any).matching(editLabels).allElementsBoundByIndex
+                    .prefix(6).map { "\($0.label) (type \($0.elementType.rawValue))" }.joined(separator: ", ")
+                logDiagnostics("no Select All for \(identifier); menu items: [\(offered)]", focus: [identifier])
+                XCTFail("No Select All menu item for \(identifier)", file: file, line: line)
+                return
+            }
+            selectAll.tap()
         }
         field.typeText(text)
+        let after = field.value as? String ?? ""
+        XCTContext.runActivity(named: "AIBIBLE-DIAG after replacing \(identifier): value '\(after.prefix(40))'") { _ in }
         field.waitFor("value == '\(text)'", 5, file: file, line: line)
     }
 
@@ -181,6 +227,13 @@ extension XCUIApplication {
         lines.append("search fields: \(searchFields.count); sheets: \(sheets.count)")
         let scrollers = scrollViews.allElementsBoundByIndex.prefix(4)
         lines.append("scroll views (\(scrollViews.count)): " + scrollers.map { "\($0.frame)" }.joined(separator: "; "))
+        let collections = collectionViews.allElementsBoundByIndex.prefix(4)
+        lines.append("collection views (\(collectionViews.count)): " + collections.map { "\($0.frame)" }.joined(separator: "; "))
+        let texts = staticTexts.allElementsBoundByIndex
+        lines.append("static texts: \(texts.count); last 6 (label, frame):")
+        for text in texts.suffix(6) {
+            lines.append("  '\(text.label.prefix(60))' \(text.frame)")
+        }
         for identifier in identifiers.prefix(6) {
             let matches = descendants(matching: .any).matching(identifier: identifier)
             let all = matches.allElementsBoundByIndex

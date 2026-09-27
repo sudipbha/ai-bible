@@ -15,9 +15,15 @@ final class PurchaseJourneyUITests: XCTestCase {
     }
 
     /// Runs even when the test failed part-way, so a simulated purchase made before the
-    /// failure can't leave later tests unlocked.
+    /// failure can't leave later tests unlocked. Marked `@MainActor` as Apple's XCTest
+    /// documentation describes for async set-up and tear-down that needs the main actor,
+    /// because `LocalStoreKit` is main-actor isolated. The begin and end lines are receipts
+    /// in the log showing whether clean-up ran and what was left.
+    @MainActor
     override func tearDown() async throws {
-        try await LocalStoreKit.clearAll()
+        XCTContext.runActivity(named: "AIBIBLE-DIAG teardown: clearing local StoreKit transactions") { _ in }
+        let remaining = try LocalStoreKit.clearAll()
+        XCTContext.runActivity(named: "AIBIBLE-DIAG teardown: done, \(remaining) local transaction(s) remain") { _ in }
         try await super.tearDown()
     }
 
