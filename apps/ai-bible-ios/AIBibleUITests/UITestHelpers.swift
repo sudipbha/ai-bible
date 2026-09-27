@@ -220,36 +220,114 @@ extension XCUIApplication {
         field.waitFor("value == '\(text)'", 5, file: file, line: line)
     }
 
-    /// True when the whole field lies between the navigation bar and a line 48 points above
-    /// the current keyboard's top (the margin covers the suggestion bar that can sit just
-    /// above the reported keyboard frame), or above the tab bar when there is no keyboard.
-    func isAboveKeyboard(_ field: XCUIElement) -> Bool {
-        guard field.exists else { return false }
-        let frame = field.frame
-        var top = windows.firstMatch.frame.minY
+    /// The usable content band for a field: from the navigation bar's bottom edge down to a line
+    /// 48 points above the current keyboard's top (the margin covers the suggestion bar that can
+    /// sit just above the reported keyboard frame), or to the tab bar when there is no keyboard.
+    func fieldBand() -> (top: CGFloat, bottom: CGFloat) {
+        let window = windows.firstMatch.frame
+        var top = window.minY
         let bar = navigationBars.firstMatch
         if bar.exists { top = max(top, bar.frame.maxY) }
-        var bottom = windows.firstMatch.frame.maxY
+        var bottom = window.maxY
         let tabs = tabBars.firstMatch
         if tabs.exists { bottom = min(bottom, tabs.frame.minY) }
         let keyboard = keyboards.firstMatch
         if keyboard.exists { bottom = min(bottom, keyboard.frame.minY - 48) }
-        return frame.minY >= top && frame.maxY <= bottom
+        return (top, bottom)
     }
 
-    /// Drags the content (at most 4 times) until the field is fully above the keyboard, then
-    /// re-checks. Fails with the field and keyboard geometry if it never gets there.
+    /// True when the whole field lies inside `fieldBand()`.
+    func isAboveKeyboard(_ field: XCUIElement) -> Bool {
+        guard field.exists else { return false }
+        let frame = field.frame
+        let band = fieldBand()
+        return frame.minY >= band.top && frame.maxY <= band.bottom
+    }
+
+    /// Moves the content by `distance` points (positive moves it up, negative down) with a slow
+    /// drag that holds still at the end, so the scroll view doesn't keep gliding after release.
+    /// The drag starts and ends inside the content band. Distances are clamped to 20...200 points
+    /// and to what fits in the band. Returns the movement actually requested (same sign
+    /// convention), or 0 after failing the test if the band is too small for any valid drag.
+    @discardableResult
+    func dragContent(by distance: CGFloat, file: StaticString = #filePath, line: UInt = #line) -> CGFloat {
+        let band = fieldBand()
+        let usable = band.bottom - band.top - 8   // 4-point margin inside each edge
+        guard usable >= 20 else {
+            logDiagnostics("content band too small to drag: \(band.top)...\(band.bottom)")
+            XCTFail("Content band \(band.top)...\(band.bottom) is too small for a drag", file: file, line: line)
+            return 0
+        }
+        let window = windows.firstMatch.frame
+        let magnitude = min(max(abs(distance), 20), 200, usable)
+        let step = distance >= 0 ? magnitude : -magnitude
+        let middle = (band.top + band.bottom) / 2
+        let startY = min(max(middle + step / 2, band.top + 4), band.bottom - 4)
+        let endY = min(max(startY - step, band.top + 4), band.bottom - 4)
+        let origin = coordinate(withNormalizedOffset: .zero)
+        origin.withOffset(CGVector(dx: window.midX, dy: startY))
+            .press(forDuration: 0.1,
+                   thenDragTo: origin.withOffset(CGVector(dx: window.midX, dy: endY)),
+                   withVelocity: .slow,
+                   thenHoldForDuration: 0.3)
+        return startY - endY
+    }
+
+    /// Brings the whole field into `fieldBand()` with at most 5 small, calculated drags, re-reading
+    /// geometry after every drag.
+    ///
+    /// Sign convention: a positive movement moves the content up (a field below the band rises);
+    /// a negative one moves it down. While the field is visible, each step moves it by its overlap
+    /// with the band plus 12 points. If the field disappears from the list (it was moved past the
+    /// visible area), the first recovery step reverses the last movement made while it was
+    /// visible, and later recovery steps keep that same reversed direction, so recovery always
+    /// heads back toward where it was last seen and never oscillates or continues away. Each step
+    /// is logged (field or last seen frame, band, keyboard, movement). Fails explicitly if the band
+    /// is too small, the field is taller than the band, or the field can't be brought into it.
     func revealAboveKeyboard(_ field: XCUIElement, _ identifier: String,
                              file: StaticString = #filePath, line: UInt = #line) -> Bool {
-        var drags = 0
-        while !isAboveKeyboard(field) && drags < 4 {
-            dragContentUp()
-            drags += 1
+        var lastSeen: CGRect?
+        var lastMovementWhileSeen: CGFloat = 0
+        var recoveryMovement: CGFloat?
+        for step in 0..<5 {
+            let band = fieldBand()
+            let keyboard = keyboards.firstMatch
+            let keyboardText = keyboard.exists ? "\(keyboard.frame)" : "none"
+            let bandText = "band \(band.top)...\(band.bottom) keyboard \(keyboardText)"
+            let movement: CGFloat
+            if field.exists {
+                let frame = field.frame
+                lastSeen = frame
+                recoveryMovement = nil
+                if frame.height > band.bottom - band.top {
+                    logDiagnostics("\(identifier) (height \(frame.height)) is taller than the \(bandText)", focus: [identifier])
+                    XCTFail("\(identifier) is taller than the space above the keyboard", file: file, line: line)
+                    return false
+                }
+                if frame.minY >= band.top && frame.maxY <= band.bottom {
+                    XCTContext.runActivity(named: "AIBIBLE-DIAG reveal \(identifier) step \(step): in band, field \(frame) \(bandText)") { _ in }
+                    return true
+                }
+                // Below the band: move content up by the overlap; above it: move content down.
+                movement = frame.maxY > band.bottom ? frame.maxY - band.bottom + 12 : frame.minY - band.top - 12
+                XCTContext.runActivity(named: "AIBIBLE-DIAG reveal \(identifier) step \(step): field \(frame) \(bandText) move \(movement)") { _ in }
+                lastMovementWhileSeen = dragContent(by: movement, file: file, line: line)
+                if lastMovementWhileSeen == 0 { return false }
+            } else if let seen = lastSeen, lastMovementWhileSeen != 0 {
+                // Gone after the last movement: reverse it once, then keep going the same way.
+                if recoveryMovement == nil { recoveryMovement = -lastMovementWhileSeen }
+                movement = recoveryMovement ?? 0
+                XCTContext.runActivity(named: "AIBIBLE-DIAG reveal \(identifier) step \(step): missing, last seen \(seen) "
+                                       + "after move \(lastMovementWhileSeen), \(bandText) recovery move \(movement)") { _ in }
+                if dragContent(by: movement, file: file, line: line) == 0 { return false }
+            } else {
+                break   // never seen, or gone without any movement from here: nothing to reverse
+            }
         }
         if isAboveKeyboard(field) { return true }
         let keyboard = keyboards.firstMatch
-        logDiagnostics("\(identifier) not above the keyboard after \(drags) drags: field "
-                       + "\(field.exists ? "\(field.frame)" : "missing") keyboard "
+        logDiagnostics("\(identifier) not in the band above the keyboard after 5 steps: field "
+                       + "\(field.exists ? "\(field.frame)" : "missing, last seen \(String(describing: lastSeen))") keyboard "
                        + "\(keyboard.exists ? "\(keyboard.frame)" : "none")", focus: [identifier])
         XCTFail("\(identifier) could not be brought above the keyboard", file: file, line: line)
         return false

@@ -21,6 +21,11 @@ struct ReaderView: View {
     /// most once for this reader. Dispatch is not arrival: only acknowledgement clears the
     /// pending block.
     @State private var didDispatchPending = false
+    /// Whether any part of the requested block is inside the scroll view's visible area. A
+    /// block near the end of a chapter can be on screen without ever becoming the top block
+    /// (the scroll view stops at the bottom), so reaching the requested place is judged by
+    /// visibility, not only by the top-block report.
+    @State private var requestedBlockVisible = false
     /// The top visible block, as reported by the scroll view. Observed only: the reader
     /// scrolls through the `ScrollViewReader` proxy, never by writing this value.
     @State private var visibleBlockID: String?
@@ -65,10 +70,13 @@ struct ReaderView: View {
                     .padding(.bottom, 4)   // keeps the earlier 20-point gap before the first block
 
                     ForEach(chapter.blocks) { block in
-                        BlockView(block: block)
-                            .id(block.id)
-                            .accessibilityIdentifier("block.\(block.id)")
-                            .contextMenu { blockMenu(block) }
+                        tracksVisibility(
+                            of: block,
+                            BlockView(block: block)
+                                .id(block.id)
+                                .accessibilityIdentifier("block.\(block.id)")
+                                .contextMenu { blockMenu(block) }
+                        )
                     }
 
                     ChapterFooter(chapter: chapter, open: open)
@@ -125,10 +133,11 @@ struct ReaderView: View {
             .onChange(of: visibleBlockID) { _, id in
                 guard let id else { return }
                 if let pending = pendingBlockID {
-                    // Until the scroll view reports the requested block, its reports are
-                    // provisional and must not replace the saved place.
+                    // Until the requested block is reached (reported at the top, or seen on
+                    // screen after the scroll), reports are provisional and must not replace
+                    // the saved place.
                     guard id == pending else { return }
-                    pendingBlockID = nil
+                    acknowledgePending("reported at top")
                 }
                 model.updatePosition(blockID: id)
             }
@@ -150,10 +159,46 @@ struct ReaderView: View {
             return
         }
         proxy.scrollTo(target, anchor: .top)
+        // Already on screen before the scroll (no visibility change will follow): reached.
+        if requestedBlockVisible { acknowledgePending("visible at dispatch") }
         #if DEBUG
-        // Dispatch evidence only; arrival is shown by the scroll view reporting the block.
+        // Dispatch evidence only; arrival is shown by acknowledgement.
         Logger(subsystem: "AIBible", category: "reader")
             .notice("AIBIBLE-READER dispatched opening block \(target, privacy: .public) at viewport height \(Double(self.viewportHeight), privacy: .public)")
+        #endif
+    }
+
+    /// Adds visibility tracking to the route's requested block only (the route never changes
+    /// for this view, so other blocks are left exactly as they were). Uses the documented
+    /// `.scrollView` coordinate space and `bounds(of:)` (iOS 17) to test whether any part of
+    /// the block is inside the scroll view's visible area.
+    @ViewBuilder
+    private func tracksVisibility(of block: Block, _ content: some View) -> some View {
+        if block.id == position.blockID {
+            content.onGeometryChange(for: Bool.self) { geometry in
+                guard let bounds = geometry.bounds(of: .scrollView) else { return false }
+                let frame = geometry.frame(in: .scrollView)
+                return frame.intersects(CGRect(origin: .zero, size: bounds.size))
+            } action: { visible in
+                requestedBlockVisible = visible
+                if visible, didDispatchPending, pendingBlockID == block.id {
+                    acknowledgePending("visible after scroll")
+                }
+            }
+        } else {
+            content
+        }
+    }
+
+    /// The requested block has been reached: stop treating reports as provisional. Its place is
+    /// saved now; later top-block reports (including the user's own scrolling) are saved normally.
+    private func acknowledgePending(_ reason: String) {
+        guard let target = pendingBlockID else { return }
+        pendingBlockID = nil
+        model.updatePosition(blockID: target)
+        #if DEBUG
+        Logger(subsystem: "AIBible", category: "reader")
+            .notice("AIBIBLE-READER acknowledged opening block \(target, privacy: .public): \(reason, privacy: .public)")
         #endif
     }
 

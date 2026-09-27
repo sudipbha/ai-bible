@@ -97,4 +97,47 @@ final class ReaderJourneyUITests: XCTestCase {
                               diagnose: readerDiagnostics)
         withExtendedLifetime(storeKit) {}
     }
+
+    /// A passage near the end of a chapter can't be scrolled to the top of the screen (the
+    /// scroll view stops at the bottom), so the reader never reports it as the top block. Open
+    /// such a passage (fx.ch01.f12, the last block) from Search, scroll back by hand to an
+    /// earlier, distinct passage (fx.ch01.f2), and relaunch: the reader must reopen at the new
+    /// place, not at the originally requested passage. Synthetic fixture content only.
+    @MainActor
+    func testManualScrollAfterOpeningNearBottomPassageIsWhereTheAppReopens() throws {
+        let store = "reader-bottom-target"
+        let storeKit = try LocalStoreKit.cleanSession()
+        let app = XCUIApplication()
+        app.launch(store: store, reset: true)
+        let diagnose = ["block.fx.ch01.f12", "block.fx.ch01.f2", "block.fx.ch01.p4", "reader.chapterTitle"]
+
+        // "final" occurs only in fx.ch01.f12.
+        app.openTab("Search")
+        let field = app.searchFields.firstMatch.waitToAppear()
+        field.tap()
+        field.typeText("final")
+        app.element("search.result.fx.ch01.f12").waitToAppear().tap()
+        app.expectHittable("block.fx.ch01.f12", diagnose: diagnose)
+
+        // Scroll back by hand (bounded, slow drags) until the earlier passage is on screen and
+        // the requested one is not.
+        let earlier = app.element("block.fx.ch01.f2")
+        let requested = app.element("block.fx.ch01.f12")
+        var drags = 0
+        while !(earlier.exists && earlier.isHittable && !(requested.exists && requested.isHittable)) && drags < 14 {
+            app.dragContent(by: -200)
+            drags += 1
+        }
+        app.expectHittable("block.fx.ch01.f2", diagnose: diagnose)
+        app.expectNotHittable("block.fx.ch01.f12", "Still showing the requested passage after scrolling back", diagnose: diagnose)
+        app.expectNotHittable("block.fx.ch01.p4", "Scrolled back too little to be a distinct place", diagnose: diagnose)
+
+        // Relaunch without a reset: the new place is restored, not the original request.
+        app.relaunchKeepingData(store: store)
+        app.expectHittable("block.fx.ch01.f2", diagnose: diagnose)
+        app.expectNotHittable("block.fx.ch01.f12", "Reopened at the originally requested passage, not the new place",
+                              diagnose: diagnose)
+        app.expectNotHittable("block.fx.ch01.p4", "Reopened near the requested passage, not the new place", diagnose: diagnose)
+        withExtendedLifetime(storeKit) {}
+    }
 }

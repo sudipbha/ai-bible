@@ -195,6 +195,23 @@ final class EntitlementModelTests: XCTestCase {
     }
 
     @MainActor
+    func testUpdatesListenerStopsWhenModelIsReleased() async {
+        let provider = FakePurchaseProvider()
+        var model: EntitlementModel? = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model?.start()
+        weak var released = model
+        model = nil
+        XCTAssertNil(released, "Nothing else should keep the model alive")
+
+        // Without cancellation the listener would keep iterating the stream forever.
+        let deadline = ContinuousClock.now + .seconds(5)
+        while !provider.updatesTerminated && ContinuousClock.now < deadline {
+            try? await Task.sleep(for: .milliseconds(20))
+        }
+        XCTAssertTrue(provider.updatesTerminated, "The transaction-updates listener must stop when its model is released")
+    }
+
+    @MainActor
     func testRevocationArrivingWhileRunningLocks() async {
         let provider = FakePurchaseProvider()
         provider.entitlement = .active

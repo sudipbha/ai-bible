@@ -122,6 +122,14 @@ final class EntitlementModel {
         self.now = now
     }
 
+    /// The listener task only holds the model weakly, but it keeps iterating the updates
+    /// stream (which never ends by itself) after the model is gone. Cancelling it ends that
+    /// iteration, which terminates the stream and, for StoreKit, its inner `Transaction.updates`
+    /// task.
+    deinit {
+        updatesTask?.cancel()
+    }
+
     /// Call once at launch: listen for transaction updates, then re-read entitlements.
     func start() async {
         if updatesTask == nil {

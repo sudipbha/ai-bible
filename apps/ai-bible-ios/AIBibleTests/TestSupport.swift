@@ -18,6 +18,22 @@ final class FakePurchaseProvider: PurchaseProvider, @unchecked Sendable {
     private(set) var priceCalls = 0
 
     private var continuation: AsyncStream<EntitlementSnapshot>.Continuation?
+    /// True once the consumer of `transactionUpdates()` stops listening (the stream terminates).
+    /// Written from the stream's `onTermination` callback and read by main-actor tests, so it is
+    /// guarded by a lock.
+    var updatesTerminated: Bool {
+        terminationLock.lock()
+        defer { terminationLock.unlock() }
+        return terminated
+    }
+    private let terminationLock = NSLock()
+    private var terminated = false
+
+    private func markUpdatesTerminated() {
+        terminationLock.lock()
+        terminated = true
+        terminationLock.unlock()
+    }
 
     func currentEntitlement() async throws -> EntitlementSnapshot {
         if entitlementFails { throw Offline() }
@@ -45,6 +61,8 @@ final class FakePurchaseProvider: PurchaseProvider, @unchecked Sendable {
     func transactionUpdates() -> AsyncStream<EntitlementSnapshot> {
         AsyncStream { continuation in
             self.continuation = continuation
+            // Weak, so the continuation doesn't keep the fake alive.
+            continuation.onTermination = { [weak self] _ in self?.markUpdatesTerminated() }
         }
     }
 

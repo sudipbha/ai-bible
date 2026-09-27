@@ -33,6 +33,50 @@ final class StoreKitIntegrationTests: XCTestCase {
         return await condition()
     }
 
+    /// Waits (bounded) until the cleared local environment has settled: no transactions and
+    /// the real provider reporting no entitlement. Clearing is immediate on the session but the
+    /// provider reads `Transaction.currentEntitlements`, so a purchase from the previous test
+    /// could otherwise still be reported. Fails with the observed state if it never settles.
+    @MainActor
+    private func waitForCleanEnvironment(_ session: SKTestSession, file: StaticString = #filePath, line: UInt = #line) async {
+        XCTAssertTrue(session.allTransactions().isEmpty,
+                      "\(session.allTransactions().count) local transaction(s) remain after clearing", file: file, line: line)
+        var last: EntitlementSnapshot?
+        let settled = await eventually {
+            last = try? await provider.currentEntitlement()
+            return last == EntitlementSnapshot.none
+        }
+        XCTAssertTrue(settled, "The provider still reports \(String(describing: last)) after clearing", file: file, line: line)
+    }
+
+    /// A model started in the settled clean environment, with the precondition every purchase
+    /// test relies on checked explicitly: locked, price loaded and a purchase allowed. Without
+    /// this, `buy()` returns silently when stale access is already full.
+    @MainActor
+    private func startedCleanModel(_ session: SKTestSession, file: StaticString = #filePath, line: UInt = #line) async -> EntitlementModel {
+        await waitForCleanEnvironment(session, file: file, line: line)
+        let model = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model.start()
+        XCTAssertEqual(model.state.access, .sample, "Access before the purchase", file: file, line: line)
+        XCTAssertTrue(model.canStartPurchase,
+                      "A purchase can't start: price \(String(describing: model.displayPrice)), flow \(model.flow)",
+                      file: file, line: line)
+        return model
+    }
+
+    /// The local transaction for this app's product, waited for (bounded): delivery to the
+    /// test session is asynchronous.
+    @MainActor
+    private func productTransaction(_ session: SKTestSession, file: StaticString = #filePath, line: UInt = #line) async throws -> SKTestTransaction {
+        var found: SKTestTransaction?
+        _ = await eventually {
+            found = session.allTransactions().first { $0.productIdentifier == AppConfig.fullBookProductID }
+            return found != nil
+        }
+        return try XCTUnwrap(found, "No local transaction for \(AppConfig.fullBookProductID); session has "
+                             + "\(session.allTransactions().map(\.productIdentifier))", file: file, line: line)
+    }
+
     @MainActor
     func testLocalProductLoadsALocalizedPrice() async throws {
         _ = try makeSession()
@@ -44,6 +88,7 @@ final class StoreKitIntegrationTests: XCTestCase {
     @MainActor
     func testPurchaseGrantsVerifiedEntitlementFoundAgainAfterReinstall() async throws {
         let session = try makeSession()
+        await waitForCleanEnvironment(session)
         let before = try await provider.currentEntitlement()
         XCTAssertEqual(before, .none)
 
@@ -62,12 +107,12 @@ final class StoreKitIntegrationTests: XCTestCase {
     @MainActor
     func testRefundLocksPaidContentAgain() async throws {
         let session = try makeSession()
-        let model = EntitlementModel(provider: provider, cached: EntitlementState())
-        await model.start()
+        let model = await startedCleanModel(session)
         await model.buy()
         XCTAssertEqual(model.state.access, .full)
 
-        let transaction = try XCTUnwrap(session.allTransactions().first)
+        // Refund the transaction this purchase actually created.
+        let transaction = try await productTransaction(session)
         try session.refundTransaction(identifier: transaction.identifier)
 
         let locked = await eventually {
@@ -81,14 +126,13 @@ final class StoreKitIntegrationTests: XCTestCase {
     func testAskToBuyIsPendingUntilApproved() async throws {
         let session = try makeSession()
         session.askToBuyEnabled = true
-        let model = EntitlementModel(provider: provider, cached: EntitlementState())
-        await model.start()
+        let model = await startedCleanModel(session)
 
         await model.buy()
         XCTAssertTrue(model.state.awaitingApproval)
         XCTAssertEqual(model.state.access, .sample)
 
-        let pending = try XCTUnwrap(session.allTransactions().first)
+        let pending = try await productTransaction(session)
         try session.approveAskToBuyTransaction(identifier: pending.identifier)
 
         let unlocked = await eventually { model.state.access == .full }
@@ -100,8 +144,7 @@ final class StoreKitIntegrationTests: XCTestCase {
     func testFailedTransactionStaysLockedWithMessage() async throws {
         let session = try makeSession()
         session.failTransactionsEnabled = true
-        let model = EntitlementModel(provider: provider, cached: EntitlementState())
-        await model.start()
+        let model = await startedCleanModel(session)
 
         await model.buy()
 
