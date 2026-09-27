@@ -53,7 +53,9 @@ final class FilterToolUITests: XCTestCase {
         app.navigationBars.buttons.element(boundBy: 0).tap()
         let second = app.staticTexts["Second tool"].waitToAppear()
         app.openTab("Settings")
-        app.element("settings.deleteData").waitToAppear().tap()
+        // The Delete My Data row is below the first screen of the Settings list and isn't
+        // created until scrolled to (run 36352200784), so scroll to it (bounded) first.
+        app.scrollUntilHittable("settings.deleteData").tap()
         app.buttons["Delete My Data"].firstMatch.waitToAppear().tap()
         app.relaunchKeepingData(store: store)
         app.openTab("Tools")

@@ -30,9 +30,11 @@ enum LocalStoreKit {
 
     /// Removes every local transaction. Called from tearDown so a test that fails after a
     /// simulated purchase can't leave the next test unlocked.
-    /// Returns how many transactions remain afterwards (expected 0).
+    /// Returns how many transactions remain afterwards (expected 0). `nonisolated` so the
+    /// synchronous `tearDownWithError()` can call it without an actor hop: it uses only a
+    /// fresh, method-local `SKTestSession` and touches no UI.
     @discardableResult
-    static func clearAll() throws -> Int {
+    nonisolated static func clearAll() throws -> Int {
         let session = try SKTestSession(configurationFileNamed: "Products")
         session.clearTransactions()
         return session.allTransactions().count
@@ -176,14 +178,20 @@ extension XCUIApplication {
     /// it never deletes by length at an unknown caret position.
     func replaceNumber(_ text: String, in identifier: String, file: StaticString = #filePath, line: UInt = #line) {
         let field = scrollUntilHittable(identifier)
-        let point = field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.8))
-        point.tap()
+        // Run 36352200784: `cost.setup` was hittable, but its tap point (y 448.2) lay under
+        // the keyboard (top 446), so the tap and press went to the keyboard. Keep the whole
+        // field above the current keyboard, re-checking after the keyboard appears.
+        guard revealAboveKeyboard(field, identifier, file: file, line: line) else { return }
+        field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.8)).tap()
         let keyboard = keyboards.firstMatch
         if !keyboard.waitForExistence(timeout: 5) {
             logDiagnostics("no keyboard after tapping \(identifier)", focus: [identifier])
             XCTFail("No keyboard after tapping \(identifier)", file: file, line: line)
             return
         }
+        guard revealAboveKeyboard(field, identifier, file: file, line: line) else { return }
+        // Recomputed from the field's current frame after any scrolling above.
+        let point = field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.8))
         let before = field.value as? String ?? ""
         XCTContext.runActivity(named: "AIBIBLE-DIAG before replacing \(identifier): frame \(field.frame) "
                                + "value '\(before.prefix(40))' keyboard \(keyboard.frame)") { _ in }
@@ -193,7 +201,8 @@ extension XCUIApplication {
             let selectAll = descendants(matching: .any).matching(NSPredicate(format: "label == 'Select All'")).firstMatch
             point.tap()   // a tap on the focused field shows the edit menu
             if !selectAll.waitForExistence(timeout: 3) {
-                point.press(forDuration: 1.0)
+                guard revealAboveKeyboard(field, identifier, file: file, line: line) else { return }
+                field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.8)).press(forDuration: 1.0)
             }
             guard selectAll.waitForExistence(timeout: 3) else {
                 let editLabels = NSPredicate(format: "label IN {'Select', 'Select All', 'Paste', 'Copy', 'Cut', 'AutoFill'}")
@@ -209,6 +218,41 @@ extension XCUIApplication {
         let after = field.value as? String ?? ""
         XCTContext.runActivity(named: "AIBIBLE-DIAG after replacing \(identifier): value '\(after.prefix(40))'") { _ in }
         field.waitFor("value == '\(text)'", 5, file: file, line: line)
+    }
+
+    /// True when the whole field lies between the navigation bar and a line 48 points above
+    /// the current keyboard's top (the margin covers the suggestion bar that can sit just
+    /// above the reported keyboard frame), or above the tab bar when there is no keyboard.
+    func isAboveKeyboard(_ field: XCUIElement) -> Bool {
+        guard field.exists else { return false }
+        let frame = field.frame
+        var top = windows.firstMatch.frame.minY
+        let bar = navigationBars.firstMatch
+        if bar.exists { top = max(top, bar.frame.maxY) }
+        var bottom = windows.firstMatch.frame.maxY
+        let tabs = tabBars.firstMatch
+        if tabs.exists { bottom = min(bottom, tabs.frame.minY) }
+        let keyboard = keyboards.firstMatch
+        if keyboard.exists { bottom = min(bottom, keyboard.frame.minY - 48) }
+        return frame.minY >= top && frame.maxY <= bottom
+    }
+
+    /// Drags the content (at most 4 times) until the field is fully above the keyboard, then
+    /// re-checks. Fails with the field and keyboard geometry if it never gets there.
+    func revealAboveKeyboard(_ field: XCUIElement, _ identifier: String,
+                             file: StaticString = #filePath, line: UInt = #line) -> Bool {
+        var drags = 0
+        while !isAboveKeyboard(field) && drags < 4 {
+            dragContentUp()
+            drags += 1
+        }
+        if isAboveKeyboard(field) { return true }
+        let keyboard = keyboards.firstMatch
+        logDiagnostics("\(identifier) not above the keyboard after \(drags) drags: field "
+                       + "\(field.exists ? "\(field.frame)" : "missing") keyboard "
+                       + "\(keyboard.exists ? "\(keyboard.frame)" : "none")", focus: [identifier])
+        XCTFail("\(identifier) could not be brought above the keyboard", file: file, line: line)
+        return false
     }
 
     /// Writes a bounded description of what is on screen into the test log (each line is an

@@ -15,16 +15,16 @@ final class PurchaseJourneyUITests: XCTestCase {
     }
 
     /// Runs even when the test failed part-way, so a simulated purchase made before the
-    /// failure can't leave later tests unlocked. Marked `@MainActor` as Apple's XCTest
-    /// documentation describes for async set-up and tear-down that needs the main actor,
-    /// because `LocalStoreKit` is main-actor isolated. The begin and end lines are receipts
-    /// in the log showing whether clean-up ran and what was left.
-    @MainActor
-    override func tearDown() async throws {
-        XCTContext.runActivity(named: "AIBIBLE-DIAG teardown: clearing local StoreKit transactions") { _ in }
+    /// failure can't leave later tests unlocked. Synchronous and on no particular actor:
+    /// `SKTestSession`'s initializer, `clearTransactions()` and `allTransactions()` are plain
+    /// synchronous methods on a class with no actor annotation, so no actor hop or UI work is
+    /// needed. The begin and end lines are receipts showing that clean-up ran and what was left;
+    /// they use `NSLog` (thread-safe, no actor), whose runner output is expected in the xcodebuild log.
+    override func tearDownWithError() throws {
+        NSLog("AIBIBLE-DIAG teardown: clearing local StoreKit transactions")
         let remaining = try LocalStoreKit.clearAll()
-        XCTContext.runActivity(named: "AIBIBLE-DIAG teardown: done, \(remaining) local transaction(s) remain") { _ in }
-        try await super.tearDown()
+        NSLog("AIBIBLE-DIAG teardown: done, %ld local transaction(s) remain", remaining)
+        try super.tearDownWithError()
     }
 
     @MainActor
@@ -67,7 +67,10 @@ final class PurchaseJourneyUITests: XCTestCase {
         app.replaceNumber("12", in: "cost.manual")
         app.replaceNumber("8", in: "cost.wholeJob")
         app.replaceNumber("90", in: "cost.setup")
-        app.element("cost.title").tap()   // moving focus commits the last number
+        // End editing through the normal back navigation (the title field may have been
+        // scrolled off screen by now), then reopen the saved worksheet and check its results.
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.staticTexts["UI test sheet"].waitToAppear().tap()
         app.expectText(containing: "Manual, 240 min (4 h)")
         app.expectText(containing: "First trial period, 250 min (4 h 10 min)")
         app.expectText(containing: "Later periods, 160 min (2 h 40 min)")
