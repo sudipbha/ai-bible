@@ -1,6 +1,6 @@
-# Hosted-Mac test route (inactive)
+# Hosted-Mac test route (active on the draft pull request branch)
 
-Nothing here runs by itself. `ios-app-tests.yml.example` isn't in `.github/workflows/`, so GitHub ignores it. None of this has run yet.
+`ios-app-tests.yml.example` has been copied unchanged to `.github/workflows/ios-app-tests.yml` on `claude/determined-mendel-zyd5vi` only; it is not on `main`. Its `pull_request` trigger runs this route for the draft pull request. The first run, GitHub Actions run 36337255552 on commit `3ee73c8`, passed the 72 unit tests on Xcode 26.3 with the iPhone SE (3rd generation) simulator on iOS 26.2. The native journey tests added after that run have not been compiled or run.
 
 ## What it does
 
@@ -46,7 +46,9 @@ On a Mac you can run the same script locally:
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer bash apps/ai-bible-ios/ci/run-tests.sh
 ```
 
-## Activation proposal (for root and owner review; not done)
+## Activation record
+
+Steps 1–3 below were done with owner approval: the workflow copy, the push, the draft pull request and the review of run 36337255552. Step 4 has not happened.
 
 Constraints:
 - A `workflow_dispatch` workflow can be triggered by hand only once the workflow file is on the default branch (`main`). A template on this branch alone can't be run manually.

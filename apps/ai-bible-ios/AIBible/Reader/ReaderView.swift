@@ -44,11 +44,13 @@ struct ReaderView: View {
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("reader.chapterTitle")
 
                 LazyVStack(alignment: .leading, spacing: 16) {
                     ForEach(chapter.blocks) { block in
                         BlockView(block: block)
                             .id(block.id)
+                            .accessibilityIdentifier("block.\(block.id)")
                             .contextMenu { blockMenu(block) }
                     }
                 }
@@ -81,6 +83,14 @@ struct ReaderView: View {
                 bookmarkButton(chapter)
             }
         }
+        .onAppear {
+            // Record the opened place right away. onChange below only fires after a
+            // scroll, so without this a chapter opened from Contents, Search, a bookmark
+            // or the footer was never saved as the place to resume.
+            if let id = visibleBlockID ?? chapter.blocks.first?.id {
+                model.updatePosition(blockID: id)
+            }
+        }
         .onChange(of: visibleBlockID) { _, id in
             if let id { model.updatePosition(blockID: id) }
         }
@@ -96,6 +106,7 @@ struct ReaderView: View {
                   systemImage: marked ? "bookmark.fill" : "bookmark")
         }
         .disabled(target == nil)
+        .accessibilityIdentifier("reader.bookmark")
     }
 
     @ViewBuilder
@@ -141,6 +152,7 @@ private struct LockedChapterView: View {
         } actions: {
             Button("See what's included", action: unlock)
         }
+        .accessibilityIdentifier("reader.locked")
         .navigationTitle(chapter.label)
         .navigationBarTitleDisplayMode(.inline)
     }

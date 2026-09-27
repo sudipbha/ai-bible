@@ -16,7 +16,9 @@ struct FilterDetailView: View {
         Form {
             Section("What are you checking?") {
                 TextField("Task you want help with", text: $draft.taskName)
+                    .accessibilityIdentifier("filter.task")
                 TextField("Tool you're considering", text: $draft.toolName)
+                    .accessibilityIdentifier("filter.tool")
             }
             ForEach(Array(questions.enumerated()), id: \.element.id) { index, question in
                 Section("Question \(index + 1) of \(questions.count)") {
@@ -24,12 +26,14 @@ struct FilterDetailView: View {
                     Picker("Answer", selection: answer(question.id)) {
                         ForEach(FilterAnswer.allCases) { Text($0.title).tag($0) }
                     }
+                    .accessibilityIdentifier("filter.answer.\(question.id)")
                     TextField("Note (optional)", text: note(question.id), axis: .vertical)
                 }
             }
             Section("Summary") {
                 let tally = draft.tally(questions: questions)
                 Text("Yes \(tally.yes) · No \(tally.no) · Not sure \(tally.unsure) · Not answered \(tally.unanswered)")
+                    .accessibilityIdentifier("filter.summary")
                 Text("The app records your answers. The decision is yours.")
                     .font(.footnote).foregroundStyle(.secondary)
             }
@@ -72,6 +76,7 @@ struct RolloutDetailView: View {
             Group {
                 Section("Tool on trial") {
                     TextField("Tool name", text: $draft.toolName)
+                        .accessibilityIdentifier("rollout.toolName")
                     DatePicker("Started", selection: $draft.startDate, displayedComponents: .date)
                     Toggle("Set a review date", isOn: hasReviewDate)
                     if let review = draft.reviewDate {
@@ -84,10 +89,12 @@ struct RolloutDetailView: View {
                         Toggle(isOn: done(item.id)) {
                             Text(item.text)
                         }
+                        .accessibilityIdentifier("rollout.step.\(item.id)")
                     }
                 } header: {
                     let progress = draft.progress(items: items)
                     Text("Checklist: \(progress.done) of \(progress.total) done")
+                        .accessibilityIdentifier("rollout.progress")
                 }
                 Section("Notes") {
                     TextField("What's working, what isn't", text: $draft.notes, axis: .vertical)
@@ -147,10 +154,11 @@ struct CostDetailView: View {
             Group {
                 Section {
                     TextField("Worksheet name", text: $draft.title)
-                    numberField("Tasks per period (for example, a month)", value: $draft.tasks)
-                    numberField("Manual minutes per task", value: $draft.manualMinutesPerTask)
-                    numberField("Whole-job minutes per task with the tool", value: $draft.wholeJobMinutesPerTask)
-                    numberField("One-time setup minutes", value: $draft.oneTimeSetupMinutes)
+                        .accessibilityIdentifier("cost.title")
+                    numberField("Tasks per period (for example, a month)", value: $draft.tasks, id: "cost.tasks")
+                    numberField("Manual minutes per task", value: $draft.manualMinutesPerTask, id: "cost.manual")
+                    numberField("Whole-job minutes per task with the tool", value: $draft.wholeJobMinutesPerTask, id: "cost.wholeJob")
+                    numberField("One-time setup minutes", value: $draft.oneTimeSetupMinutes, id: "cost.setup")
                 } header: {
                     Text("Your numbers")
                 } footer: {
@@ -202,19 +210,21 @@ struct CostDetailView: View {
         .sheet(isPresented: $unlockPresented) { UnlockSheet() }
     }
 
-    private func numberField(_ title: String, value: Binding<Int>) -> some View {
+    private func numberField(_ title: String, value: Binding<Int>, id: String) -> some View {
         LabeledContent(title) {
             TextField(title, value: value, format: .number)
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
+                .accessibilityIdentifier(id)
         }
     }
 
-    private func numberField(_ title: String, value: Binding<Double>) -> some View {
+    private func numberField(_ title: String, value: Binding<Double>, id: String) -> some View {
         LabeledContent(title) {
             TextField(title, value: value, format: .number)
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
+                .accessibilityIdentifier(id)
         }
     }
 }

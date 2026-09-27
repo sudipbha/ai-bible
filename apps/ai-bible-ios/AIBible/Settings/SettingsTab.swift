@@ -44,6 +44,7 @@ struct SettingsTab: View {
                 Section {
                     Text("Your reading position, bookmarks and tool records are stored only on this iPhone. The app doesn't collect them or send them anywhere. They're included in your iPhone's own backups, and deleting the app deletes them.")
                     Button("Delete My Data…", role: .destructive) { confirmDelete = true }
+                        .accessibilityIdentifier("settings.deleteData")
                     if model.savingPaused {
                         Label("Saving is paused to protect earlier saved data.", systemImage: "exclamationmark.triangle")
                     }

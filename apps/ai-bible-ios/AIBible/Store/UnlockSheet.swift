@@ -38,6 +38,7 @@ struct UnlockSheet: View {
                         .buttonStyle(.borderedProminent)
                         .controlSize(.large)
                         .disabled(!store.canStartPurchase)
+                        .accessibilityIdentifier("unlock.buy")
 
                         switch store.priceState {
                         case .available:
@@ -69,6 +70,7 @@ struct UnlockSheet: View {
                     }
                     .buttonStyle(.bordered)
                     .disabled(store.flow == .working)
+                    .accessibilityIdentifier("unlock.restore")
 
                     if store.flow == .working {
                         ProgressView().frame(maxWidth: .infinity)
@@ -76,6 +78,7 @@ struct UnlockSheet: View {
                     if case .message(let text) = store.flow {
                         Text(text)
                             .accessibilityAddTraits(.updatesFrequently)
+                            .accessibilityIdentifier("unlock.message")
                     }
 
                     Text("Books bought elsewhere, such as the EPUB edition, don't unlock this app.")
@@ -89,6 +92,7 @@ struct UnlockSheet: View {
                         store.dismissMessage()
                         dismiss()
                     }
+                    .accessibilityIdentifier("unlock.close")
                 }
             }
         }

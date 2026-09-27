@@ -26,6 +26,7 @@ struct ToolsTab: View {
                     Button("New Filter check", systemImage: "plus") {
                         path.append(.filter(model.newFilter()))
                     }
+                    .accessibilityIdentifier("tools.newFilter")
                 } header: {
                     Text("Five-Question Filter")
                 } footer: {
@@ -120,6 +121,7 @@ struct ToolsTab: View {
         } label: {
             Label(title, systemImage: model.canEdit(tool) ? "plus" : "lock")
         }
+        .accessibilityIdentifier("tools.new.\(tool.rawValue)")
     }
 
     private func lockedFooter(_ tool: ToolKind, _ text: String) -> Text {
@@ -137,6 +139,7 @@ struct ReadOnlyBanner: View {
         Section {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Read-only").font(.headline)
+                    .accessibilityIdentifier("tools.readOnly")
                 Text("Editing this tool needs the full book. Your saved work is kept, and you can still share it.")
                 Button("See the full book", action: unlock)
             }

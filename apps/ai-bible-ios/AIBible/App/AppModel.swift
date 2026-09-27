@@ -98,7 +98,11 @@ final class AppModel {
 
     static func live() -> AppModel {
         let provider = StoreKitPurchaseProvider(productID: AppConfig.fullBookProductID)
-        let store = try? FileStore.defaultStore()
+        var store = try? FileStore.defaultStore()
+        #if DEBUG
+        // UI tests only: keep their generated data in a temporary folder (see UITestSupport).
+        if let testStore = UITestSupport.fileStore() { store = testStore }
+        #endif
         do {
             let book = try BookLoader.loadBundled(named: AppConfig.bundledBookResource)
             return AppModel(book: book, store: store, provider: provider)

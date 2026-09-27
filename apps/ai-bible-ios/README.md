@@ -1,8 +1,12 @@
 # AI Bible — native iOS reader (prototype source)
 
-Status as of 27 September 2026: **source only. Not compiled, not tested, not signed, not submitted.**
-It was written in a Linux environment with no Swift toolchain or Xcode. Every build and test step
-below is for someone to run on a Mac. Nothing here guarantees App Store approval.
+Status as of 27 September 2026: **prototype. Simulator build and unit tests passed once; not signed,
+not submitted, not tested on a real iPhone.**
+- The source was written in a Linux environment with no Swift toolchain or Xcode.
+- One hosted-Mac run has passed: GitHub Actions run 36337255552 on commit `3ee73c8` built the app and ran
+  the 72 unit tests in `AIBibleTests`, all passing (Xcode 26.3, iPhone SE (3rd generation) simulator, iOS 26.2).
+- The native journey tests added after that run (below) have **never been compiled or run**.
+- Nothing here guarantees App Store approval.
 
 ## What it is
 
@@ -60,7 +64,9 @@ AIBible/Store                StoreKit 2 provider, entitlement state machine, unl
 AIBible/Persistence          Local JSON store (atomic writes, unreadable files kept aside), bookmarks
 AIBible/Settings             Reading preferences, restore, data deletion, privacy summary
 AIBible/Resources            Fixture JSON, PrivacyInfo.xcprivacy
-AIBibleTests                 Unit tests (see below)
+AIBibleTests                 Unit tests and hosted local-StoreKit tests (see below)
+AIBibleUITests               UI tests (candidate; never run)
+ci                           Hosted-Mac test script and workflow template
 accessibility-checklist.md   Manual device checks (not yet run)
 ```
 
@@ -76,7 +82,7 @@ accessibility-checklist.md   Manual device checks (not yet run)
   readable and shareable; only editing the paid tools needs the unlock.
 - Gumroad or other purchases do not unlock the app (Guideline 3.1.1: no license keys or codes).
 
-## Tests (written, not run)
+## Unit tests (72; passed in run 36337255552)
 
 | File | Covers |
 |---|---|
@@ -96,13 +102,43 @@ Price loading (in `EntitlementTests`):
 - A price unavailable at launch recovers without a relaunch, through the sheet appearing, Try Again, returning to the foreground, or Restore.
 - Loading the price never starts a purchase.
 
-No UI tests yet.
+## Native journey tests (candidate; never compiled or run)
 
-## Hosted-Mac route (inactive)
+These were written after run 36337255552 and are not part of that result: 8 hosted tests and 5 UI tests.
 
-`ci/run-tests.sh` and `ci/ios-app-tests.yml.example` generate the project, check its wiring and resources, and run the unit tests on a GitHub-hosted macOS runner. Nothing is under `.github/workflows/`, so nothing runs. See `ci/README.md` for what they check and for the activation proposal.
+**Local StoreKit tests:** `AIBibleTests/StoreKitIntegrationTests` drives the real `StoreKitPurchaseProvider` through `SKTestSession` against the synthetic `StoreKit/Products.storekit`. It covers:
+- loading the price
+- a purchase, and the purchase being found again after a reinstall
+- a refund
+- Ask to Buy approval
+- a failed transaction
 
-## Build route on a Mac (inert here; no CI configured)
+**UI tests:** `AIBibleUITests` exercises the rendered app:
+- reading, search, bookmarks and resuming after a relaunch
+- a passage opened from Search without scrolling being where the app reopens (synthetic chapter 1 has
+  filler blocks, so the chapter start and that passage can't both be on screen). The relaunch helper
+  waits 1.5 seconds before quitting, so this does not show that a position survives an immediate kill.
+- Filter records: create, edit, persist, delete, and Delete My Data
+- a local StoreKit unlock, then Rollout and Cost records persisting across a relaunch
+- live revocation locking an open paid chapter
+- a failed purchase staying locked
+
+**How the tests are isolated:**
+- UI tests keep their data in `<tmp>/AIBibleUITests/<name>`, through a Debug-only launch hook (`AIBible/App/UITestSupport.swift`).
+- Release builds don't contain the hook.
+- The hook never grants access, and it can't reach the real saved-data folder.
+
+**What these tests aren't:** local StoreKit testing isn't the App Store sandbox, TestFlight, or a real purchase.
+
+## Hosted-Mac route (active on this branch's draft pull request)
+
+`.github/workflows/ios-app-tests.yml` (a copy of `ci/ios-app-tests.yml.example`) runs `ci/run-tests.sh` on a
+standard GitHub-hosted `macos-15` runner for pull requests that touch `apps/ai-bible-ios/**`. The script
+generates the project, checks its wiring and resources, and runs the scheme's whole test action. Its first
+run, 36337255552, passed the 72 unit tests. The workflow file exists only on this branch, not on `main`.
+See `ci/README.md` for details.
+
+## Build route on your own Mac
 
 ```sh
 brew install xcodegen            # or another XcodeGen install

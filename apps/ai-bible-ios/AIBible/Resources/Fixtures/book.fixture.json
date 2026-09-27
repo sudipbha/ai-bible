@@ -36,9 +36,21 @@
         { "id": "fx.ch01.h1", "kind": "heading", "level": 2, "text": "Short sessions" },
         { "id": "fx.ch01.p2", "kind": "paragraph", "text": "A paragraph long enough to wrap across several lines at the default text size, so line spacing, reading width and Dynamic Type reflow can be checked on a real iPhone. The quick brown fox jumps over the lazy dog, twice, to fill the line." },
         { "id": "fx.ch01.p3", "kind": "paragraph", "text": "Inline formatting check: *emphasis*, **strong**, `inline code` and a link to [example.com](https://example.com)." },
+        { "id": "fx.ch01.f1", "kind": "paragraph", "text": "Filler paragraph one (synthetic). It exists only to make this chapter taller than one screen, so a test can tell the start of the chapter apart from a place further down. The words are ordinary and carry no meaning beyond taking up space on the page." },
+        { "id": "fx.ch01.f2", "kind": "paragraph", "text": "Filler paragraph two (synthetic). A second block of plain words keeps the later passage well below the first screen on a small iPhone at the default text size. Nothing here comes from the book, its sample chapter or its website." },
+        { "id": "fx.ch01.f3", "kind": "paragraph", "text": "Filler paragraph three (synthetic). Rivers bend, hills roll and the afternoon light moves slowly across an empty field. These sentences are placeholders and should never be proofread as real content." },
+        { "id": "fx.ch01.f4", "kind": "paragraph", "text": "Filler paragraph four (synthetic). The same idea again in different words: this block adds height to the chapter so that opening a passage further down is visibly different from opening the chapter at its first paragraph." },
+        { "id": "fx.ch01.f5", "kind": "paragraph", "text": "Filler paragraph five (synthetic). A kettle warms, a door closes, a bird lands on the fence and leaves again. Placeholder text of this kind is common in layout checks because it looks like prose without saying anything." },
+        { "id": "fx.ch01.f6", "kind": "paragraph", "text": "Filler paragraph six (synthetic). More plain words to lengthen the chapter. They wrap across several lines, which also gives Dynamic Type and line spacing a longer run of text to reflow." },
+        { "id": "fx.ch01.f7", "kind": "paragraph", "text": "Filler paragraph seven (synthetic). Clouds gather over a quiet harbour and the boats rock gently at their moorings. None of this refers to any real place, person or business." },
+        { "id": "fx.ch01.f8", "kind": "paragraph", "text": "Filler paragraph eight (synthetic). The last block of padding before the passage that the reader tests open directly. After it comes a short heading and then the accent-search paragraph." },
         { "id": "fx.ch01.h2", "kind": "heading", "level": 3, "text": "Accents and search" },
         { "id": "fx.ch01.p4", "kind": "paragraph", "text": "Search should find café when you type cafe, and Résumé when you type resume." },
-        { "id": "fx.ch01.l1", "kind": "list", "items": ["First list item", "Second list item with **strong** text", "Third list item"] }
+        { "id": "fx.ch01.l1", "kind": "list", "items": ["First list item", "Second list item with **strong** text", "Third list item"] },
+        { "id": "fx.ch01.f9", "kind": "paragraph", "text": "Trailing filler paragraph one (synthetic). Padding after the passage lets the reader scroll that passage all the way to the top of the screen instead of stopping at the end of the chapter." },
+        { "id": "fx.ch01.f10", "kind": "paragraph", "text": "Trailing filler paragraph two (synthetic). More plain words below the passage for the same reason. They are placeholders only." },
+        { "id": "fx.ch01.f11", "kind": "paragraph", "text": "Trailing filler paragraph three (synthetic). The evening is calm, the street is empty and the lamps come on one after another. A little more padding follows." },
+        { "id": "fx.ch01.f12", "kind": "paragraph", "text": "Trailing filler paragraph four (synthetic). A final block of plain words, so that even a tall screen has room to show the passage at the top. This is the end of the padding." }
       ]
     },
     {

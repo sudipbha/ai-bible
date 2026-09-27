@@ -57,6 +57,7 @@ struct ContentsView: View {
                             Text("\(chapter.label): \(chapter.title)").foregroundStyle(.secondary)
                         }
                     }
+                    .accessibilityIdentifier("contents.continue")
                 }
             }
 
@@ -67,6 +68,7 @@ struct ContentsView: View {
                     } label: {
                         ChapterRow(chapter: chapter, locked: !model.canRead(chapter))
                     }
+                    .accessibilityIdentifier("contents.chapter.\(chapter.id)")
                 }
             }
 
@@ -74,6 +76,7 @@ struct ContentsView: View {
                 NavigationLink(value: ReadRoute.bookmarks) {
                     Label("Bookmarks (\(model.bookmarks.count))", systemImage: "bookmark")
                 }
+                .accessibilityIdentifier("contents.bookmarks")
             }
         }
         .navigationTitle(model.book.title)
@@ -126,6 +129,7 @@ struct BookmarksView: View {
                         }
                     }
                 }
+                .accessibilityIdentifier("bookmark.\(bookmark.anchor.blockID)")
             }
             .onDelete { offsets in
                 model.deleteBookmarks(ids: Set(offsets.map { model.bookmarks[$0].id }))

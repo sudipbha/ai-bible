@@ -21,6 +21,7 @@ struct SearchTab: View {
                             Text(hit.snippet)
                         }
                     }
+                    .accessibilityIdentifier("search.result.\(hit.blockID)")
                 }
                 if results.lockedMatchCount > 0 {
                     Section {
@@ -31,6 +32,7 @@ struct SearchTab: View {
                                  ? "1 more match in the full book"
                                  : "\(results.lockedMatchCount) more matches in the full book")
                         }
+                        .accessibilityIdentifier("search.lockedMatches")
                     }
                 }
             }

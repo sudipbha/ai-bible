@@ -38,6 +38,9 @@ targets:
     platform: iOS
     sources:
       - path: AIBibleTests
+      # Test-bundle copy for SKTestSession(configurationFileNamed:). Never in the app itself.
+      - path: StoreKit/Products.storekit
+        buildPhase: resources
     dependencies:
       - target: AIBible
     settings:
@@ -46,12 +49,27 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.aibible.tests   # placeholder
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/AIBible.app/AIBible"
         BUNDLE_LOADER: "$(TEST_HOST)"
+  AIBibleUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AIBibleUITests
+      - path: StoreKit/Products.storekit
+        buildPhase: resources
+    dependencies:
+      - target: AIBible
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.aibible.uitests   # placeholder
+        TEST_TARGET_NAME: AIBible
 schemes:
   AIBible:
     build:
       targets:
         AIBible: all
         AIBibleTests: [test]
+        AIBibleUITests: [test]
     run:
       config: Debug
       storeKitConfiguration: StoreKit/Products.storekit
@@ -60,3 +78,4 @@ schemes:
       gatherCoverageData: true
       targets:
         - AIBibleTests
+        - AIBibleUITests
