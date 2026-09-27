@@ -88,9 +88,28 @@ final class EntitlementModel {
         case message(String)
     }
 
+    /// The localized price from the App Store. Buy is offered only when this is `.available`.
+    enum PriceState: Equatable {
+        case notLoaded
+        case loading
+        case available(String)
+        /// The last attempt returned no product (offline, or the product isn't set up yet).
+        case unavailable
+    }
+
     private(set) var state: EntitlementState
     private(set) var flow: Flow = .idle
-    private(set) var displayPrice: String?
+    private(set) var priceState: PriceState = .notLoaded
+
+    var displayPrice: String? {
+        if case .available(let price) = priceState { return price }
+        return nil
+    }
+
+    /// True when a purchase can be started: price known, not already unlocked, nothing in progress.
+    var canStartPurchase: Bool {
+        displayPrice != nil && state.access != .full && flow != .working
+    }
 
     @ObservationIgnored var onChange: ((EntitlementState) -> Void)?
     @ObservationIgnored private let provider: any PurchaseProvider
@@ -115,7 +134,22 @@ final class EntitlementModel {
             }
         }
         await refresh()
-        displayPrice = await provider.displayPrice()
+        await refreshPrice()
+    }
+
+    /// One attempt to fetch the localized price. It never starts a purchase. It is
+    /// called at launch, when the unlock sheet appears, when the app returns to the
+    /// foreground, after Restore, and from the sheet's Try Again button. Each call is
+    /// a single request, and a call while another is in flight does nothing.
+    func refreshPrice() async {
+        guard priceState != .loading else { return }
+        if case .available = priceState { return }
+        priceState = .loading
+        if let price = await provider.displayPrice() {
+            priceState = .available(price)
+        } else {
+            priceState = .unavailable
+        }
     }
 
     func refresh() async {
@@ -128,6 +162,7 @@ final class EntitlementModel {
     }
 
     func buy() async {
+        guard canStartPurchase else { return }
         flow = .working
         do {
             let outcome = try await provider.purchase()
@@ -143,9 +178,6 @@ final class EntitlementModel {
         } catch {
             flow = .message("The purchase couldn't be completed. Check your connection and try again.")
         }
-        if displayPrice == nil {
-            displayPrice = await provider.displayPrice()
-        }
     }
 
     func restore() async {
@@ -153,6 +185,7 @@ final class EntitlementModel {
         do {
             try await provider.restore()
             await refresh()
+            await refreshPrice()
             flow = state.access == .full
                 ? .idle
                 : .message("No earlier purchase of the full book was found for this Apple Account.")

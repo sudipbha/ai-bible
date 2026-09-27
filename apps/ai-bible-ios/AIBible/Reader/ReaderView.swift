@@ -12,6 +12,7 @@ struct ReaderView: View {
 
     /// Bound to the scroll view: setting it scrolls, scrolling updates it.
     @State private var visibleBlockID: String?
+    @State private var unlockPresented = false
 
     init(position: ReaderPosition, open: @escaping (ReaderPosition) -> Void) {
         self.position = position
@@ -19,10 +20,17 @@ struct ReaderView: View {
         _visibleBlockID = State(initialValue: position.blockID)
     }
 
+    // Access is checked on every render, not only when the route is opened, so an
+    // open paid chapter stops showing its text as soon as access is lost (refund,
+    // revocation, or a launch-time check that no longer finds the purchase).
     var body: some View {
-        if let chapter = model.book.chapter(position.chapterID) {
+        switch model.readerGate(for: position) {
+        case .readable(let chapter):
             reader(chapter)
-        } else {
+        case .locked(let chapter):
+            LockedChapterView(chapter: chapter, unlock: { unlockPresented = true })
+                .sheet(isPresented: $unlockPresented) { UnlockSheet() }
+        case .missing:
             ContentUnavailableView("Chapter not found", systemImage: "book.closed")
         }
     }
@@ -117,6 +125,24 @@ struct ReaderView: View {
         } else {
             withAnimation { visibleBlockID = blockID }
         }
+    }
+}
+
+/// Shown in place of a paid chapter the reader can't open. No chapter text is shown.
+private struct LockedChapterView: View {
+    let chapter: Chapter
+    let unlock: () -> Void
+
+    var body: some View {
+        ContentUnavailableView {
+            Label("\(chapter.label): \(chapter.title)", systemImage: "lock")
+        } description: {
+            Text("This chapter is included with the full book. Your bookmarks and saved tool records are kept.")
+        } actions: {
+            Button("See what's included", action: unlock)
+        }
+        .navigationTitle(chapter.label)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

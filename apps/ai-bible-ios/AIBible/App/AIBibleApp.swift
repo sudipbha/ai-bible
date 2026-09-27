@@ -12,7 +12,12 @@ struct AIBibleApp: App {
                 .task { await model.entitlements.start() }
         }
         .onChange(of: scenePhase) { _, phase in
-            if phase != .active { model.flush() }
+            if phase == .active {
+                // Picks up a price that was unavailable at launch (for example, offline).
+                Task { await model.entitlements.refreshPrice() }
+            } else {
+                model.flush()
+            }
         }
     }
 }

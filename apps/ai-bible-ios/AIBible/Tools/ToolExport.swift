@@ -43,11 +43,16 @@ enum ToolExport {
         let tasks = sheet.tasks
         var lines = ["Whole-job cost worksheet", sheet.displayName, ""]
         lines.append("Time per period")
-        lines.append("Manual: \(tasks) tasks × \(number(sheet.manualMinutesPerTask)) min = \(MinutesFormat.string(sheet.manualMinutes))")
-        lines.append("First trial period: \(tasks) tasks × \(number(sheet.wholeJobMinutesPerTask)) min whole-job + \(number(sheet.oneTimeSetupMinutes)) min one-time setup = \(MinutesFormat.string(sheet.firstTrialMinutes))")
-        lines.append("Later periods: \(tasks) tasks × \(number(sheet.wholeJobMinutesPerTask)) min whole-job = \(MinutesFormat.string(sheet.laterMinutes))")
-        lines.append("First period: \(MinutesFormat.capacityChange(sheet.firstPeriodCapacityChange))")
-        lines.append("Later periods: \(MinutesFormat.capacityChange(sheet.laterCapacityChange))")
+        if let results = sheet.results {
+            lines.append("Manual: \(tasks) tasks × \(number(sheet.manualMinutesPerTask)) min = \(MinutesFormat.string(results.manualMinutes))")
+            lines.append("First trial period: \(tasks) tasks × \(number(sheet.wholeJobMinutesPerTask)) min whole-job + \(number(sheet.oneTimeSetupMinutes)) min one-time setup = \(MinutesFormat.string(results.firstTrialMinutes))")
+            lines.append("Later periods: \(tasks) tasks × \(number(sheet.wholeJobMinutesPerTask)) min whole-job = \(MinutesFormat.string(results.laterMinutes))")
+            lines.append("First period: \(MinutesFormat.capacityChange(results.firstPeriodCapacityChange))")
+            lines.append("Later periods: \(MinutesFormat.capacityChange(results.laterCapacityChange))")
+        } else {
+            lines.append("Results aren't shown until these entries are fixed:")
+            lines.append(contentsOf: sheet.validationIssues.map { "- \($0)" })
+        }
         lines.append("Whole-job minutes include preparing, checking, correcting and approving each task.")
         lines.append("")
         lines.append("Money (kept separate from time)")
@@ -61,8 +66,9 @@ enum ToolExport {
         return lines.joined(separator: "\n")
     }
 
-    private static func number(_ value: Double) -> String {
-        value == value.rounded() ? String(Int(value)) : String(format: "%.1f", value)
+    static func number(_ value: Double) -> String {
+        guard value.isFinite, abs(value) <= MinutesFormat.maxFormattable else { return "invalid" }
+        return value == value.rounded() ? String(Int(value)) : String(format: "%.1f", value)
     }
 
     private static func dateString(_ date: Date) -> String {

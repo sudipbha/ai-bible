@@ -132,15 +132,64 @@ struct CostWorksheet: Codable, Sendable, Equatable, Identifiable {
         manualMinutes - laterMinutes
     }
 
-    /// Negative entries are clamped to zero before saving.
-    func sanitized() -> CostWorksheet {
-        var copy = self
-        copy.tasks = max(0, tasks)
-        copy.manualMinutesPerTask = max(0, manualMinutesPerTask.isFinite ? manualMinutesPerTask : 0)
-        copy.wholeJobMinutesPerTask = max(0, wholeJobMinutesPerTask.isFinite ? wholeJobMinutesPerTask : 0)
-        copy.oneTimeSetupMinutes = max(0, oneTimeSetupMinutes.isFinite ? oneTimeSetupMinutes : 0)
-        if let price = monthlyPrice, price < 0 { copy.monthlyPrice = 0 }
-        return copy
+    // Input limits. They are far above any real small-business figure and keep every
+    // product well inside the range that can be formatted safely.
+    static let maxTasks = 1_000_000
+    static let maxMinutesPerTask: Double = 100_000
+    static let maxSetupMinutes: Double = 10_000_000
+
+    /// Plain-language problems with the entered numbers. Results are shown only when
+    /// this is empty; an invalid entry is never quietly turned into zero.
+    var validationIssues: [String] {
+        var issues: [String] = []
+        if tasks < 0 {
+            issues.append("Tasks per period can't be negative.")
+        } else if tasks > Self.maxTasks {
+            issues.append("Tasks per period must be \(Self.maxTasks.formatted()) or fewer.")
+        }
+        issues += Self.minuteIssues("Manual minutes per task", manualMinutesPerTask, limit: Self.maxMinutesPerTask)
+        issues += Self.minuteIssues("Whole-job minutes per task", wholeJobMinutesPerTask, limit: Self.maxMinutesPerTask)
+        issues += Self.minuteIssues("One-time setup minutes", oneTimeSetupMinutes, limit: Self.maxSetupMinutes)
+        if let price = monthlyPrice {
+            if price.isNaN {
+                issues.append("The monthly price isn't a valid number.")
+            } else if price < 0 {
+                issues.append("The monthly price can't be negative.")
+            }
+        }
+        return issues
+    }
+
+    var isValid: Bool { validationIssues.isEmpty }
+
+    struct Results: Equatable {
+        var manualMinutes: Double
+        var firstTrialMinutes: Double
+        var laterMinutes: Double
+        var firstPeriodCapacityChange: Double
+        var laterCapacityChange: Double
+    }
+
+    /// The worksheet's time figures, or nil when an entry is invalid.
+    var results: Results? {
+        guard isValid else { return nil }
+        let results = Results(
+            manualMinutes: manualMinutes,
+            firstTrialMinutes: firstTrialMinutes,
+            laterMinutes: laterMinutes,
+            firstPeriodCapacityChange: firstPeriodCapacityChange,
+            laterCapacityChange: laterCapacityChange
+        )
+        let all = [results.manualMinutes, results.firstTrialMinutes, results.laterMinutes,
+                   results.firstPeriodCapacityChange, results.laterCapacityChange]
+        return all.allSatisfy { $0.isFinite && abs($0) <= MinutesFormat.maxFormattable } ? results : nil
+    }
+
+    private static func minuteIssues(_ name: String, _ value: Double, limit: Double) -> [String] {
+        if !value.isFinite { return ["\(name) isn't a valid number."] }
+        if value < 0 { return ["\(name) can't be negative."] }
+        if value > limit { return ["\(name) must be \(limit.formatted()) or fewer."] }
+        return []
     }
 
     var displayName: String {
@@ -149,8 +198,14 @@ struct CostWorksheet: Codable, Sendable, Equatable, Identifiable {
 }
 
 enum MinutesFormat {
+    /// Largest magnitude formatted as minutes. Anything beyond it (or non-finite) is
+    /// shown as out of range instead of being converted to an integer.
+    static let maxFormattable: Double = 1_000_000_000_000
+    static let outOfRange = "Out of range"
+
     /// "250 min (4 h 10 min)"; whole minutes are shown without decimals.
     static func string(_ minutes: Double) -> String {
+        guard minutes.isFinite, abs(minutes) <= maxFormattable else { return outOfRange }
         let rounded = (minutes * 10).rounded() / 10
         let base = rounded == rounded.rounded()
             ? "\(Int(rounded)) min"
@@ -166,6 +221,7 @@ enum MinutesFormat {
 
     /// Signed change in capacity, worded so it is never read as cash.
     static func capacityChange(_ minutes: Double) -> String {
+        guard minutes.isFinite, abs(minutes) <= maxFormattable else { return outOfRange }
         if minutes > 0 { return "\(string(minutes)) of time freed (time, not cash)" }
         if minutes < 0 { return "\(string(-minutes)) of extra time needed" }
         return "No change in time"

@@ -108,6 +108,7 @@ final class EntitlementModelTests: XCTestCase {
         let provider = FakePurchaseProvider()
         provider.purchaseResult = .failure(FakePurchaseProvider.Offline())
         let model = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model.refreshPrice()
         await model.buy()
         XCTAssertEqual(model.state.access, .sample)
         guard case .message = model.flow else { return XCTFail("Expected an error message") }
@@ -131,6 +132,66 @@ final class EntitlementModelTests: XCTestCase {
         await model.restore()
         XCTAssertEqual(model.state.access, .sample)
         guard case .message = model.flow else { return XCTFail("Expected a message") }
+    }
+
+    // MARK: Finding 3 — price recovers after an offline launch, without relaunch or auto-purchase
+
+    @MainActor
+    func testPriceRecoversWithoutRelaunchAndNeverAutoPurchases() async {
+        let provider = FakePurchaseProvider()
+        provider.price = nil                              // offline at launch
+        let model = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model.start()
+        XCTAssertEqual(model.priceState, .unavailable)
+        XCTAssertFalse(model.canStartPurchase)
+
+        await model.buy()                                 // a disabled Buy must do nothing
+        XCTAssertEqual(provider.purchaseCalls, 0)
+
+        await model.refreshPrice()                        // still offline: stays unavailable
+        XCTAssertEqual(model.priceState, .unavailable)
+
+        provider.price = "£4.99"                          // back online (any localized string)
+        await model.refreshPrice()                        // sheet appears / Try Again / foreground
+        XCTAssertEqual(model.priceState, .available("£4.99"))
+        XCTAssertEqual(model.displayPrice, "£4.99")
+        XCTAssertTrue(model.canStartPurchase)
+        XCTAssertEqual(provider.purchaseCalls, 0, "Loading the price must never start a purchase")
+
+        await model.buy()                                 // only an explicit Buy purchases
+        XCTAssertEqual(provider.purchaseCalls, 1)
+        XCTAssertEqual(model.state.access, .full)
+    }
+
+    @MainActor
+    func testRefreshPriceIsSkippedOnceAvailable() async {
+        let provider = FakePurchaseProvider()
+        let model = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model.refreshPrice()
+        await model.refreshPrice()
+        XCTAssertEqual(provider.priceCalls, 1)
+    }
+
+    @MainActor
+    func testRestoreAlsoRetriesMissingPrice() async {
+        let provider = FakePurchaseProvider()
+        provider.price = nil
+        let model = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model.start()
+        provider.price = "$4.99"
+        await model.restore()
+        XCTAssertEqual(model.displayPrice, "$4.99")
+        XCTAssertEqual(provider.purchaseCalls, 0)
+    }
+
+    @MainActor
+    func testBuyIsIgnoredWhenAlreadyUnlocked() async {
+        let provider = FakePurchaseProvider()
+        provider.entitlement = .active
+        let model = EntitlementModel(provider: provider, cached: EntitlementState())
+        await model.start()
+        await model.buy()
+        XCTAssertEqual(provider.purchaseCalls, 0)
     }
 
     @MainActor

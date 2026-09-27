@@ -38,35 +38,77 @@ struct UserData: Codable, Sendable, Equatable {
 
 /// A JSON file in Application Support, written atomically. It is included in the
 /// device's own backups; it is not synced anywhere.
+///
+/// The saved file is never overwritten unless it was read successfully or safely
+/// moved aside first. When neither is possible, `load()` reports `.blocked` and the
+/// caller must not save until the user explicitly deletes their data.
 struct FileStore: Sendable {
+    enum BlockReason: Equatable, Sendable {
+        /// The file exists but couldn't be read (for example, the device is still locked).
+        case unreadable
+        /// The file was written by a newer version of the app.
+        case newerVersion(Int)
+        /// The file couldn't be decoded and couldn't be moved aside.
+        case couldNotPreserve
+    }
+
     enum LoadResult: Equatable {
         case fresh
         case loaded(UserData)
-        /// The file could not be read. It was moved aside, not deleted.
-        case recovered(backup: URL)
+        /// The file couldn't be decoded. It was moved to `backup`, so starting fresh is safe.
+        case quarantined(backup: URL)
+        /// The file was left exactly where it is. Saving must stay off.
+        case blocked(BlockReason)
     }
 
+    static let fileName = "userdata.json"
+    static let quarantinePrefix = "userdata.unreadable-"
+
     let url: URL
+    /// File operations, replaceable in tests to simulate failures.
+    var readData: @Sendable (URL) throws -> Data = { try Data(contentsOf: $0) }
+    var moveItem: @Sendable (URL, URL) throws -> Void = { try FileManager.default.moveItem(at: $0, to: $1) }
+    var removeItem: @Sendable (URL) throws -> Void = { try FileManager.default.removeItem(at: $0) }
+    var listDirectory: @Sendable (URL) throws -> [String] = { try FileManager.default.contentsOfDirectory(atPath: $0.path) }
+
+    init(url: URL) {
+        self.url = url
+    }
 
     static func defaultStore() throws -> FileStore {
         let directory = try FileManager.default
             .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appendingPathComponent("AIBible", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        return FileStore(url: directory.appendingPathComponent("userdata.json"))
+        return FileStore(url: directory.appendingPathComponent(fileName))
     }
 
     func load() -> LoadResult {
         guard FileManager.default.fileExists(atPath: url.path) else { return .fresh }
+
+        let data: Data
         do {
-            let data = try Data(contentsOf: url)
+            data = try readData(url)
+        } catch {
+            // Possibly temporary (file protection before first unlock); leave it untouched.
+            return .blocked(.unreadable)
+        }
+
+        if let version = Self.schemaVersion(in: data), version > UserData.currentSchemaVersion {
+            return .blocked(.newerVersion(version))
+        }
+
+        do {
             return .loaded(try Self.decoder.decode(UserData.self, from: data))
         } catch {
-            let stamp = Int(Date().timeIntervalSince1970)
             let backup = url.deletingLastPathComponent()
-                .appendingPathComponent("userdata.unreadable-\(stamp).json")
-            try? FileManager.default.moveItem(at: url, to: backup)
-            return .recovered(backup: backup)
+                .appendingPathComponent("\(Self.quarantinePrefix)\(Int(Date().timeIntervalSince1970))-\(UUID().uuidString).json")
+            do {
+                try moveItem(url, backup)
+            } catch {
+                return .blocked(.couldNotPreserve)
+            }
+            return .quarantined(backup: backup)
         }
     }
 
@@ -75,22 +117,54 @@ struct FileStore: Sendable {
         try data.write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
     }
 
-    func delete() throws {
-        if FileManager.default.fileExists(atPath: url.path) {
-            try FileManager.default.removeItem(at: url)
+    /// Files this app wrote for the reader: the main file and any quarantined copies.
+    /// Other files in the directory are never included. Throws if the directory can't be
+    /// listed, so "couldn't look" is never mistaken for "nothing there".
+    func userDataFiles() throws -> [URL] {
+        let directory = url.deletingLastPathComponent()
+        return try listDirectory(directory)
+            .filter { $0 == url.lastPathComponent || ($0.hasPrefix(Self.quarantinePrefix) && $0.hasSuffix(".json")) }
+            .sorted()
+            .map { directory.appendingPathComponent($0) }
+    }
+
+    /// Removes every file from `userDataFiles()`. Returns the files that couldn't be removed.
+    /// Throws, without removing anything, if the files couldn't be listed.
+    func deleteAllUserDataFiles() throws -> [URL] {
+        try userDataFiles().filter { file in
+            do {
+                try removeItem(file)
+                return false
+            } catch {
+                return FileManager.default.fileExists(atPath: file.path)
+            }
         }
     }
 
-    private static var encoder: JSONEncoder {
+    /// Reads only the schema version, so a newer file is recognised even if the rest doesn't decode.
+    private static func schemaVersion(in data: Data) -> Int? {
+        struct Header: Decodable { var schemaVersion: Int? }
+        return (try? JSONDecoder().decode(Header.self, from: data))?.schemaVersion
+    }
+
+    // Non-finite numbers are written as strings so a record with an invalid value
+    // still saves and reopens (the worksheet then shows the validation message).
+    private static let nonFinite = (positive: "inf", negative: "-inf", nan: "nan")
+
+    static var encoder: JSONEncoder {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = [.sortedKeys]
+        encoder.nonConformingFloatEncodingStrategy = .convertToString(
+            positiveInfinity: nonFinite.positive, negativeInfinity: nonFinite.negative, nan: nonFinite.nan)
         return encoder
     }
 
-    private static var decoder: JSONDecoder {
+    static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
+        decoder.nonConformingFloatDecodingStrategy = .convertFromString(
+            positiveInfinity: nonFinite.positive, negativeInfinity: nonFinite.negative, nan: nonFinite.nan)
         return decoder
     }
 }

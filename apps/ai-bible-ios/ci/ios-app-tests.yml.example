@@ -1,0 +1,33 @@
+# INACTIVE TEMPLATE. GitHub runs nothing from this path.
+# It becomes a workflow only if someone copies it to .github/workflows/ (see ci/README.md).
+# Synthetic fixtures only: no signing, no secrets, no caches, no uploaded artifacts.
+name: AIBible iOS unit tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "apps/ai-bible-ios/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aibible-ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    runs-on: macos-15            # standard GitHub-hosted arm64 image
+    timeout-minutes: 30
+    env:
+      # macos-15 defaults to Xcode 16.4; select 26.3 explicitly. The script fails if it is missing.
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    steps:
+      - name: Check out (read-only token, not persisted)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Generate project and run unit tests
+        run: bash apps/ai-bible-ios/ci/run-tests.sh

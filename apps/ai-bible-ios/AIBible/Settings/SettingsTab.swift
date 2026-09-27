@@ -44,6 +44,9 @@ struct SettingsTab: View {
                 Section {
                     Text("Your reading position, bookmarks and tool records are stored only on this iPhone. The app doesn't collect them or send them anywhere. They're included in your iPhone's own backups, and deleting the app deletes them.")
                     Button("Delete My Data…", role: .destructive) { confirmDelete = true }
+                    if model.savingPaused {
+                        Label("Saving is paused to protect earlier saved data.", systemImage: "exclamationmark.triangle")
+                    }
                     if let notice = model.storageNotice {
                         Text(notice).font(.footnote).foregroundStyle(.secondary)
                     }
@@ -73,9 +76,9 @@ struct SettingsTab: View {
             .navigationTitle("Settings")
             .confirmationDialog("Delete your reading position, bookmarks and all tool records from this iPhone?",
                                 isPresented: $confirmDelete, titleVisibility: .visible) {
-                Button("Delete My Data", role: .destructive) { model.deleteAllUserData() }
+                Button("Delete My Data", role: .destructive) { _ = model.deleteAllUserData() }
             } message: {
-                Text("This can't be undone. Your purchase isn't affected.")
+                Text("This also removes any recovery copies of earlier saved data. It can't be undone. Your purchase isn't affected.")
             }
         }
         .sheet(isPresented: $unlockPresented) { UnlockSheet() }

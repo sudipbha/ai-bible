@@ -52,7 +52,9 @@ struct ToolsTab: View {
                 Section {
                     ForEach(model.costs) { sheet in
                         NavigationLink(value: ToolRoute.cost(sheet.id)) {
-                            recordRow(sheet.displayName, detail: "Later periods: \(MinutesFormat.string(sheet.laterMinutes))")
+                            recordRow(sheet.displayName, detail: sheet.results.map {
+                                "Later periods: \(MinutesFormat.string($0.laterMinutes))"
+                            } ?? "Some entries need fixing")
                         }
                     }
                     .onDelete { offsets in

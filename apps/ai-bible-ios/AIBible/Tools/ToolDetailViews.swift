@@ -139,7 +139,7 @@ struct CostDetailView: View {
 
     var body: some View {
         let editable = model.canEdit(.cost)
-        let sheet = draft.sanitized()
+        let sheet = draft
         Form {
             if !editable {
                 ReadOnlyBanner { unlockPresented = true }
@@ -160,11 +160,18 @@ struct CostDetailView: View {
             .disabled(!editable)
 
             Section {
-                LabeledContent("Manual", value: MinutesFormat.string(sheet.manualMinutes))
-                LabeledContent("First trial period", value: MinutesFormat.string(sheet.firstTrialMinutes))
-                LabeledContent("Later periods", value: MinutesFormat.string(sheet.laterMinutes))
-                LabeledContent("First period", value: MinutesFormat.capacityChange(sheet.firstPeriodCapacityChange))
-                LabeledContent("Later periods", value: MinutesFormat.capacityChange(sheet.laterCapacityChange))
+                if let results = sheet.results {
+                    LabeledContent("Manual", value: MinutesFormat.string(results.manualMinutes))
+                    LabeledContent("First trial period", value: MinutesFormat.string(results.firstTrialMinutes))
+                    LabeledContent("Later periods", value: MinutesFormat.string(results.laterMinutes))
+                    LabeledContent("First period", value: MinutesFormat.capacityChange(results.firstPeriodCapacityChange))
+                    LabeledContent("Later periods", value: MinutesFormat.capacityChange(results.laterCapacityChange))
+                } else {
+                    Text("Results aren't shown until these entries are fixed:")
+                    ForEach(sheet.validationIssues, id: \.self) { issue in
+                        Label(issue, systemImage: "exclamationmark.triangle")
+                    }
+                }
             } header: {
                 Text("Time per period")
             } footer: {

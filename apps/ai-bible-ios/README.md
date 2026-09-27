@@ -83,10 +83,24 @@ accessibility-checklist.md   Manual device checks (not yet run)
 | `CostWorksheetTests` | The fictional vector, money kept separate, no savings wording, clamping |
 | `IDMigrationTests` | Exact ID → `idMap` chain (with cycle guard) → quote match (same chapter first) → chapter start → book start; bookmarks are never dropped |
 | `EntitlementTests` | Reducer for every state; model with a fake store: relaunch, offline cache, pending across restart, failure, restore found / not found, live revocation |
-| `LocalStoreTests` | Round-trip, missing file, unreadable file kept aside, older files decode; revocation keeps saved work; locked start position; Delete My Data leaves the purchase alone |
+| `LocalStoreTests` | Round-trip, missing file; undecodable file quarantined byte-for-byte under a collision-safe name; failed quarantine, read failure and newer-format files are left untouched and saving pauses (original bytes survive edits and flush); revocation keeps saved work; Delete My Data removes the main file and recovery copies but not unrelated files or the purchase, and reports failures |
+| `ReaderGateTests` | An open paid reader route locks after live revocation, an authoritative empty refresh, or a launch check that finds no purchase; an offline launch keeps cached access; bookmarks are kept |
 | `ContentAndSearchTests` | Bundled fixture validates, only Chapter 1 is free, fixture `idMap`, validation catches bad structure, accent/case search, locked matches counted but not shown |
 
+Cost-worksheet edge cases (in `CostWorksheetTests`):
+- Negative, NaN, infinite and over-limit entries show validation messages instead of results; they are never turned into zero.
+- Formatting and export never convert out-of-range values to `Int`.
+- An invalid record saves and reopens with its validation intact.
+
+Price loading (in `EntitlementTests`):
+- A price unavailable at launch recovers without a relaunch, through the sheet appearing, Try Again, returning to the foreground, or Restore.
+- Loading the price never starts a purchase.
+
 No UI tests yet.
+
+## Hosted-Mac route (inactive)
+
+`ci/run-tests.sh` and `ci/ios-app-tests.yml.example` generate the project, check its wiring and resources, and run the unit tests on a GitHub-hosted macOS runner. Nothing is under `.github/workflows/`, so nothing runs. See `ci/README.md` for what they check and for the activation proposal.
 
 ## Build route on a Mac (inert here; no CI configured)
 

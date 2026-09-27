@@ -11,8 +11,11 @@ final class FakePurchaseProvider: PurchaseProvider, @unchecked Sendable {
     /// What the store reports after a successful Restore.
     var entitlementAfterRestore: EntitlementSnapshot?
     var restoreFails = false
+    /// Test-only stand-in for the localized App Store price. The app never hard-codes a price.
     var price: String? = "$4.99"
     private(set) var restoreCalls = 0
+    private(set) var purchaseCalls = 0
+    private(set) var priceCalls = 0
 
     private var continuation: AsyncStream<EntitlementSnapshot>.Continuation?
 
@@ -22,6 +25,7 @@ final class FakePurchaseProvider: PurchaseProvider, @unchecked Sendable {
     }
 
     func purchase() async throws -> PurchaseOutcome {
+        purchaseCalls += 1
         let outcome = try purchaseResult.get()
         if outcome == .verified { entitlement = .active }
         return outcome
@@ -33,7 +37,10 @@ final class FakePurchaseProvider: PurchaseProvider, @unchecked Sendable {
         if let after = entitlementAfterRestore { entitlement = after }
     }
 
-    func displayPrice() async -> String? { price }
+    func displayPrice() async -> String? {
+        priceCalls += 1
+        return price
+    }
 
     func transactionUpdates() -> AsyncStream<EntitlementSnapshot> {
         AsyncStream { continuation in

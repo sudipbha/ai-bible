@@ -17,6 +17,14 @@ struct ReaderPosition: Hashable, Sendable {
     var blockID: String?
 }
 
+/// What an open reader may show right now. Re-evaluated on every render, so a
+/// reader that is already on screen locks as soon as access is lost.
+enum ReaderGate: Equatable {
+    case readable(Chapter)
+    case locked(Chapter)
+    case missing
+}
+
 @MainActor
 @Observable
 final class AppModel {
@@ -29,8 +37,11 @@ final class AppModel {
     private(set) var filters: [FilterRecord]
     private(set) var rollouts: [RolloutRecord]
     private(set) var costs: [CostWorksheet]
-    /// Shown in Settings when saved data couldn't be read or written.
+    /// Shown in Settings when saved data couldn't be read, preserved, written or deleted.
     private(set) var storageNotice: String?
+    /// True while an earlier saved file is still in place and couldn't be read or moved
+    /// aside. Nothing is written until the user chooses Delete My Data.
+    private(set) var savingPaused = false
 
     @ObservationIgnored private let searchIndex: SearchIndex
     @ObservationIgnored private let store: FileStore?
@@ -44,14 +55,18 @@ final class AppModel {
 
         var saved = UserData()
         var notice: String?
+        var paused = false
         if let store {
             switch store.load() {
             case .fresh:
                 break
             case .loaded(let data):
                 saved = data
-            case .recovered(let backup):
-                notice = "Saved data couldn't be read, so the app started fresh. The old file was kept as \(backup.lastPathComponent)."
+            case .quarantined(let backup):
+                notice = "Saved data couldn't be read, so the app started fresh. The old file was kept on this iPhone as \(backup.lastPathComponent)."
+            case .blocked(let reason):
+                paused = true
+                notice = Self.blockedNotice(reason)
             }
         } else {
             notice = "This device isn't letting the app save right now, so changes may not be kept."
@@ -64,8 +79,21 @@ final class AppModel {
         rollouts = saved.rollouts
         costs = saved.costs
         storageNotice = notice
+        savingPaused = paused
         entitlements = EntitlementModel(provider: provider, cached: saved.entitlement)
         entitlements.onChange = { [weak self] _ in self?.scheduleSave() }
+    }
+
+    private static func blockedNotice(_ reason: FileStore.BlockReason) -> String {
+        let tail = " Saving is paused so it isn't overwritten. Changes you make now won't be kept. Delete My Data in Settings clears it and turns saving back on."
+        switch reason {
+        case .unreadable:
+            return "Your saved data couldn't be opened right now (the iPhone may still be locked). Restart the app to try again." + tail
+        case .newerVersion(let version):
+            return "Your saved data is from a newer version of this app (format \(version)). Update the app to open it." + tail
+        case .couldNotPreserve:
+            return "Your saved data couldn't be read and couldn't be moved aside safely, so it was left in place." + tail
+        }
     }
 
     static func live() -> AppModel {
@@ -101,6 +129,11 @@ final class AppModel {
     }
 
     // MARK: Reading
+
+    func readerGate(for position: ReaderPosition) -> ReaderGate {
+        guard let chapter = book.chapter(position.chapterID) else { return .missing }
+        return canRead(chapter) ? .readable(chapter) : .locked(chapter)
+    }
 
     func startPosition() -> ReaderPosition {
         if let anchor = lastPosition, canRead(chapterID: anchor.chapterID) {
@@ -182,12 +215,13 @@ final class AppModel {
         return sheet.id
     }
 
+    /// Saves the worksheet exactly as entered, including invalid numbers, so the
+    /// reader sees and fixes them rather than finding a silently changed value.
     func update(_ sheet: CostWorksheet) {
-        let clean = sheet.sanitized()
         guard canEdit(.cost),
               let index = costs.firstIndex(where: { $0.id == sheet.id }),
-              costs[index] != clean else { return }
-        var copy = clean
+              costs[index] != sheet else { return }
+        var copy = sheet
         copy.updatedAt = Date()
         costs[index] = copy
         scheduleSave()
@@ -203,15 +237,41 @@ final class AppModel {
         scheduleSave()
     }
 
-    /// Clears position, bookmarks and tool records. The purchase is the App Store's
-    /// record and is re-read from StoreKit, so it is not affected.
-    func deleteAllUserData() {
+    /// Clears position, bookmarks and tool records, and removes this app's saved file
+    /// and any recovery copies of it. Other files are left alone. The purchase is the
+    /// App Store's record and is re-read from StoreKit, so it is not affected.
+    @discardableResult
+    func deleteAllUserData() -> Bool {
+        pendingSave?.cancel()
+        pendingSave = nil
         lastPosition = nil
         bookmarks = []
         filters = []
         rollouts = []
         costs = []
-        flush()
+
+        guard let store else { return true }
+        let remaining: [URL]
+        do {
+            remaining = try store.deleteAllUserDataFiles()
+        } catch {
+            // It's unknown which saved files exist, so nothing is claimed as deleted and
+            // saving pauses (even if it wasn't paused before) so no saved file is overwritten.
+            savingPaused = true
+            storageNotice = "Your saved data couldn't be checked, so it may not have been deleted. Saving is paused so nothing is overwritten. Try Delete My Data again."
+            return false
+        }
+        if remaining.isEmpty {
+            savingPaused = false
+            storageNotice = nil
+            saveNow()
+            return storageNotice == nil
+        }
+        // Keep saving paused if the original file is still there, so it isn't overwritten.
+        savingPaused = savingPaused && remaining.contains(store.url)
+        storageNotice = "Some saved data couldn't be deleted: " + remaining.map(\.lastPathComponent).joined(separator: ", ") + ". Try Delete My Data again."
+        if !savingPaused { saveNow() }
+        return false
     }
 
     // MARK: Saving
@@ -244,7 +304,7 @@ final class AppModel {
     }
 
     private func saveNow() {
-        guard let store else { return }
+        guard let store, !savingPaused else { return }
         do {
             try store.save(snapshot())
             if storageNotice?.hasPrefix("Couldn't save") == true { storageNotice = nil }

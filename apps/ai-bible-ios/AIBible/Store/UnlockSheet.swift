@@ -37,11 +37,25 @@ struct UnlockSheet: View {
                         }
                         .buttonStyle(.borderedProminent)
                         .controlSize(.large)
-                        .disabled(store.flow == .working || store.displayPrice == nil)
+                        .disabled(!store.canStartPurchase)
 
-                        if store.displayPrice == nil {
-                            Text("The price comes from the App Store. Connect to the internet to see it.")
-                                .font(.footnote).foregroundStyle(.secondary)
+                        switch store.priceState {
+                        case .available:
+                            EmptyView()
+                        case .notLoaded, .loading:
+                            HStack(spacing: 8) {
+                                ProgressView()
+                                Text("Getting the price from the App Store…")
+                            }
+                            .font(.footnote).foregroundStyle(.secondary)
+                        case .unavailable:
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("The App Store price isn't available right now. Check your connection, then try again.")
+                                    .font(.footnote).foregroundStyle(.secondary)
+                                Button("Try Again") {
+                                    Task { await store.refreshPrice() }
+                                }
+                            }
                         }
                         if store.state.awaitingApproval {
                             Label("Waiting for approval. If it was declined, you can ask again.", systemImage: "hourglass")
@@ -77,6 +91,10 @@ struct UnlockSheet: View {
                     }
                 }
             }
+        }
+        .task {
+            // Fetches the price only; a purchase starts only when Buy is tapped.
+            await store.refreshPrice()
         }
         .onChange(of: store.state.access) { _, access in
             if access == .full { dismiss() }
