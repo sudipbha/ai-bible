@@ -100,6 +100,8 @@ struct ContentsView: View {
                 .accessibilityIdentifier("contents.bookmarks")
             }
         }
+        // Identifies the Contents list itself (its collection view); each row keeps its own element and identifier.
+        .accessibilityIdentifier("contents.list")
         .navigationTitle(model.book.title)
     }
 }

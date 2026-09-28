@@ -68,9 +68,10 @@ extension XCUIApplication {
     func backToContents() {
         let back = navigationBars.buttons.element(boundBy: 0)
         if back.waitForExistence(timeout: 5) { back.tap() }
-        let contents = element("contents.bookmarks")
+        // The list itself, not a row: at large text sizes the last rows may not be realized yet.
+        let contents = element("contents.list")
         if !contents.waitForExistence(timeout: 10) {
-            logDiagnostics("Contents list didn't appear", focus: ["contents.bookmarks"])
+            logDiagnostics("Contents list didn't appear", focus: ["contents.list", "contents.bookmarks"])
             XCTFail("Contents list didn't appear")
         }
     }
