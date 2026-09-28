@@ -40,6 +40,17 @@ final class DecisionsJourneyUITests: XCTestCase {
         app.element("decisions.new").waitToAppear()
         app.showcase("42 My AI tool decisions")
 
+        // Side by side and the software payroll are one tap away.
+        app.element("decisions.compare").waitToAppear().tap()
+        app.element("compare.list").waitToAppear()
+        app.showcase("43 Compare tools")
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.element("decisions.payroll").waitToAppear().tap()
+        app.element("payroll.list").waitToAppear()
+        app.showcase("44 Software payroll")
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        row.waitToAppear()
+
         // With a decision saved, the app opens on Decisions.
         app.relaunchKeepingData(store: store)
         app.element("decisions.list").waitToAppear()

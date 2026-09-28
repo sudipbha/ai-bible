@@ -102,6 +102,9 @@ struct RootView: View {
                         .tag(RootTab.settings)
                 }
                 .onAppear { if selection == nil { selection = initialTab } }
+                .onChange(of: IntentRouter.shared.pendingNewEvaluation, initial: true) { _, pending in
+                    if pending { selection = .decisions }
+                }
             }
         }
         .preferredColorScheme(theme.colorScheme)

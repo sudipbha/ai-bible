@@ -26,6 +26,12 @@ struct DecisionsTab: View {
             }
             .navigationTitle("My AI tool decisions")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: IntentRouter.shared.pendingNewEvaluation, initial: true) { _, pending in
+                // "Evaluate an AI tool" from Siri or Shortcuts.
+                guard pending else { return }
+                IntentRouter.shared.pendingNewEvaluation = false
+                path = [.evaluation(model.newEvaluation())]
+            }
             .navigationDestination(for: DecisionRoute.self) { route in
                 switch route {
                 case .evaluation(let id):
