@@ -224,11 +224,178 @@ struct ToolPrompt: Codable, Sendable, Equatable, Hashable, Identifiable {
 enum InlineText {
     static func attributed(_ markdown: String) -> AttributedString {
         let options = AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-        return (try? AttributedString(markdown: markdown, options: options)) ?? AttributedString(markdown)
+        let protected = BareURLText.protect(markdown)
+        guard var result = try? AttributedString(markdown: protected.markdown, options: options) else {
+            return AttributedString(markdown)
+        }
+        BareURLText.restore(protected.urls, in: &result)
+        return result
     }
 
     static func plain(_ markdown: String) -> String {
         String(attributed(markdown).characters)
+    }
+}
+
+/// Foundation's Markdown parser keeps a bare URL's characters literally, so the backslash escapes
+/// the converter writes inside one (before `_`, `*`, `[` and so on) would be shown. Before parsing,
+/// each bare `http(s)://` run that contains such an escape is swapped for a private-use placeholder;
+/// after parsing, the placeholder becomes the URL's literal text, with those escapes removed, keeping
+/// the surrounding styles and adding a link. Runs without escapes are left to Foundation unchanged.
+/// Nothing else changes: code spans, explicit link destinations, whole `<…>` autolinks (including any
+/// URL nested inside one) and text outside URLs are parsed exactly as before, and the stored Markdown
+/// is untouched.
+enum BareURLText {
+    private static let open: Character = "\u{E000}"
+    private static let close: Character = "\u{E001}"
+    private static let asciiPunctuation = Set("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
+    /// Unescaped characters that are Markdown syntax end a bare URL run.
+    private static let stoppers = Set("*_`[]<>~\\\"")
+    /// Trailing characters left out of the link, as in GitHub-style autolinks (still shown as text).
+    private static let trailing = Set(".,:;!?")
+
+    static func protect(_ markdown: String) -> (markdown: String, urls: [String]) {
+        let chars = Array(markdown)
+        if chars.contains(open) || chars.contains(close) { return (markdown, []) }
+        var out = ""
+        var urls: [String] = []
+        var i = 0
+        while i < chars.count {
+            let c = chars[i]
+            if c == "\\", i + 1 < chars.count {
+                out.append(c)
+                out.append(chars[i + 1])
+                i += 2
+            } else if c == "`" {
+                let end = codeSpanEnd(chars, from: i)
+                out.append(contentsOf: chars[i..<end])
+                i = end
+            } else if c == "<", let end = angleAutolinkEnd(chars, from: i) {
+                out.append(contentsOf: chars[i..<end])
+                i = end
+            } else if c == "]", i + 1 < chars.count, chars[i + 1] == "(" {
+                let end = destinationEnd(chars, from: i + 2)
+                out.append(contentsOf: chars[i..<end])
+                i = end
+            } else if startsBareURL(chars, at: i) {
+                var literal = ""
+                var escaped = false
+                var j = i
+                while j < chars.count {
+                    let d = chars[j]
+                    if d == "\\", j + 1 < chars.count, asciiPunctuation.contains(chars[j + 1]),
+                       chars[j + 1] != "<", chars[j + 1] != ">" {
+                        literal.append(chars[j + 1])
+                        escaped = true
+                        j += 2
+                    } else if d.isWhitespace || stoppers.contains(d) {
+                        break
+                    } else {
+                        literal.append(d)
+                        j += 1
+                    }
+                }
+                guard escaped else {
+                    // Nothing to repair: Foundation handles this URL exactly as it always has.
+                    out.append(contentsOf: chars[i..<j])
+                    i = j
+                    continue
+                }
+                out.append(open)
+                out.append(contentsOf: String(urls.count))
+                out.append(close)
+                urls.append(literal)
+                i = j
+            } else {
+                out.append(c)
+                i += 1
+            }
+        }
+        return (out, urls)
+    }
+
+    static func restore(_ urls: [String], in text: inout AttributedString) {
+        for (index, literal) in urls.enumerated().reversed() {
+            guard let range = text.range(of: "\(open)\(index)\(close)") else { continue }
+            let attributes = text[range].runs.first?.attributes ?? AttributeContainer()
+            var replacement = AttributedString(literal, attributes: attributes)
+            var target = literal
+            // As in GitHub-style autolinks: trailing punctuation and an unmatched closing ")" stay text only.
+            while let last = target.last, trailing.contains(last)
+                    || (last == ")" && target.filter({ $0 == ")" }).count > target.filter({ $0 == "(" }).count) {
+                target.removeLast()
+            }
+            if attributes.link == nil, !target.isEmpty, let url = URL(string: target) {
+                let end = replacement.index(replacement.startIndex, offsetByCharacters: target.count)
+                replacement[replacement.startIndex..<end].link = url
+            }
+            text.replaceSubrange(range, with: replacement)
+        }
+    }
+
+    private static func startsBareURL(_ chars: [Character], at i: Int) -> Bool {
+        if i > 0 {
+            let previous = chars[i - 1]
+            if previous.isLetter || previous.isNumber || previous == "<" { return false }
+        }
+        for scheme in ["https://", "http://"] where i + scheme.count <= chars.count {
+            if String(chars[i..<(i + scheme.count)]).lowercased() == scheme { return true }
+        }
+        return false
+    }
+
+    /// End (exclusive) of a CommonMark autolink `<scheme:…>` starting at `i`, or nil if there isn't one.
+    /// Scheme: a letter then 1–31 letters, digits, `+`, `.` or `-`; then `:` and no spaces, `<` or `>`.
+    private static func angleAutolinkEnd(_ chars: [Character], from i: Int) -> Int? {
+        var j = i + 1
+        guard j < chars.count, chars[j].isASCII, chars[j].isLetter else { return nil }
+        let schemeStart = j
+        while j < chars.count, chars[j].isASCII, chars[j].isLetter || chars[j].isNumber || "+.-".contains(chars[j]) {
+            j += 1
+        }
+        guard (2...32).contains(j - schemeStart), j < chars.count, chars[j] == ":" else { return nil }
+        j += 1
+        while j < chars.count {
+            let d = chars[j]
+            if d == ">" { return j + 1 }
+            if d == "<" || d.isWhitespace || d.asciiValue.map({ $0 < 0x20 || $0 == 0x7F }) == true { return nil }
+            j += 1
+        }
+        return nil
+    }
+
+    /// End (exclusive) of a code span opened by a backtick run at `i`, or of the run itself if unclosed.
+    private static func codeSpanEnd(_ chars: [Character], from i: Int) -> Int {
+        var n = 0
+        while i + n < chars.count, chars[i + n] == "`" { n += 1 }
+        var j = i + n
+        while j < chars.count {
+            guard chars[j] == "`" else { j += 1; continue }
+            var m = 0
+            while j + m < chars.count, chars[j + m] == "`" { m += 1 }
+            if m == n { return j + m }
+            j += m
+        }
+        return i + n
+    }
+
+    /// End (exclusive) of an explicit link destination starting after "](", including its ")".
+    private static func destinationEnd(_ chars: [Character], from start: Int) -> Int {
+        var j = start
+        if j < chars.count, chars[j] == "<" {
+            while j < chars.count, chars[j] != ">" { j += 1 }
+        }
+        var depth = 1
+        while j < chars.count {
+            if chars[j] == "\\" { j += 2; continue }
+            if chars[j] == "(" { depth += 1 }
+            if chars[j] == ")" {
+                depth -= 1
+                if depth == 0 { return j + 1 }
+            }
+            j += 1
+        }
+        return chars.count
     }
 }
 

@@ -15,6 +15,7 @@ import simulator_preflight as preflight  # noqa: E402
 SE3 = "com.apple.CoreSimulator.SimDeviceType.iPhone-SE-3rd-generation"
 IPHONE17 = "com.apple.CoreSimulator.SimDeviceType.iPhone-17"
 IOS265 = "com.apple.CoreSimulator.SimRuntime.iOS-26-5"
+IOS262 = "com.apple.CoreSimulator.SimRuntime.iOS-26-2"
 
 
 def devicetypes(*identifiers):
@@ -82,10 +83,74 @@ class WorkflowPinTests(unittest.TestCase):
             self.assertEqual(active.read_text(encoding="utf-8"), example)
         for required in ("runs-on: macos-26 ", "timeout-minutes: 30", "DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer",
                          "AIBIBLE_EXPECT_XCODE_BUILD: 17F113", f"AIBIBLE_SIM_DEVICE_TYPE: {SE3}",
-                         f"AIBIBLE_SIM_RUNTIME: {IOS265}", "persist-credentials: false", "contents: read"):
+                         f"AIBIBLE_SIM_RUNTIME: {IOS262}", "persist-credentials: false", "contents: read"):
             self.assertIn(required, example)
+        self.assertNotIn(IOS265, example, "exactly one runtime is pinned")
         for forbidden in ("-large", "-xlarge", "secrets.", "actions/cache", "upload-artifact", "CODE_SIGN"):
             self.assertNotIn(forbidden, example.replace("(not -large / -xlarge)", ""))
+
+
+
+class PngBytesTests(unittest.TestCase):
+    """Bundled PNGs must be copied byte-for-byte; the app checks the covers' SHA-256."""
+
+    APP = Path(__file__).resolve().parent.parent.parent
+    SCRIPT = APP / "ci" / "check-resource-bytes.sh"
+
+    def test_png_processing_is_off_for_the_app_and_hosted_test_targets(self):
+        text = (self.APP / "project.yml").read_text(encoding="utf-8")
+        blocks = {}
+        for name in ("AIBible", "AIBibleTests", "AIBibleUITests"):
+            start = text.index(f"\n  {name}:\n")
+            nexts = [text.index(f"\n  {n}:\n") for n in ("AIBible", "AIBibleTests", "AIBibleUITests", "schemes")
+                     if f"\n  {n}:\n" in text and text.index(f"\n  {n}:\n") > start]
+            nexts += [text.index("\nschemes:")] if "\nschemes:" in text else []
+            blocks[name] = text[start:min(nexts)]
+        for name in ("AIBible", "AIBibleTests"):
+            self.assertIn('COMPRESS_PNG_FILES: "NO"', blocks[name], name)
+            self.assertIn('STRIP_PNG_TEXT: "NO"', blocks[name], name)
+
+    def test_ci_reads_back_both_synthetic_pngs_after_the_build(self):
+        script = (self.APP / "ci" / "run-tests.sh").read_text(encoding="utf-8")
+        build = script.index("xcodebuild build-for-testing")
+        readback = script.index("check-resource-bytes.sh")
+        tests = script.index("xcodebuild test-without-building")
+        self.assertTrue(build < readback < tests, "readback runs after the build and before the tests")
+        for source, built in (("AIBible/Resources/Fixtures/presentation-fixture-cover.png", "$APP_BUNDLE/presentation-fixture-cover.png"),
+                              ("AIBibleTests/ConverterSample/synthetic-sample-cover.png",
+                               "$APP_BUNDLE/PlugIns/AIBibleTests.xctest/synthetic-sample-cover.png")):
+            self.assertIn(source, script)
+            self.assertIn(built, script)
+
+    def test_synthetic_source_pngs_are_unchanged(self):
+        import hashlib
+        for relative in ("AIBible/Resources/Fixtures/presentation-fixture-cover.png",
+                         "AIBibleTests/ConverterSample/synthetic-sample-cover.png"):
+            data = (self.APP / relative).read_bytes()
+            self.assertEqual((len(data), hashlib.sha256(data).hexdigest()),
+                             (73, "4f7aa88955dc030612a08ec5f5867587911ef0fa6b9e152a11ed478ee72d0574"), relative)
+
+    @unittest.skipUnless(__import__("shutil").which("bash"), "the readback is a POSIX bash script; bash is not installed")
+    def test_readback_script_passes_identical_and_fails_drift_or_missing(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            source, same, drifted = folder / "cover.png", folder / "same.png", folder / "drifted.png"
+            source.write_bytes(b"\x89PNG original")
+            same.write_bytes(b"\x89PNG original")
+            drifted.write_bytes(b"\x89PNG re-encoded")
+            run = lambda *files: subprocess.run(["bash", self.SCRIPT.as_posix(), *[f.as_posix() for f in files]],
+                                                capture_output=True, text=True)
+            ok = run(source, same)
+            self.assertEqual(ok.returncode, 0, ok.stderr)
+            self.assertIn("source 13 B", ok.stdout)
+            bad = run(source, same, source, drifted)
+            self.assertEqual(bad.returncode, 1)
+            self.assertIn("drifted.png differs from its source", bad.stderr)
+            missing = run(source, folder / "absent.png")
+            self.assertEqual(missing.returncode, 1)
+            self.assertIn("built copy missing", missing.stderr)
+            odd = subprocess.run(["bash", self.SCRIPT.as_posix(), source.as_posix()], capture_output=True, text=True)
+            self.assertEqual(odd.returncode, 2)
 
 
 if __name__ == "__main__":

@@ -136,6 +136,12 @@ done
 # Public builds package only the synthetic fixture: no converted or private book content.
 bash "$APP_DIR/ci/check-no-private-content.sh" "$APP_BUNDLE" || fail "private or converted content found in the app bundle"
 plutil -lint "$APP_BUNDLE/PrivacyInfo.xcprivacy"
+# Synthetic PNG covers must be copied byte-for-byte (their SHA-256 is checked by the app).
+bash "$APP_DIR/ci/check-resource-bytes.sh" \
+  "$APP_DIR/AIBible/Resources/Fixtures/presentation-fixture-cover.png" "$APP_BUNDLE/presentation-fixture-cover.png" \
+  "$APP_DIR/AIBibleTests/ConverterSample/synthetic-sample-cover.png" \
+  "$APP_BUNDLE/PlugIns/AIBibleTests.xctest/synthetic-sample-cover.png" \
+  || fail "a bundled synthetic PNG differs from its source (PNG processing?)"
 
 section "Run unit tests"
 set +e

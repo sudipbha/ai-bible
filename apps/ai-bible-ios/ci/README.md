@@ -35,13 +35,17 @@ The template and `run-tests.sh` together do the following.
 
 **Simulator:**
 - With `AIBIBLE_SIM_DEVICE_TYPE` and `AIBIBLE_SIM_RUNTIME` set (the workflow sets iPhone SE (3rd
-  generation) and iOS 26.5):
+  generation) and iOS 26.2):
   - `ci/simulator_preflight.py` checks, from `simctl list -j`, that the device type is installed, the
     runtime is installed and available, and that the runtime lists the device type as supported;
   - it then creates one ephemeral simulator of exactly that pair and deletes it at exit;
   - if any check or the creation fails, the run fails. It never substitutes another device and never
     downloads a runtime.
-- The inventory lists iPhone SE (3rd generation) as **not pre-created** on iOS 26.5. That neither
+- Run 36367022185 created that device on iOS 26.5, but local StoreKit test sessions failed there
+  (`SKInternalErrorDomain Code=3`). Apple's developer forums report a known command-line `SKTestSession`
+  issue on recent Xcode, and one reporter saw it work on iOS 26.2; that is evidence, not a proven fix.
+  The next run therefore pins iOS 26.2, which is installed on the same image. The inventory lists
+  iPhone SE (3rd generation) as **not pre-created** on iOS 26.2 either. That neither
   proves nor rules out support; only the preflight on the runner can tell. If it fails, a different
   exact device would need root approval, with its different screen geometry stated.
 - Without those variables (local runs), picks the newest installed iPhone running iOS 17.0 or later.
@@ -49,6 +53,8 @@ The template and `run-tests.sh` together do the following.
 
 **Build and test:**
 - Runs `build-for-testing` with `CODE_SIGNING_ALLOWED=NO`.
+- Compares both synthetic PNG covers in the built app and hosted-test bundle with their sources,
+  byte for byte (`ci/check-resource-bytes.sh`); PNG compression and text stripping are off in `project.yml`.
 - Checks that `book.fixture.json` and `PrivacyInfo.xcprivacy` are inside the built app and that
   `Products.storekit` isn't. `ci/check-no-private-content.sh` then fails the run if any converted or
   private file is in the bundle: `*.epub` (any case), other `book.*.json`, any `*.private.*` (such as the
@@ -79,6 +85,6 @@ Proposed steps, each needing explicit owner approval at the time:
 4. Only if the owner later merges the pull request does `workflow_dispatch` become available on `main` for manual reruns.
 
 Before step 1, confirm the following:
-- `Xcode_26.6` (build 17F113) and the iOS 26.5 simulator runtime are still listed in the current macos-26 arm64
+- `Xcode_26.6` (build 17F113) and the iOS 26.2 simulator runtime are still listed in the current macos-26 arm64
   runner-image README: https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
 - The checkout commit still matches the v7.0.1 tag.

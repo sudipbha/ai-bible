@@ -25,11 +25,12 @@ jobs:
       # (macOS 26.6.2): Xcode 26.6, build 17F113. The script fails if either differs.
       DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
       AIBIBLE_EXPECT_XCODE_BUILD: 17F113
-      # One ephemeral iPhone SE (3rd generation) on the installed iOS 26.5 runtime. The image lists
-      # no pre-created SE; the script checks the runtime supports this device type and fails
-      # without substituting another device or downloading a runtime.
+      # One ephemeral iPhone SE (3rd generation) on the installed iOS 26.2 runtime (run 36367022185
+      # used iOS 26.5, where local StoreKit test sessions failed with SKInternalErrorDomain Code=3).
+      # The image lists no pre-created SE; the script checks the runtime supports this device type
+      # and fails without substituting another device or downloading a runtime.
       AIBIBLE_SIM_DEVICE_TYPE: com.apple.CoreSimulator.SimDeviceType.iPhone-SE-3rd-generation
-      AIBIBLE_SIM_RUNTIME: com.apple.CoreSimulator.SimRuntime.iOS-26-5
+      AIBIBLE_SIM_RUNTIME: com.apple.CoreSimulator.SimRuntime.iOS-26-2
     steps:
       - name: Check out (read-only token, not persisted)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

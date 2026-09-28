@@ -24,6 +24,9 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.aibible.app   # placeholder
+        # Copy PNG resources byte-for-byte: covers are checked against their recorded SHA-256.
+        COMPRESS_PNG_FILES: "NO"
+        STRIP_PNG_TEXT: "NO"
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: "AI Bible"
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
@@ -47,6 +50,8 @@ targets:
       base:
         GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.example.aibible.tests   # placeholder
+        COMPRESS_PNG_FILES: "NO"
+        STRIP_PNG_TEXT: "NO"
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/AIBible.app/AIBible"
         BUNDLE_LOADER: "$(TEST_HOST)"
   AIBibleUITests:

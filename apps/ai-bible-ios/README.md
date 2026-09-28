@@ -2,7 +2,7 @@
 
 Status as of 28 September 2026: **prototype. Not signed, not submitted, not tested on a real iPhone.**
 - The source was written in a Linux environment with no Swift toolchain or Xcode.
-- Latest hosted-Mac result: GitHub Actions run 36358639807 on commit `247b33a` (Xcode 26.3, iPhone SE
+- Earlier hosted-Mac result: GitHub Actions run 36358639807 on commit `247b33a` (Xcode 26.3, iPhone SE
   (3rd generation) simulator, iOS 26.2).
   - The build succeeded. 87 unique tests ran: 81 hosted and 6 UI.
   - **86 passed and 1 failed.** All 6 UI tests passed, including the three reader journeys, the paid
@@ -11,8 +11,20 @@ Status as of 28 September 2026: **prototype. Not signed, not submitted, not test
     didn't unlock the app.
   - The log shows the local "StoreKit Testing in Xcode" certificate reported as expired, and a transaction
     treated as unverified. That this is the cause is **not proven**, and it remains an open failure.
-- The converter, the extended content schema and the tests added after that run (see "Content") have
-  **not been compiled or run on a Mac.** Only the converter's Python tests have run.
+- Latest hosted-Mac result: GitHub Actions run 36367022185 on commit `b54e251` (macos-26, Xcode 26.6,
+  iPhone SE (3rd generation) simulator, iOS 26.5).
+  - The build passed. 115 unique tests ran: **97 passed, 18 failed and 0 skipped.**
+  - 10 tests failed because the synthetic PNG covers didn't match their SHA-256. The log shows Xcode's PNG
+    copy step processing both files. That this changed their bytes is the leading hypothesis, not a
+    proven cause, until the built files' bytes are checked.
+  - 1 test failed because Foundation showed the converter's backslash escapes inside a bare URL.
+  - 7 tests failed because local StoreKit test sessions didn't load the product.
+- Changes made after that run, in source only and **not yet compiled or run on a Mac:**
+  - PNG processing is turned off for the app and hosted test targets, and CI reads back both built PNGs
+    before the tests.
+  - Bare URLs that contain the converter's escapes are shown literally (`BareURLText`).
+  - The simulator runtime is pinned to iOS 26.2 for the StoreKit failures. Whether that helps is unknown.
+  - Their new Swift tests (`InlineTextURLTests`) have never run. Only the Python tests have run, on Linux.
 - Nothing here guarantees App Store approval.
 
 ## What it is
