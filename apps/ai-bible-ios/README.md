@@ -1,30 +1,17 @@
 # AI Bible — native iOS reader (prototype source)
 
 Status as of 28 September 2026: **prototype. Not signed, not submitted, not tested on a real iPhone.**
-- The source was written in a Linux environment with no Swift toolchain or Xcode.
-- Earlier hosted-Mac result: GitHub Actions run 36358639807 on commit `247b33a` (Xcode 26.3, iPhone SE
-  (3rd generation) simulator, iOS 26.2).
-  - The build succeeded. 87 unique tests ran: 81 hosted and 6 UI.
-  - **86 passed and 1 failed.** All 6 UI tests passed, including the three reader journeys, the paid
-    purchase journey and the Filter journey.
-  - The failure: `StoreKitIntegrationTests.testAskToBuyIsPendingUntilApproved`, 2 assertions. The approval
-    didn't unlock the app.
-  - The log shows the local "StoreKit Testing in Xcode" certificate reported as expired, and a transaction
-    treated as unverified. That this is the cause is **not proven**, and it remains an open failure.
-- Latest hosted-Mac result: GitHub Actions run 36367022185 on commit `b54e251` (macos-26, Xcode 26.6,
-  iPhone SE (3rd generation) simulator, iOS 26.5).
-  - The build passed. 115 unique tests ran: **97 passed, 18 failed and 0 skipped.**
-  - 10 tests failed because the synthetic PNG covers didn't match their SHA-256. The log shows Xcode's PNG
-    copy step processing both files. That this changed their bytes is the leading hypothesis, not a
-    proven cause, until the built files' bytes are checked.
-  - 1 test failed because Foundation showed the converter's backslash escapes inside a bare URL.
-  - 7 tests failed because local StoreKit test sessions didn't load the product.
-- Changes made after that run, in source only and **not yet compiled or run on a Mac:**
-  - PNG processing is turned off for the app and hosted test targets, and CI reads back both built PNGs
-    before the tests.
-  - Bare URLs that contain the converter's escapes are shown literally (`BareURLText`).
-  - The simulator runtime is pinned to iOS 26.2 for the StoreKit failures. Whether that helps is unknown.
-  - Their new Swift tests (`InlineTextURLTests`) have never run. Only the Python tests have run, on Linux.
+- Latest hosted-Mac result: GitHub Actions run 36411494769 on commit `0d6d942` (macos-26 arm64 image
+  20260907.0351.1, Xcode 26.6 build 17F113, one ephemeral iPhone SE (3rd generation) simulator on iOS 26.2).
+  - Build passed. **126 unique tests: 126 passed, 0 failed, 0 skipped** (119 hosted, 7 UI).
+  - Both synthetic PNG covers read back byte-identical to their sources before the tests.
+  - The run uploaded 13 screenshots of the synthetic app (artifact `aibible-screenshots`, kept 7 days).
+- Earlier runs on this branch failed intermittently in two UI journeys: Delete My Data in the Filter journey
+  (run 36372328824) and resuming at a manually scrolled place (run 36374747429). Both passed in later runs;
+  neither cause was proven, so treat them as watch items rather than fixed.
+- These are simulator results with **synthetic fixture content only**. The full private book has been
+  converted locally but has **never been loaded or rendered by the app**, and nothing has run on a physical
+  iPhone, with VoiceOver, or against the App Store sandbox.
 - Nothing here guarantees App Store approval.
 
 ## What it is
@@ -186,9 +173,10 @@ them passed except `testAskToBuyIsPendingUntilApproved` (see Status).
 ## Hosted-Mac route (active on this branch's draft pull request)
 
 `.github/workflows/ios-app-tests.yml` (a copy of `ci/ios-app-tests.yml.example`) runs `ci/run-tests.sh` on a
-standard GitHub-hosted `macos-15` runner for pull requests that touch `apps/ai-bible-ios/**`. The script
-generates the project, checks its wiring and resources, and runs the scheme's whole test action. Its first
-run, 36337255552, passed the 72 unit tests; the latest, 36358639807, ran 87 tests with one failure (see Status). The workflow file exists only on this branch, not on `main`.
+standard GitHub-hosted `macos-26` runner for pull requests that touch `apps/ai-bible-ios/**`. The script
+checks the pinned Xcode build and simulator, generates the project, checks its wiring and bundled resources,
+and runs the scheme's whole test action. Its only upload is the UI tests' named screenshots of the synthetic
+app (`aibible-screenshots`, 7 days). The workflow file exists only on this branch, not on `main`.
 See `ci/README.md` for details.
 
 ## Build route on your own Mac
@@ -220,9 +208,11 @@ xcodebuild test -project AIBible.xcodeproj -scheme AIBible \
   - `DEVELOPMENT_TEAM`.
   - `AppConfig.fullBookProductID` (to match the App Store Connect product).
   - `AppConfig.privacyPolicyURL` and `supportURL` (both required).
-  - The app icon (none is included yet).
-- **Real content:** root review of the converter, then the local conversion, validation report and proofread (see above).
-- **Ask to Buy:** the local StoreKit Ask to Buy test still fails (see Status); its cause is unproven.
+- **Real content:** the local conversion is done, but the private build must still be made and checked on a Mac
+  (`converter/stage-private-build.sh`): loading, rendering, cover, contents, tools and a proofread. The
+  release edition must also be reconciled with the pinned EPUB.
+- **Purchases:** local StoreKit tests (including Ask to Buy) pass in the simulator; the App Store sandbox and
+  TestFlight have not been tried.
 - **Privacy manifest:** check the reason codes against Apple's current documentation (UserDefaults `CA92.1`
   is declared).
 - **Deferred in this prototype:**
