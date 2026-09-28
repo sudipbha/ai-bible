@@ -1,11 +1,11 @@
 # AI Bible — native iOS reader (prototype source)
 
 Status as of 28 September 2026: **prototype. Not signed, not submitted, not tested on a real iPhone.**
-- Latest hosted-Mac result: GitHub Actions run 36411494769 on commit `0d6d942` (macos-26 arm64 image
+- Latest hosted-Mac result: GitHub Actions run 36421344665 on commit `55ee5f2` (macos-26 arm64 image
   20260907.0351.1, Xcode 26.6 build 17F113, one ephemeral iPhone SE (3rd generation) simulator on iOS 26.2).
-  - Build passed. **126 unique tests: 126 passed, 0 failed, 0 skipped** (119 hosted, 7 UI).
+  - Build passed. **140 unique tests: 140 passed, 0 failed, 0 skipped** (132 hosted, 8 UI).
   - Both synthetic PNG covers read back byte-identical to their sources before the tests.
-  - The run uploaded 13 screenshots of the synthetic app (artifact `aibible-screenshots`, kept 7 days).
+  - The run uploaded 18 screenshots of the synthetic app (artifact `aibible-screenshots`, kept 7 days).
 - Earlier runs on this branch failed intermittently in two UI journeys: Delete My Data in the Filter journey
   (run 36372328824) and resuming at a manually scrolled place (run 36374747429). Both passed in later runs;
   neither cause was proven, so treat them as watch items rather than fixed.
