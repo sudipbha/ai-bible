@@ -18,6 +18,7 @@ struct UserData: Codable, Sendable, Equatable {
     var filters: [FilterRecord] = []
     var rollouts: [RolloutRecord] = []
     var costs: [CostWorksheet] = []
+    var evaluations: [ToolEvaluation] = []
     var entitlement = EntitlementState()
 
     init() {}
@@ -32,6 +33,7 @@ struct UserData: Codable, Sendable, Equatable {
         filters = try c.decodeIfPresent([FilterRecord].self, forKey: .filters) ?? []
         rollouts = try c.decodeIfPresent([RolloutRecord].self, forKey: .rollouts) ?? []
         costs = try c.decodeIfPresent([CostWorksheet].self, forKey: .costs) ?? []
+        evaluations = try c.decodeIfPresent([ToolEvaluation].self, forKey: .evaluations) ?? []
         entitlement = try c.decodeIfPresent(EntitlementState.self, forKey: .entitlement) ?? EntitlementState()
     }
 }

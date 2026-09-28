@@ -66,6 +66,34 @@ enum ToolExport {
         return lines.joined(separator: "\n")
     }
 
+    /// A one-tool decision summary: status and history, review date, the owner's note, then the
+    /// linked Filter, cost and trial records in full.
+    @MainActor
+    static func text(_ evaluation: ToolEvaluation, model: AppModel) -> String {
+        var lines = ["AI tool decision", evaluation.displayName]
+        if !evaluation.taskName.isEmpty { lines.append("Task: \(evaluation.taskName)") }
+        lines.append("Status: \(evaluation.status.title)")
+        for change in evaluation.history {
+            lines.append("  \(change.status.title) since \(dateString(change.date))")
+        }
+        if evaluation.status.isOpen, let review = evaluation.reviewDate {
+            lines.append("Review date: \(dateString(review))")
+        }
+        if !evaluation.decisionNote.isEmpty { lines.append("Note: \(evaluation.decisionNote)") }
+        let tools = model.book.tools
+        if let id = evaluation.filterID, let record = model.filters.first(where: { $0.id == id }) {
+            lines += ["", "----", text(record, questions: tools.filterQuestions)]
+        }
+        if let id = evaluation.costID, let sheet = model.costs.first(where: { $0.id == id }) {
+            lines += ["", "----", text(sheet)]
+        }
+        if let id = evaluation.rolloutID, let record = model.rollouts.first(where: { $0.id == id }) {
+            lines += ["", "----", text(record, items: tools.rolloutItems)]
+        }
+        lines.append(footer(updated: evaluation.updatedAt))
+        return lines.joined(separator: "\n")
+    }
+
     static func number(_ value: Double) -> String {
         guard value.isFinite, abs(value) <= MinutesFormat.maxFormattable else { return "invalid" }
         return value == value.rounded() ? String(Int(value)) : String(format: "%.1f", value)

@@ -58,6 +58,7 @@ final class AppModel {
     private(set) var filters: [FilterRecord]
     private(set) var rollouts: [RolloutRecord]
     private(set) var costs: [CostWorksheet]
+    private(set) var evaluations: [ToolEvaluation]
     /// Shown in Settings when saved data couldn't be read, preserved, written or deleted.
     private(set) var storageNotice: String?
     /// True while an earlier saved file is still in place and couldn't be read or moved
@@ -67,6 +68,8 @@ final class AppModel {
     @ObservationIgnored private let searchIndex: SearchIndex
     @ObservationIgnored private let store: FileStore?
     @ObservationIgnored private var pendingSave: Task<Void, Never>?
+    /// Review-date reminders. Nil in unit tests; the live app uses local notifications.
+    @ObservationIgnored var reminders: (any ReviewReminderScheduling)?
 
     init(book: BookBundle, loadError: String? = nil, store: FileStore?, provider: any PurchaseProvider, coverImage: Data? = nil) {
         self.book = book
@@ -104,6 +107,7 @@ final class AppModel {
         filters = saved.filters
         rollouts = saved.rollouts
         costs = saved.costs
+        evaluations = saved.evaluations
         storageNotice = notice
         savingPaused = paused
         entitlements = EntitlementModel(provider: provider, cached: saved.entitlement)
@@ -140,7 +144,9 @@ final class AppModel {
         #endif
         do {
             let edition = try BookLoader.loadSelectedEdition(named: resource, expectFixture: expectFixture)
-            return AppModel(book: edition.book, store: store, provider: provider, coverImage: edition.coverImage)
+            let model = AppModel(book: edition.book, store: store, provider: provider, coverImage: edition.coverImage)
+            model.reminders = NotificationReviewReminders()
+            return model
         } catch {
             // No fallback to other content: the selected edition is shown or nothing is.
             let empty = BookBundle(
@@ -302,6 +308,102 @@ final class AppModel {
         scheduleSave()
     }
 
+    // MARK: Decisions
+
+    /// Starts deciding about a new AI tool, with its own Filter check (free) attached.
+    @discardableResult
+    func newEvaluation(now: Date = Date()) -> UUID {
+        var evaluation = ToolEvaluation(now: now)
+        let filter = FilterRecord()
+        filters.insert(filter, at: 0)
+        evaluation.filterID = filter.id
+        evaluations.insert(evaluation, at: 0)
+        scheduleSave()
+        return evaluation.id
+    }
+
+    /// Saves the evaluation. A status change is recorded with its date, and the tool and task
+    /// names are copied to the linked records so they read the same in Tools.
+    func update(_ evaluation: ToolEvaluation, now: Date = Date()) {
+        guard let index = evaluations.firstIndex(where: { $0.id == evaluation.id }),
+              evaluations[index] != evaluation else { return }
+        let old = evaluations[index]
+        var copy = evaluation
+        // The history is the model's record: a change of status is appended here, never taken
+        // from the caller, so an out-of-date copy can't drop an earlier entry.
+        copy.status = old.status
+        copy.history = old.history
+        copy.setStatus(evaluation.status, at: now)
+        copy.updatedAt = now
+        evaluations[index] = copy
+        if copy.toolName != old.toolName || copy.taskName != old.taskName {
+            syncNames(from: copy)
+        }
+        syncReminders(now: now)
+        scheduleSave()
+    }
+
+    /// Attaches a new cost worksheet. Needs the full book, like the worksheet itself.
+    func attachCostWorksheet(to evaluationID: UUID) -> UUID? {
+        guard let index = evaluations.firstIndex(where: { $0.id == evaluationID }),
+              let sheetID = newCostWorksheet() else { return nil }
+        evaluations[index].costID = sheetID
+        syncNames(from: evaluations[index])
+        scheduleSave()
+        return sheetID
+    }
+
+    /// Starts a trial: attaches a rollout record, moves the status to In trial and, if no review
+    /// date is set yet, proposes one two weeks out. Needs the full book, like the rollout tracker.
+    func startTrial(for evaluationID: UUID, now: Date = Date(), calendar: Calendar = .current) -> UUID? {
+        guard let index = evaluations.firstIndex(where: { $0.id == evaluationID }),
+              let rolloutID = newRollout() else { return nil }
+        var evaluation = evaluations[index]
+        evaluation.rolloutID = rolloutID
+        evaluation.setStatus(.inTrial, at: now)
+        if evaluation.reviewDate == nil {
+            evaluation.reviewDate = calendar.date(byAdding: .day, value: 14, to: now)
+        }
+        evaluation.updatedAt = now
+        evaluations[index] = evaluation
+        if let rollout = rollouts.firstIndex(where: { $0.id == rolloutID }) {
+            rollouts[rollout].startDate = now
+            rollouts[rollout].reviewDate = evaluation.reviewDate
+        }
+        syncNames(from: evaluation)
+        syncReminders(now: now)
+        scheduleSave()
+        return rolloutID
+    }
+
+    /// Removes evaluations only. Their Filter, cost and trial records stay in Tools.
+    func deleteEvaluations(ids: Set<UUID>) {
+        evaluations.removeAll { ids.contains($0.id) }
+        syncReminders()
+        scheduleSave()
+    }
+
+    func evaluation(linkedTo recordID: UUID) -> ToolEvaluation? {
+        evaluations.first { [$0.filterID, $0.costID, $0.rolloutID].contains(recordID) }
+    }
+
+    private func syncNames(from evaluation: ToolEvaluation) {
+        if let id = evaluation.filterID, let i = filters.firstIndex(where: { $0.id == id }) {
+            filters[i].toolName = evaluation.toolName
+            filters[i].taskName = evaluation.taskName
+        }
+        if canEdit(.rollout), let id = evaluation.rolloutID, let i = rollouts.firstIndex(where: { $0.id == id }) {
+            rollouts[i].toolName = evaluation.toolName
+        }
+        if canEdit(.cost), let id = evaluation.costID, let i = costs.firstIndex(where: { $0.id == id }) {
+            costs[i].title = [evaluation.toolName, evaluation.taskName].filter { !$0.isEmpty }.joined(separator: " · ")
+        }
+    }
+
+    private func syncReminders(now: Date = Date()) {
+        reminders?.replaceAll(with: PlannedReminder.plan(evaluations, now: now))
+    }
+
     /// Deleting is always allowed, locked or not: the reader owns their records.
     func delete(_ tool: ToolKind, ids: Set<UUID>) {
         switch tool {
@@ -326,6 +428,8 @@ final class AppModel {
         filters = []
         rollouts = []
         costs = []
+        evaluations = []
+        syncReminders()
 
         guard let store else { return true }
         let remaining: [URL]
@@ -358,6 +462,7 @@ final class AppModel {
         data.lastPosition = lastPosition
         data.bookmarks = bookmarks
         data.filters = filters
+        data.evaluations = evaluations
         data.rollouts = rollouts
         data.costs = costs
         data.entitlement = entitlements.state

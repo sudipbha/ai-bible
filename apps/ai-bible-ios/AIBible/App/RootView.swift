@@ -68,27 +68,46 @@ enum ReadRoute: Hashable {
     case edition(EditionFocus)
 }
 
+enum RootTab: Hashable {
+    case decisions, read, tools, search, settings
+}
+
 struct RootView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(ReaderPreferences.themeKey) private var theme = ReaderTheme.system
+    /// A fresh install opens in the reader. Once the owner has AI tool decisions, the app opens
+    /// on them instead: the book explains the method, and Decisions is where it is used.
+    @State private var selection: RootTab?
 
     var body: some View {
         Group {
             if let error = model.loadError {
                 ContentUnavailableView(error, systemImage: "book.closed")
             } else {
-                TabView {
+                TabView(selection: Binding(get: { selection ?? initialTab }, set: { selection = $0 })) {
+                    DecisionsTab()
+                        .tabItem { Label("Decisions", systemImage: "checkmark.seal") }
+                        .tag(RootTab.decisions)
                     ReadTab()
                         .tabItem { Label("Read", systemImage: "book") }
+                        .tag(RootTab.read)
                     ToolsTab()
                         .tabItem { Label("Tools", systemImage: "checklist") }
+                        .tag(RootTab.tools)
                     SearchTab()
                         .tabItem { Label("Search", systemImage: "magnifyingglass") }
+                        .tag(RootTab.search)
                     SettingsTab()
                         .tabItem { Label("Settings", systemImage: "gearshape") }
+                        .tag(RootTab.settings)
                 }
+                .onAppear { if selection == nil { selection = initialTab } }
             }
         }
         .preferredColorScheme(theme.colorScheme)
+    }
+
+    private var initialTab: RootTab {
+        model.evaluations.isEmpty ? .read : .decisions
     }
 }
