@@ -25,11 +25,13 @@ final class ReaderJourneyUITests: XCTestCase {
         // Launch opens straight into the free chapter, with no onboarding.
         app.element("reader.chapterTitle").waitToAppear()
         app.element("block.fx.ch01.p1").waitToAppear()
+        app.showcase("01 Reader, chapter 1")
 
         // A paid chapter from Contents opens the unlock sheet, not the chapter.
         app.backToContents()
         app.element("contents.chapter.fx.ch02").tap()
         app.element("unlock.buy").waitToAppear()
+        app.showcase("02 Unlock sheet")
         app.element("unlock.close").tap()
         app.element("unlock.buy").waitToDisappear()
 
@@ -39,6 +41,7 @@ final class ReaderJourneyUITests: XCTestCase {
         field.tap()
         field.typeText("Tool")
         app.element("search.lockedMatches").waitToAppear()
+        app.showcase("03 Search")
         XCTAssertFalse(app.element("search.result.fx.ch02.t1").exists, "Paid text must not be listed")
         field.buttons.firstMatch.tap()   // clear
         field.typeText("resume")
@@ -62,8 +65,11 @@ final class ReaderJourneyUITests: XCTestCase {
         app.element("block.fx.ch01.p4").waitToAppear()
         app.backToContents()
         app.element("contents.continue").waitToAppear()
+        app.showcase("04 Contents")
         app.element("contents.bookmarks").tap()
-        app.element("bookmark.fx.ch01.p4").waitToAppear().tap()
+        let saved = app.element("bookmark.fx.ch01.p4").waitToAppear()
+        app.showcase("05 Bookmarks")
+        saved.tap()
         app.element("block.fx.ch01.p4").waitToAppear()
         withExtendedLifetime(storeKit) {}
     }

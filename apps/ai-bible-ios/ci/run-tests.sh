@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Builds and runs the AIBible unit tests on a macOS machine with Xcode.
-# Synthetic fixtures only. No signing, no secrets, no caches, no uploaded artifacts.
+# Synthetic fixtures only. No signing, no secrets, no caches. The only files kept are the UI tests'
+# named screenshots (AIBIBLE-SHOT), copied to $AIBIBLE_SCREENSHOT_DIR when that is set.
 #
 # Run from anywhere:  bash apps/ai-bible-ios/ci/run-tests.sh
 # Requires DEVELOPER_DIR to point at the intended Xcode (it is never guessed).
@@ -152,4 +153,35 @@ xcodebuild test-without-building \
 status=$?
 set -e
 echo "xcodebuild test exit status: $status"
+
+# Copy the UI tests' named screenshots out of the result bundle for people to look at. This never
+# changes the test result: any problem here is only a warning.
+if [[ -n "${AIBIBLE_SCREENSHOT_DIR:-}" ]]; then
+  section "Export screenshots"
+  if xcrun xcresulttool export attachments --path "$WORK/Tests.xcresult" --output-path "$WORK/attachments" >/dev/null; then
+    python3 - "$WORK/attachments" "$AIBIBLE_SCREENSHOT_DIR" <<'PY' || echo "::warning::screenshots could not be copied"
+import json, os, re, shutil, sys
+source, target = sys.argv[1], sys.argv[2]
+os.makedirs(target, exist_ok=True)
+found = []
+def walk(node):
+    if isinstance(node, dict):
+        name, file = node.get("suggestedHumanReadableName", ""), node.get("exportedFileName")
+        if file and "AIBIBLE-SHOT" in name:
+            found.append((name, file))
+        for value in node.values(): walk(value)
+    elif isinstance(node, list):
+        for value in node: walk(value)
+walk(json.load(open(os.path.join(source, "manifest.json"))))
+for name, file in sorted(found):
+    stem = os.path.splitext(name.split("AIBIBLE-SHOT", 1)[1])[0]
+    stem = re.sub(r"_\d+_[0-9A-Fa-f-]{36}$", "", stem)   # xcresulttool's index and UUID suffix
+    label = re.sub(r"[^A-Za-z0-9 ._-]+", "", stem).strip()
+    shutil.copy(os.path.join(source, file), os.path.join(target, label[:80] + os.path.splitext(file)[1]))
+print(f"{len(found)} screenshot(s) copied")
+PY
+  else
+    echo "::warning::xcresulttool could not export attachments"
+  fi
+fi
 exit "$status"

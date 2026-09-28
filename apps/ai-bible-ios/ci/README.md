@@ -11,7 +11,8 @@ The template and `run-tests.sh` together do the following.
   **This toolchain change is prepared but has not run.** Earlier runs used `macos-15` with Xcode 26.3.
 - Grants only `contents: read`.
 - Checks out code with `actions/checkout` pinned to commit `3d3c42e5…` (v7.0.1), with `persist-credentials: false`.
-- Uses no secrets, signing, caches or uploaded artifacts, and synthetic fixtures only.
+- Uses no secrets, signing or caches, and synthetic fixtures only. Its one upload is `aibible-screenshots`:
+  the UI tests' named screenshots (`showcase(...)`), kept for 7 days, so the app can be seen without a Mac.
 
 **Xcode:**
 - Selects Xcode through `DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer`, and fails if it's missing.

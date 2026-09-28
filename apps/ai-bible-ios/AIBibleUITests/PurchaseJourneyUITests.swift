@@ -58,6 +58,7 @@ final class PurchaseJourneyUITests: XCTestCase {
         app.type("UI test rollout", into: "rollout.toolName")
         app.element("rollout.step.fx.rollout.s1").waitToAppear().tapSwitch()
         app.element("rollout.progress").waitFor("label BEGINSWITH 'Checklist: 1 of 6'")
+        app.showcase("10 Rollout tracker")
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         // Cost worksheet with the fictional vector: 20 × 12 = 240, 20 × 8 + 90 = 250, later 160.
@@ -74,6 +75,7 @@ final class PurchaseJourneyUITests: XCTestCase {
         app.expectText(containing: "Manual, 240 min (4 h)")
         app.expectText(containing: "First trial period, 250 min (4 h 10 min)")
         app.expectText(containing: "Later periods, 160 min (2 h 40 min)")
+        app.showcase("11 Cost worksheet")
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         // Both records persist across a relaunch, and the purchase is found again.

@@ -25,10 +25,12 @@ final class FilterToolUITests: XCTestCase {
         // The summary follows all five question sections, below the first screen, so scroll
         // to it (bounded) and check the tally itself.
         app.scrollUntilHittable("filter.summary").waitFor("label BEGINSWITH 'Yes 1'")
+        app.showcase("30 Five-Question Filter")
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         let row = app.staticTexts["UI test tool · UI test task"]
         row.waitToAppear()
+        app.showcase("31 Tools")
 
         // Persisted across a relaunch, answers included.
         app.relaunchKeepingData(store: store)
@@ -53,6 +55,7 @@ final class FilterToolUITests: XCTestCase {
         app.navigationBars.buttons.element(boundBy: 0).tap()
         let second = app.staticTexts["Second tool"].waitToAppear()
         app.openTab("Settings")
+        app.showcase("32 Settings")
         // The Delete My Data row is below the first screen of the Settings list and isn't
         // created until scrolled to (run 36352200784), so scroll to it (bounded) first.
         app.scrollUntilHittable("settings.deleteData").tap()

@@ -1,6 +1,7 @@
 # INACTIVE TEMPLATE. GitHub runs nothing from this path.
 # It becomes a workflow only if someone copies it to .github/workflows/ (see ci/README.md).
-# Synthetic fixtures only: no signing, no secrets, no caches, no uploaded artifacts.
+# Synthetic fixtures only: no signing, no secrets, no caches. The only upload is the UI tests'
+# named screenshots of the synthetic app (kept 7 days), so people without a Mac can see it.
 name: AIBible iOS unit tests
 
 on:
@@ -38,4 +39,15 @@ jobs:
           persist-credentials: false
 
       - name: Generate project and run unit tests
+        env:
+          AIBIBLE_SCREENSHOT_DIR: ${{ runner.temp }}/aibible-screenshots
         run: bash apps/ai-bible-ios/ci/run-tests.sh
+
+      - name: Upload screenshots (synthetic fixture only)
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: aibible-screenshots
+          path: ${{ runner.temp }}/aibible-screenshots
+          if-no-files-found: warn
+          retention-days: 7

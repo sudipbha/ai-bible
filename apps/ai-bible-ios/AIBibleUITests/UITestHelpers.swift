@@ -334,6 +334,18 @@ extension XCUIApplication {
         return false
     }
 
+    /// Saves a named screenshot of the current screen to the result bundle, kept even when the
+    /// test passes, so people can see the app (CI exports these; synthetic fixture only).
+    /// It asserts nothing and changes nothing in the app.
+    func showcase(_ name: String) {
+        XCTContext.runActivity(named: "AIBIBLE-SHOT \(name)") { activity in
+            let shot = XCTAttachment(screenshot: screenshot())
+            shot.name = "AIBIBLE-SHOT \(name)"
+            shot.lifetime = .keepAlways
+            activity.add(shot)
+        }
+    }
+
     /// Writes a bounded description of what is on screen into the test log (each line is an
     /// XCTest activity name, which xcodebuild prints) and attaches a screenshot and a
     /// truncated hierarchy to the result bundle. Diagnostics only; it asserts nothing.

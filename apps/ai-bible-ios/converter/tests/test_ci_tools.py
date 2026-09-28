@@ -86,8 +86,15 @@ class WorkflowPinTests(unittest.TestCase):
                          f"AIBIBLE_SIM_RUNTIME: {IOS262}", "persist-credentials: false", "contents: read"):
             self.assertIn(required, example)
         self.assertNotIn(IOS265, example, "exactly one runtime is pinned")
-        for forbidden in ("-large", "-xlarge", "secrets.", "actions/cache", "upload-artifact", "CODE_SIGN"):
+        for forbidden in ("-large", "-xlarge", "secrets.", "actions/cache", "CODE_SIGN"):
             self.assertNotIn(forbidden, example.replace("(not -large / -xlarge)", ""))
+        # The one upload: the synthetic screenshots, from a pinned action, kept 7 days.
+        upload = "uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1"
+        self.assertEqual(example.count("upload-artifact"), 1)
+        self.assertIn(upload, example)
+        for required in ("name: aibible-screenshots", "path: ${{ runner.temp }}/aibible-screenshots",
+                         "AIBIBLE_SCREENSHOT_DIR: ${{ runner.temp }}/aibible-screenshots", "retention-days: 7"):
+            self.assertIn(required, example)
 
 
 

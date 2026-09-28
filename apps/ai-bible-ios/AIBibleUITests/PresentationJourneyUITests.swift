@@ -22,9 +22,11 @@ final class PresentationJourneyUITests: XCTestCase {
 
         // The compact edition entry opens the full cover, described by its alt text, then the title page.
         app.backToContents()
+        app.showcase("20 Contents with cover and title page (large text)")
         app.scrollUntilHittable("contents.edition").tap()
         app.expectHittable("edition.cover", diagnose: diagnose)
         XCTAssertEqual(app.element("edition.cover").label, "Zebrafog cover art")
+        app.showcase("21 Cover")
         XCTAssertTrue(app.element("edition.titlePage.0").waitForExistence(timeout: 10))
         app.backToContents()
 
@@ -32,6 +34,7 @@ final class PresentationJourneyUITests: XCTestCase {
         app.scrollUntilHittable("contents.entry.1").tap()
         app.expectHittable("edition.titlePage.0", diagnose: diagnose)
         XCTAssertEqual(app.element("edition.titlePage.0").label, "Zebrafog Field Notes")
+        app.showcase("22 Title page")
         app.backToContents()
 
         // A nested heading entry opens its free chapter at that heading.
