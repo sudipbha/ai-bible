@@ -16,19 +16,27 @@ Status as of 28 September 2026: **prototype. Not signed, not submitted, not test
 
 ## What it is
 
-The owner-approved v1 scope:
+A decision tool for small businesses evaluating AI software, built on the book's method, with the book
+inside as the reference. Everything works offline and stays on the device.
 
-- An offline native reader: contents, in-chapter headings, resume where you left off, bookmarks,
-  local search that ignores case and accents, light/sepia/dark themes, serif or sans text, and Dynamic Type.
-- Saved, offline tools:
-  - **Five-Question Filter** (free), which records answers per task and tool and does not score them.
-  - **Rollout tracker** (full unlock).
-  - **Whole-job cost worksheet** (full unlock).
-  - Every record can be shared as plain text.
-- Free: Chapter 1 and the Filter. Paid: one non-consumable "Full Book and Tools" unlock of about $5.
-  **Price tier, currency and base storefront are undecided.** The price shown in `StoreKit/Products.storekit`
-  is for local testing only.
-- No login, backend, sync, analytics, ads, tracking or AI features. Data stays on the device.
+- **Decisions** ("My AI tool decisions"): one evaluation per tool and task.
+  - Three guided steps, each linked to the chapter that explains it: Five-Question Filter (free),
+    whole-job cost worksheet, and a trial with the rollout checklist.
+  - Status Considering / In trial / Kept / Dropped, with a dated history and a note.
+  - Review date with an optional local reminder that morning; a trial review (did the whole job take less
+    time, how often the output needed fixing) with Keep it / Drop it.
+  - Compare tools side by side, and a Software payroll of kept tools (a total only when every price uses
+    the same note, so currencies never mix).
+  - Share any decision as a one-page text summary. Siri / Shortcuts: "Evaluate an AI tool".
+  - A fresh install opens the reader; once decisions exist, the app opens on Decisions.
+- **The tools on their own** (Tools tab): Filter checks, rollout trackers and cost worksheets.
+- **Reader:** contents, in-chapter headings, resume where you left off, bookmarks, local search that
+  ignores case and accents, light/sepia/dark themes, serif or sans text, and Dynamic Type.
+- Free: Chapter 1, the Filter and Decisions. Paid: one non-consumable "Full Book and Tools" unlock for the
+  cost worksheet, trial tracker and remaining chapters. **Price tier, currency and base storefront are
+  undecided.** The price in `StoreKit/Products.storekit` is for local testing only.
+- No login, backend, sync, analytics, ads, tracking or AI features.
+- App Store materials (listing, review notes, privacy and support drafts, owner checklist): `store/`.
 
 ## Content: fixtures only in public builds
 
