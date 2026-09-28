@@ -1404,7 +1404,7 @@ def build_tools(mapping, chapters, diagnostics):
                     diagnostics.add("tools-item-invalid", where)
                     continue
                 text = items[entry["item"]]
-            elif block["kind"] == "paragraph":
+            elif block["kind"] in {"paragraph", "heading"}:
                 text = block["text"]
             else:
                 diagnostics.add("tools-block-kind", where, f"{block['kind']} needs an item index")

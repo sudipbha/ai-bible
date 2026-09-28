@@ -149,7 +149,8 @@ does not yet follow internal links.
 
 ## Tools
 
-The mapping names blocks (and list items) by ID. The converter copies their Markdown exactly, so
+The mapping names paragraphs, headings, or list items by ID. Heading prompts use their exact source
+wording without an item index. The converter copies their Markdown exactly, so
 nobody retypes book wording. It checks:
 - exactly five Filter prompts;
 - unique, well-formed prompt IDs;

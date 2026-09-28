@@ -96,7 +96,13 @@ struct ReaderView: View {
                 .padding(.vertical, 24)
                 .frame(maxWidth: .infinity)
             }
-            .scrollPosition(id: $visibleBlockID, anchor: .top)
+            // Keep the requested opening block authoritative until the scroll view actually
+            // reaches it. A plain two-way binding can be overwritten by the scroll view's
+            // initial top row before lazy layout has resolved a distant target; after that,
+            // the one-shot proxy dispatch has nothing declarative left to hold the request.
+            // Observations are still recorded in `visibleBlockID`, but while a request is
+            // pending the binding continues to present that request to SwiftUI.
+            .scrollPosition(id: openingScrollPosition, anchor: .top)
             // Dispatch the scroll to the requested opening block once the scroll view has a real
             // size. In runs 36350115237 and 36352200784 the reader didn't reach the requested
             // block when an initial `scrollPosition` value was the only mechanism; that this
@@ -147,6 +153,13 @@ struct ReaderView: View {
                 model.updatePosition(blockID: id)
             }
         }
+    }
+
+    private var openingScrollPosition: Binding<String?> {
+        Binding(
+            get: { pendingBlockID ?? visibleBlockID },
+            set: { visibleBlockID = $0 }
+        )
     }
 
     /// Dispatches the scroll to the pending opening block at most once, when there is one and

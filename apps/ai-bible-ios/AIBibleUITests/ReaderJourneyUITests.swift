@@ -122,7 +122,8 @@ final class ReaderJourneyUITests: XCTestCase {
         let storeKit = try LocalStoreKit.cleanSession()
         let app = XCUIApplication()
         app.launch(store: store, reset: true)
-        let diagnose = ["block.fx.ch01.f12", "block.fx.ch01.f2", "block.fx.ch01.p4", "reader.chapterTitle"]
+        let diagnose = ["block.fx.ch01.f12", "block.fx.ch01.f2", "block.fx.ch01.p4",
+                        "reader.chapterTitle", "reader.bookmark"]
 
         // "final" occurs only in fx.ch01.f12.
         app.openTab("Search")
@@ -155,6 +156,9 @@ final class ReaderJourneyUITests: XCTestCase {
 
         // Relaunch without a reset: the new place is restored, not the original request.
         app.relaunchKeepingData(store: store)
+        // If this ever fails again, the Debug-only bookmark value distinguishes a loaded/routed
+        // f2 that did not arrive from an anchor that was overwritten before relaunch.
+        app.logDiagnostics("after relaunching at the manually scrolled place", focus: diagnose)
         app.expectHittable("block.fx.ch01.f2", diagnose: diagnose)
         app.expectNotHittable("block.fx.ch01.f12", "Reopened at the originally requested passage, not the new place",
                               diagnose: diagnose)

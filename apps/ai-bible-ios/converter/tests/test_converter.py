@@ -594,6 +594,26 @@ class IdentifierTests(FailureAssertions):
 class ToolMappingTests(FailureAssertions):
     FILTER, ROLLOUT = "appx.l0002", "ch01.l0005"
 
+    def test_heading_prompts_keep_source_text_without_an_item_index(self):
+        headings = [{"id": f"appx.h{i}", "kind": "heading", "level": 2,
+                     "text": f"Question {i}: Sample **prompt**?"} for i in range(1, 6)]
+        chapters = [{"id": "appx", "access": "paid", "blocks": headings},
+                    {"id": "ch01", "access": "free", "blocks": [
+                        {"id": self.ROLLOUT, "kind": "list", "items": ["Plan", "Review"]}]},
+                    {"id": "ch02", "access": "paid", "blocks": []}]
+        mapping = syn.tools(self.FILTER, self.ROLLOUT)
+        mapping["filter"]["prompts"] = [
+            {"id": f"filter.q{i}", "block": block["id"]} for i, block in enumerate(headings, 1)]
+        diagnostics = conv.Diagnostics()
+        result = conv.build_tools(mapping, chapters, diagnostics)
+        diagnostics.raise_if_any()
+        self.assertEqual([q["text"] for q in result["filterQuestions"]],
+                         [b["text"] for b in headings])
+        mapping["filter"]["prompts"][0]["item"] = 0
+        diagnostics = conv.Diagnostics()
+        conv.build_tools(mapping, chapters, diagnostics)
+        self.assertTrue(any("tools-item-invalid" in d for d in diagnostics.items))
+
     def test_tools_copy_exact_source_wording(self):
         book, _, report, _ = convert(tools=syn.tools(self.FILTER, self.ROLLOUT))
         self.assertEqual([q["text"] for q in book["tools"]["filterQuestions"]],

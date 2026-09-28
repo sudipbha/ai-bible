@@ -208,7 +208,13 @@ final class AppModel {
         if let anchor = lastPosition, canRead(chapterID: anchor.chapterID) {
             return ReaderPosition(chapterID: anchor.chapterID, blockID: anchor.blockID)
         }
-        let first = book.chapters.first(where: { canRead($0) }) ?? book.chapters.first
+        // Converted editions keep copyright and introductory reading sections in `chapters`
+        // before the numbered chapters. A fresh reader should open at Chapter 1, while those
+        // front-matter sections remain available from Contents. Older/fixture editions without
+        // that label retain their existing first-readable fallback.
+        let first = book.chapters.first(where: { $0.label == "Chapter 1" && canRead($0) })
+            ?? book.chapters.first(where: { canRead($0) })
+            ?? book.chapters.first
         return ReaderPosition(chapterID: first?.id ?? "", blockID: first?.blocks.first?.id)
     }
 

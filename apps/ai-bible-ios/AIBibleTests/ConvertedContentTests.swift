@@ -23,6 +23,16 @@ final class ConvertedContentTests: XCTestCase {
         XCTAssertEqual(book.chapters.map(\.id), ["copyright", "front", "ch01", "ch02", "appx"])
     }
 
+    @MainActor
+    func testFreshConvertedEditionStartsAtChapterOne() throws {
+        let model = AppModel(book: try sample(), store: nil, provider: FakePurchaseProvider())
+
+        XCTAssertEqual(
+            model.startPosition(),
+            ReaderPosition(chapterID: "ch01", blockID: "ch01.p0001")
+        )
+    }
+
     func testOrderedListKeepsItsStartNumber() throws {
         let lists = try chapter("ch01").blocks.filter { $0.kind == .list }
         XCTAssertEqual(lists.map(\.isOrderedList), [false, true, true])
