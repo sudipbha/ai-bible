@@ -217,6 +217,58 @@ final class EvaluationTests: XCTestCase {
         evaluation.status = .dropped
         XCTAssertFalse(evaluation.isReviewDue(now: start + day))
     }
+
+    @MainActor
+    func testSummaryAndPayrollUseLinkedRecordsAndOnlyAddMatchingPrices() async throws {
+        let model = await unlockedModel()
+        func keep(_ name: String, price: Decimal?, note: String, keptAt: Date) throws -> UUID {
+            let id = model.newEvaluation(now: keptAt)
+            let costID = try XCTUnwrap(model.attachCostWorksheet(to: id))
+            var sheet = try XCTUnwrap(model.costs.first { $0.id == costID })
+            sheet.monthlyPrice = price
+            sheet.priceNote = note
+            model.update(sheet)
+            var evaluation = try XCTUnwrap(model.evaluations.first { $0.id == id })
+            evaluation.toolName = name
+            evaluation.status = .kept
+            model.update(evaluation, now: keptAt)
+            return id
+        }
+        let now = start + 200 * day
+        _ = try keep("Draftly", price: 20, note: "USD", keptAt: start)            // kept 200 days ago
+        _ = try keep("Sortwise", price: Decimal(string: "12.50"), note: "USD", keptAt: now - day)
+        let considering = model.newEvaluation(now: now)
+
+        let summaries = model.evaluations.map { DecisionSummary($0, model: model) }
+        let pending = try XCTUnwrap(summaries.first { $0.id == considering })
+        XCTAssertEqual(pending.filterAnswered, 0)
+        XCTAssertEqual(pending.filterTotal, model.book.tools.filterQuestions.count)
+        XCTAssertNil(pending.cost)
+        XCTAssertNil(pending.checklistDone)
+
+        var payroll = SoftwarePayroll(summaries, now: now)
+        XCTAssertEqual(payroll.rows.map(\.name).sorted(), ["Draftly", "Sortwise"])
+        XCTAssertEqual(payroll.total, Decimal(string: "32.50"))
+        XCTAssertEqual(payroll.totalNote, "USD")
+        XCTAssertEqual(payroll.rows.first { $0.name == "Draftly" }?.reviewSuggested, true)
+        XCTAssertEqual(payroll.rows.first { $0.name == "Sortwise" }?.reviewSuggested, false)
+
+        // A different note (another currency) means no total rather than a wrong one.
+        _ = try keep("Ledgerly", price: 9, note: "GBP", keptAt: now)
+        payroll = SoftwarePayroll(model.evaluations.map { DecisionSummary($0, model: model) }, now: now)
+        XCTAssertEqual(payroll.rows.count, 3)
+        XCTAssertNil(payroll.total)
+    }
+
+    func testTrialReviewAnswersDecodeWithDefaults() throws {
+        var evaluation = ToolEvaluation(now: start)
+        evaluation.reviewSavedTime = .yes
+        evaluation.reviewRework = .sometimes
+        let data = try FileStore.encoder.encode(evaluation)
+        let decoded = try FileStore.decoder.decode(ToolEvaluation.self, from: data)
+        XCTAssertEqual(decoded, evaluation)
+        XCTAssertEqual(decoded.lastStatusDate, start)
+    }
 }
 
 @MainActor

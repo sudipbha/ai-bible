@@ -79,6 +79,12 @@ enum ToolExport {
         if evaluation.status.isOpen, let review = evaluation.reviewDate {
             lines.append("Review date: \(dateString(review))")
         }
+        if evaluation.reviewSavedTime != .unanswered {
+            lines.append("Trial review — whole job took less time: \(evaluation.reviewSavedTime.title)")
+        }
+        if evaluation.reviewRework != .unanswered {
+            lines.append("Trial review — output needed fixing: \(evaluation.reviewRework.title)")
+        }
         if !evaluation.decisionNote.isEmpty { lines.append("Note: \(evaluation.decisionNote)") }
         let tools = model.book.tools
         if let id = evaluation.filterID, let record = model.filters.first(where: { $0.id == id }) {

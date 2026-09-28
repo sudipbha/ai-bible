@@ -5,6 +5,8 @@ enum DecisionRoute: Hashable {
     case filter(UUID)
     case rollout(UUID)
     case cost(UUID)
+    case compare
+    case payroll
 }
 
 /// "My AI tool decisions": every AI tool the owner is deciding about, grouped by where it
@@ -38,6 +40,10 @@ struct DecisionsTab: View {
                     if let record = model.rollouts.first(where: { $0.id == id }) { RolloutDetailView(record: record) } else { deletedView }
                 case .cost(let id):
                     if let sheet = model.costs.first(where: { $0.id == id }) { CostDetailView(sheet: sheet) } else { deletedView }
+                case .compare:
+                    CompareView(path: $path)
+                case .payroll:
+                    PayrollView()
                 }
             }
         }
@@ -87,6 +93,16 @@ struct DecisionsTab: View {
 
     private var list: some View {
         List {
+            Section {
+                NavigationLink(value: DecisionRoute.compare) {
+                    Label("Compare tools side by side", systemImage: "rectangle.split.3x1")
+                }
+                .accessibilityIdentifier("decisions.compare")
+                NavigationLink(value: DecisionRoute.payroll) {
+                    Label("Software payroll", systemImage: "creditcard")
+                }
+                .accessibilityIdentifier("decisions.payroll")
+            }
             ForEach(EvaluationStatus.allCases.sorted(by: Self.listOrder)) { status in
                 let group = model.evaluations.filter { $0.status == status }
                 if !group.isEmpty {
@@ -196,6 +212,32 @@ struct EvaluationDetailView: View {
                     LabeledContent(change.status.title, value: change.date.formatted(date: .abbreviated, time: .omitted))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                }
+            }
+
+            if draft.status == .inTrial {
+                Section {
+                    Picker("Did the whole job take less time?", selection: $draft.reviewSavedTime) {
+                        ForEach(FilterAnswer.allCases) { Text($0.title).tag($0) }
+                    }
+                    .accessibilityIdentifier("evaluation.review.savedTime")
+                    Picker("How often did you fix its output?", selection: $draft.reviewRework) {
+                        ForEach(ReworkLevel.allCases) { Text($0.title).tag($0) }
+                    }
+                    .accessibilityIdentifier("evaluation.review.rework")
+                    HStack {
+                        Button("Keep it") { draft.status = .kept }
+                            .buttonStyle(.borderedProminent)
+                            .accessibilityIdentifier("evaluation.keep")
+                        Spacer()
+                        Button("Drop it", role: .destructive) { draft.status = .dropped }
+                            .buttonStyle(.bordered)
+                            .accessibilityIdentifier("evaluation.drop")
+                    }
+                } header: {
+                    Text(draft.isReviewDue() ? "Trial review — due" : "Trial review")
+                } footer: {
+                    Text("Re-run the cost worksheet with what really happened before you decide.")
                 }
             }
 
