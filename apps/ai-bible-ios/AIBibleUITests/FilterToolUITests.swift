@@ -56,10 +56,68 @@ final class FilterToolUITests: XCTestCase {
         // The Delete My Data row is below the first screen of the Settings list and isn't
         // created until scrolled to (run 36352200784), so scroll to it (bounded) first.
         app.scrollUntilHittable("settings.deleteData").tap()
-        app.buttons["Delete My Data"].firstMatch.waitToAppear().tap()
+        // The dialog's destructive action, labelled exactly "Delete My Data" (the Settings row reads
+        // "Delete My Data…"). It must be the only such button, on screen and hittable, before the tap.
+        let confirmations = app.buttons.matching(
+            NSPredicate(format: "label == 'Delete My Data' AND identifier != 'settings.deleteData'"))
+        let confirm = confirmations.firstMatch
+        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "isHittable == true"), object: confirm)
+        if !confirm.waitForExistence(timeout: 10) || XCTWaiter.wait(for: [hittable], timeout: 10) != .completed
+            || confirmations.count != 1 {
+            logDeletion(app, "Delete My Data confirmation not shown as one hittable button")
+            XCTFail("Delete My Data confirmation not shown as one hittable button")
+        }
+        confirm.tap()
+        let dismissed = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: confirm)
+        if XCTWaiter.wait(for: [dismissed], timeout: 10) != .completed {
+            logDeletion(app, "Delete My Data confirmation still shown after the tap")
+            XCTFail("Delete My Data confirmation still shown after the tap")
+        }
+        // Before any relaunch: no storage notice or saving-paused warning, and the record is gone
+        // from the live list.
+        if Self.storageNotices(in: app).firstMatch.exists {
+            logDeletion(app, "Storage notice after Delete My Data")
+            XCTFail("Storage notice after Delete My Data")
+        }
+        app.openTab("Tools")
+        app.element("tools.newFilter").waitToAppear()
+        if second.exists {
+            logDeletion(app, "Second tool still listed after Delete My Data, before relaunch")
+            XCTFail("Second tool still listed after Delete My Data, before relaunch")
+        }
         app.relaunchKeepingData(store: store)
         app.openTab("Tools")
         app.element("tools.newFilter").waitToAppear()
+        if second.exists {
+            logDeletion(app, "Second tool reappeared after relaunch (it was gone before relaunch)")
+        }
         XCTAssertFalse(second.exists)
+    }
+
+    /// Settings texts that report a deletion or save problem: the deletion notices ("… Try Delete My
+    /// Data again."), the save-failure notice, and the saving-paused warning.
+    @MainActor
+    private static func storageNotices(in app: XCUIApplication) -> XCUIElementQuery {
+        app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@ OR label CONTAINS %@ OR label CONTAINS %@",
+                                             "Try Delete My Data again", "Couldn't save your latest changes",
+                                             "Saving is paused"))
+    }
+
+    /// Bounded diagnostics for the Delete My Data step: the screen summary, the buttons whose label
+    /// mentions Delete, and any storage, save-failure or saving-paused notice. Test records only;
+    /// no user data exists in this store.
+    @MainActor
+    private func logDeletion(_ app: XCUIApplication, _ reason: String) {
+        app.logDiagnostics(reason, focus: ["settings.deleteData", "tools.newFilter"])
+        var lines: [String] = []
+        let deletes = app.buttons.matching(NSPredicate(format: "label CONTAINS 'Delete'")).allElementsBoundByIndex
+        lines.append("buttons labelled Delete: \(deletes.count)")
+        for button in deletes.prefix(6) {
+            lines.append("  '\(button.label.prefix(60))' id '\(button.identifier)' frame \(button.frame) hittable \(button.isHittable)")
+        }
+        let notices = Self.storageNotices(in: app).allElementsBoundByIndex
+        lines.append("storage notices: \(notices.count)")
+        for notice in notices.prefix(3) { lines.append("  '\(notice.label.prefix(200))'") }
+        for line in lines { XCTContext.runActivity(named: "AIBIBLE-DIAG " + line) { _ in } }
     }
 }
