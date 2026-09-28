@@ -1,0 +1,378 @@
+{
+  "chapters": [
+    {
+      "access": "free",
+      "blocks": [
+        {
+          "id": "copyright.p0001",
+          "kind": "paragraph",
+          "text": "Copyright Zebrafog fixture. All rights invented."
+        }
+      ],
+      "id": "copyright",
+      "label": "Copyright",
+      "title": "Copyright"
+    },
+    {
+      "access": "free",
+      "blocks": [
+        {
+          "id": "front.p0001",
+          "kind": "paragraph",
+          "text": "A short invented preface."
+        }
+      ],
+      "id": "front",
+      "label": "Before you start",
+      "title": "Before Zebrafog starts"
+    },
+    {
+      "access": "free",
+      "blocks": [
+        {
+          "id": "ch01.p0001",
+          "kind": "paragraph",
+          "text": "Plain Zebrafog opening with **strong**, *emphasis*, `inline_code()` and tail text."
+        },
+        {
+          "id": "ch01.h0002",
+          "kind": "heading",
+          "level": 2,
+          "text": "Styles and marks"
+        },
+        {
+          "id": "ch01.p0003",
+          "kind": "paragraph",
+          "text": "Literal marks \\* \\_ \\` \\[x\\] \\<tag\\> \\& \\~ \\! \\\\ stay as typed; see https://example.com/a\\_b\\*c?d=\\[1\\] now."
+        },
+        {
+          "id": "ch01.l0004",
+          "items": [
+            "First **bold** item",
+            "Second *soft* item with `x`"
+          ],
+          "kind": "list",
+          "ordered": false
+        },
+        {
+          "id": "ch01.l0005",
+          "items": [
+            "Fourth step",
+            "Fifth step"
+          ],
+          "kind": "list",
+          "ordered": true,
+          "start": 4
+        },
+        {
+          "id": "ch01.l0006",
+          "items": [
+            "Default one",
+            "Default two"
+          ],
+          "kind": "list",
+          "ordered": true
+        },
+        {
+          "id": "ch01.n0007",
+          "kind": "note",
+          "text": "**Source:** invented study, `ref-9`, tail."
+        },
+        {
+          "id": "ch01.d0008",
+          "kind": "divider"
+        },
+        {
+          "id": "ch01.h0009",
+          "kind": "heading",
+          "level": 3,
+          "text": "Minor heading"
+        },
+        {
+          "id": "ch01.p0010",
+          "kind": "paragraph",
+          "text": "After the divider."
+        }
+      ],
+      "id": "ch01",
+      "label": "Chapter 1",
+      "title": "Zebrafog One"
+    },
+    {
+      "access": "paid",
+      "blocks": [
+        {
+          "cards": {
+            "accessibilityLabel": "Invented comparison",
+            "cards": [
+              {
+                "accessibilityLabel": "Card A",
+                "fields": [
+                  {
+                    "label": "Tool",
+                    "title": "Alpha"
+                  },
+                  {
+                    "label": "Use",
+                    "value": [
+                      {
+                        "text": "Drafting notes"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Cost",
+                    "value": [
+                      {
+                        "text": "About **$5** a month, billed yearly"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "accessibilityLabel": "Card B",
+                "fields": [
+                  {
+                    "label": "Tool",
+                    "title": "Beta"
+                  },
+                  {
+                    "label": "Owner",
+                    "value": [
+                      {
+                        "blank": {
+                          "accessibilityLabel": "Write the owner",
+                          "text": "________"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Verdict",
+                    "value": [
+                      {
+                        "text": "**Keep**"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Review",
+                    "value": [
+                      {
+                        "text": "Every "
+                      },
+                      {
+                        "blank": {
+                          "accessibilityLabel": "Number of weeks",
+                          "text": "____"
+                        }
+                      },
+                      {
+                        "text": " weeks"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "label": "Group label"
+          },
+          "id": "ch02.c0001",
+          "kind": "cards"
+        },
+        {
+          "id": "ch02.q0002",
+          "kind": "quote",
+          "paragraphs": [
+            "Quoted one.",
+            "Quoted two.",
+            "Quoted *three*.",
+            "Quoted four."
+          ]
+        },
+        {
+          "id": "ch02.p0003",
+          "kind": "paragraph",
+          "text": "Closing Zebrafog paragraph."
+        }
+      ],
+      "id": "ch02",
+      "label": "Chapter 2",
+      "title": "Zebrafog Two"
+    },
+    {
+      "access": "paid",
+      "blocks": [
+        {
+          "id": "appx.h0001",
+          "kind": "heading",
+          "level": 2,
+          "text": "Worksheet"
+        },
+        {
+          "id": "appx.l0002",
+          "items": [
+            "Pick a task",
+            "Time it",
+            "Try the tool",
+            "Check the result",
+            "Decide"
+          ],
+          "kind": "list",
+          "ordered": true
+        },
+        {
+          "id": "appx.p0003",
+          "kind": "paragraph",
+          "text": "Repeated line."
+        },
+        {
+          "id": "appx.p0004",
+          "kind": "paragraph",
+          "text": "Repeated line."
+        }
+      ],
+      "id": "appx",
+      "label": "Appendices",
+      "title": "Zebrafog Appendix"
+    }
+  ],
+  "contentVersion": "fixture-presentation-2026-09-28.1",
+  "isFixture": true,
+  "presentation": {
+    "contents": [
+      {
+        "depth": 1,
+        "label": "Cover",
+        "target": {
+          "kind": "cover"
+        }
+      },
+      {
+        "depth": 1,
+        "label": "Title",
+        "target": {
+          "kind": "titlePage"
+        }
+      },
+      {
+        "depth": 1,
+        "label": "Copyright",
+        "target": {
+          "chapterID": "copyright",
+          "kind": "chapter"
+        }
+      },
+      {
+        "depth": 1,
+        "label": "Before",
+        "target": {
+          "chapterID": "front",
+          "kind": "chapter"
+        }
+      },
+      {
+        "depth": 1,
+        "label": "One",
+        "target": {
+          "chapterID": "ch01",
+          "kind": "chapter"
+        }
+      },
+      {
+        "depth": 2,
+        "label": "Styles",
+        "target": {
+          "blockID": "ch01.h0002",
+          "chapterID": "ch01",
+          "kind": "block"
+        }
+      },
+      {
+        "depth": 1,
+        "label": "Two",
+        "target": {
+          "blockID": "ch02.c0001",
+          "chapterID": "ch02",
+          "kind": "block"
+        }
+      },
+      {
+        "depth": 1,
+        "label": "Appendix",
+        "target": {
+          "chapterID": "appx",
+          "kind": "chapter"
+        }
+      }
+    ],
+    "cover": {
+      "alt": "Zebrafog cover art",
+      "byteCount": 73,
+      "resource": "presentation-fixture-cover.png",
+      "sha256": "4f7aa88955dc030612a08ec5f5867587911ef0fa6b9e152a11ed478ee72d0574"
+    },
+    "titlePage": {
+      "elements": [
+        {
+          "role": "title",
+          "text": "Zebrafog *Field* Notes"
+        },
+        {
+          "role": "author",
+          "text": "Example **Studio** with `v2`"
+        }
+      ]
+    }
+  },
+  "sourceAnchors": {
+    "appendix.xhtml": "appx.h0001",
+    "ch1.xhtml": "ch01.p0001",
+    "ch1.xhtml#c1": "ch01.p0001",
+    "ch1.xhtml#s2": "ch01.h0002",
+    "ch1.xhtml#t1": "ch01.p0001",
+    "ch2.xhtml": "ch02.c0001",
+    "ch2.xhtml#top": "ch02.c0001",
+    "copyright.xhtml": "copyright.p0001",
+    "front.xhtml": "front.p0001"
+  },
+  "title": "AI Bible presentation (test fixture)",
+  "tools": {
+    "costChapterID": "ch02",
+    "filterChapterID": "appx",
+    "filterQuestions": [
+      {
+        "id": "filter.q1",
+        "text": "Pick a task"
+      },
+      {
+        "id": "filter.q2",
+        "text": "Time it"
+      },
+      {
+        "id": "filter.q3",
+        "text": "Try the tool"
+      },
+      {
+        "id": "filter.q4",
+        "text": "Check the result"
+      },
+      {
+        "id": "filter.q5",
+        "text": "Decide"
+      }
+    ],
+    "rolloutChapterID": "ch01",
+    "rolloutItems": [
+      {
+        "id": "rollout.s1",
+        "text": "Fourth step"
+      },
+      {
+        "id": "rollout.s2",
+        "text": "Fifth step"
+      }
+    ]
+  }
+}

@@ -64,6 +64,8 @@ enum ReaderPreferences {
 enum ReadRoute: Hashable {
     case reader(ReaderPosition)
     case bookmarks
+    /// Converted editions only: the cover and title page.
+    case edition(EditionFocus)
 }
 
 struct RootView: View {

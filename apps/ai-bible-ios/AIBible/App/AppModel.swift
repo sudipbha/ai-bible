@@ -4,8 +4,16 @@ import Observation
 enum AppConfig {
     /// Placeholder. Replace with the non-consumable product ID created in App Store Connect.
     static let fullBookProductID = "com.example.aibible.fullbook"
+    #if AIBIBLE_PRIVATE_BOOK
+    /// Private local builds only, made with converter/stage-private-build.sh from a reviewed
+    /// conversion. Public builds and CI never define AIBIBLE_PRIVATE_BOOK.
+    static let bundledBookResource = "book.private"
+    static let expectsFixtureContent = false
+    #else
     /// Synthetic fixture. Real book content needs an approved, pinned edition first.
     static let bundledBookResource = "book.fixture"
+    static let expectsFixtureContent = true
+    #endif
     /// Required before App Store submission (Guideline 5.1.1(i)); not set yet.
     static let privacyPolicyURL: URL? = nil
     /// Required before App Store submission; not set yet.
@@ -15,6 +23,17 @@ enum AppConfig {
 struct ReaderPosition: Hashable, Sendable {
     var chapterID: String
     var blockID: String?
+}
+
+/// The part of the edition view to show first.
+enum EditionFocus: Hashable, Sendable {
+    case cover
+    case titlePage
+}
+
+enum ContentsDestination: Equatable {
+    case edition(EditionFocus)
+    case reader(ReaderPosition)
 }
 
 /// What an open reader may show right now. Re-evaluated on every render, so a
@@ -30,6 +49,8 @@ enum ReaderGate: Equatable {
 final class AppModel {
     let book: BookBundle
     let loadError: String?
+    /// The edition's cover image, already checked against its recorded SHA-256. Nil for the fixture.
+    let coverImage: Data?
     let entitlements: EntitlementModel
 
     private(set) var lastPosition: ReadingAnchor?
@@ -47,9 +68,10 @@ final class AppModel {
     @ObservationIgnored private let store: FileStore?
     @ObservationIgnored private var pendingSave: Task<Void, Never>?
 
-    init(book: BookBundle, loadError: String? = nil, store: FileStore?, provider: any PurchaseProvider) {
+    init(book: BookBundle, loadError: String? = nil, store: FileStore?, provider: any PurchaseProvider, coverImage: Data? = nil) {
         self.book = book
         self.loadError = loadError
+        self.coverImage = coverImage
         self.store = store
         self.searchIndex = SearchIndex(book: book)
 
@@ -71,7 +93,11 @@ final class AppModel {
         } else {
             notice = "This device isn't letting the app save right now, so changes may not be kept."
         }
-        saved = AnchorMigration.migrate(saved, to: book)
+        // With no loadable content, saved places and records are kept exactly as they are:
+        // migrating them against the empty placeholder would drop valid positions.
+        if loadError == nil {
+            saved = AnchorMigration.migrate(saved, to: book)
+        }
 
         lastPosition = saved.lastPosition
         bookmarks = saved.bookmarks
@@ -103,15 +129,36 @@ final class AppModel {
         // UI tests only: keep their generated data in a temporary folder (see UITestSupport).
         if let testStore = UITestSupport.fileStore() { store = testStore }
         #endif
+        var resource = AppConfig.bundledBookResource
+        var expectFixture = AppConfig.expectsFixtureContent
+        #if DEBUG
+        // UI tests only: a second synthetic fixture with a cover, title page and source contents.
+        if let testBook = UITestSupport.bookResource() {
+            resource = testBook
+            expectFixture = true
+        }
+        #endif
         do {
-            let book = try BookLoader.loadBundled(named: AppConfig.bundledBookResource)
-            return AppModel(book: book, store: store, provider: provider)
+            let edition = try BookLoader.loadSelectedEdition(named: resource, expectFixture: expectFixture)
+            return AppModel(book: edition.book, store: store, provider: provider, coverImage: edition.coverImage)
         } catch {
+            // No fallback to other content: the selected edition is shown or nothing is.
             let empty = BookBundle(
                 contentVersion: "missing", isFixture: true, title: "AI Bible", chapters: [], idMap: nil,
                 tools: ToolContent(filterQuestions: [], rolloutItems: [])
             )
-            return AppModel(book: empty, loadError: "The book content couldn't be loaded.", store: store, provider: provider)
+            let message: String
+            switch error as? BookLoader.LoadError {
+            case .wrongContentKind:
+                message = "The packaged book content doesn't match this build's content selection."
+            case .invalidContent(let count):
+                message = "The packaged book content failed \(count) structural check(s), so it wasn't opened."
+            case .coverMismatch:
+                message = "The packaged cover image doesn't match the book content, so it wasn't opened."
+            default:
+                message = "The book content couldn't be loaded."
+            }
+            return AppModel(book: empty, loadError: message, store: store, provider: provider)
         }
     }
 
@@ -133,6 +180,24 @@ final class AppModel {
     }
 
     // MARK: Reading
+
+    /// Where a source contents entry leads, or nil if its target isn't in this edition.
+    /// Chapter and block targets go through the normal reader route, so paid ones stay locked.
+    func destination(for target: ContentsTarget) -> ContentsDestination? {
+        switch target.kind {
+        case .cover:
+            return book.presentation?.cover == nil ? nil : .edition(.cover)
+        case .titlePage:
+            return book.presentation?.titlePage == nil ? nil : .edition(.titlePage)
+        case .chapter:
+            guard let chapterID = target.chapterID, book.chapter(chapterID) != nil else { return nil }
+            return .reader(ReaderPosition(chapterID: chapterID, blockID: nil))
+        case .block:
+            guard let chapterID = target.chapterID, let blockID = target.blockID,
+                  book.chapter(chapterID)?.blocks.contains(where: { $0.id == blockID }) == true else { return nil }
+            return .reader(ReaderPosition(chapterID: chapterID, blockID: blockID))
+        }
+    }
 
     func readerGate(for position: ReaderPosition) -> ReaderGate {
         guard let chapter = book.chapter(position.chapterID) else { return .missing }
@@ -246,6 +311,8 @@ final class AppModel {
     /// App Store's record and is re-read from StoreKit, so it is not affected.
     @discardableResult
     func deleteAllUserData() -> Bool {
+        // The content-error state is read-only; saved data is left for a build that can load the book.
+        guard loadError == nil else { return false }
         pendingSave?.cancel()
         pendingSave = nil
         lastPosition = nil
@@ -308,7 +375,8 @@ final class AppModel {
     }
 
     private func saveNow() {
-        guard let store, !savingPaused else { return }
+        // Never write while the book content failed to load: the in-memory state is a placeholder.
+        guard let store, !savingPaused, loadError == nil else { return }
         do {
             try store.save(snapshot())
             if storageNotice?.hasPrefix("Couldn't save") == true { storageNotice = nil }

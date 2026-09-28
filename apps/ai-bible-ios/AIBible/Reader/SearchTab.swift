@@ -44,6 +44,8 @@ struct SearchTab: View {
                     ReaderView(position: position, open: open)
                 case .bookmarks:
                     BookmarksView(open: open)
+                case .edition(let focus):
+                    EditionView(focus: focus)
                 }
             }
             .task(id: query) {

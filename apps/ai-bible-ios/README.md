@@ -1,11 +1,18 @@
 # AI Bible — native iOS reader (prototype source)
 
-Status as of 27 September 2026: **prototype. Simulator build and unit tests passed once; not signed,
-not submitted, not tested on a real iPhone.**
+Status as of 28 September 2026: **prototype. Not signed, not submitted, not tested on a real iPhone.**
 - The source was written in a Linux environment with no Swift toolchain or Xcode.
-- One hosted-Mac run has passed: GitHub Actions run 36337255552 on commit `3ee73c8` built the app and ran
-  the 72 unit tests in `AIBibleTests`, all passing (Xcode 26.3, iPhone SE (3rd generation) simulator, iOS 26.2).
-- The native journey tests added after that run (below) have **never been compiled or run**.
+- Latest hosted-Mac result: GitHub Actions run 36358639807 on commit `247b33a` (Xcode 26.3, iPhone SE
+  (3rd generation) simulator, iOS 26.2).
+  - The build succeeded. 87 unique tests ran: 81 hosted and 6 UI.
+  - **86 passed and 1 failed.** All 6 UI tests passed, including the three reader journeys, the paid
+    purchase journey and the Filter journey.
+  - The failure: `StoreKitIntegrationTests.testAskToBuyIsPendingUntilApproved`, 2 assertions. The approval
+    didn't unlock the app.
+  - The log shows the local "StoreKit Testing in Xcode" certificate reported as expired, and a transaction
+    treated as unverified. That this is the cause is **not proven**, and it remains an open failure.
+- The converter, the extended content schema and the tests added after that run (see "Content") have
+  **not been compiled or run on a Mac.** Only the converter's Python tests have run.
 - Nothing here guarantees App Store approval.
 
 ## What it is
@@ -24,19 +31,42 @@ The owner-approved v1 scope:
   is for local testing only.
 - No login, backend, sync, analytics, ads, tracking or AI features. Data stays on the device.
 
-## Content: fixtures only
+## Content: fixtures only in public builds
 
 `AIBible/Resources/Fixtures/book.fixture.json` is **synthetic text**. It contains no book, sample-chapter or
-website text, and its Filter questions and rollout steps are placeholders. Real content needs all of these first:
+website text, and its Filter questions and rollout steps are placeholders. Public builds, CI and every test
+use synthetic content only.
 
-1. An approved, pinned edition (a source revision plus a checksum).
+**Real content path (built, never run on the real book):**
+- `converter/` holds a generic, local EPUB → `BookBundle` converter with authored, registry-backed block
+  IDs, strict structure checks and synthetic tests. See `converter/README.md`.
+- The block schema now also has ordered lists with a start number, multi-paragraph quotes, dividers and
+  card groups with varied fields and fill-in blanks. Older editions decode unchanged.
+- A private build is made locally with `converter/stage-private-build.sh`. It defines
+  `AIBIBLE_PRIVATE_BOOK`, loads `book.private.json`, and refuses a missing or fixture edition. There is
+  no fallback to the fixture.
+- The EPUB, the registry, the converted book, the report and the cover stay outside Git.
+- **Front matter (converted editions):** a compact "Cover and title page" row at the top of Contents
+  opens the cover (described by its alt text) and the title page. Contents then lists the source's own
+  entries, in order and indented by depth; each opens the cover, the title page, a chapter or a
+  heading, and paid targets go through the normal unlock gate. The public fixture has no front matter,
+  so its plain chapter list is unchanged. A Debug-only UI-test option selects a second synthetic
+  fixture (`presentation.fixture.json`) to exercise this. None of it has been compiled or run yet.
+- The private staging build copies only the reviewed book JSON and its declared cover, both checked by
+  SHA-256; the app refuses an edition whose cover is missing or different.
+- An edition that fails `BookLoader.problems(in:)` isn't opened. While content is unavailable,
+  saved places and records are kept exactly as they were and nothing is written.
+
+**Still needed before real content ships:**
+1. An approved, pinned edition. The development pin is a checksum only; it doesn't show equivalence with
+   the current Gumroad or final release.
 2. Confirmed redistribution rights for the text, cover and any quoted material (Guideline 5.2).
-3. A conversion step, not built yet, that produces this JSON format. Block IDs must be authored editorial
-   IDs that stay stable across editions, and renamed blocks must be listed in `idMap`.
-4. `BookLoader.problems(in:)` returning nothing, followed by a human proofread against the source.
+3. Root review of this converter, then a local conversion by the coordinator, then a human proofread
+   against the source.
+4. `BookLoader.problems(in:)` returning nothing for the converted edition.
 
-The app reports `isFixture` in Settings, and a test fails if a non-fixture bundle is swapped in
-before that test is deliberately updated.
+The app reports `isFixture` in Settings. Tests fail if a public build selects anything but the fixture
+or packages converted content.
 
 ## Cost worksheet formula
 
@@ -65,7 +95,8 @@ AIBible/Persistence          Local JSON store (atomic writes, unreadable files k
 AIBible/Settings             Reading preferences, restore, data deletion, privacy summary
 AIBible/Resources            Fixture JSON, PrivacyInfo.xcprivacy
 AIBibleTests                 Unit tests and hosted local-StoreKit tests (see below)
-AIBibleUITests               UI tests (candidate; never run)
+AIBibleUITests               UI tests (6 passed in run 36358639807; PresentationJourneyUITests added since, never run)
+converter                    Local EPUB converter, synthetic tests, private staging build (never run on the book)
 ci                           Hosted-Mac test script and workflow template
 accessibility-checklist.md   Manual device checks (not yet run)
 ```
@@ -82,7 +113,11 @@ accessibility-checklist.md   Manual device checks (not yet run)
   readable and shareable; only editing the paid tools needs the unlock.
 - Gumroad or other purchases do not unlock the app (Guideline 3.1.1: no license keys or codes).
 
-## Unit tests (72; passed in run 36337255552)
+## Unit tests
+
+The first 72 passed in run 36337255552, and all 81 hosted tests except Ask to Buy passed in run
+36358639807. The classes added after that (`ConvertedContentTests`, `ContentPackagingTests`,
+`ContentLoadErrorTests`, `PresentationTests` and `PrivateContentScanTests`) have never run.
 
 | File | Covers |
 |---|---|
@@ -92,6 +127,11 @@ accessibility-checklist.md   Manual device checks (not yet run)
 | `LocalStoreTests` | Round-trip, missing file; undecodable file quarantined byte-for-byte under a collision-safe name; failed quarantine, read failure and newer-format files are left untouched and saving pauses (original bytes survive edits and flush); revocation keeps saved work; Delete My Data removes the main file and recovery copies but not unrelated files or the purchase, and reports failures |
 | `ReaderGateTests` | An open paid reader route locks after live revocation, an authoritative empty refresh, or a launch check that finds no purchase; an offline launch keeps cached access; bookmarks are kept |
 | `ContentAndSearchTests` | Bundled fixture validates, only Chapter 1 is free, fixture `idMap`, validation catches bad structure, accent/case search, locked matches counted but not shown |
+| `ConvertedContentTests` (new) | The converter's synthetic sample decodes and validates; list start 4/5; list numbers within `Int` range (limits, overflow, zero and negative starts); cards keep their own fields and blank labels; quotes, notes and dividers stay distinct; escaped marks and URLs read exactly; Foundation keeps strong/emphasis/code styling; search, source anchors, tool wording; malformed new shapes are rejected; a selected edition that fails its checks isn't loaded; older editions still decode |
+| `ContentPackagingTests` (new) | Public builds select the fixture; no converted or private files in the app bundle; an edition of the wrong kind fails to load |
+| `PresentationTests` (new) | Converted cover, title page and contents decode and validate; the cover is loaded only if its size and SHA-256 match; title-page text, order, roles and styles; every contents entry's destination; paid targets use the normal gate; bad entries are rejected; the synthetic presentation fixture is valid |
+| `PrivateContentScanTests` (new) | The bundle scan flags each private output and ignores synthetic files |
+| `ContentLoadErrorTests` (new) | With content unavailable, saved position, bookmarks and records aren't migrated or rewritten, even after an entitlement change and a flush |
 
 Cost-worksheet edge cases (in `CostWorksheetTests`):
 - Negative, NaN, infinite and over-limit entries show validation messages instead of results; they are never turned into zero.
@@ -102,9 +142,10 @@ Price loading (in `EntitlementTests`):
 - A price unavailable at launch recovers without a relaunch, through the sheet appearing, Try Again, returning to the foreground, or Restore.
 - Loading the price never starts a purchase.
 
-## Native journey tests (candidate; never compiled or run)
+## Native journey tests
 
-These were written after run 36337255552 and are not part of that result: 8 hosted tests and 5 UI tests.
+These were written after run 36337255552: 9 hosted tests and 6 UI tests. In run 36358639807 all of
+them passed except `testAskToBuyIsPendingUntilApproved` (see Status).
 
 **Local StoreKit tests:** `AIBibleTests/StoreKitIntegrationTests` drives the real `StoreKitPurchaseProvider` through `SKTestSession` against the synthetic `StoreKit/Products.storekit`. It covers:
 - loading the price
@@ -135,7 +176,7 @@ These were written after run 36337255552 and are not part of that result: 8 host
 `.github/workflows/ios-app-tests.yml` (a copy of `ci/ios-app-tests.yml.example`) runs `ci/run-tests.sh` on a
 standard GitHub-hosted `macos-15` runner for pull requests that touch `apps/ai-bible-ios/**`. The script
 generates the project, checks its wiring and resources, and runs the scheme's whole test action. Its first
-run, 36337255552, passed the 72 unit tests. The workflow file exists only on this branch, not on `main`.
+run, 36337255552, passed the 72 unit tests; the latest, 36358639807, ran 87 tests with one failure (see Status). The workflow file exists only on this branch, not on `main`.
 See `ci/README.md` for details.
 
 ## Build route on your own Mac
@@ -168,7 +209,8 @@ xcodebuild test -project AIBible.xcodeproj -scheme AIBible \
   - `AppConfig.fullBookProductID` (to match the App Store Connect product).
   - `AppConfig.privacyPolicyURL` and `supportURL` (both required).
   - The app icon (none is included yet).
-- **Real content:** the conversion pipeline, the validation report and a proofread (see above).
+- **Real content:** root review of the converter, then the local conversion, validation report and proofread (see above).
+- **Ask to Buy:** the local StoreKit Ask to Buy test still fails (see Status); its cause is unproven.
 - **Privacy manifest:** check the reason codes against Apple's current documentation (UserDefaults `CA92.1`
   is declared).
 - **Deferred in this prototype:**

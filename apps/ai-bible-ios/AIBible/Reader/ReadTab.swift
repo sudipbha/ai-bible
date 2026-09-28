@@ -17,6 +17,8 @@ struct ReadTab: View {
                         ReaderView(position: position, open: { open($0, replacingReader: true) })
                     case .bookmarks:
                         BookmarksView(open: { open($0, replacingReader: false) })
+                    case .edition(let focus):
+                        EditionView(focus: focus)
                     }
                 }
         }
@@ -61,14 +63,33 @@ struct ContentsView: View {
                 }
             }
 
-            Section("Contents") {
-                ForEach(model.book.chapters) { chapter in
-                    Button {
-                        open(ReaderPosition(chapterID: chapter.id, blockID: nil))
-                    } label: {
-                        ChapterRow(chapter: chapter, locked: !model.canRead(chapter))
+            if let presentation = model.book.presentation, presentation.cover != nil || presentation.titlePage != nil {
+                Section {
+                    NavigationLink(value: ReadRoute.edition(presentation.cover != nil ? .cover : .titlePage)) {
+                        EditionEntryRow(presentation: presentation, coverImage: model.coverImage, title: model.book.title)
                     }
-                    .accessibilityIdentifier("contents.chapter.\(chapter.id)")
+                    .accessibilityIdentifier("contents.edition")
+                }
+            }
+
+            if let entries = model.book.presentation?.contents, !entries.isEmpty {
+                // The source's own contents: every entry leads to its cover, title page, chapter or heading.
+                Section("Contents") {
+                    ForEach(Array(entries.enumerated()), id: \.offset) { index, entry in
+                        SourceContentsRow(entry: entry, destination: model.destination(for: entry.target), open: open)
+                            .accessibilityIdentifier("contents.entry.\(index)")
+                    }
+                }
+            } else {
+                Section("Contents") {
+                    ForEach(model.book.chapters) { chapter in
+                        Button {
+                            open(ReaderPosition(chapterID: chapter.id, blockID: nil))
+                        } label: {
+                            ChapterRow(chapter: chapter, locked: !model.canRead(chapter))
+                        }
+                        .accessibilityIdentifier("contents.chapter.\(chapter.id)")
+                    }
                 }
             }
 
@@ -80,6 +101,68 @@ struct ContentsView: View {
             }
         }
         .navigationTitle(model.book.title)
+    }
+}
+
+/// One entry of the source contents, indented by its depth.
+private struct SourceContentsRow: View {
+    @Environment(AppModel.self) private var model
+    let entry: ContentsEntry
+    let destination: ContentsDestination?
+    let open: (ReaderPosition) -> Void
+
+    var body: some View {
+        switch destination {
+        case .some(.edition(let focus)):
+            NavigationLink(value: ReadRoute.edition(focus)) { label(locked: false) }
+        case .some(.reader(let position)):
+            Button { open(position) } label: { label(locked: !model.canRead(chapterID: position.chapterID)) }
+        case .none:
+            // Validation rejects unmapped targets, so this only shows for malformed data.
+            label(locked: false).foregroundStyle(.secondary)
+        }
+    }
+
+    private func label(locked: Bool) -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            Text(verbatim: entry.label)
+                .font(entry.depth == 1 ? .body : .subheadline)
+                .foregroundStyle(.primary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 8)
+            if locked {
+                Image(systemName: "lock")
+                    .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
+            }
+        }
+        .padding(.leading, CGFloat(max(entry.depth - 1, 0)) * 16)
+        .accessibilityElement(children: .combine)
+        .accessibilityValue(locked ? "Included with the full book" : "")
+    }
+}
+
+/// A compact row that opens the full cover and title page.
+private struct EditionEntryRow: View {
+    let presentation: BookPresentation
+    let coverImage: Data?
+    let title: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            if let coverImage, let image = UIImage(data: coverImage) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 44, height: 64)
+                    .accessibilityHidden(true)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(verbatim: title).font(.headline).fixedSize(horizontal: false, vertical: true)
+                Text("Cover and title page").font(.subheadline).foregroundStyle(.secondary)
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 

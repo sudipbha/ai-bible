@@ -1,0 +1,47 @@
+{
+  "format": "aibible-tools/1",
+  "filter": {
+    "chapter": "REPLACE-chapter-id",
+    "freeToolUsesPaidChapterText": false,
+    "prompts": [
+      {
+        "id": "filter.q1",
+        "block": "REPLACE-block-id",
+        "item": 0
+      },
+      {
+        "id": "filter.q2",
+        "block": "REPLACE-block-id",
+        "item": 1
+      },
+      {
+        "id": "filter.q3",
+        "block": "REPLACE-block-id",
+        "item": 2
+      },
+      {
+        "id": "filter.q4",
+        "block": "REPLACE-block-id",
+        "item": 3
+      },
+      {
+        "id": "filter.q5",
+        "block": "REPLACE-block-id",
+        "item": 4
+      }
+    ]
+  },
+  "rollout": {
+    "chapter": "REPLACE-chapter-id",
+    "items": [
+      {
+        "id": "rollout.s1",
+        "block": "REPLACE-block-id",
+        "item": 0
+      }
+    ]
+  },
+  "cost": {
+    "chapter": "REPLACE-chapter-id"
+  }
+}

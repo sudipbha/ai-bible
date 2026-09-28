@@ -22,7 +22,7 @@ struct FilterDetailView: View {
             }
             ForEach(Array(questions.enumerated()), id: \.element.id) { index, question in
                 Section("Question \(index + 1) of \(questions.count)") {
-                    Text(question.text)
+                    Text(InlineText.attributed(question.text))
                     Picker("Answer", selection: answer(question.id)) {
                         ForEach(FilterAnswer.allCases) { Text($0.title).tag($0) }
                     }
@@ -87,7 +87,7 @@ struct RolloutDetailView: View {
                 Section {
                     ForEach(items) { item in
                         Toggle(isOn: done(item.id)) {
-                            Text(item.text)
+                            Text(InlineText.attributed(item.text))
                         }
                         .accessibilityIdentifier("rollout.step.\(item.id)")
                     }

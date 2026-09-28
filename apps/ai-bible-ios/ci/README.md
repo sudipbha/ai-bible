@@ -7,15 +7,19 @@
 The template and `run-tests.sh` together do the following.
 
 **Runner:**
-- Uses a standard `macos-15` arm64 runner with a 30-minute timeout.
+- Uses a standard `macos-26` arm64 runner (not a `-large` or `-xlarge` label) with a 30-minute timeout.
+  **This toolchain change is prepared but has not run.** Earlier runs used `macos-15` with Xcode 26.3.
 - Grants only `contents: read`.
 - Checks out code with `actions/checkout` pinned to commit `3d3c42e5…` (v7.0.1), with `persist-credentials: false`.
 - Uses no secrets, signing, caches or uploaded artifacts, and synthetic fixtures only.
 
 **Xcode:**
-- Selects Xcode through `DEVELOPER_DIR=/Applications/Xcode_26.3.app/Contents/Developer`, and fails if it's missing.
+- Selects Xcode through `DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer`, and fails if it's missing.
+- Fails unless `xcodebuild -version` reports build `17F113` (`AIBIBLE_EXPECT_XCODE_BUILD`).
 - Logs `xcodebuild -version`, the simulator SDK and the macOS version.
-- Never falls back to the image's default Xcode, which is 16.4.
+- These pins come from the official runner-images inventory for `macos-26` arm64 image 20260907.0351.1
+  (macOS 26.6.2), read on 28 September 2026. The image can change before a run; the pins then fail
+  the run rather than silently using something else.
 
 **XcodeGen:**
 - Downloads the official XcodeGen 2.46.0 `xcodegen.zip`.
@@ -30,14 +34,27 @@ The template and `run-tests.sh` together do the following.
 - `TEST_HOST` points at `AIBible.app`.
 
 **Simulator:**
-- Lists the iPhone simulators already installed for the selected Xcode.
-- Picks the newest one running iOS 17.0 or later, which is the deployment target.
-- Confirms it's a valid destination for the scheme, and fails clearly if there's none.
-- Downloads no runtimes.
+- With `AIBIBLE_SIM_DEVICE_TYPE` and `AIBIBLE_SIM_RUNTIME` set (the workflow sets iPhone SE (3rd
+  generation) and iOS 26.5):
+  - `ci/simulator_preflight.py` checks, from `simctl list -j`, that the device type is installed, the
+    runtime is installed and available, and that the runtime lists the device type as supported;
+  - it then creates one ephemeral simulator of exactly that pair and deletes it at exit;
+  - if any check or the creation fails, the run fails. It never substitutes another device and never
+    downloads a runtime.
+- The inventory lists iPhone SE (3rd generation) as **not pre-created** on iOS 26.5. That neither
+  proves nor rules out support; only the preflight on the runner can tell. If it fails, a different
+  exact device would need root approval, with its different screen geometry stated.
+- Without those variables (local runs), picks the newest installed iPhone running iOS 17.0 or later.
+- Confirms the simulator is a valid destination for the scheme.
 
 **Build and test:**
 - Runs `build-for-testing` with `CODE_SIGNING_ALLOWED=NO`.
-- Checks that `book.fixture.json` and `PrivacyInfo.xcprivacy` are inside the built app and that `Products.storekit` isn't, and lints the privacy manifest.
+- Checks that `book.fixture.json` and `PrivacyInfo.xcprivacy` are inside the built app and that
+  `Products.storekit` isn't. `ci/check-no-private-content.sh` then fails the run if any converted or
+  private file is in the bundle: `*.epub` (any case), other `book.*.json`, any `*.private.*` (such as the
+  private book or cover), ID registries, conversion reports, `front-matter.json`, `cover.json`, or the
+  `cover.jpg` / `cover.jpeg` / `cover.png` names earlier converter versions wrote (any letter case). It
+  prints file names only. It also lints the privacy manifest.
 - Runs `test-without-building` and exits with xcodebuild's own status.
 
 On a Mac you can run the same script locally:
@@ -62,5 +79,6 @@ Proposed steps, each needing explicit owner approval at the time:
 4. Only if the owner later merges the pull request does `workflow_dispatch` become available on `main` for manual reruns.
 
 Before step 1, confirm the following:
-- `Xcode_26.3` is still listed in the current macos-15 arm64 runner-image README: https://github.com/actions/runner-images/blob/main/images/macos/macos-15-arm64-Readme.md
+- `Xcode_26.6` (build 17F113) and the iOS 26.5 simulator runtime are still listed in the current macos-26 arm64
+  runner-image README: https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
 - The checkout commit still matches the v7.0.1 tag.

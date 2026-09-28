@@ -18,7 +18,7 @@ struct BlockView: View {
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
         case .list:
-            ListBlockView(items: block.items ?? [])
+            ListBlockView(items: block.items ?? [], firstNumber: block.isOrderedList ? (block.start ?? 1) : nil)
         case .checklist:
             ChecklistBlockView(items: block.items ?? [])
         case .table:
@@ -27,23 +27,161 @@ struct BlockView: View {
             }
         case .note:
             NoteBlockView(text: block.text ?? "")
+        case .quote:
+            QuoteBlockView(paragraphs: block.paragraphs ?? [])
+        case .divider:
+            Divider()
+                .padding(.vertical, 8)
+                .accessibilityElement()
+                .accessibilityLabel(Text("Section break"))
+        case .cards:
+            if let group = block.cards {
+                CardGroupView(group: group)
+            }
         }
     }
 }
 
+/// Bulleted, or numbered from `firstNumber` (an ordered list can start at 4).
 private struct ListBlockView: View {
     let items: [String]
+    let firstNumber: Int?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
+            ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                 HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    Text("•").accessibilityHidden(true)
+                    if let firstNumber {
+                        // Overflow-safe even for malformed data, which the loader rejects anyway.
+                        let numbered = firstNumber.addingReportingOverflow(index)
+                        Text(verbatim: numbered.overflow ? "•" : "\(numbered.partialValue).")
+                            .monospacedDigit()
+                    } else {
+                        Text("•").accessibilityHidden(true)
+                    }
                     Text(InlineText.attributed(item))
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 .accessibilityElement(children: .combine)
             }
+        }
+    }
+}
+
+private struct QuoteBlockView: View {
+    let paragraphs: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            ForEach(Array(paragraphs.enumerated()), id: \.offset) { _, paragraph in
+                Text(InlineText.attributed(paragraph))
+                    .font(.body)
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.leading, 14)
+        .overlay(alignment: .leading) {
+            Rectangle()
+                .fill(Color(uiColor: .separator))
+                .frame(width: 3)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(Text("Quotation"))
+    }
+}
+
+/// Cards keep their own fields in source order; they are never merged into shared columns.
+private struct CardGroupView: View {
+    let group: CardGroup
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if let label = group.label {
+                Text(InlineText.attributed(label))
+                    .font(.headline)
+                    .accessibilityAddTraits(.isHeader)
+            }
+            ForEach(Array(group.cards.enumerated()), id: \.offset) { _, card in
+                CardView(card: card)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(ifPresent: group.accessibilityLabel)
+    }
+}
+
+private struct CardView: View {
+    let card: Card
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(Array(card.fields.enumerated()), id: \.offset) { _, field in
+                CardFieldView(field: field)
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color(uiColor: .separator)))
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(ifPresent: card.accessibilityLabel)
+    }
+}
+
+private struct CardFieldView: View {
+    let field: CardField
+
+    var body: some View {
+        if let title = field.title {
+            VStack(alignment: .leading, spacing: 2) {
+                label
+                Text(InlineText.attributed(title))
+                    .font(.headline)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
+        } else {
+            VStack(alignment: .leading, spacing: 2) {
+                label
+                valueText(field.value ?? [])
+                    .font(.body)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            // Blanks are read as what belongs there, not as underscores.
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text("\(InlineText.plain(field.label)): \(CardValuePart.spokenText(field.value ?? []))"))
+        }
+    }
+
+    private var label: some View {
+        Text(InlineText.attributed(field.label))
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func valueText(_ parts: [CardValuePart]) -> Text {
+        parts.reduce(Text(verbatim: "")) { result, part in
+            if let text = part.text {
+                return result + Text(InlineText.attributed(text))
+            }
+            if let blank = part.blank {
+                return result + Text(verbatim: blank.text)
+            }
+            return result
+        }
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func accessibilityLabel(ifPresent label: String?) -> some View {
+        if let label {
+            accessibilityLabel(Text(label))
+        } else {
+            self
         }
     }
 }

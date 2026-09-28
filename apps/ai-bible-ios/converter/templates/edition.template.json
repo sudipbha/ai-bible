@@ -1,0 +1,154 @@
+{
+  "format": "aibible-edition/1",
+  "contentVersion": "REPLACE-edition-id",
+  "title": "REPLACE-title",
+  "epubSHA256": "c5f148caa838fbf3a4266741257860a46beb0b4d8de5f242d70f72e0049c2699",
+  "coverSHA256": "d4605b378dd83cdec27fbea617f204db0b7e934674203b92fa2b56b01acb022f",
+  "profile": {},
+  "documents": {
+    "REPLACE-cover.xhtml": {
+      "role": "cover"
+    },
+    "REPLACE-title.xhtml": {
+      "role": "titlePage"
+    },
+    "REPLACE-contents.xhtml": {
+      "role": "printedContents"
+    },
+    "REPLACE-copyright.xhtml": {
+      "role": "reading",
+      "chapterID": "copyright",
+      "label": "Copyright",
+      "access": "free"
+    },
+    "REPLACE-front-matter.xhtml": {
+      "role": "reading",
+      "chapterID": "front",
+      "label": "Front matter",
+      "access": "free"
+    },
+    "REPLACE-chapter-01.xhtml": {
+      "role": "reading",
+      "chapterID": "ch01",
+      "label": "Chapter 1",
+      "access": "free"
+    },
+    "REPLACE-chapter-02.xhtml": {
+      "role": "reading",
+      "chapterID": "ch02",
+      "label": "Chapter 2",
+      "access": "paid"
+    },
+    "REPLACE-chapter-03.xhtml": {
+      "role": "reading",
+      "chapterID": "ch03",
+      "label": "Chapter 3",
+      "access": "paid"
+    },
+    "REPLACE-chapter-04.xhtml": {
+      "role": "reading",
+      "chapterID": "ch04",
+      "label": "Chapter 4",
+      "access": "paid"
+    },
+    "REPLACE-chapter-05.xhtml": {
+      "role": "reading",
+      "chapterID": "ch05",
+      "label": "Chapter 5",
+      "access": "paid"
+    },
+    "REPLACE-chapter-06.xhtml": {
+      "role": "reading",
+      "chapterID": "ch06",
+      "label": "Chapter 6",
+      "access": "paid"
+    },
+    "REPLACE-chapter-07.xhtml": {
+      "role": "reading",
+      "chapterID": "ch07",
+      "label": "Chapter 7",
+      "access": "paid"
+    },
+    "REPLACE-chapter-08.xhtml": {
+      "role": "reading",
+      "chapterID": "ch08",
+      "label": "Chapter 8",
+      "access": "paid"
+    },
+    "REPLACE-chapter-09.xhtml": {
+      "role": "reading",
+      "chapterID": "ch09",
+      "label": "Chapter 9",
+      "access": "paid"
+    },
+    "REPLACE-chapter-10.xhtml": {
+      "role": "reading",
+      "chapterID": "ch10",
+      "label": "Chapter 10",
+      "access": "paid"
+    },
+    "REPLACE-chapter-11.xhtml": {
+      "role": "reading",
+      "chapterID": "ch11",
+      "label": "Chapter 11",
+      "access": "paid"
+    },
+    "REPLACE-chapter-12.xhtml": {
+      "role": "reading",
+      "chapterID": "ch12",
+      "label": "Chapter 12",
+      "access": "paid"
+    },
+    "REPLACE-chapter-13.xhtml": {
+      "role": "reading",
+      "chapterID": "ch13",
+      "label": "Chapter 13",
+      "access": "paid"
+    },
+    "REPLACE-chapter-14.xhtml": {
+      "role": "reading",
+      "chapterID": "ch14",
+      "label": "Chapter 14",
+      "access": "paid"
+    },
+    "REPLACE-appendices.xhtml": {
+      "role": "reading",
+      "chapterID": "appx",
+      "label": "Appendices",
+      "access": "paid"
+    }
+  },
+  "expectedCensus": {
+    "ol": 27,
+    "ul": 22,
+    "li": 223,
+    "maxListDepth": 1,
+    "h1": 16,
+    "h2": 78,
+    "h3": 3,
+    "h4": 56,
+    "cardGroups": 8,
+    "cards": 56,
+    "fields": 223,
+    "labels": 231,
+    "values": 167,
+    "cardTitles": 56,
+    "blankFields": 60,
+    "blankFieldsWithAria": 60,
+    "asideSourceNotes": 13,
+    "blockquote": 4,
+    "hr": 14,
+    "strong": 348,
+    "em": 73,
+    "code": 32,
+    "aInternal": 0,
+    "rawURLs": 9,
+    "table": 0,
+    "pre": 0,
+    "img": 0,
+    "svg": 0,
+    "math": 0,
+    "audio": 0,
+    "video": 0
+  }
+}

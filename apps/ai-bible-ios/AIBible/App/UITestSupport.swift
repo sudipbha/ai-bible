@@ -10,6 +10,16 @@ import Foundation
 enum UITestSupport {
     static let storeArgument = "-AIBibleUITestStore"
     static let resetArgument = "-AIBibleUITestReset"
+    static let bookArgument = "-AIBibleUITestBook"
+    /// Synthetic fixtures a UI test may select instead of the default one. Nothing else is accepted.
+    static let selectableBooks: Set<String> = ["presentation.fixture"]
+
+    /// A synthetic fixture chosen by a UI test, or nil. Only names in `selectableBooks` count.
+    static func bookResource(arguments: [String] = ProcessInfo.processInfo.arguments) -> String? {
+        guard let index = arguments.firstIndex(of: bookArgument), arguments.indices.contains(index + 1),
+              selectableBooks.contains(arguments[index + 1]) else { return nil }
+        return arguments[index + 1]
+    }
 
     /// Parent of every UI-test store: <tmp>/AIBibleUITests.
     static var root: URL {

@@ -6,7 +6,7 @@ enum ToolExport {
         var lines = ["Five-Question Filter", record.displayName, ""]
         for (index, question) in questions.enumerated() {
             let answer = record.answers[question.id] ?? .unanswered
-            lines.append("\(index + 1). \(question.text)")
+            lines.append("\(index + 1). \(InlineText.plain(question.text))")
             lines.append("   Answer: \(answer.title)")
             if let note = record.notes[question.id], !note.isEmpty {
                 lines.append("   Note: \(note)")
@@ -29,7 +29,7 @@ enum ToolExport {
         lines.append("Done: \(progress.done) of \(progress.total)")
         lines.append("")
         for item in items {
-            lines.append("[\(record.done.contains(item.id) ? "x" : " ")] \(item.text)")
+            lines.append("[\(record.done.contains(item.id) ? "x" : " ")] \(InlineText.plain(item.text))")
         }
         if !record.notes.isEmpty {
             lines.append("")

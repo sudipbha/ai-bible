@@ -4,6 +4,12 @@
 #
 # Run from anywhere:  bash apps/ai-bible-ios/ci/run-tests.sh
 # Requires DEVELOPER_DIR to point at the intended Xcode (it is never guessed).
+#
+# Optional pins (the workflow sets all three):
+#   AIBIBLE_EXPECT_XCODE_BUILD  fail unless `xcodebuild -version` reports this build (e.g. 17F113)
+#   AIBIBLE_SIM_DEVICE_TYPE     simulator device type identifier   } both or neither: create one
+#   AIBIBLE_SIM_RUNTIME         simulator runtime identifier       } ephemeral simulator, no fallback
+# Without the simulator pins, the newest installed iPhone simulator is used (local runs).
 set -euo pipefail
 
 XCODEGEN_VERSION="2.46.0"
@@ -17,7 +23,12 @@ section() { echo; echo "=== $* ==="; }
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORK="$(mktemp -d "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/aibible-ci.XXXXXX")"
-trap 'rm -rf "$WORK"' EXIT
+EPHEMERAL_DEVICE=""
+cleanup() {
+  if [[ -n "$EPHEMERAL_DEVICE" ]]; then xcrun simctl delete "$EPHEMERAL_DEVICE" >/dev/null 2>&1 || true; fi
+  rm -rf "$WORK"
+}
+trap cleanup EXIT
 
 section "Host and Xcode"
 [[ "$(uname -s)" == "Darwin" ]] || fail "This script needs macOS."
@@ -29,6 +40,11 @@ export DEVELOPER_DIR
 echo "DEVELOPER_DIR=$DEVELOPER_DIR"
 xcodebuild -version
 xcrun --sdk iphonesimulator --show-sdk-version
+if [[ -n "${AIBIBLE_EXPECT_XCODE_BUILD:-}" ]]; then
+  xcode_build="$(xcodebuild -version | awk '/^Build version/ {print $3}')"
+  [[ "$xcode_build" == "$AIBIBLE_EXPECT_XCODE_BUILD" ]] \
+    || fail "Xcode build is $xcode_build, expected $AIBIBLE_EXPECT_XCODE_BUILD"
+fi
 
 section "XcodeGen ${XCODEGEN_VERSION} (pinned archive, checksum-verified)"
 curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 -o "$WORK/xcodegen.zip" "$XCODEGEN_URL"
@@ -62,6 +78,20 @@ test_settings="$(xcodebuild -project "$PROJECT" -target AIBibleTests -sdk iphone
 echo "$test_settings" | grep -E '^\s*(TEST_HOST|BUNDLE_LOADER|IPHONEOS_DEPLOYMENT_TARGET) = '
 echo "$test_settings" | grep -Eq '^\s*TEST_HOST = .*/AIBible\.app/AIBible$' || fail "TEST_HOST does not point at AIBible.app"
 
+if [[ -n "${AIBIBLE_SIM_DEVICE_TYPE:-}" || -n "${AIBIBLE_SIM_RUNTIME:-}" ]]; then
+section "Create the pinned simulator (no runtime download, no fallback)"
+[[ -n "${AIBIBLE_SIM_DEVICE_TYPE:-}" && -n "${AIBIBLE_SIM_RUNTIME:-}" ]] \
+  || fail "Set both AIBIBLE_SIM_DEVICE_TYPE and AIBIBLE_SIM_RUNTIME, or neither"
+xcrun simctl list devicetypes -j > "$WORK/devicetypes.json"
+xcrun simctl list runtimes -j > "$WORK/runtimes.json"
+/usr/bin/python3 "$APP_DIR/ci/simulator_preflight.py" --device-type "$AIBIBLE_SIM_DEVICE_TYPE" \
+  --runtime "$AIBIBLE_SIM_RUNTIME" --devicetypes-json "$WORK/devicetypes.json" --runtimes-json "$WORK/runtimes.json" \
+  || fail "Pinned simulator unavailable: $AIBIBLE_SIM_DEVICE_TYPE on $AIBIBLE_SIM_RUNTIME (not substituting another)"
+EPHEMERAL_DEVICE="$(xcrun simctl create "AIBible CI $(date +%s)" "$AIBIBLE_SIM_DEVICE_TYPE" "$AIBIBLE_SIM_RUNTIME")" \
+  || fail "simctl could not create $AIBIBLE_SIM_DEVICE_TYPE on $AIBIBLE_SIM_RUNTIME"
+DEVICE_ID="$EPHEMERAL_DEVICE"
+echo "Created ephemeral simulator $DEVICE_ID"
+else
 section "Pick an installed iPhone simulator (no runtime download)"
 DEVICE_ID="$(xcrun simctl list devices available --json | /usr/bin/python3 -c '
 import json, re, sys
@@ -84,6 +114,7 @@ if best is None:
 print(best[1])
 print("Selected %s, iOS %s" % (best[2], best[3]), file=sys.stderr)
 ' "$MIN_IOS_RUNTIME")" || fail "No available iPhone simulator with iOS >= $MIN_IOS_RUNTIME for this Xcode"
+fi
 DESTINATION="platform=iOS Simulator,id=$DEVICE_ID"
 xcodebuild -project "$PROJECT" -scheme AIBible -showdestinations | grep -F "$DEVICE_ID" \
   || fail "Selected simulator $DEVICE_ID is not a valid destination for the AIBible scheme"
@@ -102,6 +133,8 @@ for resource in book.fixture.json PrivacyInfo.xcprivacy; do
   echo "Found $resource"
 done
 [[ ! -e "$APP_BUNDLE/Products.storekit" ]] || fail "Products.storekit must not ship inside the app"
+# Public builds package only the synthetic fixture: no converted or private book content.
+bash "$APP_DIR/ci/check-no-private-content.sh" "$APP_BUNDLE" || fail "private or converted content found in the app bundle"
 plutil -lint "$APP_BUNDLE/PrivacyInfo.xcprivacy"
 
 section "Run unit tests"
