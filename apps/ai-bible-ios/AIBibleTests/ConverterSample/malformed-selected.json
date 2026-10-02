@@ -1,0 +1,18 @@
+{
+  "contentVersion": "synthetic-malformed-1",
+  "isFixture": false,
+  "title": "Synthetic malformed edition",
+  "chapters": [
+    {
+      "id": "m1",
+      "label": "Malformed 1",
+      "title": "Invented shapes",
+      "access": "free",
+      "blocks": [
+        { "id": "m1.l1", "kind": "list", "items": ["one", "two"], "ordered": true, "start": 9223372036854775807 },
+        { "id": "m1.q1", "kind": "quote", "paragraphs": [] }
+      ]
+    }
+  ],
+  "tools": { "filterQuestions": [], "rolloutItems": [] }
+}

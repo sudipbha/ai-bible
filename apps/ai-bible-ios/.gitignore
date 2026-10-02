@@ -1,0 +1,22 @@
+# Generated from project.yml by XcodeGen
+*.xcodeproj/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+build/
+
+# Private book content never enters Git (see converter/README.md)
+*.[eE][pP][uU][bB]
+AIBible/Resources/Private/
+book.private*.json
+book.draft*.json
+id-registry*.json
+conversion-report*.json
+front-matter.json
+cover.json
+*.private.*
+# Cover image names written by earlier converter versions
+cover.jpg
+cover.jpeg
+cover.png
+__pycache__/
