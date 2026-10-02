@@ -4,25 +4,31 @@
 # Prepared for the owner's Mac. It is never run in CI and must not be pointed at a
 # Git working tree: the private bundle and every build product stay in --work.
 #
-#   DEVELOPER_DIR=/Applications/Xcode_26.3.app/Contents/Developer \
+#   DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer \
 #   bash apps/ai-bible-ios/converter/stage-private-build.sh \
 #     --book <converted book.private.json> --expect-sha256 <its SHA-256> \
 #     [--cover <converted cover file> --expect-cover-sha256 <its SHA-256>] \
 #     --work <new folder outside Git> --xcodegen <path to xcodegen> \
-#     --destination 'platform=iOS Simulator,id=<simulator UDID>'
+#     ( --destination 'platform=iOS Simulator,id=<simulator UDID>'      # unsigned Debug build
+#     | --release-archive --team <Apple team ID> [--bundle-id <id>] )  # signed Release archive
 #
+# --release-archive makes a signed Release archive at <work>/AIBible.xcarchive (automatic signing
+# with --team; Xcode must be signed in to that team). It never uploads or submits it.
 # Only the declared, reviewed files are copied: the book JSON and, when the book declares one,
 # its cover image under the resource name the book records. Anything missing, extra or with a
 # different SHA-256 or size stops the script before anything is staged.
 # The app sources come from the committed HEAD (git archive), not from loose files in the
 # checkout, so nothing untracked is swept in. The build defines AIBIBLE_PRIVATE_BOOK, which
 # makes the app load book.private.json and refuse anything else (no fallback to the fixture).
-# It builds only: it doesn't run tests, install, sign or upload anything.
+# The synthetic sample books are removed from the staged sources, so the build can't bundle or
+# select them. After building, ci/verify-private-app.sh checks the app: the reviewed book and cover
+# are bundled byte-for-byte, no synthetic content is present, and the executable carries the
+# private edition marker. The Debug mode builds only; the archive mode signs but never uploads.
 set -euo pipefail
 
 fail() { echo "stage-private-build: $*" >&2; exit 1; }
 
-BOOK="" EXPECT="" WORK="" XCODEGEN="" DESTINATION="" COVER="" EXPECT_COVER=""
+BOOK="" EXPECT="" WORK="" XCODEGEN="" DESTINATION="" COVER="" EXPECT_COVER="" ARCHIVE=0 TEAM="" BUNDLE_ID=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --book) BOOK="${2:-}"; shift 2 ;;
@@ -32,11 +38,22 @@ while [[ $# -gt 0 ]]; do
     --work) WORK="${2:-}"; shift 2 ;;
     --xcodegen) XCODEGEN="${2:-}"; shift 2 ;;
     --destination) DESTINATION="${2:-}"; shift 2 ;;
+    --release-archive) ARCHIVE=1; shift ;;
+    --team) TEAM="${2:-}"; shift 2 ;;
+    --bundle-id) BUNDLE_ID="${2:-}"; shift 2 ;;
     *) fail "unknown argument $1" ;;
   esac
 done
-[[ -n "$BOOK" && -n "$EXPECT" && -n "$WORK" && -n "$XCODEGEN" && -n "$DESTINATION" ]] \
-  || fail "--book, --expect-sha256, --work, --xcodegen and --destination are all required"
+[[ -n "$BOOK" && -n "$EXPECT" && -n "$WORK" && -n "$XCODEGEN" ]] \
+  || fail "--book, --expect-sha256, --work and --xcodegen are all required"
+if [[ "$ARCHIVE" == 1 ]]; then
+  [[ -z "$DESTINATION" ]] || fail "--destination is for the Debug build; --release-archive builds for any iOS device"
+  [[ "$TEAM" =~ ^[A-Z0-9]{10}$ ]] || fail "--release-archive needs --team <10-character Apple team ID>"
+  [[ -z "$BUNDLE_ID" || "$BUNDLE_ID" =~ ^[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$ ]] || fail "--bundle-id must be a reverse-DNS identifier"
+else
+  [[ -n "$DESTINATION" ]] || fail "--destination is required (or use --release-archive)"
+  [[ -z "$TEAM" && -z "$BUNDLE_ID" ]] || fail "--team and --bundle-id are only for --release-archive"
+fi
 [[ -f "$BOOK" ]] || fail "private book bundle not found"
 [[ "$EXPECT" =~ ^[0-9a-f]{64}$ ]] || fail "--expect-sha256 must be 64 lowercase hex characters"
 [[ ! -e "$WORK" ]] || fail "--work must not exist yet"
@@ -96,22 +113,52 @@ mkdir -p "$WORK"
 git -C "$REPO" archive --format=tar HEAD apps/ai-bible-ios | tar -x -C "$WORK"
 echo "Sources: commit $(git -C "$REPO" rev-parse HEAD)"
 APP="$WORK/apps/ai-bible-ios"
+# The synthetic sample books must not be bundled (or selectable) in a private build.
+rm -rf "$APP/AIBible/Resources/Fixtures"
 mkdir -p "$APP/AIBible/Resources/Private"
 cp "$BOOK" "$APP/AIBible/Resources/Private/book.private.json"
 [[ "$declared" == "none" ]] || cp "$COVER" "$APP/AIBible/Resources/Private/$COVER_RESOURCE"
 
 cd "$APP"
 "$XCODEGEN" generate --spec project.yml --quiet
-xcodebuild build -project AIBible.xcodeproj -scheme AIBible -configuration Debug \
-  -destination "$DESTINATION" -derivedDataPath "$WORK/DerivedData" \
-  CODE_SIGNING_ALLOWED=NO SWIFT_ACTIVE_COMPILATION_CONDITIONS='DEBUG AIBIBLE_PRIVATE_BOOK' -quiet
-
-BUILT="$(find "$WORK/DerivedData/Build/Products" -maxdepth 2 -type d -name 'AIBible.app' | head -n 1)"
-[[ -n "$BUILT" && -f "$BUILT/book.private.json" ]] || fail "book.private.json missing from the built app"
-packaged="$(sha256_of "$BUILT/book.private.json")"
-[[ "$packaged" == "$EXPECT" ]] || fail "packaged book differs from the reviewed bundle"
-if [[ "$declared" != "none" ]]; then
-  [[ -f "$BUILT/$COVER_RESOURCE" && "$(sha256_of "$BUILT/$COVER_RESOURCE")" == "$EXPECT_COVER" ]] \
-    || fail "packaged cover differs from the reviewed cover"
+if [[ "$ARCHIVE" == 1 ]]; then
+  CONFIGURATION=Release CONDITIONS='AIBIBLE_PRIVATE_BOOK'
+  SIGNING=(DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic)
+  [[ -z "$BUNDLE_ID" ]] || SIGNING+=(PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID")
+else
+  CONFIGURATION=Debug CONDITIONS='DEBUG AIBIBLE_PRIVATE_BOOK'
+  SIGNING=(CODE_SIGNING_ALLOWED=NO)
 fi
-echo "Built (not installed or run): $BUILT"
+# Record the settings Xcode will actually use for the app target and refuse anything unexpected.
+settings="$(xcodebuild -showBuildSettings -project AIBible.xcodeproj -target AIBible -configuration "$CONFIGURATION" \
+  SWIFT_ACTIVE_COMPILATION_CONDITIONS="$CONDITIONS" "${SIGNING[@]}" 2>/dev/null)"
+active="$(sed -n 's/^ *SWIFT_ACTIVE_COMPILATION_CONDITIONS = //p' <<< "$settings" | head -n 1)"
+echo "Build settings: configuration $CONFIGURATION; SWIFT_ACTIVE_COMPILATION_CONDITIONS = $active"
+[[ " $active " == *" AIBIBLE_PRIVATE_BOOK "* ]] || fail "AIBIBLE_PRIVATE_BOOK is not active for the app target"
+if [[ "$ARCHIVE" == 1 && " $active " == *" DEBUG "* ]]; then fail "the Release archive must not define DEBUG"; fi
+
+if [[ "$ARCHIVE" == 1 ]]; then
+  xcodebuild archive -project AIBible.xcodeproj -scheme AIBible -configuration Release \
+    -destination 'generic/platform=iOS' -archivePath "$WORK/AIBible.xcarchive" \
+    -derivedDataPath "$WORK/DerivedData" -allowProvisioningUpdates \
+    SWIFT_ACTIVE_COMPILATION_CONDITIONS="$CONDITIONS" "${SIGNING[@]}" -quiet
+  BUILT="$WORK/AIBible.xcarchive/Products/Applications/AIBible.app"
+else
+  xcodebuild build -project AIBible.xcodeproj -scheme AIBible -configuration Debug \
+    -destination "$DESTINATION" -derivedDataPath "$WORK/DerivedData" \
+    SWIFT_ACTIVE_COMPILATION_CONDITIONS="$CONDITIONS" "${SIGNING[@]}" -quiet
+  BUILT="$(find "$WORK/DerivedData/Build/Products" -maxdepth 2 -type d -name 'AIBible.app' | head -n 1)"
+fi
+[[ -n "$BUILT" && -d "$BUILT" ]] || fail "built AIBible.app not found"
+if [[ "$declared" == "none" ]]; then
+  bash "$APP/ci/verify-private-app.sh" "$BUILT" "$EXPECT" || fail "the built app failed the private-content checks"
+else
+  bash "$APP/ci/verify-private-app.sh" "$BUILT" "$EXPECT" "$COVER_RESOURCE" "$EXPECT_COVER" \
+    || fail "the built app failed the private-content checks"
+fi
+if [[ "$ARCHIVE" == 1 ]]; then
+  codesign --verify --deep --strict "$BUILT" || fail "the archived app's signature doesn't verify"
+  echo "Signed Release archive (not uploaded or submitted): $WORK/AIBible.xcarchive"
+else
+  echo "Built (not installed or run): $BUILT"
+fi

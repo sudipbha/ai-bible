@@ -1104,6 +1104,34 @@ class StagingScriptTests(unittest.TestCase):
         finally:
             ws.close()
 
+    def test_release_archive_arguments(self):
+        ws = Workspace()
+        try:
+            work = ws.path / "stage"
+            args = [a for a in self.base_args(work)]
+            no_destination = args[:args.index("--destination")] + args[args.index("--destination") + 2:]
+            status, err = self.run_script(*no_destination)
+            self.assertIn("--destination is required (or use --release-archive)", err)
+            status, err = self.run_script(*no_destination, "--release-archive")
+            self.assertIn("needs --team", err)
+            status, err = self.run_script(*no_destination, "--release-archive", "--team", "abc")
+            self.assertIn("needs --team", err)
+            status, err = self.run_script(*args, "--release-archive", "--team", "ABCDE12345")
+            self.assertIn("--destination is for the Debug build", err)
+            status, err = self.run_script(*no_destination, "--release-archive", "--team", "ABCDE12345",
+                                          "--bundle-id", "not a bundle id")
+            self.assertIn("reverse-DNS", err)
+            status, err = self.run_script(*args, "--team", "ABCDE12345")
+            self.assertIn("only for --release-archive", err)
+            # Valid archive arguments still stop before building here (no macOS, or no xcodegen).
+            status, err = self.run_script(*no_destination, "--release-archive", "--team", "ABCDE12345",
+                                          "--bundle-id", "com.example.app", env_extra={"DEVELOPER_DIR": "/nonexistent"})
+            self.assertNotEqual(status, 0)
+            self.assertTrue(any(m in err for m in ("needs macOS", "DEVELOPER_DIR", "xcodegen not executable")), err)
+            self.assertFalse(work.exists())
+        finally:
+            ws.close()
+
     def test_cover_must_be_the_declared_reviewed_file(self):
         ws = Workspace()
         try:

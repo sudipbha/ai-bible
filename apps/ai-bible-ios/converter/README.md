@@ -172,7 +172,20 @@ The Filter is free. If its wording comes from a paid chapter, the mapping must s
    with `AIBIBLE_PRIVATE_BOOK` defined. That build loads `book.private`, checks the cover's size and
    SHA-256, and shows an error, not the fixture, if anything is missing, invalid or different.
 
-It doesn't test, install, sign or upload anything. `front-matter.json`, the report and the registry are
+5. It removes the synthetic sample books from the staged sources, so they can't be bundled or selected.
+6. After building, `ci/verify-private-app.sh` checks the app: the reviewed book and cover are bundled
+   byte-for-byte, no synthetic content is present (no fixture files, no JSON with `isFixture: true`),
+   and the executable carries the private edition marker (`AIBIBLE_EDITION=private-book`, compiled in
+   only with `AIBIBLE_PRIVATE_BOOK`). Any failure stops the script.
+
+Two modes:
+- `--destination <simulator>`: an unsigned Debug build for the Simulator.
+- `--release-archive --team <team ID> [--bundle-id <id>]`: a signed Release archive at
+  `<work>/AIBible.xcarchive` (automatic signing; Xcode must be signed in to that team). The build
+  settings are printed and must include `AIBIBLE_PRIVATE_BOOK` and not `DEBUG`; the archived app's
+  signature is verified. It is never exported, uploaded or submitted.
+
+It doesn't run tests or install anything. `front-matter.json`, the report and the registry are
 never packaged.
 
 The script is POSIX bash, and building needs macOS and Xcode:

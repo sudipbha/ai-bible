@@ -33,7 +33,12 @@ In `project.yml` and `AIBible/App/AppModel.swift`:
 
 ## 4. Real book build and proofread (MAC)
 1. Run `converter/stage-private-build.sh` with the reviewed `book.private.json` and cover
-   (see `converter/README.md`). It copies them into a build outside Git.
+   (see `converter/README.md`). It copies them into a build outside Git, removes the synthetic
+   samples, and verifies the built app bundles and selects the private book.
+   - Simulator check: `--destination 'platform=iOS Simulator,id=<UDID>'` (unsigned Debug).
+   - Store build: `--release-archive --team <team ID> --bundle-id <your bundle ID>` makes the signed
+     Release archive. Then upload it from Xcode's Organizer. A normal Xcode Product → Archive of this
+     repo bundles only the **synthetic sample**; never submit that.
 2. On the Simulator and a real iPhone, check: cover, contents, every chapter, tables and cards, the
    Filter questions and rollout steps, search, bookmarks, paid lock and unlock.
 3. VoiceOver and the largest text size on the oldest supported iPhone.
@@ -47,7 +52,8 @@ In `project.yml` and `AIBible/App/AppModel.swift`:
 4. Screenshots: see `SCREENSHOTS.md`. Take them from the real-book build, not the synthetic fixture.
 
 ## 6. Build, test, submit (MAC, APPLE)
-1. Xcode → Product → Archive with the release edition; upload to App Store Connect.
+1. Make the archive with `stage-private-build.sh --release-archive` (step 4), then upload it from
+   Xcode → Window → Organizer. Do not use a plain Product → Archive (sample content only).
 2. TestFlight: install on real iPhones; buy, restore, Ask to Buy and refund in the sandbox.
 3. Submit the app with the in-app purchase attached. If rejected under 4.2, reply in Resolution Center
    pointing to the Decisions workflow; the fallback is publishing the EPUB on Apple Books.

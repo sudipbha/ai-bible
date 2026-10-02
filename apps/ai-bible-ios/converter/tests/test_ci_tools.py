@@ -160,5 +160,96 @@ class PngBytesTests(unittest.TestCase):
             self.assertEqual(odd.returncode, 2)
 
 
+@unittest.skipUnless(__import__("shutil").which("bash"), "the verifier is a POSIX bash script; bash is not installed")
+class PrivateAppVerifyTests(unittest.TestCase):
+    """ci/verify-private-app.sh against fake app bundles: it must pass only an app that bundles the
+    reviewed private book (and cover), selects it, and holds no synthetic sample content."""
+
+    APP = Path(__file__).resolve().parent.parent.parent
+    SCRIPT = APP / "ci" / "verify-private-app.sh"
+    BOOK = b'{"isFixture": false, "chapters": []}'
+    COVER = b"\x89PNG private cover"
+
+    def make_app(self, folder, marker=b"AIBIBLE_EDITION=private-book"):
+        import plistlib
+        app = Path(folder) / "AIBible.app"
+        app.mkdir()
+        (app / "Info.plist").write_bytes(plistlib.dumps({"CFBundleExecutable": "AIBible"}, fmt=plistlib.FMT_BINARY))
+        (app / "AIBible").write_bytes(b"\x00\xcf\xfa\xed" + marker + b"\x00code")
+        (app / "book.private.json").write_bytes(self.BOOK)
+        (app / "cover.private.jpg").write_bytes(self.COVER)
+        (app / "PrivacyInfo.xcprivacy").write_bytes(b"plist")
+        return app
+
+    def run_verify(self, app, cover=True, book_sha=None):
+        import hashlib
+        args = [str(app), book_sha or hashlib.sha256(self.BOOK).hexdigest()]
+        if cover:
+            args += ["cover.private.jpg", hashlib.sha256(self.COVER).hexdigest()]
+        return subprocess.run(["bash", self.SCRIPT.as_posix(), *args], capture_output=True, text=True)
+
+    def test_passes_a_private_app_and_reports_what_it_checked(self):
+        with tempfile.TemporaryDirectory() as folder:
+            result = self.run_verify(self.make_app(folder))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("selects the private edition", result.stdout)
+
+    def test_fails_on_any_synthetic_content(self):
+        cases = {
+            "Fixtures/book.fixture.json": b"{}",
+            "presentation-fixture-cover.png": b"png",
+            "other.fixture.json": b"{}",
+            "notes.json": b'{"isFixture": true}',
+        }
+        for name, data in cases.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as folder:
+                app = self.make_app(folder)
+                (app / name).parent.mkdir(parents=True, exist_ok=True)
+                (app / name).write_bytes(data)
+                result = self.run_verify(app)
+                self.assertEqual(result.returncode, 1)
+                self.assertIn("synthetic", result.stderr)
+
+    def test_fails_unless_the_executable_selects_the_private_edition(self):
+        for marker, expected in ((b"AIBIBLE_EDITION=synthetic-fixture", "lacks the private edition marker"),
+                                 (b"AIBIBLE_EDITION=private-book AIBIBLE_EDITION=synthetic-fixture",
+                                  "contains the synthetic edition marker")):
+            with self.subTest(expected=expected), tempfile.TemporaryDirectory() as folder:
+                result = self.run_verify(self.make_app(folder, marker=marker))
+                self.assertEqual(result.returncode, 1)
+                self.assertIn(expected, result.stderr)
+
+    def test_fails_on_a_changed_or_missing_book_or_cover(self):
+        with tempfile.TemporaryDirectory() as folder:
+            app = self.make_app(folder)
+            self.assertIn("differs from the reviewed bundle", self.run_verify(app, book_sha="0" * 64).stderr)
+            (app / "cover.private.jpg").write_bytes(b"other")
+            self.assertIn("differs from the reviewed cover", self.run_verify(app).stderr)
+            (app / "book.private.json").unlink()
+            self.assertIn("book.private.json missing", self.run_verify(app, cover=False).stderr)
+        self.assertEqual(subprocess.run(["bash", self.SCRIPT.as_posix(), "only-one"], capture_output=True).returncode, 2)
+
+    def test_release_marker_is_compiled_per_edition_and_logged(self):
+        source = (self.APP / "AIBible" / "App" / "AppModel.swift").read_text(encoding="utf-8")
+        private = source.index('static let editionMarker = "AIBIBLE_EDITION=private-book"')
+        synthetic = source.index('static let editionMarker = "AIBIBLE_EDITION=synthetic-fixture"')
+        self.assertTrue(source.index("#if AIBIBLE_PRIVATE_BOOK") < private < source.index("#else") < synthetic)
+        self.assertIn("AppConfig.editionMarker, privacy: .public", source)
+        script = (self.APP / "ci" / "run-tests.sh").read_text(encoding="utf-8")
+        self.assertIn("-configuration Release", script)
+        self.assertIn('exit "$marker_status"', script)
+
+    def test_staging_strips_samples_and_verifies_both_build_modes(self):
+        script = (self.APP / "converter" / "stage-private-build.sh").read_text(encoding="utf-8")
+        strip = script.index('rm -rf "$APP/AIBible/Resources/Fixtures"')
+        self.assertLess(strip, script.index('"$XCODEGEN" generate'))
+        self.assertIn("xcodebuild archive", script)
+        self.assertIn("-configuration Release", script)
+        self.assertEqual(script.count("ci/verify-private-app.sh\" \"$BUILT\""), 2)
+        self.assertIn("codesign --verify", script)
+        # It may archive and sign, but never export, upload or submit anything.
+        self.assertNotRegex(script, r"altool|notarytool|-exportArchive|upload-app|iTMSTransporter|xcrun +upload")
+
+
 if __name__ == "__main__":
     unittest.main()

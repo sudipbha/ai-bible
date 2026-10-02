@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import OSLog
 
 enum AppConfig {
     /// Placeholder. Replace with the non-consumable product ID created in App Store Connect.
@@ -9,10 +10,15 @@ enum AppConfig {
     /// conversion. Public builds and CI never define AIBIBLE_PRIVATE_BOOK.
     static let bundledBookResource = "book.private"
     static let expectsFixtureContent = false
+    /// Release checks (ci/verify-private-app.sh) look for this in the built executable. It is
+    /// longer than Swift's inline small-string limit, so it is stored as data, and it is logged
+    /// at launch so the optimizer keeps it.
+    static let editionMarker = "AIBIBLE_EDITION=private-book"
     #else
     /// Synthetic fixture. Real book content needs an approved, pinned edition first.
     static let bundledBookResource = "book.fixture"
     static let expectsFixtureContent = true
+    static let editionMarker = "AIBIBLE_EDITION=synthetic-fixture"
     #endif
     /// Required before App Store submission (Guideline 5.1.1(i)); not set yet.
     static let privacyPolicyURL: URL? = nil
@@ -127,6 +133,7 @@ final class AppModel {
     }
 
     static func live() -> AppModel {
+        Logger(subsystem: "AIBible", category: "content").notice("\(AppConfig.editionMarker, privacy: .public)")
         let provider = StoreKitPurchaseProvider(productID: AppConfig.fullBookProductID)
         var store = try? FileStore.defaultStore()
         #if DEBUG

@@ -154,6 +154,28 @@ status=$?
 set -e
 echo "xcodebuild test exit status: $status"
 
+# The private-book Release check (ci/verify-private-app.sh) finds the selected edition by a marker
+# string in the executable. Prove here, on a real optimized Release build of the public app, that
+# the marker survives optimization: it must carry the synthetic marker and not the private one.
+section "Release build keeps the edition marker"
+marker_status=0
+if xcodebuild build -project "$PROJECT" -scheme AIBible -configuration Release \
+     -destination "generic/platform=iOS Simulator" -derivedDataPath "$WORK/ReleaseData" \
+     CODE_SIGNING_ALLOWED=NO -quiet; then
+  python3 - "$WORK/ReleaseData/Build/Products/Release-iphonesimulator/AIBible.app" <<'PY' || marker_status=1
+import os, plistlib, sys
+app = sys.argv[1]
+executable = plistlib.load(open(os.path.join(app, "Info.plist"), "rb"))["CFBundleExecutable"]
+binary = open(os.path.join(app, executable), "rb").read()
+synthetic, private = b"AIBIBLE_EDITION=synthetic-fixture", b"AIBIBLE_EDITION=private-book"
+print(f"Release {executable}: synthetic marker {synthetic in binary}, private marker {private in binary}")
+sys.exit(0 if synthetic in binary and private not in binary else 1)
+PY
+else
+  marker_status=1
+fi
+[[ "$marker_status" -eq 0 ]] || echo "::error::the public Release build doesn't carry exactly the synthetic edition marker"
+
 # Copy the UI tests' named screenshots out of the result bundle for people to look at. This never
 # changes the test result: any problem here is only a warning.
 if [[ -n "${AIBIBLE_SCREENSHOT_DIR:-}" ]]; then
@@ -184,4 +206,5 @@ PY
     echo "::warning::xcresulttool could not export attachments"
   fi
 fi
-exit "$status"
+[[ "$status" -ne 0 ]] && exit "$status"
+exit "$marker_status"
