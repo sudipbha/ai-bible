@@ -54,6 +54,21 @@ else
   [[ -n "$DESTINATION" ]] || fail "--destination is required (or use --release-archive)"
   [[ -z "$TEAM" && -z "$BUNDLE_ID" ]] || fail "--team and --bundle-id are only for --release-archive"
 fi
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd -P)"
+if [[ "$ARCHIVE" == 1 ]]; then
+  # Store builds only: refuse placeholder or missing release values in the committed sources
+  # (bundle ID, product ID, privacy and support URLs) before anything else happens.
+  command -v python3 >/dev/null 2>&1 || fail "python3 is required for the release preflight"
+  PREFLIGHT="$(mktemp -d)"
+  trap 'rm -rf "$PREFLIGHT"' EXIT
+  git -C "$REPO" archive --format=tar HEAD apps/ai-bible-ios/project.yml apps/ai-bible-ios/AIBible/App/AppModel.swift \
+    apps/ai-bible-ios/StoreKit/Products.storekit apps/ai-bible-ios/ci/release-preflight.py | tar -x -C "$PREFLIGHT" \
+    || fail "could not read the committed release values from HEAD"
+  PREFLIGHT_ARGS=(--root "$PREFLIGHT/apps/ai-bible-ios")
+  [[ -z "$BUNDLE_ID" ]] || PREFLIGHT_ARGS+=(--bundle-id "$BUNDLE_ID")
+  python3 "$PREFLIGHT/apps/ai-bible-ios/ci/release-preflight.py" "${PREFLIGHT_ARGS[@]}" \
+    || fail "release preflight failed (see above); fix the committed release values first"
+fi
 [[ -f "$BOOK" ]] || fail "private book bundle not found"
 [[ "$EXPECT" =~ ^[0-9a-f]{64}$ ]] || fail "--expect-sha256 must be 64 lowercase hex characters"
 [[ ! -e "$WORK" ]] || fail "--work must not exist yet"
@@ -108,7 +123,6 @@ fi
 [[ -n "${DEVELOPER_DIR:-}" && -d "$DEVELOPER_DIR" ]] || fail "DEVELOPER_DIR must point at the intended Xcode"
 [[ -x "$XCODEGEN" ]] || fail "xcodegen not executable at --xcodegen"
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd -P)"
 mkdir -p "$WORK"
 git -C "$REPO" archive --format=tar HEAD apps/ai-bible-ios | tar -x -C "$WORK"
 echo "Sources: commit $(git -C "$REPO" rev-parse HEAD)"
@@ -158,6 +172,10 @@ else
 fi
 if [[ "$ARCHIVE" == 1 ]]; then
   codesign --verify --deep --strict "$BUILT" || fail "the archived app's signature doesn't verify"
+  archived_id="$(python3 -c 'import plistlib,sys; print(plistlib.load(open(sys.argv[1],"rb"))["CFBundleIdentifier"])' "$BUILT/Info.plist")"
+  echo "Archived bundle ID: $archived_id"
+  python3 "$APP/ci/release-preflight.py" --root "$APP" --bundle-id "$archived_id" \
+    || fail "the archived app's bundle ID fails the release preflight"
   echo "Signed Release archive (not uploaded or submitted): $WORK/AIBible.xcarchive"
 else
   echo "Built (not installed or run): $BUILT"

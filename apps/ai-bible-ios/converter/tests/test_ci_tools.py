@@ -251,5 +251,83 @@ class PrivateAppVerifyTests(unittest.TestCase):
         self.assertNotRegex(script, r"altool|notarytool|-exportArchive|upload-app|iTMSTransporter|xcrun +upload")
 
 
+class ReleasePreflightTests(unittest.TestCase):
+    """ci/release-preflight.py refuses placeholder or missing release values without choosing any."""
+
+    APP = Path(__file__).resolve().parent.parent.parent
+    SCRIPT = APP / "ci" / "release-preflight.py"
+    GOOD_PRODUCT = "org.sample-owner.aibible.fullbook"
+
+    def copy_root(self, folder, bundle="org.sample-owner.aibible", product=GOOD_PRODUCT,
+                  privacy='"https://books.sample-owner.org/privacy"', support='"https://books.sample-owner.org/support"',
+                  storekit_product=None):
+        import shutil
+        root = Path(folder) / "app"
+        for relative in ("project.yml", "AIBible/App/AppModel.swift", "StoreKit/Products.storekit"):
+            (root / relative).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(self.APP / relative, root / relative)
+        project = (root / "project.yml").read_text(encoding="utf-8")
+        (root / "project.yml").write_text(project.replace("com.example.aibible.app", bundle, 1), encoding="utf-8")
+        config = (root / "AIBible/App/AppModel.swift").read_text(encoding="utf-8")
+        config = config.replace('fullBookProductID = "com.example.aibible.fullbook"', f'fullBookProductID = "{product}"')
+        config = config.replace("privacyPolicyURLString: String? = nil", f"privacyPolicyURLString: String? = {privacy}")
+        config = config.replace("supportURLString: String? = nil", f"supportURLString: String? = {support}")
+        (root / "AIBible/App/AppModel.swift").write_text(config, encoding="utf-8")
+        storekit = json.loads((root / "StoreKit/Products.storekit").read_text(encoding="utf-8"))
+        storekit["products"][0]["productID"] = storekit_product or product
+        (root / "StoreKit/Products.storekit").write_text(json.dumps(storekit), encoding="utf-8")
+        return root
+
+    def run_preflight(self, root, *extra):
+        return subprocess.run([sys.executable, self.SCRIPT.as_posix(), "--root", str(root), *extra],
+                              capture_output=True, text=True)
+
+    def test_the_committed_placeholders_are_all_refused(self):
+        result = self.run_preflight(self.APP)
+        self.assertEqual(result.returncode, 1)
+        for expected in ("bundle ID from project.yml (AIBible target) is a placeholder: com.example.aibible.app",
+                         "fullBookProductID is a placeholder: com.example.aibible.fullbook",
+                         "privacyPolicyURLString is not set", "supportURLString is not set"):
+            self.assertIn(expected, result.stderr)
+
+    def test_real_looking_values_pass(self):
+        with tempfile.TemporaryDirectory() as folder:
+            result = self.run_preflight(self.copy_root(folder))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("bundle ID org.sample-owner.aibible, product ID " + self.GOOD_PRODUCT, result.stdout)
+
+    def test_each_bad_value_is_refused(self):
+        cases = [
+            ({"bundle": "com.example.aibible"}, "bundle ID from project.yml (AIBible target) is a placeholder"),
+            ({"bundle": "not a bundle id"}, "is not a reverse-DNS identifier"),
+            ({"product": "com.example.aibible.fullbook"}, "fullBookProductID is a placeholder"),
+            ({"product": "full book!"}, "characters App Store Connect doesn't allow"),
+            ({"storekit_product": "org.sample-owner.other"}, "don't match AppConfig.fullBookProductID"),
+            ({"privacy": "nil"}, "privacyPolicyURLString is not set"),
+            ({"privacy": '"http://books.sample-owner.org/privacy"'}, "privacyPolicyURLString must be an https URL"),
+            ({"support": '"https://example.com/support"'}, "supportURLString is a placeholder"),
+            ({"support": '"https://localhost/support"'}, "supportURLString"),
+            ({"support": '"https://books.sample-owner.org/TODO"'}, "supportURLString is a placeholder"),
+        ]
+        for overrides, expected in cases:
+            with self.subTest(expected=expected), tempfile.TemporaryDirectory() as folder:
+                result = self.run_preflight(self.copy_root(folder, **overrides))
+                self.assertEqual(result.returncode, 1)
+                self.assertIn(expected, result.stderr)
+
+    def test_bundle_id_override_is_checked_instead_of_project_yml(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = self.copy_root(folder, bundle="com.example.aibible.app")
+            self.assertEqual(self.run_preflight(root, "--bundle-id", "org.sample-owner.aibible").returncode, 0)
+            result = self.run_preflight(root, "--bundle-id", "com.example.other")
+            self.assertIn("bundle ID from --bundle-id is a placeholder", result.stderr)
+
+    def test_staging_runs_the_preflight_before_building_and_on_the_archive(self):
+        script = (self.APP / "converter" / "stage-private-build.sh").read_text(encoding="utf-8")
+        preflight = script.index('python3 "$PREFLIGHT/apps/ai-bible-ios/ci/release-preflight.py"')
+        self.assertLess(preflight, script.index('[[ -f "$BOOK" ]]'))
+        self.assertIn('release-preflight.py" --root "$APP" --bundle-id "$archived_id"', script)
+
+
 if __name__ == "__main__":
     unittest.main()

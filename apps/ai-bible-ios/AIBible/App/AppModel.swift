@@ -20,10 +20,15 @@ enum AppConfig {
     static let expectsFixtureContent = true
     static let editionMarker = "AIBIBLE_EDITION=synthetic-fixture"
     #endif
-    /// Required before App Store submission (Guideline 5.1.1(i)); not set yet.
-    static let privacyPolicyURL: URL? = nil
-    /// Required before App Store submission; not set yet.
-    static let supportURL: URL? = nil
+    // Release values. ci/release-preflight.py refuses a release archive while any of these is a
+    // placeholder or missing, so they are kept as plain literals it can read.
+    /// Required before App Store submission (Guideline 5.1.1(i)): the live https privacy policy page.
+    static let privacyPolicyURLString: String? = nil
+    /// Required before App Store submission: the live https support page.
+    static let supportURLString: String? = nil
+
+    static var privacyPolicyURL: URL? { privacyPolicyURLString.flatMap { URL(string: $0) } }
+    static var supportURL: URL? { supportURLString.flatMap { URL(string: $0) } }
 }
 
 struct ReaderPosition: Hashable, Sendable {

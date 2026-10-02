@@ -1123,11 +1123,13 @@ class StagingScriptTests(unittest.TestCase):
             self.assertIn("reverse-DNS", err)
             status, err = self.run_script(*args, "--team", "ABCDE12345")
             self.assertIn("only for --release-archive", err)
-            # Valid archive arguments still stop before building here (no macOS, or no xcodegen).
+            # Valid archive arguments stop at the release preflight while the committed release values
+            # are placeholders (as they are until the owner sets them), before anything is staged.
             status, err = self.run_script(*no_destination, "--release-archive", "--team", "ABCDE12345",
                                           "--bundle-id", "com.example.app", env_extra={"DEVELOPER_DIR": "/nonexistent"})
             self.assertNotEqual(status, 0)
-            self.assertTrue(any(m in err for m in ("needs macOS", "DEVELOPER_DIR", "xcodegen not executable")), err)
+            self.assertIn("release preflight failed", err)
+            self.assertIn("bundle ID from --bundle-id is a placeholder: com.example.app", err)
             self.assertFalse(work.exists())
         finally:
             ws.close()

@@ -180,7 +180,9 @@ The Filter is free. If its wording comes from a paid chapter, the mapping must s
 
 Two modes:
 - `--destination <simulator>`: an unsigned Debug build for the Simulator.
-- `--release-archive --team <team ID> [--bundle-id <id>]`: a signed Release archive at
+- `--release-archive --team <team ID> [--bundle-id <id>]`: first runs `ci/release-preflight.py` on the
+  committed sources and stops if the bundle ID, product ID, or privacy or support URL is still a
+  placeholder or missing (and checks the archived app's bundle ID again afterwards); then a signed Release archive at
   `<work>/AIBible.xcarchive` (automatic signing; Xcode must be signed in to that team). The build
   settings are printed and must include `AIBIBLE_PRIVATE_BOOK` and not `DEBUG`; the archived app's
   signature is verified. It is never exported, uploaded or submitted.

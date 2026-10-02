@@ -29,7 +29,11 @@ In `project.yml` and `AIBible/App/AppModel.swift`:
 - `DEVELOPMENT_TEAM`: your team ID.
 - `AppConfig.fullBookProductID`: the App Store Connect product ID; update `StoreKit/Products.storekit`
   to match so local tests keep passing.
-- `AppConfig.privacyPolicyURL` and `AppConfig.supportURL`: the live URLs.
+- `AppConfig.privacyPolicyURLString` and `AppConfig.supportURLString`: the live https URLs.
+
+Check with `python3 ci/release-preflight.py --root apps/ai-bible-ios [--bundle-id <id>]`: it lists every
+value that is still a placeholder or missing. `stage-private-build.sh --release-archive` runs it on the
+committed sources and refuses to build until it passes, then checks the archived app's bundle ID too.
 
 ## 4. Real book build and proofread (MAC)
 1. Run `converter/stage-private-build.sh` with the reviewed `book.private.json` and cover
