@@ -88,6 +88,8 @@ class WorkflowPinTests(unittest.TestCase):
         self.assertNotIn(IOS265, example, "exactly one runtime is pinned")
         for forbidden in ("-large", "-xlarge", "secrets.", "actions/cache", "CODE_SIGN"):
             self.assertNotIn(forbidden, example.replace("(not -large / -xlarge)", ""))
+        # The Python suite (converter, release preflight, private-app verifier) runs in CI too.
+        self.assertIn("python3 -m unittest discover -s apps/ai-bible-ios/converter/tests", example)
         # The one upload: the synthetic screenshots, from a pinned action, kept 7 days.
         upload = "uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1"
         self.assertEqual(example.count("upload-artifact"), 1)

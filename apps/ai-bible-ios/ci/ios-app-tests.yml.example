@@ -43,6 +43,12 @@ jobs:
           AIBIBLE_SCREENSHOT_DIR: ${{ runner.temp }}/aibible-screenshots
         run: bash apps/ai-bible-ios/ci/run-tests.sh
 
+      # The converter, release preflight, private-app verifier and CI-tool tests: synthetic inputs
+      # only, no secrets or network. Runs even if the Swift tests failed, so both results are shown.
+      - name: Python converter, preflight and CI-tool tests
+        if: success() || failure()
+        run: python3 -m unittest discover -s apps/ai-bible-ios/converter/tests -v
+
       - name: Upload screenshots (synthetic fixture only)
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

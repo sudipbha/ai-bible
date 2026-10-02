@@ -11,6 +11,8 @@ The template and `run-tests.sh` together do the following.
   **This toolchain change is prepared but has not run.** Earlier runs used `macos-15` with Xcode 26.3.
 - Grants only `contents: read`.
 - Checks out code with `actions/checkout` pinned to commit `3d3c42e5…` (v7.0.1), with `persist-credentials: false`.
+- Also runs the Python suite (`converter/tests`: converter, release preflight, private-app verifier
+  and CI tools) with synthetic inputs, even if the Swift tests fail.
 - Uses no secrets, signing or caches, and synthetic fixtures only. Its one upload is `aibible-screenshots`:
   the UI tests' named screenshots (`showcase(...)`), kept for 7 days, so the app can be seen without a Mac.
 
